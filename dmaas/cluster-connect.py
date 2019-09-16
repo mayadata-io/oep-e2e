@@ -8,12 +8,9 @@ import time
 import subprocess
 import threading
 from tqdm import trange
-sys.path.append("..")
-from endpoints.url import *
-from data.data import *
-from get.getRequest import *
-from post.postRequest import *
-from cluster_details.cluster import *
+from config import *
+from api_request.request import *
+from cluster.cluster import *
 
 def getOrgID():
     organizationsDict = getRequest(organizationsUrl)

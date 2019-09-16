@@ -1,8 +1,8 @@
 import re
 import sys
-from endpoints.url import *
-from get.getRequest import *
-
+sys.path.append("..")
+from config import *
+from api_request.request import *
 
 def isExisitngCluster(clusterNameInit):
     clustersDict = getRequest(clustersUrl)
