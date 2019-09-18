@@ -14,11 +14,13 @@ def getOrgID():
         organizationId = dict['id']
         return(organizationId)
 
-def isExistingCredential(credentialName):
+def isExistingCredential(credentialName, provider):
+    providerDict = {"gcp" : "1bp2", "aws" : "1bp1"}
+    providerId = providerDict[provider]
     credentialsDict = getRequest(credentialsUrl)
     credentialList = credentialsDict['data']
     for dict in credentialList:
-        if dict['name'] == credentialName:
+        if dict['name'] == credentialName and dict['providerId'] == providerId:
                 return True
 
 def getCredentialId(credentialName):
@@ -58,7 +60,7 @@ def credential(credentialName, provider):
         else:
             print("GCP credentials file does not exist in the path provided!!")
 
-
+    
     providerId = providerDict[provider]
     
     credentialsData = setData(credentialName, providerId, credential)

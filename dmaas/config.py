@@ -1,29 +1,31 @@
+baseUrl = "https://director.mayadata.io/v3"
+
 # organization
-organizationsUrl = "https://director.mayadata.io/v3/organizations"
+organizationsUrl = f"{baseUrl}/organizations"
 
 # subscription
-subscriptionsUrl = "https://director.mayadata.io/v3/subscriptions"
+subscriptionsUrl = f"{baseUrl}/subscriptions"
 
 #credential
-credentialsUrl = 'https://director.mayadata.io/v3/providercredentials/'
+credentialsUrl = f'{baseUrl}/providercredentials/'
 credentialsList = ["name", "organizationId", "providerId", "credential"]
 credentialsDict = dict.fromkeys(credentialsList, "default")
 
 #project
-projectsUrl = "https://director.mayadata.io/v3/projects/"
+projectsUrl = f"{baseUrl}/projects/"
 
 # cluster 
-clustersUrl = "https://director.mayadata.io/v3/clusters"
+clustersUrl = f"{baseUrl}/clusters"
 clusterImportList = ["name", "organizationId", "k8sServerConfig", "provider"]
 clusterImportData = dict.fromkeys(clusterImportList, "default")
 clusterUpgrageList = ["accountId", "clusterId", "kind", "organizationId"]
 clusterUpgrageData = dict.fromkeys(clusterUpgrageList, "default")
 
 # maya-apps
-mayaAppsUrl = "https://director.mayadata.io/v3/projects/projectId/mayaapplications"
+mayaAppsUrl = f"{baseUrl}/projects/projectId/mayaapplications"
 
 # schedule
-schedulesUrl = "https://director.mayadata.io/v3/projects/projectId/mayaapplications/mayaAppID/dmaasschedules"
+schedulesUrl = f"{baseUrl}/projects/projectId/mayaapplications/mayaAppID/dmaasschedules"
 scheduleList = ["applicationId", "clusterId", "credentialId", "name", "organizationId", "scheduleInterval", "transferType", "region"]
 scheduleDict = dict.fromkeys(scheduleList, "default")
 

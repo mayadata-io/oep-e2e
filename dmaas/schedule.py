@@ -9,22 +9,22 @@ from cluster.cluster import *
     
 def isExisitngSchedule(scheduleName, clusterNameInit, deployment, namespace):
     mayaAppUrl, mayaAppId = getmayaAppId(clusterNameInit, deployment, namespace)
-    print(mayaAppId)
     scheduleUrl = mayaAppUrl + f"/{mayaAppId}/dmaasschedules"
     #print(scheduleUrl)
     schedulesDict = getRequest(scheduleUrl)
     schedulesList = schedulesDict['data']
     for dict in schedulesList:
-        if re.match(scheduleName, dict["name"]):
+        if dict["name"] == scheduleName:
             return True
 
 def createSchedule(credentialName, scheduleName, provider, region, clusterNameInit, deployment, namespace):
-    if isExistingCredential(credentialName):
+    if isExistingCredential(credentialName, provider):
+        print(f"Credential with the name {credentialName} and cloud-provider {provider} exists")
         credentialId = getCredentialId(credentialName)
     else:
         if credential(credentialName, provider):
             credentialId = getCredentialId(credentialName)
-            print(credentialId)
+            #print(credentialId)
     
     mayaAppUrl, mayaAppId = getmayaAppId(clusterNameInit, deployment, namespace)
     scheduleUrl = mayaAppUrl + f"/{mayaAppId}/dmaasschedules"
