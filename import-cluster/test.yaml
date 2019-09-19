@@ -1,0 +1,34 @@
+---
+- hosts: localhost
+  connection: local
+
+  vars_files:
+    - test_vars.yml
+
+  tasks:
+    - block:
+
+          ## Generating the testname for deployment
+        - include_tasks: /ansible-utils/create_testname.yml
+
+          ## RECORD START-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'SOT'
+
+        - name: Importing cluster
+          shell: python3 cluster-connect.py -n {{ cluster_name }}
+
+        - set_fact:
+            flag: "Pass"
+
+      rescue:
+        - name: Setting fail flag
+          set_fact:
+            flag: "Fail"
+
+      always:
+        ## RECORD END-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'EOT'

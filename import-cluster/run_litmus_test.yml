@@ -1,0 +1,38 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: litmus-import-cluster-
+  namespace: litmus
+spec:
+  template:
+    metadata:
+      name: litmus
+      labels:
+        app: importcluster-litmus
+    spec:
+      serviceAccountName: litmus
+      restartPolicy: Never
+      containers:
+      - name: ansibletest
+        image: ranjnshashank855/mod-test:v1
+        imagePullPolicy: Always
+        env:
+          - name: ANSIBLE_STDOUT_CALLBACK
+            #value: log_plays
+            value: default
+         
+            # DirectorOnline user-name
+          - name: KEY
+            value:
+
+
+            # DirectorOnline password
+          - name: VALUE
+            value: 
+
+          - name: CLUSTER_NAME
+            value: test123
+
+        command: ["/bin/bash"]
+        args: ["-c", "ansible-playbook ./import-cluster/test.yml -i /etc/ansible/hosts -v; exit 0"]
