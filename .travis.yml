@@ -1,0 +1,13 @@
+env:
+  global:
+    - COMMIT=${TRAVIS_COMMIT::6}
+sudo: required
+services:
+- docker
+script:
+- export REPO=mayadataio/dop-validator;
+- docker login -u "$DOCKER_USER" -p "$DOCKER_PASS" && docker build -t $REPO:ci . ;
+after_success:
+- if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then export REPO=mayadata/www-mayadata-io;
+   docker login -u "$DOCKER_USER" -p "$DOCKER_PASS" && docker push $REPO:ci; 
+  fi
