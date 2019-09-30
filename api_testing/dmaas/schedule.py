@@ -1,34 +1,44 @@
 from mayapps import *
 from config import *
-from account import *
+from account.account import *
 from api_request.request import *
 from cluster.cluster import *
-from dmaas.credentials import *
+from credentials import *
 from mayapps.mayapps import *
 
-class schedule:
+class Schedule(Data):
     data = {}
     url = ''
     id = ''
 
     def __init__(self, name):
         self.name = name
+        requestUrl = ''
+        Data.__init__(self, requestUrl)
         self.setData()
 
     def setData(self):
         """ sets schedule properties if it exists so that ohter methods don't need to send get requests """ 
-        schedulesList = getRequest(schedulesUrl)
+        self.requestUrl = SCHEDULES_URL
+        schedulesList = self.get()
         for dict in schedulesList:
             if dict["name"] == self.name:
-                schedule.data = dict
-                schedule.id = self.data['id']
-                schedule.scheduleUrl = self.data['links']['self']
+                Schedule.data = dict
+                Schedule.id = self.data['id']
+                Schedule.scheduleUrl = self.data['links']['self']
                 return True
     
     def isExist(self):
-        if self.url != '':
+        if self.id != '':
             return True
         else:
+            return False
+
+    def isActive(self):
+        state = self.data['state']
+        if state == "active":
+            return True
+        elif state == "stopped":
             return False
 
     def isValid(self):
@@ -43,22 +53,23 @@ class schedule:
         """ sets post-request data and sends the request to create schedule """
         dict = self.preValidation(args)
         if dict:
-            scheduleDict["applicationId"] = dict["applicationId"]
-            scheduleDict["clusterId"] = dict["clusterId"]
-            scheduleDict["credentialId"] = dict["credentialId"]
-            scheduleDict["name"] = self.name
-            scheduleDict["organizationId"] = dict["organizationId"]
-            scheduleDict["scheduleInterval"] = "*/02 * * * *"
-            scheduleDict["transferType"] = 1 
-            scheduleDict["region"] = dict["region"]
-            schedule.url = dict["url"] + "/dmaasschedules"
-            print("DMaaS schedule URl:", schedule.url)
-            response = postRequest(schedule.url, scheduleDict)
+            SCHEDULE_DICT["applicationId"] = dict["applicationId"]
+            SCHEDULE_DICT["clusterId"] = dict["clusterId"]
+            SCHEDULE_DICT["credentialId"] = dict["credentialId"]
+            SCHEDULE_DICT["name"] = self.name
+            SCHEDULE_DICT["organizationId"] = dict["organizationId"]
+            SCHEDULE_DICT["scheduleInterval"] = "*/02 * * * *"
+            SCHEDULE_DICT["transferType"] = 1 
+            SCHEDULE_DICT["region"] = dict["region"]
+            Schedule.url = dict["url"] + "/dmaasschedules"
+            print("DMaaS schedule URl:", self.url)
+            self.requestUrl = self.url
+            response = self.post(SCHEDULE_DICT)
             if response:
-                schedule.data = response
-                schedule.id = self.data['id']
-                schedule.url = self.data['links']['self']
-            print(f"Cluster {self.name} created..Let's connect the cluster")
+                Schedule.data = response
+                Schedule.id = self.data['id']
+                Schedule.url = self.data['links']['self']
+            print(f"DMaaS schedule {self.name} created!")
             
     def preValidation(self, args):
         credentialName = args["credential_name"]
@@ -67,39 +78,35 @@ class schedule:
         deployment = args["deployment"]
         namespace = args["namespace"]
         region = args["region"]
-        clusterobj = cluster(clusterNameInit)
+        clusterobj = Cluster(clusterNameInit)
         
         if clusterobj.isExist() and not self.isExist():
-            projectId = clusterobj.getProjectId()
-            maya = mayapps(projectId, deployment, namespace)    
-            credentialobj = credential(credentialName, provider)
-            accountobj = account()
-
+            groupId = clusterobj.getGroupId()
+            maya = Mayapps(groupId, deployment, namespace)    
+            credentialobj = Credential(credentialName, provider)
+            accountobj = Account()
             """ sets validation conditions """
-            conditions = {
-                clusterobj.isActive():"Cluster not active!",
-                clusterobj.checkSubscription():"Cluster is not on the evaluation or premium mode!",
-                credentialobj.isExist():"Credential not found!",
-                maya.isExist():"Maya Apps not found!"
-                }
-        
+            conditions = [
+                    clusterobj.isActive(),
+                    clusterobj.checkSubscription(),
+                    credentialobj.isExist(),
+                    maya.isExist()
+                    ]   
             """ performing checks """
             check_status = "pass"
             
             for condition in conditions:
                 if not condition: 
                     check_status = "fail"
-                    print(conditions[condition])
-
+                    
             if check_status == "pass":
                 dict = {"applicationId":maya.id,
                 "clusterId" : clusterobj.id,
                 "credentialId" : credentialobj.id,
-                "organizationId":accountobj.getOrganizationID(),
-                "url":maya.url
+                "organizationId":accountobj.getProjectID(),
+                "url":maya.url,
+                "region":region
                 }
-                print(dict)
                 return dict
-               
         else:
             print("Cluster not found!")

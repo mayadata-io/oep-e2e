@@ -11,9 +11,7 @@ def main():
                 args = json.load(json_file)
 
     scheduleName = args["schedule_name"]
-    region = args["region"]
-
-    scheduleobj = schedule(scheduleName, region)
+    scheduleobj = Schedule(scheduleName)
     scheduleobj.create(args)
 
 if __name__ == '__main__':

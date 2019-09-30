@@ -1,23 +1,19 @@
 import json
 import base64
 from config import *
+from account.account import *
 from api_request.request import *
 
-def getOrgID():
-        organizationsDict = getRequest(organizationsUrl)
-        # assuming there is only one organization for now
-        organizationsList = organizationsDict['data']
-        for dict in organizationsList:
-            organizationId = dict['id']
-            return(organizationId)
-
-class credential:
+class Credential(Data):
     data = {}
     url = ''
     id = ''
-    def __init__(self, credentialName, provider):
-        self.name = credentialName
+    
+    def __init__(self, name, provider):
+        self.name = name
         self.provider = provider
+        requestUrl = ''
+        Data.__init__(self, requestUrl)
         self.isExist()
 
     def isValid(self):
@@ -31,12 +27,13 @@ class credential:
     def isExist(self):
         providerDict = {"gcp" : "1bp2", "aws" : "1bp1"}
         providerId = providerDict[self.provider]
-        credentialList = getRequest(credentialsUrl)
-        for cred in credentialList:
+        self.requestUrl = CREDENTIALS_URL
+        credentialsList = self.get()
+        for cred in credentialsList:
             if cred['name'] == self.name and cred['providerId'] == providerId:
-                credential.url = cred['links']['self']
-                credential.data = cred
-                credential.id = cred['id']
+                Credential.url = cred['links']['self']
+                Credential.data = cred
+                Credential.id = cred['id']
                 return True
         print(f"Credential {self.name} does not exists!")
 
@@ -46,7 +43,7 @@ class credential:
         else:
             print(f"Credential {self.name} does not exists!")
 
-    def awsCredential(self):
+    def aws(self):
         awsPath = os.environ.get('AWSPATH', 'Not Set')
         if os.path.exists(awsPath):
             with open(awsPath) as json_file:
@@ -55,7 +52,7 @@ class credential:
         else:
             print("AWS credentials file does not exist in the path provided!!")
     
-    def gcpCredential(self):
+    def gcp(self):
         gcpPath = os.environ.get('GCPPATH', 'Not Set')
         if os.path.exists(gcpPath):
             with open(gcpPath) as json_file:
@@ -69,19 +66,21 @@ class credential:
             print("GCP credentials file does not exist in the path provided!!")
                 
     def create(self):
+        accountobj = Account()
         providerDict = {"gcp" : "1bp2", "aws" : "1bp1"}
-
         if self.provider == "aws":
-            credential = self.awsCredential()
-
-        if self.provider == "gcp":
-            credential = self.gcpCredential()
-
+            credential = self.aws()
+        elif self.provider == "gcp":
+            credential = self.gcp()
         providerId = providerDict[self.provider]
-        credentialsDict["name"] = self.name
-        credentialsDict["organizationId"] = getOrgID()
-        credentialsDict["providerId"] = providerId
-        credentialsDict["credential"] = credential
-        credentialsData = json.dumps(credentialsDict)
-        self.url = credentialsUrl + postRequest(credentialsUrl, credentialsData)['id']
-        return(self.url)  
+        CREDENTIALS_Dict["name"] = self.name
+        CREDENTIALS_Dict["organizationId"] = accountobj.getProjectID()
+        CREDENTIALS_Dict["providerId"] = providerId
+        CREDENTIALS_Dict["credential"] = credential
+        credentialsData = json.dumps(CREDENTIALS_Dict)
+        self.requestUrl = CREDENTIALS_URL
+        response = self.post(credentialsData)
+        if response:
+            print(f"Credential {self.name} is created!!")
+            Credential.url = CREDENTIALS_URL + response['id']
+    
