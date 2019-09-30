@@ -32,4 +32,7 @@ schedulesUrl = f"{baseUrl}/dmaasschedules"
 scheduleList = ["applicationId", "clusterId", "credentialId", "name", "organizationId", "scheduleInterval", "transferType", "region"]
 scheduleDict = dict.fromkeys(scheduleList, "default")
 
+#restore
+restoreUrl = "https://director.mayadata.io/v3/dmaasjobs"
+
 

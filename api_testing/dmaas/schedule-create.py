@@ -16,8 +16,6 @@ def main():
     scheduleobj = schedule(scheduleName, region)
     scheduleobj.create(args)
 
-
-        
 if __name__ == '__main__':
     main()
 

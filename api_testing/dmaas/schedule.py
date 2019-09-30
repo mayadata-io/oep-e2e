@@ -9,10 +9,10 @@ from mayapps.mayapps import *
 class schedule:
     data = {}
     url = ''
+    id = ''
 
-    def __init__(self, name, region):
+    def __init__(self, name):
         self.name = name
-        self.region = region
         self.setData()
 
     def setData(self):
@@ -20,8 +20,9 @@ class schedule:
         schedulesList = getRequest(schedulesUrl)
         for dict in schedulesList:
             if dict["name"] == self.name:
-                schedule.scheduleData = dict
-                schedule.scheduleUrl = dict['links']['self']
+                schedule.data = dict
+                schedule.id = self.data['id']
+                schedule.scheduleUrl = self.data['links']['self']
                 return True
     
     def isExist(self):
@@ -49,19 +50,23 @@ class schedule:
             scheduleDict["organizationId"] = dict["organizationId"]
             scheduleDict["scheduleInterval"] = "*/02 * * * *"
             scheduleDict["transferType"] = 1 
-            scheduleDict["region"] = self.region
+            scheduleDict["region"] = dict["region"]
             schedule.url = dict["url"] + "/dmaasschedules"
             print("DMaaS schedule URl:", schedule.url)
-            if postRequest(schedule.url, scheduleDict):
-                print("DMaaS schedule created!")
-
+            response = postRequest(schedule.url, scheduleDict)
+            if response:
+                schedule.data = response
+                schedule.id = self.data['id']
+                schedule.url = self.data['links']['self']
+            print(f"Cluster {self.name} created..Let's connect the cluster")
+            
     def preValidation(self, args):
         credentialName = args["credential_name"]
         provider = args["provider"]
         clusterNameInit = args["cluster_name"]
         deployment = args["deployment"]
         namespace = args["namespace"]
-        
+        region = args["region"]
         clusterobj = cluster(clusterNameInit)
         
         if clusterobj.isExist() and not self.isExist():
