@@ -5,7 +5,7 @@
 import argparse
 import time
 import subprocess
-from account import *
+from account.account import *
 from config import *
 from api_request.request import *
 from cluster import *
@@ -13,8 +13,7 @@ from cluster import *
 def waitForActiveCluster(clusterobj, plan):
     print(f"Waiting for the cluster to be active...", end="")
     while not clusterobj.isActive():
-        print(clusterobj.isActive())
-        time.sleep(0.2)  
+        time.sleep(0.3)  
     print("Cluster is active! Let's upgrade")
     # wait for sometime after cluster is active to upgrade
     time.sleep(20)
@@ -50,12 +49,15 @@ def main():
     args = parser.parse_args()
     clusterNameInit = args.cluster_name
     plan = args.subscription_plan
-    clusterobj = cluster(clusterNameInit)
-    accountobj = account()
+    clusterobj = Cluster(clusterNameInit)
+    accountobj = Account()
 
-    if clusterobj.isValid():
-        organizationId = accountobj.getOrganizationID()
-        connectCluster(clusterobj, organizationId, plan)
+    organizationId = accountobj.getProjectID()
+    if organizationId:
+        if clusterobj.isValid():
+            connectCluster(clusterobj, organizationId, plan)
+    else:
+        print("No organization present!")
 
 if __name__ == '__main__':
     main()

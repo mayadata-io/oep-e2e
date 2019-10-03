@@ -1,9 +1,9 @@
 {
     "credential_name":"vishnu",
-    "schedule_name":"testing",
+    "schedule_name":"gcpschedule",
     "region":"us-east-1",
     "provider":"gcp",
-    "cluster_name":"harshita",
+    "cluster_name":"resource",
     "deployment":"minio-deployment",
     "namespace":"minio"
 }

@@ -1,38 +1,44 @@
 #!/usr/bin/env python
 
 """ This module contains api requests methods """
-import os
+import os   
 import requests
+from status_codes import *
 import json
 
-def getRequest(url):
-    """ Fetches credentials from envs , sends request and returns response data """
-    key = os.environ.get('KEY')
-    value = os.environ.get('VALUE')
-    auth = (key, value)
-    response = requests.get(url, auth=auth)
-    if response.status_code == 200:
-        keys = []
-        responseDict = json.loads(response.content.decode('utf-8'))
-        for key in responseDict:
-            keys.append(key)
-        if 'data' not in keys:
-            return responseDict
-        else:
-            return(responseDict['data'])
-    else:
-        print(response.status_code, response.reason)
+class Data(statusCodes):
 
-def postRequest(url, data):
-    """ Fetches credentials from envs , sends request and returns response data """
-    key = os.environ.get('KEY')
-    value = os.environ.get('VALUE')
-    auth = (key, value)
-    response = requests.post(url, data=data, auth=auth)
-    responseDict = json.loads(response.content.decode('utf-8'))
-    if response.status_code == 201:
-        return(responseDict)
-    else:
-        print(response.status_code, response.reason)
-        print("Error!",responseDict['message'])
-    
+    def __init__(self, url):
+        self.requestUrl = url
+        auth_api_key = os.environ.get('USERNAME')
+        auth_password = os.environ.get('PASSWORD')
+        auth = (auth_api_key, auth_password)
+        self.auth = auth
+     
+    def get(self):
+        """ sends request and returns response data """
+        response = requests.get(self.requestUrl, auth=self.auth)
+        if response.status_code == self.OK:
+            responseDict = json.loads(response.content.decode('utf-8'))
+            # code is fetching data from a list like /clusters endpoint so it have multiple `data` fields for various clusters
+            # but when code is fething data from specific endpoint like cluster/specific_cluster_id 
+            # thn it doesnt have data field in it 
+            # code below is checking the same
+            keys = list(responseDict.keys())
+            if 'data' not in keys:
+                return responseDict
+            else:
+                return(responseDict['data'])
+        else:
+            print(response.status_code, response.reason)
+             
+    def post(self, data):
+        """ sends request and returns response data """
+        response = requests.post(self.requestUrl, data=data, auth=self.auth)
+        responseDict = json.loads(response.content.decode('utf-8'))
+        if response.status_code == self.CREATED:
+            return(responseDict)
+        else:
+            print(response.status_code, response.reason)
+            print("Error!",responseDict['message'])
+        

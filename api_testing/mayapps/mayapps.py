@@ -7,37 +7,42 @@ from config import *
 from api_request.request import *
 from cluster.cluster import *
 
-class mayapps:
+class Mayapps(Data):
     url = ''
     id = ''
     data = {}
     
-    def __init__(self, projectId, deployment, namespace):
+    def __init__(self, groupId, deployment, namespace):
         self.deployment = deployment
         self.namespace = namespace
-        self.projectId = projectId
+        self.groupId = groupId
+        requestUrl = ''
+        Data.__init__(self, requestUrl)
         self.setData()
 
     def makeAppUrl(self):
-        mayaAppUrl = mayaAppsUrl.replace("projectId", self.projectId)
+        mayaAppUrl = MAYA_APPS_URL.replace("groupId", self.groupId)
         return(mayaAppUrl)
 
     def isExist(self):
         if self.id:
             return True
-        
+        else:
+            print("Maya Apps not found!")
+            
     def setData(self):
         """ sets maya-apps properties if it exists so that ohter methods don't need to send get requests """ 
         mayaAppUrl = self.makeAppUrl()
         if mayaAppUrl:
-            mayaAppsList = getRequest(mayaAppUrl)
+            self.requestUrl = mayaAppUrl
+            mayaAppsList = self.get()
             for dict in mayaAppsList:
                 mayaAppDict = dict
                 if mayaAppDict['name'] == self.deployment and mayaAppDict['data']['namespace'] == self.namespace:
                     #print("Maya application exists!")
-                    mayapps.data = mayaAppDict
-                    mayapps.url = self.data['links']['self']
-                    mayapps.id = self.data['id']
+                    Mayapps.data = mayaAppDict
+                    Mayapps.url = self.data['links']['self']
+                    Mayapps.id = self.data['id']
                     return True
             #print("Maya application does not exists!")
     

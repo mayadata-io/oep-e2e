@@ -6,32 +6,35 @@ import sys
 import subprocess
 from config import *
 from api_request.request import *
+#from test import *
 
-class cluster:
+class Cluster(Data):
     data = {}
     url = ''
     name = ''
     id = ''
     
     def __init__(self, nameInit):
+        requestUrl = ''
+        Data.__init__(self, requestUrl)
         self.nameInit = nameInit
         self.setData()
 
     def setData(self):
         """ searches for cluster and sets cluster properties if it exists so that ohter methods don't need to send get requests """
-        clusterList = getRequest(clustersUrl)
+        self.requestUrl = CLUSTERS_URL
+        clusterList = self.get()
         for dict in clusterList:
             if re.match(self.nameInit, dict["name"]):
-                cluster.data = dict
-                cluster.id = self.data['id']
-                cluster.url = clustersUrl + '/' + self.id
-                cluster.name = self.data["name"]
+                Cluster.data = dict
+                Cluster.id = self.data['id']
+                Cluster.url = CLUSTERS_URL + '/' + self.id
+                Cluster.name = self.data["name"]
               
     def isExist(self):
         if self.name != '':
             return True
         else:
-            print(f"Cluster {self.nameInit} not found!")
             return False
 
     def isValid(self):
@@ -48,17 +51,18 @@ class cluster:
     def create(self, organizationId):
         print("Creating cluster..") 
         # set post-request data
-        clusterImportData["name"] = self.nameInit
-        clusterImportData["organizationId"] = organizationId
-        clusterImportData["k8sServerConfig"] = "null"   
-        clusterImportData["provider"] = "default" 
+        CLUSTER_IMPORT_DATA["name"] = self.nameInit
+        CLUSTER_IMPORT_DATA["organizationId"] = organizationId
+        CLUSTER_IMPORT_DATA["k8sServerConfig"] = "null"   
+        CLUSTER_IMPORT_DATA["provider"] = "default" 
         # post-request to create cluster
-        response = postRequest(clustersUrl, clusterImportData)
+        self.requestUrl = CLUSTERS_URL
+        response = self.post(CLUSTER_IMPORT_DATA)
         # if response is valid set cluster properties
         if response:
-            cluster.id = response['id']
-            cluster.url = clustersUrl + '/' + self.id
-            cluster.name = response['name']
+            Cluster.id = response['id']
+            Cluster.url = CLUSTERS_URL + '/' + self.id
+            Cluster.name = response['name']
             print(f"Cluster {self.nameInit} created..Let's connect the cluster")
             return True
 
@@ -67,7 +71,8 @@ class cluster:
             listOfNamespaces = str(subprocess.check_output("kubectl get ns -o jsonpath='{.items[*].metadata.name}'",shell=True),'utf-8')
             mayaNamespace = 'maya-system'
             if mayaNamespace not in listOfNamespaces: 
-                cluster.data = getRequest(self.url)
+                self.requestUrl = self.url
+                Cluster.data = self.get()
                 yamlApply = self.data['registrationToken']['clusterCommand']
                 if yamlApply != None:
                     os.system(yamlApply)
@@ -81,34 +86,41 @@ class cluster:
     def upgrade(self):
         """ checks if cluster is active and sets cluster upgrade post-request data and upgrades the cluster"""
         if self.isActive():
-            clusterUpgrageData["accountId"] = self.getCreatorId()
-            clusterUpgrageData["clusterId"] = self.id
-            clusterUpgrageData["kind"] = "evaluation"
-            clusterUpgrageData["organizationId"] = self.getOrganizationId()
-            if postRequest(subscriptionsUrl, clusterUpgrageData):
+            CLUSTER_UPGRADE_DATA["accountId"] = self.getCreatorId()
+            CLUSTER_UPGRADE_DATA["clusterId"] = self.id
+            CLUSTER_UPGRADE_DATA["kind"] = "evaluation"
+            CLUSTER_UPGRADE_DATA["organizationId"] = self.getProjectId()
+            self.requestUrl = SUBSCRIPTIONS_URL
+            if self.post(CLUSTER_UPGRADE_DATA):
                 print("Cluster Upgraded")
                 return True
             else:
                 print("Cluster not upgraded")
         else:
             print("Cannot upgrade! Cluster not active")
-        
+            return False
+    
     def checkSubscription(self):
         if self.isExist():
-            checkSubscriptionUrl = f"https://director.mayadata.io/v3/clusters/{self.id}/subscriptions"
-            SubscriptionList = getRequest(checkSubscriptionUrl)
+            subscriptionUrl = f"{BASE_URL}/clusters/{self.id}/subscriptions"
+            self.requestUrl = subscriptionUrl
+            SubscriptionList = self.get()
             if len(SubscriptionList) != 0:
                 return(SubscriptionList[0]['kind'])
+            else:
+                print("Cluster is not on the evaluation or premium mode!")
+                return False
                 
-    def getProjectId(self): 
+    def getGroupId(self): 
         """ checks if cluster exists to fetch project id from project-name and cluster id """ 
         if self.isExist():
-            projectList = getRequest(projectsUrl)
-            if projectList:
-                for dict in projectList:
+            self.requestUrl = GROUPS_URL
+            groupList = self.get()
+            if groupList:
+                for dict in groupList:
                     if dict['name'] == 'Default' and dict['clusterId'] == self.id:
-                        projectId = dict['id']
-                        return(projectId)
+                        groupId = dict['id']
+                        return(groupId)
 
     def getCreatorId(self):
         if self.isExist():
@@ -116,18 +128,21 @@ class cluster:
          
     def getState(self):
         if self.isExist():
-            state = getRequest(self.url)['state']
+            self.requestUrl = self.url
+            data = self.get()
+            state = data['state']
             return(state)
        
     def isActive(self):
         if self.getState() == 'active':
             return True
+        else:
+            return False
 
     def getId(self):
         if self.isExist():
             return(self.data['id'])   
-      
-    def getOrganizationId(self):
+    
+    def getProjectId(self):
         if self.isExist():
             return(self.data['organizationId']) 
-      

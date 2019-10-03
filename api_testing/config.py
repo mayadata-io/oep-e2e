@@ -1,38 +1,40 @@
 import os
 
 #baseUrl = "https://director.mayadata.io/v3"
-baseUrl = os.environ.get('BASEURL')
+BASE_URL = os.environ.get('BASEURL')
 
 # organization
-organizationsUrl = f"{baseUrl}/organizations"
+PROJECTS_URL = f"{BASE_URL}/organizations"
 
 # subscription
-subscriptionsUrl = f"{baseUrl}/subscriptions"
+SUBSCRIPTIONS_URL = f"{BASE_URL}/subscriptions"
 
 #project
-projectsUrl = f"{baseUrl}/projects/"
+GROUPS_URL = f"{BASE_URL}/projects/"
 
 # cluster 
-clustersUrl = f"{baseUrl}/clusters"
-clusterImportList = ["name", "organizationId", "k8sServerConfig", "provider"]
-clusterImportData = dict.fromkeys(clusterImportList, "default")
-clusterUpgrageList = ["accountId", "clusterId", "kind", "organizationId"]
-clusterUpgrageData = dict.fromkeys(clusterUpgrageList, "default")
+CLUSTERS_URL = f"{BASE_URL}/clusters"
+CLUSTER_IMPORT_LIST = ["name", "organizationId", "k8sServerConfig", "provider"]
+CLUSTER_IMPORT_DATA = dict.fromkeys(CLUSTER_IMPORT_LIST, "default")
+CLUSTER_UPGRADE_LIST = ["accountId", "clusterId", "kind", "organizationId"]
+CLUSTER_UPGRADE_DATA = dict.fromkeys(CLUSTER_UPGRADE_LIST, "default")
 
 #credential
-credentialsUrl = f'{baseUrl}/providercredentials/'
-credentialsList = ["name", "organizationId", "providerId", "credential"]
-credentialsDict = dict.fromkeys(credentialsList, "default")
+CREDENTIALS_URL = f'{BASE_URL}/providercredentials/'
+CREDENTIALS_LIST = ["name", "organizationId", "providerId", "credential"]
+CREDENTIALS_Dict = dict.fromkeys(CREDENTIALS_LIST, "default")
 
 # maya-apps
-mayaAppsUrl = f"{baseUrl}/projects/projectId/mayaapplications"
+MAYA_APPS_URL = f"{BASE_URL}/projects/groupId/mayaapplications"
 
 # schedule
-schedulesUrl = f"{baseUrl}/dmaasschedules"
-scheduleList = ["applicationId", "clusterId", "credentialId", "name", "organizationId", "scheduleInterval", "transferType", "region"]
-scheduleDict = dict.fromkeys(scheduleList, "default")
+SCHEDULES_URL = f"{BASE_URL}/dmaasschedules"
+SCHEDULE_LIST = ["applicationId", "clusterId", "credentialId", "name", "organizationId", "scheduleInterval", "transferType", "region"]
+SCHEDULE_DICT = dict.fromkeys(SCHEDULE_LIST, "default")
 
 #restore
-restoreUrl = "https://director.mayadata.io/v3/dmaasjobs"
+RESTORE_URL = f"{BASE_URL}/dmaasjobs/"
+RESTORE_LIST = ['backupName', 'dstClusterId', 'organizationId']
+RESTORE_DICT = dict.fromkeys(RESTORE_LIST, "default")
 
 
