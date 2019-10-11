@@ -1,9 +1,0 @@
-{
-    "credential_name":"vishnu",
-    "schedule_name":"gcpschedule",
-    "region":"us-east-1",
-    "provider":"gcp",
-    "cluster_name":"resource",
-    "deployment":"minio-deployment",
-    "namespace":"minio"
-}
