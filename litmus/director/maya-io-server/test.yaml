@@ -15,9 +15,24 @@
         - include_tasks: /ansible-utils/update_litmus_result_resource.yml
           vars:
             status: 'SOT'
+          
+          ## Checking maya-io server pod's state
+        - name : Fetch app state
+          shell: kubectl get pods -n {{ namespace }} | grep maya-io | awk '{print $3}'
+          register: app_status
+          failed_when: "'Running' not in app_status.stdout"
+        
+        - name : Fetch director url 
+          shell: kubectl get node -o wide | awk {'print $7'} | head -n 2 | tail -n 1
+          register: node_ip
 
-        - name: Importing cluster
-          shell: python3 cluster-connect.py -n {{ cluster_name }}
+        - set_fact:
+            url : "http://{{ node_ip.stdout }}:30380"
+
+        - name : Check connection
+          shell: curl {{ url }}/ping
+          register: curl_status
+          failed_when: "'pong' not in curl_status.stdout"
 
         - set_fact:
             flag: "Pass"

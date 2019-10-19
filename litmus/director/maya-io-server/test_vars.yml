@@ -1,0 +1,2 @@
+test_name: maya-io-server-check
+namespace: "{{ lookup('env','NAMESPACE') }}"
