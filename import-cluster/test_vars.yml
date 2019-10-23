@@ -1,2 +1,0 @@
-test_name: import-cluster
-cluster_name: "{{ lookup('env','CLUSTER_NAME') }}"

@@ -1,0 +1,28 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: maya-io-server-check
+  namespace: litmus
+spec:
+  template:
+    metadata:
+      name: litmus
+      labels:
+        app: maya-io-server-check-litmus
+    spec:
+      serviceAccountName: litmus
+      restartPolicy: Never
+      containers:
+      - name: ansibletest
+        image: mayadataio/dop-validator:ci
+        imagePullPolicy: Always
+        env:
+          - name: ANSIBLE_STDOUT_CALLBACK
+            value: default
+            
+          - name: NAMESPACE
+            value: modtest
+        
+        command: ["/bin/bash"]
+        args: ["-c", "ansible-playbook ./litmus/director/maya-io-server/test.yaml -i /etc/ansible/hosts -v; exit 0"]
