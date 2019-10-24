@@ -15,7 +15,11 @@
         - include_tasks: /ansible-utils/update_litmus_result_resource.yml
           vars:
             status: 'SOT'
-          
+        
+          ## Display all the director components
+        - name : Display director components
+          shell: kubectl get all -n {{ namespace }}
+
           ## Checking maya-io server pod's state
         - name : Fetch app state
           shell: kubectl get pods -n {{ namespace }} | grep maya-io | awk '{print $3}'
