@@ -19,10 +19,10 @@ spec:
         imagePullPolicy: Always
         env:
           - name: ANSIBLE_STDOUT_CALLBACK
-            value: default
-            
+            value: default  
           - name: NAMESPACE
-            value: modtest
-        
+            value: default              
         command: ["/bin/bash"]
         args: ["-c", "ansible-playbook ./litmus/director/maya-io-server/test.yaml -i /etc/ansible/hosts -v; exit 0"]
+      imagePullSecrets:
+      - name: director-test
