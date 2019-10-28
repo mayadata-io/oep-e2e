@@ -25,4 +25,4 @@ spec:
         command: ["/bin/bash"]
         args: ["-c", "ansible-playbook ./litmus/director/maya-io-server/test.yaml -i /etc/ansible/hosts -v; exit 0"]
       imagePullSecrets:
-      - name: director-test
+      - name: oep-secret
