@@ -30,7 +30,7 @@
           failed_when: "'Running' not in app_status.stdout"
         
         - name : Fetch director url 
-          shell: kubectl get node -o wide | awk {'print $7'} | head -n 2 | tail -n 1
+          shell: kubectl get node -o wide | awk {'print $7'} | head -n 4 | tail -n 1
           register: node_ip
 
         - set_fact:
