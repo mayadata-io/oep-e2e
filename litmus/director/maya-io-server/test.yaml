@@ -20,7 +20,7 @@
         - name : Fetch app state
           shell: kubectl get pods -n {{ namespace }} | grep maya-io | awk '{print $3}' | awk -F':' '{print $1}'
           register: app_status
-          until: app_status.stdout != 'Init' and app_status.stdout != 'ContainerCreating'
+          until: app_status.stdout != 'Init' and app_status.stdout != 'ContainerCreating' and app_status.stdout != 'PodInitializing'
           retries: 15
           delay: 10
           
