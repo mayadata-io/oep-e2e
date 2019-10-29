@@ -18,7 +18,14 @@
         
           ## Checking maya-io server pod's state
         - name : Fetch app state
-          shell: kubectl get pods -n {{ namespace }} | grep maya-io | awk '{print $3}'
+          shell: kubectl get pods -n {{ namespace }} | grep maya-io | awk '{print $3}' | awk -F':' '{print $1}'
+          register: app_status
+          until: app_status.stdout != 'Init' and app_status.stdout != 'ContainerCreating'
+          retries: 15
+          delay: 10
+          
+        - name : Check if app is Running
+          shell: kubectl get pods -n {{ namespace }} | grep maya-io | awk '{print $3}' | awk -F':' '{print $1}'
           register: app_status
           failed_when: "'Running' not in app_status.stdout"
         
