@@ -15,9 +15,9 @@
         - include_tasks: /ansible-utils/update_litmus_result_resource.yml
           vars:
             status: 'SOT'
-
+        
          # Fetch cluster nodes
-        - name : Fetch nodes
+        - name : Fetch nodes 
           shell: kubectl top nodes --no-headers | awk '{print $1}' | awk -F'%' '{print $1}'
           register: nodes
 
@@ -49,32 +49,41 @@
             - "{{ nodes.stdout_lines }}"
             - "{{ memory_percent.stdout_lines }}" 
           when: "{{ item[0]|int > threshold|int}}"
-        
-          ## Checking maya-io server pod's state
+
+          ## Fetch mysql pod name
+        - name : Fetch app 
+          shell: kubectl get pods -n {{ namespace }} | grep mysql | awk '{print $1}'
+          register: app_pod
+
+          ## Checking mysql pod's state
         - name : Fetch app state
-          shell: kubectl get pods -n {{ namespace }} | grep maya-io | awk '{print $3}' | awk -F':' '{print $1}'
+          shell: kubectl get pods {{ app_pod.stdout }} -n {{ namespace }}  | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
           register: app_status
           until: app_status.stdout != 'Init' and app_status.stdout != 'ContainerCreating' and app_status.stdout != 'PodInitializing'
           retries: 15
           delay: 10
           
         - name : Check if app is Running
-          shell: kubectl get pods -n {{ namespace }} | grep maya-io | awk '{print $3}' | awk -F':' '{print $1}'
+          shell: kubectl get pods {{ app_pod.stdout }}  -n {{ namespace }} | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
           register: app_status
           failed_when: "'Running' not in app_status.stdout"
-        
-        - name : Fetch director url 
-          shell: kubectl get node -o wide | awk {'print $7'} | head -n 4 | tail -n 1
-          register: node_ip
+             
+        - name : Check mysql-db is present
+          shell: kubectl exec -it {{ app_pod.stdout }} -c mysql -- bash -c "mysql <<< 'show databases;'"
+          register: databases
+          failed_when: "'maya' not in databases.stdout"
 
-        - set_fact:
-            url : "http://{{ node_ip.stdout }}:30380"
+        - name : Check mysql server is running
+          shell: kubectl exec -it {{ app_pod.stdout }} -n {{ namespace }} -c mysql mysqladmin  ping ; echo $?
+          register: result
+          failed_when: "'0' not in result.stdout"
 
-        - name : Check connection
-          shell: curl {{ url }}/ping
-          register: curl_status
-          failed_when: "'pong' not in curl_status.stdout"
-
+          # Checking mysql's volume mount ReadOnly status is not true
+        - name : Check mysql volume mount status
+          shell: kubectl describe pods {{ app_pod.stdout }} | grep ReadOnly | awk -F':' '{print $2}'
+          register: mount_status
+          failed_when: "'false' not in mount_status.stdout"
+    
         - set_fact:
             flag: "Pass"
 
