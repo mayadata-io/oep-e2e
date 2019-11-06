@@ -1,0 +1,36 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: maya-ui-check
+  namespace: litmus
+spec:
+  template:
+    metadata:
+      name: litmus
+      labels:
+        app: maya-ui-litmus
+    spec:
+      serviceAccountName: litmus
+      restartPolicy: Never
+      containers:
+      - name: ansibletest
+        image: mayadataio/dop-validator:ci
+        imagePullPolicy: Always
+        env:
+          - name: ANSIBLE_STDOUT_CALLBACK
+            value: default  
+          - name: NAMESPACE
+            value: default   
+          - name: FIRSTNAME
+            value: OEP
+          - name: SURNAME
+            value: USER
+          - name: USERNAME
+            value: oep.user@mayadata.io
+          - name: PASSWORD
+            value: OEPuser@123
+        command: ["/bin/bash"]
+        args: ["-c", "ansible-playbook ./litmus/director/maya-ui/test.yaml -i /etc/ansible/hosts -v; exit 0"]
+      imagePullSecrets:
+      - name: oep-secret
