@@ -1,0 +1,82 @@
+---
+- hosts: localhost
+  connection: local
+
+  vars_files:
+    - test_vars.yml
+
+  tasks:
+    - block:
+
+          ## Generating the testname for deployment
+        - include_tasks: /ansible-utils/create_testname.yml
+
+          ## RECORD START-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'SOT'
+        
+        # Fetch cluster nodes
+        - name : Fetch nodes 
+          shell: kubectl top nodes --no-headers | awk '{print $1}' | awk -F'%' '{print $1}'
+          register: nodes
+
+        # Fetch nodes memory consumption
+        - name : Fetch memory consumption
+          shell: kubectl top nodes --no-headers | awk '{print $5}' | awk -F'%' '{print $1}'
+          register: memory_percent
+        
+        # Fetch nodes cpu consumption
+        - name : Fetch cpu consumption
+          shell: kubectl top nodes --no-headers | awk '{print $3}' | awk -F'%' '{print $1}'
+          register: cpu_percent
+      
+        - set_fact:
+            threshold : "90"
+
+        - name : Checking cpu consumption of all nodes
+          debug:  
+            msg: cpu consumption of node {{ item.0 }} gone above {{ item.1 }}
+          with_together: 
+            - "{{ nodes.stdout_lines }}"
+            - "{{ cpu_percent.stdout_lines }}" 
+          when: "{{ item[0]|int > threshold|int}}"
+         
+        - name : Checking memory consumption of all nodes
+          debug:  
+            msg: memory consumption of node {{ item.0 }} gone above {{ item.1 }}
+          with_together: 
+            - "{{ nodes.stdout_lines }}"
+            - "{{ memory_percent.stdout_lines }}" 
+          when: "{{ item[0]|int > threshold|int}}"
+
+          ## Fetch elasticsearch pod name
+        - name : Fetch app 
+          shell: kubectl get pods -n {{ namespace }} | grep od-elasticsearch | awk '{print $1}'
+          register: app_pod
+
+          ## Checking od-elasticsearch pod's state
+        - name : Fetch app state
+          shell: kubectl get pods {{ app_pod.stdout }} -n {{ namespace }}  | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
+          register: app_status
+          until: app_status.stdout != 'Init' and app_status.stdout != 'ContainerCreating' and app_status.stdout != 'PodInitializing'
+          delay: 10
+          
+        - name : Check if app is Running
+          shell: kubectl get pods {{ app_pod.stdout }}  -n {{ namespace }} | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
+          register: app_status
+          failed_when: "'Running' not in app_status.stdout"
+
+        - set_fact:
+            flag: "Pass"
+
+      rescue:
+        - name: Setting fail flag
+          set_fact:
+            flag: "Fail"
+
+      always:
+        ## RECORD END-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'EOT'

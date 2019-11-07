@@ -1,0 +1,2 @@
+test_name: od-elasticsearch-check
+namespace: "{{ lookup('env','NAMESPACE') }}"
