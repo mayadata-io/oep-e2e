@@ -1,0 +1,2 @@
+test_name: cassandra-check
+namespace: "{{ lookup('env','NAMESPACE') }}"
