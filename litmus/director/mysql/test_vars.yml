@@ -1,0 +1,2 @@
+test_name: mysql-check
+namespace: "{{ lookup('env','NAMESPACE') }}"
