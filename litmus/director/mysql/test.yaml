@@ -69,7 +69,7 @@
           failed_when: "'Running' not in app_status.stdout"
              
         - name : Check mysql-db is present
-          shell: kubectl exec -it {{ app_pod.stdout }} -c mysql -- bash -c "mysql <<< 'show databases;'"
+          shell: kubectl exec -it {{ app_pod.stdout }} -c mysql -n {{ namespace }} -- bash -c "mysql <<< 'show databases;'"
           register: databases
           failed_when: "'maya' not in databases.stdout"
 
@@ -80,7 +80,7 @@
 
           # Checking mysql's volume mount ReadOnly status is not true
         - name : Check mysql volume mount status
-          shell: kubectl describe pods {{ app_pod.stdout }} | grep ReadOnly | awk -F':' '{print $2}'
+          shell: kubectl describe pods {{ app_pod.stdout }} -n {{ namespace }} | grep ReadOnly | awk -F':' '{print $2}'
           register: mount_status
           failed_when: "'false' not in mount_status.stdout"
     
