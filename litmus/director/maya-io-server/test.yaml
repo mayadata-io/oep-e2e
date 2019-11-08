@@ -55,10 +55,6 @@
           shell: kubectl get pods -n {{ namespace }} | grep mysql | awk '{print $1}'
           register: app_pod
 
-         # Display pods status
-        - name: Display pod status
-          shell: kubectl get pods -n {{ namespace }}
-        
           ## Checking maya-io server pod's state
         - name : Fetch app state
           shell: kubectl get pods {{ app_pod.stdout }} -n {{ namespace }}  | awk '{print $3}' | awk -F':' '{print $1}'
@@ -66,11 +62,7 @@
           until: app_status.stdout != 'Init' and app_status.stdout != 'ContainerCreating' and app_status.stdout != 'PodInitializing'
           retries: 15
           delay: 10
-        
-          # Display pods status
-        - name: Display pod status
-          shell: kubectl get pods -n {{ namespace }}
-          
+           
         - name : Check if app is Running
           shell: kubectl get pods {{ app_pod.stdout }} -n {{ namespace }} | awk '{print $3}' | awk -F':' '{print $1}'
           register: app_status
