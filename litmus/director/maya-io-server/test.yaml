@@ -59,7 +59,7 @@
           shell: kubectl get pods {{ app_pod.stdout }} -n {{ namespace }}  | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
           register: app_status
           until: app_status.stdout == 'Running'
-          retries: 30
+          retries: 50
           delay: 10
         
         - name : Fetch director url 

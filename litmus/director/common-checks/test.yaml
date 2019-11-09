@@ -50,10 +50,6 @@
             - "{{ memory_percent.stdout_lines }}" 
           when: "{{ item[0]|int > threshold|int}}"
         
-        # display all pods
-        - name: Fetch app 
-          shell: kubectl get pods -n {{ namespace }} 
-        
         ## Fetch app pod name
         - name : Fetch app 
           shell: kubectl get pods -n {{ namespace }} | grep {{ pod }} | awk '{print $1}'
@@ -63,7 +59,7 @@
           shell: kubectl get pods {{ app_pod.stdout }} -n {{ namespace }}  | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
           register: app_status
           until: app_status.stdout == 'Running'
-          retries: 30
+          retries: 50
           delay: 10
         
         - set_fact:
