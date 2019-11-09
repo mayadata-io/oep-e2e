@@ -56,10 +56,11 @@
           register: app_pod
         
         - name : Fetch app state
-          shell: kubectl get pods {{ app_pod.stdout }} -n {{ namespace }}  | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
+          shell: kubectl get pods {{ item }} -n {{ namespace }}  | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
           register: app_status
           until: app_status.stdout == 'Running'
-          retries: 50
+          with_items: "{{ app_pod.stdout_lines }}"
+          retries: 30
           delay: 10
         
         - set_fact:
