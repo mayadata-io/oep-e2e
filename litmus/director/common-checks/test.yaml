@@ -64,7 +64,7 @@
           shell: kubectl get pods {{ app_pod.stdout }} -n {{ namespace }} | awk '{print $3}' | awk -F':' '{print $1}'
           register: app_status
           until: app_status.stdout != 'Init' and app_status.stdout != 'ContainerCreating' and app_status.stdout != 'PodInitializing'
-          retries: 30
+          retries: 50
           delay: 10 
           
         - name : Check if app is Running
