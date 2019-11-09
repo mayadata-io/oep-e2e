@@ -57,7 +57,7 @@
 
           ## Checking mysql pod's state
         - name : Fetch app state
-          shell: kubectl get pods {{ app_pod.stdout }} -n {{ namespace }}  | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
+          shell: kubectl get pods {{ app_pod.stdout }}  -n {{ namespace }} | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
           register: app_status
           until: app_status.stdout != 'Init' and app_status.stdout != 'ContainerCreating' and app_status.stdout != 'PodInitializing'
           retries: 15
