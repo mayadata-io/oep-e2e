@@ -1,0 +1,32 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: app-check
+  namespace: litmus
+spec:
+  template:
+    metadata:
+      name: litmus
+      labels:
+        app: app-litmus
+    spec:
+      serviceAccountName: litmus
+      restartPolicy: Never
+      containers:
+      - name: ansibletest
+        image: mayadataio/dop-validator:ci
+        imagePullPolicy: Always
+        env:
+          - name: ANSIBLE_STDOUT_CALLBACK
+            value: default
+          - name: TEST_NAME
+            value: test-name
+          - name: NAMESPACE
+            value: default
+          - name: POD
+            value: pod-name            
+        command: ["/bin/bash"]
+        args: ["-c", "ansible-playbook ./litmus/director/common-checks/test.yaml -i /etc/ansible/hosts -v; exit 0"]
+      imagePullSecrets:
+      - name: oep-secret

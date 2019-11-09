@@ -1,0 +1,3 @@
+test_name: "{{ lookup('env','TEST_NAME') }}"  
+namespace: "{{ lookup('env','NAMESPACE') }}"
+pod: "{{ lookup('env','POD') }}"
