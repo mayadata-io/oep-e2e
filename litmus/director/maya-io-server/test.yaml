@@ -50,9 +50,9 @@
             - "{{ memory_percent.stdout_lines }}" 
           when: "{{ item[0]|int > threshold|int}}"
 
-         ## Fetch mysql pod name
+         ## Fetch maya-io pod name
         - name : Fetch app 
-          shell: kubectl get pods -n {{ namespace }} | grep mysql | awk '{print $1}'
+          shell: kubectl get pods -n {{ namespace }} | grep maya-io | awk '{print $1}'
           register: app_pod
 
           ## Checking maya-io server pod's state
