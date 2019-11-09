@@ -1,0 +1,2 @@
+test_name: configs-db-check
+namespace: "{{ lookup('env','NAMESPACE') }}"

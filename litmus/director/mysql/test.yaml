@@ -32,7 +32,9 @@
         - name : Check mysql-db is present
           shell: kubectl exec -it {{ app_pod.stdout }} -c mysql -n {{ namespace }} -- bash -c "mysql <<< 'show databases;'"
           register: databases
-          failed_when: "'maya' not in databases.stdout"
+          until: "'maya' not in databases.stdout"
+          retries: 5
+          delay: 10
 
         - name : Check mysql server is running
           shell: kubectl exec -it {{ app_pod.stdout }} -n {{ namespace }} -c mysql mysqladmin  ping ; echo $?

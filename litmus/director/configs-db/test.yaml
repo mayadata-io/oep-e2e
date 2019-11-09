@@ -18,30 +18,23 @@
 
          ## Fetch maya-io pod name
         - name : Fetch app 
-          shell: kubectl get pods -n {{ namespace }} | grep maya-io | awk '{print $1}'
+          shell: kubectl get pods -n {{ namespace }} | grep configs-db | awk '{print $1}'
           register: app_pod
 
         - name : Fetch app state
           shell: kubectl get pods {{ app_pod.stdout }} -n {{ namespace }}  | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
           register: app_status
           until: app_status.stdout == 'Running'
-          retries: 30
+          retries: 50
           delay: 10
         
-        - name : Fetch director url 
-          shell: kubectl get node -o wide | awk {'print $7'} | head -n 4 | tail -n 1
-          register: node_ip
-
-        - set_fact:
-            url : "http://{{ node_ip.stdout }}:30380"
-
-        - name : Check connection
-          shell: curl {{ url }}/ping
-          register: curl_status
-          until: "'pong' not in curl_status.stdout"
+        - name : Check mysql-db is present
+          shell: kubectl exec -it {{ app_pod.stdout }} -n {{ namespace }} -- bash -c "psql -U postgres -h localhost <<< '\l'"
+          register: databases
+          until: "'configs' not in databases.stdout"
           retries: 5
           delay: 10
-
+        
         - set_fact:
             flag: "Pass"
 
