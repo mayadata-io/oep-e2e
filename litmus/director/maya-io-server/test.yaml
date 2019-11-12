@@ -20,6 +20,7 @@
         - name : Fetch app 
           shell: kubectl get pods -n {{ namespace }} | grep maya-io | awk '{print $1}'
           register: app_pod
+          failed_when: app_pod.stdout == ""
 
         - name : Fetch app state
           shell: kubectl get pods {{ app_pod.stdout }} -n {{ namespace }}  | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1

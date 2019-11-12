@@ -20,21 +20,20 @@
         - name : Fetch app 
           shell: kubectl get pods -n {{ namespace }} | grep configs-db | awk '{print $1}'
           register: app_pod
+          failed_when: app_pod.stdout == ""
 
         - name : Fetch app state
           shell: kubectl get pods {{ app_pod.stdout }} -n {{ namespace }}  | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
           register: app_status
           until: app_status.stdout == 'Running'
-          retries: 50
+          retries: 30
           delay: 10
         
-        - name : Check mysql-db is present
-          shell: kubectl exec -it {{ app_pod.stdout }} -n {{ namespace }} -- bash -c "psql -U postgres -h localhost <<< '\l'"
+        - name : Check configs-db is present
+          shell: kubectl exec -it {{ app_pod.stdout }} -n {{ namespace }} -- bash -c "psql -U postgres -h localhost <<< '\l'" 
           register: databases
-          until: "'configs' not in databases.stdout"
-          retries: 5
-          delay: 10
-        
+          failed_when: "'configs' not in databases.stdout_lines"
+          
         - set_fact:
             flag: "Pass"
 
