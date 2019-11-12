@@ -32,7 +32,7 @@
         - name : Check configs-db is present
           shell: kubectl exec -it {{ app_pod.stdout }} -n {{ namespace }} -- bash -c "psql -U postgres -h localhost <<< '\l'" | grep configs
           register: databases
-          failed_when: "'configs' not in databases.stdout_lines"
+          failed_when: "'configs' not in databases.stdout_lines[0]"
           
         - set_fact:
             flag: "Pass"
