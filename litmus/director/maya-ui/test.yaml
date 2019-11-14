@@ -46,6 +46,8 @@
               {"firstName": "{{ firstname }}", "lastName": "{{ surname }}", "password": {"publicValue": "{{ username }}", "secretValue": "{{ password }}" }}
             status_code: 201
           register: signup
+          retries: 10
+          delay: 10
 
         - name : Login
           uri:
