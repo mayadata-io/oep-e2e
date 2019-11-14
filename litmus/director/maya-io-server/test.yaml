@@ -37,9 +37,11 @@
             url : "http://{{ node_ip.stdout }}:30380"
 
         - name : Check connection
-          shell: curl {{ url }}/ping
-          register: curl_status
-          until: "'pong' in curl_status.stdout"
+          uri:
+            url: "{{ url }}/ping"
+            method: GET
+            status_code: 200
+          register: signup
           retries: 10
           delay: 10
           
