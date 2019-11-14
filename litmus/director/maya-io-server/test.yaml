@@ -39,7 +39,9 @@
         - name : Check connection
           shell: curl {{ url }}/ping
           register: curl_status
-          failed_when: "'pong' not in curl_status.stdout"
+          until: "'pong' not in curl_status.stdout"
+          retries: 10
+          delay: 10
           
         - set_fact:
             flag: "Pass"
