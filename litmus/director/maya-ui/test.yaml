@@ -49,7 +49,7 @@
 
         - name : Login
           uri:
-            url: "http://{{ director_url }}/v3/token"
+            url: "{{ director_url }}/v3/token"
             method: POST
             body_format: json
             body:
