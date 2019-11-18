@@ -1,0 +1,49 @@
+---
+- hosts: localhost
+  connection: local
+
+  vars_files:
+    - test_vars.yml
+
+  tasks:
+    - block:
+
+          ## Generating the testname for deployment
+        - include_tasks: /ansible-utils/create_testname.yml
+
+          ## RECORD START-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'SOT'
+        
+          ## Fetch consul pod name
+        - name : Fetch app pod name
+          shell: kubectl get pods -n {{ namespace }} | grep consul | awk '{print $1}'
+          register: app_pod
+          failed_when: app_pod.stdout == ""
+
+        - name : Check app pod status
+          shell: kubectl get pods {{ app_pod.stdout }} -n {{ namespace }}  | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
+          register: app_status
+          until: app_status.stdout == 'Running'
+          retries: 30
+          delay: 10
+
+        - name : Check consul status
+          shell: kubectl exec -it {{ app_pod.stdout }} -n {{ namespace }}  -- sh -c "consul members  | awk '{print $3}'"
+          register: status
+          failed_when: "'alive' not in status.stdout"
+  
+        - set_fact:
+            flag: "Pass"
+
+      rescue:
+        - name: Setting fail flag
+          set_fact:
+            flag: "Fail"
+
+      always:
+        ## RECORD END-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'EOT'
