@@ -17,7 +17,7 @@
             status: 'SOT'
         
           ## Fetch cassandra pod name
-        - name : Fetch app 
+        - name : Fetch app pod name
           shell: kubectl get pods -n {{ namespace }} | grep cassandra | awk '{print $1}'
           register: app_pod
           failed_when: app_pod.stdout == ""

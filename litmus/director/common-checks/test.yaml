@@ -51,7 +51,7 @@
           when: "{{ item[0]|int > threshold|int}}"
         
         ## Fetch app pod name
-        - name : Fetch app 
+        - name : Fetch app pod name
           shell: kubectl get pods -n {{ namespace }} | grep {{ pod }} | awk '{print $1}'
           register: app_pod
           failed_when: app_pod.stdout == ""
