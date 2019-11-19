@@ -17,7 +17,7 @@
             status: 'SOT'
 
          ## Fetch maya-io pod name
-        - name : Fetch app 
+        - name : Fetch app pod name
           shell: kubectl get pods -n {{ namespace }} | grep maya-io | awk '{print $1}'
           register: app_pod
           failed_when: app_pod.stdout == ""

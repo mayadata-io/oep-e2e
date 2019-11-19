@@ -16,7 +16,7 @@
           vars:
             status: 'SOT'
 
-        - name : Fetch app 
+        - name : Fetch app pod name 
           shell: kubectl get pods -n {{ namespace }} | grep configs-db | awk '{print $1}'
           register: app_pod
           failed_when: app_pod.stdout == ""
