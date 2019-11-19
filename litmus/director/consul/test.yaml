@@ -16,6 +16,11 @@
           vars:
             status: 'SOT'
         
+        - name : Fetch app 
+          shell: kubectl get pods -n {{ namespace }} | grep consul | awk '{print $1}'
+          register: app_pod
+          failed_when: app_pod.stdout == ""
+
         - name : Check consul status
           shell: kubectl exec -it {{ app_pod.stdout }} -n {{ namespace }}  -- sh -c "consul members  | awk '{print $3}'"
           register: status

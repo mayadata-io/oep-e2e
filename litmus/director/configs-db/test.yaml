@@ -16,6 +16,11 @@
           vars:
             status: 'SOT'
 
+        - name : Fetch app 
+          shell: kubectl get pods -n {{ namespace }} | grep configs-db | awk '{print $1}'
+          register: app_pod
+          failed_when: app_pod.stdout == ""
+
         - name : Check configs-db is present
           shell: kubectl exec -it {{ app_pod.stdout }} -n {{ namespace }} -- bash -c "psql -U postgres -h localhost <<< '\l'" | grep configs
           register: databases
