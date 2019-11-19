@@ -15,20 +15,6 @@
         - include_tasks: /ansible-utils/update_litmus_result_resource.yml
           vars:
             status: 'SOT'
-      
-          ## Fetch od-elasticsearch pod name
-        - name : Fetch app pod name
-          shell: kubectl get pods -n {{ namespace }} | grep od-elasticsearch | awk '{print $1}'
-          register: app_pod
-          failed_when: app_pod.stdout == ""
-
-          ## Checking od-elasticsearch pod's state
-        - name : Check app pod status
-          shell: kubectl get pods {{ app_pod.stdout }} -n {{ namespace }}  | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
-          register: app_status
-          until: app_status.stdout == 'Running'
-          retries: 30
-          delay: 10
              
         - name : Check the status of elasticsearch shards 
           shell: kubectl exec -it {{ app_pod.stdout }} -n {{ namespace }} -- bash -c "curl {{ admin-user }}:{{ admin-password }}@localhost:9200/_cluster/health?pretty" | grep "status" | awk -F':' '{print $2}' | awk -F',' '{print $1}'
