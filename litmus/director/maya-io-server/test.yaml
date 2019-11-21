@@ -32,7 +32,7 @@
         - name : Fetch director url 
           shell: kubectl get node -o wide | awk {'print $7'} | head -n 4 | tail -n 1
           register: node_ip
-
+        
         - set_fact:
             url : "http://{{ node_ip.stdout }}:30380"
 
@@ -41,7 +41,7 @@
             url: "{{ url }}/ping"
             method: GET
             status_code: 200
-          register: signup
+          register: response
           retries: 10
           delay: 10
           

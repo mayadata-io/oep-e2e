@@ -1,0 +1,36 @@
+apiVersion: openebs.io/v1alpha1
+kind: StoragePoolClaim
+metadata:
+  name: cstor-pool
+spec:
+  name: cstor-pool
+  type: disk
+  poolSpec:
+    poolType: striped
+  blockDevices:
+    blockDeviceList:
+    # mention the block device list you want to create the pool with
+    #- blockdevice-4c5a1685ac65103cbc639e73a8389adf 
+    - blockdevice-60fc181ef6a49c9eb237f3cac5e77d88
+    - blockdevice-8abc16c4c87ebd2f26d2c2b540caa185
+    - blockdevice-a642e6e67c89b8d08f7c1bcda75c9000
+---
+apiVersion: storage.k8s.io/v1	
+kind: StorageClass
+metadata:
+  name: openebs-cstor
+  annotations:
+    openebs.io/cas-type: cstor
+    cas.openebs.io/config: |
+      - name: StoragePoolClaim
+        value: cstor-pool
+      - name: ReplicaCount
+        value: "3"
+#      - name: VolumeControllerImage
+#        value: openebs/cstor-volume-mgmt:{{ cstor_image }}
+#      - name: VolumeTargetImage
+#        value: openebs/cstor-istgt:{{ cstor_image }}
+#      - name: VolumeMonitorImage
+#        value: openebs/m-exporter:{{ cstor_image }}
+provisioner: openebs.io/provisioner-iscsi
+reclaimPolicy: Delete
