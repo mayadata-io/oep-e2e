@@ -43,11 +43,11 @@
             method: POST
             body_format: json
             body:
-              {"firstName": "{{ firstname }}", "lastName": "{{ surname }}", "password": {"publicValue": "{{ username }}", "secretValue": "{{ password }}" }}
-            status_code: 201
-          register: signup
+              {"firstName": "{{ firstname }}", "lastName": "{{ surname }}", "password": {"publicValue": "{{ username }}", "secretValue": "{{ password }}" }} 
+          register: result
           retries: 10
-          delay: 10
+          delay: 5
+          until: ('status' in result) and (result.status == 201) 
 
         - name : Login
           uri:
