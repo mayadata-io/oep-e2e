@@ -5,7 +5,7 @@
     - cpu or memory consumption percentage is more than threshold
   - Note: Threshold = 90%
 
-- Check if application pod exists and is Running
+- Check if application pod exists and is running
 
-- Check if server is Alive
+- Check if server is alive
   - Fetch director ip and check ping/pong connection
