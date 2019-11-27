@@ -43,7 +43,7 @@
             method: POST
             body_format: json
             body:
-              {"code": "{{ admin-username }}:{{ admin-password }}", "authProvider": "localAuthConfig"}
+              {"code": "{{ admin_username }}:{{ admin_password }}", "authProvider": "localAuthConfig"}
             status_code: 201
           register: login
 
