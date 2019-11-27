@@ -36,15 +36,15 @@
         - set_fact:
             url : "http://{{ node_ip.stdout }}:30380"
 
-        - name : Check connection
+        - name: Check server connection
           uri:
             url: "{{ url }}/ping"
             method: GET
-            status_code: 200
-          register: signup
+          register: result
           retries: 10
-          delay: 10
-          
+          delay: 5
+          until: ('status' in result) and (result.status == 200) 
+
         - set_fact:
             flag: "Pass"
 
