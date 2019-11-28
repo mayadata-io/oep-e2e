@@ -1,0 +1,7 @@
+test_name: cluster-connect-check
+director_client_namespace: "{{ lookup('env','DIRECTOR_CLIENT_NAMESPACE') }}"
+director_server_namespace: "{{ lookup('env','DIRECTOR_SERVER_NAMESPACE') }}"
+client_components: ['cortex-agent','dmaas-agent','fluentd-aggregator','fluentd-forwarder','kube-state-metrics','maya-io-agent','openebs-manager','status-agent','upgrade-controller','velero','weave-scope-agent','weave-scope-app','weave-scope-cluster-agent']
+daemon_sets: ['fluentd-forwarder','maya-io-agent','weave-scope-agent']
+admin_username: "{{ lookup('env','ADMIN_USERNAME') }}"
+admin_password: "{{ lookup('env','ADMIN_PASSWORD') }}"
