@@ -45,7 +45,10 @@
             body:
               {"code": "{{ admin_username }}:{{ admin_password }}", "authProvider": "localAuthConfig"}
             status_code: 201
-          register: login
+          register: response
+          retries: 10
+          delay: 10
+          until: response.status == 201
 
         - name : Check new user signup
           uri:
@@ -54,11 +57,19 @@
             body_format: json
             body:
               {"firstName": "{{ firstname }}", "lastName": "{{ surname }}", "password": {"publicValue": "{{ username }}", "secretValue": "{{ password }}" }} 
-          register: result
-          retries: 10
-          delay: 5
-          until: ('status' in result) and (result.status == 201) 
+            status_code: 201
+          register: signup
 
+        - name : Check if registered user is not able to signup with already taken email
+          uri:
+            url: "{{ director_url }}/v3/localAuthConfig"
+            method: POST
+            body_format: json
+            body:
+              {"firstName": "{{ firstname }}", "lastName": "{{ surname }}", "password": {"publicValue": "{{ username }}", "secretValue": "{{ password }}" }} 
+            status_code: 409
+          register: conflict
+    
         - name : Check user login
           uri:
             url: "{{ director_url }}/v3/token"

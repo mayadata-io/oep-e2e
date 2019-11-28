@@ -22,7 +22,7 @@
           failed_when: app_pod.stdout == ""
 
         - name : Check the status of elasticsearch shards 
-          shell: kubectl exec -it {{ app_pod.stdout }} -n {{ namespace }} -- bash -c "curl {{ admin-user }}:{{ admin-password }}@localhost:9200/_cluster/health?pretty" | grep "status" | awk -F':' '{print $2}' | awk -F',' '{print $1}'
+          shell: kubectl exec -it {{ app_pod.stdout }} -n {{ namespace }} -- bash -c "curl {{ admin_user }}:{{ admin_password }}@localhost:9200/_cluster/health?pretty" | grep "status" | awk -F':' '{print $2}' | awk -F',' '{print $1}'
           register: status
           failed_when: "'red' in status.stdout"
       
