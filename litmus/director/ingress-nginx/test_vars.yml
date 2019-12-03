@@ -1,0 +1,2 @@
+test_name: ingress-nginx-check
+namespace: "{{ lookup('env','NAMESPACE') }}"
