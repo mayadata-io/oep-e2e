@@ -1,4 +1,4 @@
 test_name: od-elasticsearch-check
 namespace: "{{ lookup('env','NAMESPACE') }}"
-admin-user: "{{ lookup('env','ADMIN_USER') }}"
-admin-password: "{{ lookup('env','ADMIN_PASSWORD') }}"
+admin_user: "{{ lookup('env','ADMIN_USER') }}"
+admin_password: "{{ lookup('env','ADMIN_PASSWORD') }}"
