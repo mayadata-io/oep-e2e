@@ -50,20 +50,25 @@
             - "{{ memory_percent.stdout_lines }}" 
           when: "{{ item[0]|int > threshold|int}}"
         
-        ## Fetch app pod name
         - name : Fetch app pod name
           shell: kubectl get pods -n {{ namespace }} | grep {{ pod }} | awk '{print $1}'
           register: app_pod
           failed_when: app_pod.stdout == ""
 
         - name : Fetch app state
-          shell: kubectl get pods {{ item }} -n {{ namespace }}  | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
+          shell: kubectl get pods {{ item }} -n {{ namespace }} | awk 'NR==2{print $3}' | awk -F':' '{print $1}' 
           register: app_status
           until: app_status.stdout == 'Running'
           with_items: "{{ app_pod.stdout_lines }}"
           retries: 30
           delay: 10
         
+        - name: Fetch pod ready status
+          shell: kubectl get pods {{ item }} -n {{ namespace }} | awk 'NR==2{print $2}' | awk -F'/' '{print $1}' && kubectl get pods {{ item }} -n {{ namespace }} | awk 'NR==2{print $2}' | awk -F'/' '{print $2}'
+          register: pod_status
+          with_items: "{{ app_pod.stdout_lines }}"
+          failed_when: "{{ pod_status.stdout_lines | unique | length != 1 }}"
+
         - set_fact:
             flag: "Pass"
 

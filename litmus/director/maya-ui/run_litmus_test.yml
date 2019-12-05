@@ -30,10 +30,6 @@ spec:
             value: oep.user@mayadata.io
           - name: PASSWORD
             value: OEPuser@123
-          - name: ADMIN_USERNAME
-            value: Administrator
-          - name: ADMIN_PASSWORD
-            value: password
         command: ["/bin/bash"]
         args: ["-c", "ansible-playbook ./litmus/director/maya-ui/test.yaml -i /etc/ansible/hosts -v; exit 0"]
       imagePullSecrets:
