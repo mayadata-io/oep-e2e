@@ -1,0 +1,66 @@
+---
+- hosts: localhost
+  connection: local
+
+  vars_files:
+    - test_vars.yml
+
+  tasks:
+    - block:
+
+          ## Generating the testname for deployment
+        - include_tasks: /ansible-utils/create_testname.yml
+
+          ## RECORD START-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'SOT'
+        
+        - name : Check if ingress-nginx namespace exists
+          shell: kubectl get ns | grep {{ namespace }}
+          register: ns
+          failed_when: ns == ""
+        
+        - name : Fetch pod list in ingress-nginx namespace
+          shell: kubectl get pods -n {{ namespace }}  | awk '{print $1}' | tail -n +2 
+          register: pods
+          failed_when: pods.stdout == ""
+
+        - name : Fetch app state
+          shell: kubectl get pods {{ item }} -n {{ namespace }} | awk 'NR==2{print $3}' | awk -F':' '{print $1}' 
+          register: app_status
+          until: app_status.stdout == 'Running'
+          with_items: "{{ pods.stdout_lines }}"
+          retries: 30
+          delay: 10
+        
+        - name: Fetch pod ready status
+          shell: kubectl get pods -n {{ namespace }} | grep {{ item }} | awk '{print $2}' | awk -F'/' '{print $1}' && kubectl get pods -n {{ namespace }} | grep {{ item }} | awk '{print $2}' | awk -F'/' '{print $2}'
+          register: ready_status
+          with_items: "{{ pods.stdout_lines }}"     
+          failed_when: "{{ ready_status.stdout_lines | unique | length != 1 }}"
+
+        - name : Fetch replica set list in ingress-nginx namespace
+          shell: kubectl get rs -n {{ namespace }} | awk '{print $1}' | tail -n +2
+          register: rs
+          failed_when: rs.stdout == ""
+
+        - name: Fetch replica set ready status
+          shell: kubectl get rs -n {{ namespace }} | grep {{ item }} | awk '{print $2}'  && kubectl get rs -n {{ namespace }} | grep {{ item }} | awk '{print $3}' && kubectl get rs -n {{ namespace }} | grep {{ item }} | awk '{print $4}' 
+          register: ready_status
+          with_items: "{{ rs.stdout_lines }}"     
+          failed_when: "{{ ready_status.stdout_lines | unique | length != 1 }}"
+    
+        - set_fact:
+            flag: "Pass"
+
+      rescue:
+        - name: Setting fail flag
+          set_fact:
+            flag: "Fail"
+
+      always:
+        ## RECORD END-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'EOT'
