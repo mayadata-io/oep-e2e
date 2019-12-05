@@ -37,19 +37,6 @@
         - set_fact:
             director_url : "http://{{ node_ip.stdout }}:30380"
 
-        - name : Check admin login
-          uri:
-            url: "{{ director_url }}/v3/token"
-            method: POST
-            body_format: json
-            body:
-              {"code": "{{ admin_username }}:{{ admin_password }}", "authProvider": "localAuthConfig"}
-            status_code: 201
-          register: response
-          retries: 10
-          delay: 10
-          until: response.status == 201
-
         - name : Check new user signup
           uri:
             url: "{{ director_url }}/v3/localAuthConfig"

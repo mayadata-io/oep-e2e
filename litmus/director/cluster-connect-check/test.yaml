@@ -1,0 +1,119 @@
+---
+- hosts: localhost
+  connection: local
+
+  vars_files:
+    - test_vars.yml
+
+  tasks:
+    - block:
+
+          ## Generating the testname for deployment
+        - include_tasks: /ansible-utils/create_testname.yml
+
+          ## RECORD START-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'SOT'
+        
+        - name : Fetch director url 					
+          shell: kubectl get node -o wide | awk {'print $7'} | head -n 4 | tail -n 1
+          register: node_ip
+
+        - set_fact:
+            url : "http://{{ node_ip.stdout }}:30380"
+
+        - name : Check admin login
+          uri:
+            url: "{{ url }}/v3/token"
+            method: POST
+            body_format: json
+            body:
+              {"code": "{{ admin_username }}:{{ admin_password }}", "authProvider": "localAuthConfig"}
+            status_code: 201
+          register: login
+
+        - name : Check if namespace exists
+          shell: kubectl get ns | grep {{ director_client_namespace }}
+          register: result
+          failed_when: result == ""
+
+        - name : Fetch app state
+          shell: kubectl get pods -n {{ director_client_namespace }}  | grep {{ item }} | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
+          register: app_status
+          until: app_status.stdout == 'Running'
+          with_items:
+            - "{{ client_components }}"
+          retries: 5
+          delay: 2
+        
+        - name: Fetch pod ready status
+          shell: kubectl get pods -n {{ director_client_namespace }} | grep {{ item }} | awk '{print $2}' | awk -F'/' '{print $1}' && kubectl get pods -n {{ director_client_namespace }} | grep {{ item }} | awk '{print $2}' | awk -F'/' '{print $2}'
+          register: ready_status
+          with_items:
+            - "{{ client_components }}"
+          failed_when: "{{ ready_status.stdout_lines | unique | length != 1 }}"
+        
+        - name: Check daemonset status
+          shell: kubectl get ds -n {{ director_client_namespace }} | grep {{ item }} | awk '{print $2}'  && kubectl get ds -n {{ director_client_namespace }} | grep {{ item }} | awk '{print $3}' && kubectl get ds -n {{ director_client_namespace }} | grep {{ item }} | awk '{print $4}'
+          with_items:
+            - "{{ daemon_sets }}"
+          register: daemonset_status
+          failed_when: "{{ daemonset_status.stdout_lines | unique | length != 1 }}"
+  
+        - name: Fetch apiKey
+          shell: kubectl exec -it mysql-0 -c mysql -n {{ director_server_namespace }} -- bash -c  "mysql <<< 'use maya;select data from project where id=2;'" | grep apiKey
+          register: data
+
+        - set_fact:
+            api_key: "{{ (data.stdout | from_json).fields.apiKey }}"
+        
+        - name: Fetch username and password from apikey
+          shell: echo {{ api_key }} | base64 --decode
+          register: credentials_pair
+
+        - set_fact:
+            credentials: "{{ credentials_pair.stdout.split(':') }}"
+
+        - name: Fetch connected clusters data
+          uri:
+            url: "{{ url }}/v3/clusters"
+            user: "{{ credentials[0] }}"
+            password: "{{ credentials[1] }}"
+            method: GET
+            body_format: json
+            status_code: 200
+          register:  result
+
+        - name: Fetch cluster details
+          shell: echo "{{ result.json.data[1].name }}" && echo "{{ result.json.data[1].id }}"
+          register: clusters_details
+
+        - name: Fetch self-connected cluster data by id
+          uri:
+            url: "{{ url }}/v3/clusters/{{ clusters_details.stdout_lines[1] }}"
+            user: "{{ credentials[0] }}"
+            password: "{{ credentials[1] }}"
+            method: GET
+            body_format: json
+            status_code: 200
+          register: cluster_data
+          
+        - name: Check if a cluster is Active
+          shell: echo "{{ cluster_data.json.state }}" 
+          register: cluster_state
+          failed_when: cluster_state.stdout != "active"
+      
+        - set_fact:
+            flag: "Pass"
+
+      rescue:
+        - name: Setting fail flag
+          set_fact:
+            flag: "Fail"
+
+      always:
+        ## RECORD END-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'EOT'
