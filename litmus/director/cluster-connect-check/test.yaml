@@ -45,7 +45,7 @@
           with_items:
             - "{{ client_components }}"
           retries: 5
-          delay: 2
+          delay: 4
         
         - name: Fetch pod ready status
           shell: kubectl get pods -n {{ director_client_namespace }} | grep {{ item }} | awk '{print $2}' | awk -F'/' '{print $1}' && kubectl get pods -n {{ director_client_namespace }} | grep {{ item }} | awk '{print $2}' | awk -F'/' '{print $2}'
