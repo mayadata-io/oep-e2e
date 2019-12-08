@@ -16,7 +16,7 @@
           vars:
             status: 'SOT'
         
-        - name : Fetch director url 					
+        - name : Fetch director url
           shell: kubectl get node -o wide | awk {'print $7'} | head -n 4 | tail -n 1
           register: node_ip
 
@@ -68,12 +68,11 @@
         - set_fact:
             api_key: "{{ (data.stdout | from_json).fields.apiKey }}"
         
-        - name: Fetch username and password from apikey
-          shell: echo {{ api_key }} | base64 --decode
-          register: credentials_pair
+        - set_fact:
+            credentials_pair: "{{ api_key |  b64decode }}"
 
         - set_fact:
-            credentials: "{{ credentials_pair.stdout.split(':') }}"
+            credentials: "{{ credentials_pair.split(':') }}"
 
         - name: Fetch connected clusters data
           uri:
