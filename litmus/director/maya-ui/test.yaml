@@ -37,36 +37,6 @@
         - set_fact:
             director_url : "http://{{ node_ip.stdout }}:30380"
 
-        - name : Check new user signup
-          uri:
-            url: "{{ director_url }}/v3/localAuthConfig"
-            method: POST
-            body_format: json
-            body:
-              {"firstName": "{{ firstname }}", "lastName": "{{ surname }}", "password": {"publicValue": "{{ username }}", "secretValue": "{{ password }}" }} 
-            status_code: 201
-          register: signup
-
-        - name : Check if registered user is not able to signup with already taken email
-          uri:
-            url: "{{ director_url }}/v3/localAuthConfig"
-            method: POST
-            body_format: json
-            body:
-              {"firstName": "{{ firstname }}", "lastName": "{{ surname }}", "password": {"publicValue": "{{ username }}", "secretValue": "{{ password }}" }} 
-            status_code: 409
-          register: conflict
-    
-        - name : Check user login
-          uri:
-            url: "{{ director_url }}/v3/token"
-            method: POST
-            body_format: json
-            body:
-              {"code": "{{ username }}:{{ password }}", "authProvider": "localAuthConfig"}
-            status_code: 201
-          register: login
-
         - set_fact:
             flag: "Pass"
 
