@@ -7,13 +7,10 @@ setup(name='Distutils',
       description='Python Distribution Utilities',
       author='Harshita Sharma',
       author_email='harshita.sharma@mayadata.io',
-      py_modules=['api_testing.cluster.cluster', 
-      'api_testing.account.account',
-      'api_testing.api_request.request', 
-      'api_testing.dmaas.credentials', 
-      'api_testing.dmaas.schedule', 
-      'api_testing.dmaas.restore', 
-      'api_testing.mayapps.mayapps',
-      'api_testing.config'
+      py_modules=['cluster.cluster', 
+      'api_request.request', 
+      'config',
+      'project.project',
+      'group.group'
       ]
      )
