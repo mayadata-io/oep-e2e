@@ -12,3 +12,6 @@ RUN mkdir /etc/ansible/ /ansible && \
     echo "[local]" >> /etc/ansible/hosts && \
     echo "127.0.0.1" >> /etc/ansible/hosts
 COPY ./ ./
+RUN pip3 install -r api_testing/requirements.txt
+RUN cd api_testing && python setup.py install
+
