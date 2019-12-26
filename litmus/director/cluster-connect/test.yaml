@@ -16,15 +16,19 @@
           vars:
             status: 'SOT'
         
-        - name : Fetch director url
-          shell: kubectl get node -o wide | awk {'print $7'} | head -n 4 | tail -n 1
-          register: node_ip
-
         - set_fact:
-            url : "http://{{ node_ip.stdout }}:30380"
+            director_url : "http://{{ director_ip }}:30380"
+
+        - name: username
+          shell: cat /etc/secret-volume/username.txt
+          register: username
+          
+        - name: password
+          shell: cat /etc/secret-volume/password.txt
+          register: password
 
         - name: cluster connect
-          shell: python3 api_testing/cluster/cluster-connect.py --cluster_name oep-cluster --provider gcp --url {{ director_url }} --username {{ username }} --password {{ password }}
+          shell: python3 /api_testing/cluster/cluster-connect.py --cluster_name oep-cluster --provider gcp --url {{ director_url }} --username {{ username.stdout }} --password {{ password.stdout }}
       
         - set_fact:
             flag: "Pass"
