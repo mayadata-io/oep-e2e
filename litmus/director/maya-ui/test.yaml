@@ -16,20 +16,6 @@
           vars:
             status: 'SOT'
         
-          ## Fetch maya-ui pod name
-        - name : Fetch app pod name
-          shell: kubectl get pods -n {{ namespace }} | grep maya-ui | awk '{print $1}'
-          register: app_pod
-          failed_when: app_pod.stdout == ""
-
-          ## Checking maya-ui pod state
-        - name : Fetch app state
-          shell: kubectl get pods {{ app_pod.stdout }} -n {{ namespace }}  | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
-          register: app_status
-          until: app_status.stdout == 'Running'
-          retries: 30
-          delay: 10
-
         - name : Fetch director url 
           shell: kubectl get node -o wide | awk {'print $7'} | head -n 4 | tail -n 1
           register: node_ip

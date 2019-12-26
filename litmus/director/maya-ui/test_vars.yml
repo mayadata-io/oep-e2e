@@ -1,6 +1,2 @@
 test_name: maya-ui-check
 namespace: "{{ lookup('env','NAMESPACE') }}"
-firstname: "{{ lookup('env','FIRSTNAME') }}"
-surname: "{{ lookup('env','SURNAME') }}"
-username: "{{ lookup('env','USERNAME') }}"
-password: "{{ lookup('env','PASSWORD') }}"
