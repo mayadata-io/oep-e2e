@@ -1,0 +1,30 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: cluster-connect
+  namespace: litmus
+spec:
+  template:
+    metadata:
+      name: litmus
+      labels:
+        app: cluster-connect-litmus
+    spec:
+      serviceAccountName: litmus
+      restartPolicy: Never
+      containers:
+      - name: ansibletest
+        image: mayadataio/dop-validator:ci
+        imagePullPolicy: Always
+        env:
+          - name: ANSIBLE_STDOUT_CALLBACK
+            value: default  
+          - name: DIRECTOR_CLIENT_NAMESPACE
+            value: maya-system     
+          - name: DIRECTOR_SERVER_NAMESPACE
+            value: default
+        command: ["/bin/bash"]
+        args: ["-c", "ansible-playbook ./litmus/director/cluster-connect/test.yaml -i /etc/ansible/hosts -v; exit 0"]
+      imagePullSecrets:
+      - name: oep-secret
