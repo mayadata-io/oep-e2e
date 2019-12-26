@@ -1,0 +1,2 @@
+test_name: openebs-upgrade-check
+namespace: "{{ lookup('env','NAMESPACE') }}"
