@@ -1,0 +1,28 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: ad-authentication-test
+  namespace: litmus
+spec:
+  template:
+    metadata:
+      name: litmus
+      labels:
+        app: ad-authentication-test-litmus
+    spec:
+      serviceAccountName: litmus
+      restartPolicy: Never
+      containers:
+      - name: ansibletest
+        image: mayadataio/dop-validator:ci
+        imagePullPolicy: Always
+        env:
+          - name: ADMIN_USERNAME
+            value: Administrator
+          - name: ADMIN_PASSWORD
+            value: Test@123
+        command: ["/bin/bash"]
+        args: ["-c", "ansible-playbook ./litmus/director/ad-authentication-test/test.yaml -i /etc/ansible/hosts -v; exit 0"]
+      imagePullSecrets:
+      - name: oep-secret

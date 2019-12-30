@@ -1,0 +1,45 @@
+---
+- hosts: localhost
+  connection: local
+
+  vars_files:
+    - test_vars.yml
+
+  tasks:
+    - block:
+
+          ## Generating the testname for deployment
+        - include_tasks: /ansible-utils/create_testname.yml
+
+          ## RECORD START-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'SOT'
+
+        - name : Fetch director url
+          shell: kubectl get node -o wide | awk {'print $7'} | head -n 4 | tail -n 1
+          register: node_ip
+
+        - set_fact:
+            url : "http://{{ node_ip.stdout }}:30380"
+        ## The token response' token and authProvider can be captured to make future API calls
+        - name : Check AD login
+          uri:
+            url: "{{ url }}/v3/token"
+            method: POST
+            body_format: json
+            body:
+              {"code": "{{ ad_username }}:{{ ad_password }}", "authProvider": "adconfig"}
+            status_code: 201
+          register: login
+
+      rescue:
+        - name: Setting fail flag
+          set_fact:
+            flag: "Fail"
+
+      always:
+        ## RECORD END-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'EOT'
