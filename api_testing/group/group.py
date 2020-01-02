@@ -1,12 +1,10 @@
-#!/usr/bin/env python
-
 """ director account specific methods """
 
 from api_request.request import *
 from config import *
 
 class Groups():
-    data = {}
+    projectAccData = {}
 
     def __init__(self, director_url, api_key, api_password):
         # configobj = Config(director_url, api_key, api_password)
@@ -17,42 +15,20 @@ class Groups():
         # Data request object initialize
         requestobj = Data(api_key, api_password) 
         self.request = requestobj  
-        # setter method 
-        self.setData()
-        
-    def setData(self):
+      
+    def setProjectAccountDataIfExists(self):
         groupsList = self.request.get(self.base_url)
-        if len(groupsList) != 0:
-            dict = groupsList[0] 
-            Groups.data = dict
-         
-    def isExist(self): 
-        return(bool(self.data))
-         
-    def getUrl(self):
-        if getId() != None:
-            url = self.baseUrl + '/' + self.getId()
-            return(url)
-        else:
-            print("Cannot get url as Id is None")
-            return None
-
-    def getId(self):
-        if self.isExist():
-            return(self.data['id'])  
-        else:
-            print(f"{self.nameInit} does not exist")
-            return None
-         
-    def remove(self):
-        if self.isExist():
-            self.request.delete()
-            print(f"{self.nameInit} deleted")
-            return True
-        else:
-            print(f"{self.nameInit} does not exist")
-            return False
-            
-          
-            
+        account = "ProjectAccount"
+        for dict in groupsList:
+            if account == dict["name"]:
+                print(dict["name"])
+                Groups.projectAccData = dict
+                return True
+        print("Project Account does not exist")
+        return False
         
+    def getProjectAccountID(self):
+        if self.setProjectAccountDataIfExists():
+            return self.projectAccData['id']
+        else:
+            return None
