@@ -7,8 +7,8 @@ class Config():
         self.BASE_URL = director_url + "/v3"
         # fetch groups id
         self.GROUPS_URL = f"{self.BASE_URL}/groups"
-        groupsobj = Groups(director_url, api_key, api_password) 
-        group_id = groupsobj.getId()  
+        groupobj = Groups(director_url, api_key, api_password) 
+        group_id = groupobj.getProjectAccountID()
         # project
         self.PROJECTS_URL = f"{self.GROUPS_URL}/{group_id}/projects"
         # cluster 
