@@ -1,0 +1,41 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: create-apikey-check
+  namespace: litmus
+spec:
+  template:
+    metadata:
+      name: litmus
+      labels:
+        app: create-apikey-litmus
+    spec:
+      serviceAccountName: litmus
+      restartPolicy: Never
+      containers:
+      - name: ansibletest
+        image: mayadataio/dop-validator:ci
+        imagePullPolicy: Always
+        env:
+          - name: DIRECTOR_IP
+            valueFrom:
+              configMapKeyRef:
+                name: config
+                key: url
+          - name: ANSIBLE_STDOUT_CALLBACK
+            value: default  
+          - name: FIRSTNAME
+            value: OEP
+          - name: SURNAME
+            value: USER
+          - name: USERNAME
+            value: oep.user@mayadata.io
+          - name: PASSWORD
+            value: OEPuser@123
+          - name: API_KEY
+            value: OEP_KEY
+        command: ["/bin/bash"]
+        args: ["-c", "ansible-playbook ./litmus/director/create-apikey/test.yaml -i /etc/ansible/hosts -v; exit 0"]
+      imagePullSecrets:
+      - name: oep-secret
