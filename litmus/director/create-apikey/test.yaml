@@ -36,7 +36,7 @@
             token_template: "token={{ jwt }}; authProvider=localAuthConfig;"
         
         - set_fact:
-             data: "{\"name\":\"{{ API_KEY }}\"}"
+             data: "{\"name\":\"{{ apikey }}\"}"
 
         - name: Creating new api key
           shell: curl  -X POST -d "{{ data }}"  -H Cookie:"{{ token_template }}"  "{{ director_url }}/v3/apikey"
