@@ -31,24 +31,35 @@
 
         - set_fact: 
             jwt: "{{ signup.json.jwt }}"
+            accountId: "{{ signup.json.accountId }}"
 
-        - set_fact:
-            token_template: "token={{ jwt }}; authProvider=localAuthConfig;"
+        #- set_fact:
+        #    token_template: "token={{ jwt }}; authProvider=localAuthConfig;"
         
         - set_fact:
              data: "{\"name\":\"{{ apikey }}\"}"
 
         - name: Creating new api key
-          shell: curl  -X POST -d "{{ data }}"  -H Cookie:"{{ token_template }}"  "{{ director_url }}/v3/apikey"
-          register: response
-          failed_when: "'201' not in response.stdout_lines[0]"
+          #shell: curl -X POST -d "{{ data }}"  -H Cookie:"{{ token_template }}"  "{{ director_url }}/v3/apikey"
+          shell: python3 /api_testing/api-key/api-key.py --url {{ director_url }} --token {{ jwt }}
+          register: credentials
 
         - set_fact:
-            username: response.stdout.publicValue
-            password: response.stdout.secretValue
+            username: "{{ credentials.stdout_lines[0] }}"
+            password: "{{ credentials.stdout_lines[1] }}"
 
+        - name : Search user account created 
+          uri:
+            url: "{{ director_url }}/v3/accounts/{{ accountId }}/?searchuser"
+            user: "{{ username }}"
+            password: "{{ password }}"
+            method: GET
+            body_format: json
+            status_code: 200
+          register: search
+        
         - name: Create a kubernetes secret 
-          shell: kubectl create secret generic director-user-pass --from-literal=username=$username --from-literal=password=$password -n litmus
+          shell: kubectl create secret generic director-user-pass --from-literal=username={{ username }} --from-literal=password={{ password }} -n litmus
 
         - set_fact:
             flag: "Pass"
