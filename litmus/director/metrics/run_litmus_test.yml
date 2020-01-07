@@ -1,0 +1,31 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: metrics-check
+  namespace: litmus
+spec:
+  template:
+    metadata:
+      name: litmus
+      labels:
+        app: metrics-litmus
+    spec:
+      serviceAccountName: litmus
+      restartPolicy: Never
+      containers:
+      - name: ansibletest
+        image: harshitasharma011/test:v2
+        imagePullPolicy: Always
+        env:
+          - name: DIRECTOR_IP
+            valueFrom:
+              configMapKeyRef:
+                name: config
+                key: url
+          - name: ANSIBLE_STDOUT_CALLBACK
+            value: default    
+        command: ["/bin/bash"]
+        args: ["-c", "ansible-playbook ./litmus/director/metrics/test.yaml -i /etc/ansible/hosts -v; exit 0"]
+      imagePullSecrets:
+      - name: oep-secret
