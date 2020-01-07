@@ -33,6 +33,18 @@
             status_code: 201
           register: login
 
+        - set_fact:
+            jwt: "{{ login.json.jwt }}"
+        - set_fact:
+            auth_cookie: "token={{ jwt }}; authProvider=adconfig;"
+        - name : Make an API request
+          uri:
+            url: "{{ url }}/v3/identity"
+            method: GET
+            status_code: 200
+            headers:
+              Cookie: "{{auth_cookie}}"
+
       rescue:
         - name: Setting fail flag
           set_fact:
