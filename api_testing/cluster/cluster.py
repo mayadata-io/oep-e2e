@@ -50,7 +50,7 @@ class Cluster():
             return True
 
     def create(self, provider):
-        print("Creating cluster..") 
+        print("Creating cluster..")
         # set post-request data
         self.connect_data["name"] = self.nameInit
         self.connect_data["projectId"] = self.projectId  
@@ -59,7 +59,8 @@ class Cluster():
         # post-request to create cluster
         url = self.base_url
         response = self.request.post(url, self.connect_data)
-        
+        Cluster.data = response
+       
     def isMayaNamespaceExist(self):
         namespace_cmd = "kubectl get ns -o jsonpath='{.items[*].metadata.name}'"
         namespaceList = str(subprocess.check_output(namespace_cmd, shell=True),'utf-8')

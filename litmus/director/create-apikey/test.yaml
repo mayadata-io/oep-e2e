@@ -1,0 +1,65 @@
+---
+- hosts: localhost
+  connection: local
+
+  vars_files:
+    - test_vars.yml
+
+  tasks:
+    - block:
+
+          ## Generating the testname for deployment
+        - include_tasks: /ansible-utils/create_testname.yml
+
+          ## RECORD START-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'SOT'
+
+        - set_fact:
+            director_url : "http://{{ director_ip }}:30380"
+        
+        - name : Check new user signup
+          uri:
+            url: "{{ director_url }}/v3/localAuthConfig"
+            method: POST
+            body_format: json
+            body:
+              {"firstName": "{{ firstname }}", "lastName": "{{ surname }}", "password": {"publicValue": "{{ username }}", "secretValue": "{{ password }}" }} 
+            status_code: 201
+          register: signup
+
+        - set_fact: 
+            jwt: "{{ signup.json.jwt }}"
+
+        - set_fact:
+            token_template: "token={{ jwt }}; authProvider=localAuthConfig;"
+        
+        - set_fact:
+             data: "{\"name\":\"{{ apikey }}\"}"
+
+        - name: Creating new api key
+          shell: curl  -X POST -d "{{ data }}"  -H Cookie:"{{ token_template }}"  "{{ director_url }}/v3/apikey"
+          register: response
+          failed_when: "'201' not in response.stdout_lines[0]"
+
+        - set_fact:
+            username: response.stdout.publicValue
+            password: response.stdout.secretValue
+
+        - name: Create a kubernetes secret 
+          shell: kubectl create secret generic director-user-pass --from-literal=username=$username --from-literal=password=$password -n litmus
+
+        - set_fact:
+            flag: "Pass"
+
+      rescue:
+        - name: Setting fail flag
+          set_fact:
+            flag: "Fail"
+
+      always:
+        ## RECORD END-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'EOT'
