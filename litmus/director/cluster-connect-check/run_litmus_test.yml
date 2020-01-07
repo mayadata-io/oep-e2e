@@ -18,16 +18,17 @@ spec:
         image: mayadataio/dop-validator:ci
         imagePullPolicy: Always
         env:
+          - name: DIRECTOR_IP
+            valueFrom:
+              configMapKeyRef:
+                name: config
+                key: url
           - name: ANSIBLE_STDOUT_CALLBACK
             value: default  
           - name: DIRECTOR_CLIENT_NAMESPACE
             value: maya-system     
           - name: DIRECTOR_SERVER_NAMESPACE
             value: default
-          - name: ADMIN_USERNAME
-            value: Administrator
-          - name: ADMIN_PASSWORD
-            value: password 
         command: ["/bin/bash"]
         args: ["-c", "ansible-playbook ./litmus/director/cluster-connect-check/test.yaml -i /etc/ansible/hosts -v; exit 0"]
       imagePullSecrets:

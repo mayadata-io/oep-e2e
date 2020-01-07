@@ -21,7 +21,6 @@ class Groups():
         account = "ProjectAccount"
         for dict in groupsList:
             if account == dict["name"]:
-                print(dict["name"])
                 Groups.projectAccData = dict
                 return True
         print("Project Account does not exist")

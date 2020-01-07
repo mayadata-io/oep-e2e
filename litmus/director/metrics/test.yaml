@@ -5,6 +5,9 @@
   vars_files:
     - test_vars.yml
 
+  vars:
+    query: "openebs_size_of_volume"
+
   tasks:
     - block:
 
@@ -20,18 +23,18 @@
             director_url : "http://{{ director_ip }}:30380"
 
         - name: username
-          shell: cat /etc/secret-volume/username
+          shell: cat /etc/admin-secret-volume/username
           register: username
           
         - name: password
-          shell: cat /etc/secret-volume/password
+          shell: cat /etc/admin-secret-volume/password
           register: password
         
         - name: Fetch cortex-agent query metrics
           uri: 
-              url: "{{ url }}/maya-cortex-pull/api/prom/api/v1/query?query={{ query }}"
-              user: {{ username.stdout }}
-              password: {{ password.stdout }}
+              url: "{{ director_url }}/maya-cortex-pull/api/prom/api/v1/query?query={{ query }}"
+              user: "{{ username.stdout }}"
+              password: "{{ password.stdout }}"
               method: GET
               body_format: json
               status_code: 200

@@ -16,22 +16,8 @@
           vars:
             status: 'SOT'
         
-        - name : Fetch director url
-          shell: kubectl get node -o wide | awk {'print $7'} | head -n 4 | tail -n 1
-          register: node_ip
-
         - set_fact:
-            url : "http://{{ node_ip.stdout }}:30380"
-
-        - name : Check admin login
-          uri:
-            url: "{{ url }}/v3/token"
-            method: POST
-            body_format: json
-            body:
-              {"code": "{{ admin_username }}:{{ admin_password }}", "authProvider": "localAuthConfig"}
-            status_code: 201
-          register: login
+            director_url : "http://{{ director_ip }}:30380"
 
         - name : Check if namespace exists
           shell: kubectl get ns | grep {{ director_client_namespace }}
@@ -61,48 +47,6 @@
           register: daemonset_status
           failed_when: "{{ daemonset_status.stdout_lines | unique | length != 1 }}"
   
-        - name: Fetch apiKey
-          shell: kubectl exec -it mysql-0 -c mysql -n {{ director_server_namespace }} -- bash -c  "mysql <<< 'use maya;select data from project where id=2;'" | grep apiKey
-          register: data
-
-        - set_fact:
-            api_key: "{{ (data.stdout | from_json).fields.apiKey }}"
-        
-        - set_fact:
-            credentials_pair: "{{ api_key |  b64decode }}"
-
-        - set_fact:
-            credentials: "{{ credentials_pair.split(':') }}"
-
-        - name: Fetch connected clusters data
-          uri:
-            url: "{{ url }}/v3/clusters"
-            user: "{{ credentials[0] }}"
-            password: "{{ credentials[1] }}"
-            method: GET
-            body_format: json
-            status_code: 200
-          register:  result
-
-        - name: Fetch cluster details
-          shell: echo "{{ result.json.data[1].name }}" && echo "{{ result.json.data[1].id }}"
-          register: clusters_details
-
-        - name: Fetch self-connected cluster data by id
-          uri:
-            url: "{{ url }}/v3/clusters/{{ clusters_details.stdout_lines[1] }}"
-            user: "{{ credentials[0] }}"
-            password: "{{ credentials[1] }}"
-            method: GET
-            body_format: json
-            status_code: 200
-          register: cluster_data
-          
-        - name: Check if a cluster is Active
-          shell: echo "{{ cluster_data.json.state }}" 
-          register: cluster_state
-          failed_when: cluster_state.stdout != "active"
-      
         - set_fact:
             flag: "Pass"
 

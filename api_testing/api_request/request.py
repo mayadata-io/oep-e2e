@@ -30,6 +30,21 @@ class Data():
             print(response.status_code, response.reason)
             sys.exit(1)
           
+    def getByCookie(self, url, cookie):
+        """ sends get request and returns response data """
+        try:
+            response = requests.get(url, cookies = cookie)
+        except requests.exceptions.RequestException as e:
+            print(e)
+            requests.exceptions.ConnectionError
+            sys.exit(1)
+        if response.status_code == HTTPStatus.OK:
+            responseDict = json.loads(response.content.decode('utf-8'))
+            return(responseDict)
+        else:
+            print(response.status_code, response.reason)
+            sys.exit(1)
+
     def getById(self, url):
         """ sends get request and returns response data """
         try:
@@ -53,7 +68,7 @@ class Data():
             print(e)
             sys.exit(1)
         responseDict = json.loads(response.content.decode('utf-8'))
-        if response.status_code == HTTPStatus.CREATED:
+        if response.status_code == HTTPStatus.CREATED or response.status_code == HTTPStatus.OK:
             return(responseDict)
         else:
             print(response.status_code, response.reason)

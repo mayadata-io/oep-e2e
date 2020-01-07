@@ -1,0 +1,73 @@
+---
+- hosts: localhost
+  connection: local
+
+  vars_files:
+    - test_vars.yml
+
+  tasks:
+    - block:
+
+          ## Generating the testname for deployment
+        - include_tasks: /ansible-utils/create_testname.yml
+
+          ## RECORD START-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'SOT'
+
+        - set_fact:
+            director_url : "http://{{ director_ip }}:30380"
+        
+        - name : Admin login
+          uri:
+            url: "{{ director_url }}/v3/token"
+            method: POST
+            body_format: json
+            body:
+              {"code": "{{ admin_username }}:{{ admin_password }}", "authProvider": "localAuthConfig"}
+            status_code: 201
+          register: login
+
+        - set_fact: 
+            jwt: "{{ login.json.jwt }}"
+
+        - name: Get admin unique id
+          shell: python3 /api_testing/unique-id/unique-id.py  --url {{ director_url }} --token {{ jwt }}
+          register: id
+
+        - set_fact:
+            id:  "{{ id.stdout_lines[0] }}"
+
+        - name: username
+          shell: cat /etc/secret-volume/username
+          register: username
+          
+        - name: password
+          shell: cat /etc/secret-volume/password
+          register: password
+
+        - name: Get api key
+          shell: python3 /api_testing/project/getapikey.py  --url {{ director_url }} --username {{ username.stdout }} --password {{ password.stdout }} --id  {{ id }}
+          register: credentials
+
+        - set_fact:
+            username: "{{ credentials.stdout_lines[0] }}"
+            password: "{{ credentials.stdout_lines[1] }}"
+
+        - name: Create a kubernetes secret 
+          shell: kubectl create secret generic director-admin-pass --from-literal=username={{ username }} --from-literal=password={{ password }} -n litmus
+
+        - set_fact:
+            flag: "Pass"
+
+      rescue:
+        - name: Setting fail flag
+          set_fact:
+            flag: "Fail"
+
+      always:
+        ## RECORD END-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'EOT'

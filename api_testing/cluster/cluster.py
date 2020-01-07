@@ -30,8 +30,9 @@ class Cluster():
         self.setData()   
         
     def setData(self):
-        """ searches for cluster and sets cluster properties if it exists so that ohter methods don't need to send get requests """
+        """ searches for cluster and sets cluster properties if it exists so that other methods don't need to send get requests """
         url = self.base_url
+        print("Cluster base url:",url)
         clusterList = self.request.get(url)
         for dict in clusterList:
             if re.match(self.nameInit, dict["name"]):
@@ -82,7 +83,10 @@ class Cluster():
         """ creates cluster and checks if setup is clean then deploys kuberentes yaml """
         self.preConnect(provider)
         url = self.getUrl()
+        print("Cluster url:",url)
         Cluster.data = self.request.getById(url)
+        time.sleep(20)
+        # check until cluster is inactive, if it is it should have yaml
         yamlApply = self.data['registrationToken']['clusterCommand']
         if yamlApply != None:
             os.system(yamlApply)
