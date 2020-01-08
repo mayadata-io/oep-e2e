@@ -74,7 +74,21 @@ class Data():
             print(response.status_code, response.reason)
             print("Error!",responseDict['message'])
             sys.exit(1)
-           
+
+    def postByCookie(self, url, data, cookie):
+        try:
+            response = requests.post(url, data=data, cookies = cookie)
+        except requests.exceptions.RequestException as e:
+            print(e)
+            sys.exit(1)
+        responseDict = json.loads(response.content.decode('utf-8'))
+        if response.status_code == HTTPStatus.CREATED:
+            return(responseDict)
+        else:
+            print(response.status_code, response.reason)
+            print("Error!",responseDict['message'])
+            sys.exit(1)
+              
     def delete(self, url):
         """ sends delete request """
         try:
