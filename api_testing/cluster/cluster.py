@@ -85,7 +85,9 @@ class Cluster():
         url = self.getUrl()
         print("Cluster url:",url)
         Cluster.data = self.request.getById(url)
-        time.sleep(20)
+        while self.data['state'] != 'inactive' and self.data['state'] != 'active':
+            Cluster.data = self.request.getById(url)
+            time.sleep(5)
         # check until cluster is inactive, if it is it should have yaml
         yamlApply = self.data['registrationToken']['clusterCommand']
         if yamlApply != None:

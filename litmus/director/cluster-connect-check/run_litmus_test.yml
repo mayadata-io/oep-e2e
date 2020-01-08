@@ -27,8 +27,6 @@ spec:
             value: default  
           - name: DIRECTOR_CLIENT_NAMESPACE
             value: maya-system     
-          - name: DIRECTOR_SERVER_NAMESPACE
-            value: default
         command: ["/bin/bash"]
         args: ["-c", "ansible-playbook ./litmus/director/cluster-connect-check/test.yaml -i /etc/ansible/hosts -v; exit 0"]
       imagePullSecrets:
