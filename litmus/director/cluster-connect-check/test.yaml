@@ -33,20 +33,6 @@
           retries: 5
           delay: 4
         
-        - name: Fetch pod ready status
-          shell: kubectl get pods -n {{ director_client_namespace }} | grep {{ item }} | awk '{print $2}' | awk -F'/' '{print $1}' && kubectl get pods -n {{ director_client_namespace }} | grep {{ item }} | awk '{print $2}' | awk -F'/' '{print $2}'
-          register: ready_status
-          with_items:
-            - "{{ client_components }}"
-          failed_when: "{{ ready_status.stdout_lines | unique | length != 1 }}"
-        
-        - name: Check daemonset status
-          shell: kubectl get ds -n {{ director_client_namespace }} | grep {{ item }} | awk '{print $2}'  && kubectl get ds -n {{ director_client_namespace }} | grep {{ item }} | awk '{print $3}' && kubectl get ds -n {{ director_client_namespace }} | grep {{ item }} | awk '{print $4}'
-          with_items:
-            - "{{ daemon_sets }}"
-          register: daemonset_status
-          failed_when: "{{ daemonset_status.stdout_lines | unique | length != 1 }}"
-  
         - set_fact:
             flag: "Pass"
 
