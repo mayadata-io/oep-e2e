@@ -2,29 +2,29 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: cluster-connect
+  generateName: metrics-check
   namespace: litmus
 spec:
   template:
     metadata:
       name: litmus
       labels:
-        app: cluster-connect-litmus
+        app: metrics-litmus
     spec:
       serviceAccountName: litmus
       restartPolicy: Never
       volumes:
-      - name: secret-volume
+      - name: admin-secret-volume
         secret:
-          secretName: director-user-pass
+          secretName: director-admin-pass
       containers:
       - name: ansibletest
         image: mayadataio/dop-validator:ci
         imagePullPolicy: Always
         volumeMounts:
-        - name: secret-volume
+        - name: admin-secret-volume
           readOnly: true
-          mountPath: "/etc/secret-volume"
+          mountPath: "/etc/admin-secret-volume"
         env:
           - name: DIRECTOR_IP
             valueFrom:
@@ -32,12 +32,8 @@ spec:
                 name: config
                 key: url
           - name: ANSIBLE_STDOUT_CALLBACK
-            value: default  
-          - name: PROVIDER
-            value: gcp
-          - name: CLUSTER_NAME
-            value: oep-cluster
+            value: default    
         command: ["/bin/bash"]
-        args: ["-c", "ansible-playbook ./litmus/director/cluster-connect/test.yaml -i /etc/ansible/hosts -v; exit 0"]
+        args: ["-c", "ansible-playbook ./litmus/director/metrics/test.yaml -i /etc/ansible/hosts -v; exit 0"]
       imagePullSecrets:
       - name: oep-secret

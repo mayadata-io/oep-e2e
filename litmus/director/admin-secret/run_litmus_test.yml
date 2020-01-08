@@ -2,14 +2,14 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: cluster-connect
+  generateName: fetch-unique-id-check
   namespace: litmus
 spec:
   template:
     metadata:
       name: litmus
       labels:
-        app: cluster-connect-litmus
+        app: fetch-unique-id-litmus
     spec:
       serviceAccountName: litmus
       restartPolicy: Never
@@ -33,11 +33,11 @@ spec:
                 key: url
           - name: ANSIBLE_STDOUT_CALLBACK
             value: default  
-          - name: PROVIDER
-            value: gcp
-          - name: CLUSTER_NAME
-            value: oep-cluster
+          - name: ADMIN_USERNAME
+            value: Administrator
+          - name: ADMIN_PASSWORD
+            value: password 
         command: ["/bin/bash"]
-        args: ["-c", "ansible-playbook ./litmus/director/cluster-connect/test.yaml -i /etc/ansible/hosts -v; exit 0"]
+        args: ["-c", "ansible-playbook ./litmus/director/admin/test.yaml -i /etc/ansible/hosts -v; exit 0"]
       imagePullSecrets:
       - name: oep-secret

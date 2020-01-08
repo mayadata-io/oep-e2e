@@ -26,8 +26,9 @@ class Projects():
         return(bool(self.data))
          
     def getUrl(self):
-        if getId() != None:
-            url = self.baseUrl + '/' + self.getId()
+        id = self.getId()
+        if id != None:
+            url = self.base_url + '/' + id
             return(url)
 
     def getId(self):
