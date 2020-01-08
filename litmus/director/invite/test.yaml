@@ -1,0 +1,68 @@
+---
+- hosts: localhost
+  connection: local
+
+  vars_files:
+    - test_vars.yml
+
+  tasks:
+    - block:
+
+          ## Generating the testname for deployment
+        - include_tasks: /ansible-utils/create_testname.yml
+
+          ## RECORD START-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'SOT'
+
+        - set_fact:
+            director_url : "http://{{ director_ip }}:30380"
+        
+        - name : Check new user signup
+          uri:
+            url: "{{ director_url }}/v3/localAuthConfig"
+            method: POST
+            body_format: json
+            body:
+              {"firstName": "{{ firstname }}", "lastName": "{{ surname }}", "password": {"publicValue": "{{ username }}", "secretValue": "{{ password }}" }} 
+            status_code: 201
+          register: signup
+
+        - set_fact: 
+            jwt: "{{ signup.json.jwt }}"
+            accountId: "{{ signup.json.accountId }}"
+        
+        - name: Creating new api key
+          #shell: curl -X POST -d "{{ data }}"  -H Cookie:"{{ token_template }}"  "{{ director_url }}/v3/apikey"
+          shell: python3 /api_testing/api-key/api-key.py --url {{ director_url }} --token {{ jwt }} 
+          register: credentials
+
+        - set_fact:
+            invitee_username: "{{ credentials.stdout_lines[0] }}"
+            invitee_password: "{{ credentials.stdout_lines[1] }}"
+
+        - name: username
+          shell: cat /etc/secret-volume/username
+          register: inviter_username
+          
+        - name: password
+          shell: cat /etc/secret-volume/password
+          register: inviter_password
+    
+        - name: Sent the invite and accept the request
+          shell: python3 /api_testing/group/invite_process.py  --url {{ director_url }} --inviter_username {{ inviter_username }} --inviter_password {{ inviter_password }} --account_id  {{ accountId }} --invitee_username {{ invitee_username}} --invitee_password {{ invitee_password }}
+
+        - set_fact:
+            flag: "Pass"
+
+      rescue:
+        - name: Setting fail flag
+          set_fact:
+            flag: "Fail"
+
+      always:
+        ## RECORD END-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'EOT'
