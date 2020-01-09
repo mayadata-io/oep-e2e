@@ -68,7 +68,7 @@ class Data():
             print(e)
             sys.exit(1)
         responseDict = json.loads(response.content.decode('utf-8'))
-        if response.status_code == HTTPStatus.CREATED or response.status_code == HTTPStatus.OK:
+        if response.status_code == HTTPStatus.CREATED or response.status_code == HTTPStatus.OK or response.status_code == HTTPStatus.ACCEPTED:
             return(responseDict)
         else:
             print(response.status_code, response.reason)
@@ -102,4 +102,4 @@ class Data():
             sys.exit(1)
      
         
-
+    
