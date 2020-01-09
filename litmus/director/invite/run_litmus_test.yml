@@ -13,10 +13,18 @@ spec:
     spec:
       serviceAccountName: litmus
       restartPolicy: Never
+      volumes:
+      - name: secret-volume
+        secret:
+          secretName: director-user-pass
       containers:
       - name: ansibletest
         image: mayadataio/dop-validator:ci
         imagePullPolicy: Always
+        volumeMounts:
+        - name: secret-volume
+          readOnly: true
+          mountPath: "/etc/secret-volume"
         env:
           - name: DIRECTOR_IP
             valueFrom:
