@@ -1,5 +1,5 @@
 from api_request.request import *
-from group import *
+from group.group import *
 
 class Invite():
    

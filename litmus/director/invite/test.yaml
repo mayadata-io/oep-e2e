@@ -51,7 +51,7 @@
           register: inviter_password
     
         - name: Sent the invite and accept the request
-          shell: python3 /api_testing/group/invite_process.py  --url {{ director_url }} --inviter_username {{ inviter_username }} --inviter_password {{ inviter_password }} --account_id  {{ accountId }} --invitee_username {{ invitee_username}} --invitee_password {{ invitee_password }}
+          shell: python3 /api_testing/invite/invite_process.py  --url {{ director_url }} --inviter_username {{ inviter_username.stdout }} --inviter_password {{ inviter_password.stdout }} --account_id  {{ accountId }} --invitee_username {{ invitee_username }} --invitee_password {{ invitee_password }}
 
         - set_fact:
             flag: "Pass"

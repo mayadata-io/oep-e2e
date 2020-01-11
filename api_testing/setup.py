@@ -12,7 +12,7 @@ setup(name='Distutils',
       'config',
       'project.project',
       'group.group',
-      'group.invite',
+      'invite.invite',
       'api-key.api-key'
       ]
      )
