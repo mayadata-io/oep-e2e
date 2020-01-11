@@ -13,18 +13,10 @@ spec:
     spec:
       serviceAccountName: litmus
       restartPolicy: Never
-      volumes:
-      - name: secret-volume
-        secret:
-          secretName: director-user-pass
       containers:
       - name: ansibletest
         image: mayadataio/dop-validator:ci
         imagePullPolicy: Always
-        volumeMounts:
-        - name: secret-volume
-          readOnly: true
-          mountPath: "/etc/secret-volume"
         env:
           - name: DIRECTOR_IP
             valueFrom:
@@ -41,6 +33,8 @@ spec:
             value: oep.member@mayadata.io
           - name: PASSWORD
             value: OEPuser@123
+          - name: ACTION
+            value: reject
         command: ["/bin/bash"]
         args: ["-c", "ansible-playbook ./litmus/director/invite/test.yaml -i /etc/ansible/hosts -v; exit 0"]
       imagePullSecrets:

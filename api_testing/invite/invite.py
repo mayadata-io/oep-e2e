@@ -1,5 +1,5 @@
 from api_request.request import *
-from group import *
+from group.group import *
 
 class Invite():
    
@@ -27,3 +27,10 @@ class Invite():
         response = requestobj.get(url)
         accept_url = response[0]['actions']['accept']
         print(requestobj.post(accept_url, {}))
+
+    def reject(self, api_key, api_password):
+        requestobj = Data(api_key, api_password) 
+        url = self.base_url + "/v3/emailinvitations"
+        response = requestobj.get(url)
+        reject_url = response[0]['actions']['reject']
+        print(requestobj.post(reject_url, {}))
