@@ -1,6 +1,6 @@
 import argparse
 from invite import *
-from group import *
+from group.group import *
 
 def main():  
     parser = argparse.ArgumentParser()
