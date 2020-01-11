@@ -16,6 +16,59 @@
           vars:
             status: 'SOT'
 
+        - set_fact:
+            director_url : "http://{{ director_ip }}:30380"
+            
+        - name: Upgrade OpenEBS control plane
+          shell: kubectl apply -f https://openebs.github.io/charts/openebs-operator-1.5.0.yaml
+        
+        - name : Fetch OpenEBS control plane pods state
+          shell: kubectl get pods -n openebs  | grep {{ item }} | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
+          register: app_status
+          until: app_status.stdout == 'Running'
+          with_items:
+            - "{{ openebs_components }}"
+          retries: 15
+          delay: 5
+        
+        - name: Fetch OpenEBS control plane pods ready status
+          shell: kubectl get pods -n openebs | grep {{ item }} | awk '{print $2}' | awk -F'/' '{print $1}' && kubectl get pods -n openebs | grep {{ item }} | awk '{print $2}' | awk -F'/' '{print $2}'
+          register: ready_status
+          with_items:
+            - "{{ openebs_components }}"
+          until: "{{ ready_status.stdout_lines | unique | length == 1 }}"
+          retries: 20
+          delay: 5
+  
+        - name : Upgrade OpenEBS data plane
+          uri:
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/openebsupgradeclaims"
+            method: POST
+            url_username: "{{ username }}"
+            url_password: "{{ password }}"
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+            body:
+                clusterId: "{{ cluster_id }}"
+                kind: poolUpgrade
+                targetVersion: 1.5.0
+                upgradeComponents:
+                    id: "{{ pool_id }}"
+            status_code: 201
+
+        - name : Check OpenEBS upgrade job status
+          uri:
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/openebsupgradejobs"
+            method: GET
+            url_username: "{{ username }}"
+            url_password: "{{ password }}"
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+          register: upgrade_job
+          failed_when: "upgrade_job.json.data[0].state!='Success'"
+
       rescue:
         - name: Setting fail flag
           set_fact:
