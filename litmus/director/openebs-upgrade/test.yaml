@@ -18,7 +18,18 @@
 
         - set_fact:
             director_url : "http://{{ director_ip }}:30380"
+
+        - name: Get username
+          shell: cat /etc/secret-volume/username
+          register: username
             
+        - name: Get password
+          shell: cat /etc/secret-volume/password
+          register: password
+
+        - name: Add kubeconfig of the cluster
+          shell: mkdir ~/.kube && cp /etc/kube/config ~/.kube/
+
         - name: Upgrade OpenEBS control plane
           shell: kubectl apply -f https://openebs.github.io/charts/openebs-operator-1.5.0.yaml
         
@@ -28,7 +39,7 @@
           until: app_status.stdout == 'Running'
           with_items:
             - "{{ openebs_components }}"
-          retries: 15
+          retries: 20
           delay: 5
         
         - name: Fetch OpenEBS control plane pods ready status
@@ -39,13 +50,24 @@
           until: "{{ ready_status.stdout_lines | unique | length == 1 }}"
           retries: 20
           delay: 5
-  
+
+        - name: Get OpenEBS storage pool details
+          uri:
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayastoragepools"
+            method: GET
+            url_username: "{{ username.stdout }}"
+            url_password: "{{ password.stdout }}"
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+          register: storage_pool
+
         - name : Upgrade OpenEBS data plane
           uri:
             url: "{{ director_url }}/v3/groups/{{ group_id }}/openebsupgradeclaims"
             method: POST
-            url_username: "{{ username }}"
-            url_password: "{{ password }}"
+            url_username: "{{ username.stdout }}"
+            url_password: "{{ password.stdout }}"
             return_content: yes
             force_basic_auth: yes
             body_format: json
@@ -54,20 +76,26 @@
                 kind: poolUpgrade
                 targetVersion: 1.5.0
                 upgradeComponents:
-                    id: "{{ pool_id }}"
+                    id: "{{ storage_pool.json.data[0].id }}"
             status_code: 201
+          register: upgrade_claim
 
         - name : Check OpenEBS upgrade job status
           uri:
-            url: "{{ director_url }}/v3/groups/{{ group_id }}/openebsupgradejobs"
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/openebsupgradeclaims/{{ upgrade_claim.json.id }}/openebsupgradejobs"
             method: GET
-            url_username: "{{ username }}"
-            url_password: "{{ password }}"
+            url_username: "{{ username.stdout }}"
+            url_password: "{{ password.stdout }}"
             return_content: yes
             force_basic_auth: yes
             body_format: json
           register: upgrade_job
-          failed_when: "upgrade_job.json.data[0].state!='Success'"
+          until: "upgrade_job.json.data[0].state!='Success'"
+          retries: 10
+          delay: 2
+
+        - set_fact:
+          flag: "Pass"
 
       rescue:
         - name: Setting fail flag
@@ -77,5 +105,5 @@
       always:
         ## RECORD END-OF-TEST IN LITMUS RESULT CR
         - include_tasks: /ansible-utils/update_litmus_result_resource.yml
-          vars:
-            status: 'EOT'
+            vars:
+              status: 'EOT'

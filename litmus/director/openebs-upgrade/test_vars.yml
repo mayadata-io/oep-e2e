@@ -1,9 +1,5 @@
 test_name: openebs-upgrade-check
-namespace: "{{ lookup('env','NAMESPACE') }}"
 openebs_components: ['openebs-provisioner','openebs-ndm-operator','openebs-ndm','openebs-snapshot-operator','openebs-admission-server','openebs-localpv-provisioner','maya-apiserver']
-group_id: 1a68
-cluster_id: 1c11
-pool_id: 1msp23
-director_ip: 34.83.10.16
-username: 51E92CDA42EBFF464478
-password: RSpyakhXiUW5TcDogzuu91Fskfwd3eiQKYEsezGC
+group_id: "{{ lookup('env','GROUP_ID') }}"
+cluster_id: "{{ lookup('env','CLUSTER_ID') }}"
+director_ip: "{{ lookup('env','DIRECTOR_IP') }}"
