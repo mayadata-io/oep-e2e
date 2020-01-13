@@ -16,6 +16,9 @@ def main():
             help="director api password")
     parser.add_argument("--account_id",
             help="account_id")
+    parser.add_argument("--action",
+            help="action")
+
     args = parser.parse_args()
     director_url = args.url
     inviter_api_key = args.inviter_username
@@ -23,9 +26,14 @@ def main():
     invitee_api_key = args.invitee_username
     invitee_api_password = args.invitee_password
     account_id = args.account_id
+    action = args.action
     inviteObj= Invite(director_url)
     inviteObj.invite(inviter_api_key, inviter_api_password, account_id)
-    inviteObj.accept(invitee_api_key, invitee_api_password)
+    if action == "accept":
+        inviteObj.accept(invitee_api_key, invitee_api_password)
+    elif action == "reject":
+        inviteObj.reject(invitee_api_key, invitee_api_password)
+
 
 if __name__ == '__main__':
     main()
