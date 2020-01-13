@@ -32,7 +32,6 @@ class Cluster():
     def setData(self):
         """ searches for cluster and sets cluster properties if it exists so that other methods don't need to send get requests """
         url = self.base_url
-        print("Cluster base url:",url)
         clusterList = self.request.get(url)
         for dict in clusterList:
             if re.match(self.nameInit, dict["name"]):
