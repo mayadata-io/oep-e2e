@@ -53,7 +53,7 @@ def main():
     clusterobj = Cluster(clusterNameInit, director_url, api_key, api_password)
     if clusterobj.isValid():
         if clusterobj.isActive():
-            print("Cluster already active with id:",clusterobj.getId())
+            print(clusterobj.getId())
         else:
             print("Connecting cluster...")
             if connectCluster(clusterobj, provider):

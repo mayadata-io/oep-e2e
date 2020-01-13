@@ -2,7 +2,6 @@
 
 import argparse
 from api_request.request import *
-from config import *
 
 class Groups():
     projectAccData = {}
