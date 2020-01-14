@@ -17,5 +17,3 @@ class Config():
         self.CLUSTER_CONNECT_DATA = dict.fromkeys(self.CLUSTER_CONNECT_LIST, "default")
         # api-key
         self.API_KEY_URL = f"{self.BASE_URL}/apikey"
-
-        
