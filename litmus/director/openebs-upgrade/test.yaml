@@ -105,5 +105,5 @@
       always:
         ## RECORD END-OF-TEST IN LITMUS RESULT CR
         - include_tasks: /ansible-utils/update_litmus_result_resource.yml
-            vars:
-              status: 'EOT'
+          vars:
+            status: 'EOT'
