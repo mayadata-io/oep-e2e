@@ -24,9 +24,6 @@
           shell: cat /etc/secret-volume/password
           register: password
 
-        - name: Add kubeconfig of the cluster
-          shell: mkdir ~/.kube && cp /etc/kube/config ~/.kube/
-
         - name: Upgrade OpenEBS control plane
           shell: kubectl apply -f https://openebs.github.io/charts/openebs-operator-1.5.0.yaml
         
