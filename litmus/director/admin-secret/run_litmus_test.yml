@@ -38,6 +38,6 @@ spec:
           - name: ADMIN_PASSWORD
             value: password 
         command: ["/bin/bash"]
-        args: ["-c", "ansible-playbook ./litmus/director/admin/test.yaml -i /etc/ansible/hosts -v; exit 0"]
+        args: ["-c", "ansible-playbook ./litmus/director/admin-secret/test.yaml -i /etc/ansible/hosts -v; exit 0"]
       imagePullSecrets:
       - name: oep-secret
