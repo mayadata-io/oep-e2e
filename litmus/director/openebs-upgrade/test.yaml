@@ -24,6 +24,19 @@
           shell: cat /etc/secret-volume/password
           register: password
 
+        - name: Get the number of CSP
+          shell: kubectl get csp --no-headers | wc -l
+          args:
+            executable: /bin/bash
+          register: csp_count
+
+        - name: Checking whether all the pool pods are in running state before upgrading
+          shell: kubectl get po -l app=cstor-pool -n openebs -o jsonpath='{.items[?(@.status.phase=="Running")].metadata.name}' | wc -w
+          register: pool_pods
+          until: "pool_pods.stdout == csp_count.stdout"
+          retries: 10
+          delay: 5
+
         - name: Upgrade OpenEBS control plane
           shell: kubectl apply -f https://openebs.github.io/charts/openebs-operator-1.5.0.yaml
         
@@ -87,6 +100,13 @@
           until: "upgrade_job.json.data[0].state!='Success'"
           retries: 10
           delay: 2
+
+        - name: Checking whether all the pool pods are in running state after upgrading
+          shell: kubectl get po -l app=cstor-pool -n openebs -o jsonpath='{.items[?(@.status.phase=="Running")].metadata.name}' | wc -w
+          register: pool_pods
+          until: "pool_pods.stdout == csp_count.stdout"
+          retries: 15
+          delay: 5
 
         - set_fact:
             flag: "Pass"
