@@ -13,6 +13,7 @@ setup(name='Distutils',
       'project.project',
       'group.group',
       'invite.invite',
-      'api-key.api-key'
+      'api-key.api-key',
+      'user-role.role'
       ]
      )
