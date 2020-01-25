@@ -42,6 +42,17 @@ class Groups():
             if role == 'ProjectOwner':
                 return member['id']
 
+    def searchMemberByEmailID(self, email_id):
+        member_emailId = email_id
+        print(member_emailId)
+        project_acc_id = self.getProjectAccountID()
+        url = self.base_url + f"/{project_acc_id}/groupmembers/member_id"
+        groupMembersList = self.request.get(url)
+        for member in groupMembersList:
+            if member['accountDetails']['email'] == member_emailId:
+                return member
+
+    
     
    
   

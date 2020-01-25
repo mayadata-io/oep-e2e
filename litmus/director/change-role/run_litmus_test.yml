@@ -2,14 +2,14 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: invite-check
+  generateName: change-role-check
   namespace: litmus
 spec:
   template:
     metadata:
       name: litmus
       labels:
-        app: invite-check-litmus
+        app: change-role-check-litmus
     spec:
       serviceAccountName: litmus
       restartPolicy: Never
@@ -31,19 +31,16 @@ spec:
               configMapKeyRef:
                 name: config
                 key: url
+          - name: GROUP_ID
+            valueFrom:
+              configMapKeyRef:
+                name: groupid
+                key: group_id
           - name: ANSIBLE_STDOUT_CALLBACK
             value: default  
-          - name: FIRSTNAME
-            value: MEMBER
-          - name: SURNAME
-            value: USER
-          - name: USERNAME
-            value: oep.member@mayadata.io
-          - name: PASSWORD
-            value: OEPuser@123
-          - name: ACTION
-            value: accept
+          - name: MEMBER_EMAIL_ID
+            value: "oep.member@mayadata.io"
         command: ["/bin/bash"]
-        args: ["-c", "ansible-playbook ./litmus/director/invite/test.yaml -i /etc/ansible/hosts -v; exit 0"]
+        args: ["-c", "ansible-playbook ./litmus/director/change-role/test.yaml -i /etc/ansible/hosts -v; exit 0"]
       imagePullSecrets:
       - name: oep-secret

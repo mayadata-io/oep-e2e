@@ -29,11 +29,19 @@ def main():
     action = args.action
     inviteObj= Invite(director_url)
     inviteObj.invite(inviter_api_key, inviter_api_password, account_id)
-    if action == "accept":
-        inviteObj.accept(invitee_api_key, invitee_api_password)
-    elif action == "reject":
-        inviteObj.reject(invitee_api_key, invitee_api_password)
-
+    # wait till the invite is active
+    flag = inviteObj.isActive(invitee_api_key, invitee_api_password)
+    retry_counter = 1
+    retries = 10
+    while retry_counter <= retries:
+        if flag:
+                if action == "accept":
+                        inviteObj.accept(invitee_api_key, invitee_api_password)
+                elif action == "reject":
+                        inviteObj.reject(invitee_api_key, invitee_api_password)
+                break
+        flag = inviteObj.isActive(invitee_api_key, invitee_api_password)
+        retry_counter += 1
 
 if __name__ == '__main__':
     main()

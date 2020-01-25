@@ -20,6 +20,17 @@ class Invite():
         data['role'] = "ProjectMember"
         response = requestobj.post(url, data)
         print("Invite sent")
+       
+    def isActive(self, api_key, api_password):
+        requestobj = Data(api_key, api_password) 
+        url = self.base_url + "/v3/emailinvitations"
+        response = requestobj.get(url)
+        # assuming there is only one invitation
+        print(response[0]['state'])
+        if response[0]['state'] == 'active':
+            return True
+        else:
+            return False 
         
     def accept(self, api_key, api_password):
         requestobj = Data(api_key, api_password) 
