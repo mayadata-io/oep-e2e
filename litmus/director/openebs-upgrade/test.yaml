@@ -96,7 +96,7 @@
             body_format: json
           register: upgrade_job
           until: "upgrade_job.json.data[0].state=='Success'"
-          retries: 20
+          retries: 25
           delay: 5
 
         - name: Check pool-2 upgrade job status
@@ -110,7 +110,7 @@
             body_format: json
           register: upgrade_job
           until: "upgrade_job.json.data[1].state=='Success'"
-          retries: 20
+          retries: 25
           delay: 5
 
         - name: Check pool-3 upgrade job status
@@ -124,7 +124,7 @@
             body_format: json
           register: upgrade_job
           until: "upgrade_job.json.data[2].state=='Success'"
-          retries: 20
+          retries: 25
           delay: 5
 
         - name: Checking whether all the pool pods are in running state after upgrading
@@ -273,7 +273,7 @@
             body_format: json
           register: upgrade_job
           until: "upgrade_job.json.data[0].state=='Success'"
-          retries: 25
+          retries: 40
           delay: 5
 
         - name: Check openebs.io version in cvr post upgrading
