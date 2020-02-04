@@ -295,9 +295,9 @@
           failed_when: "version_count.stdout!='3'"
 
         - name: Get target pod status post volume upgrade
-          shell: kubectl get po -n openebs -l app=cstor-volume-manager -o json
-          register: target
-          until: "target.stdout | from_json | json_query('items[0].status.phase')=='Running'"
+          shell: kubectl get po -n openebs -l app=cstor-volume-manager --no-headers | awk '{print $3}'
+          register: target_status
+          until: "target_status.stdout=='Running'"
           retries: 20
           delay: 2
 
