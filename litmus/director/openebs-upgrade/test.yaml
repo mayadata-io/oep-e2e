@@ -276,10 +276,23 @@
           retries: 40
           delay: 5
 
+        - name: Get cvr list
+          shell: kubectl get cvr -n openebs --no-headers | awk '{print $1}'
+          register: cvr_list
+
+        - name: Check cvr status post upgrading
+          shell: kubectl get cvr -n openebs --no-headers {{ item }} | awk '{print $4}'
+          with_items:
+            - "{{ cvr_list.stdout_lines }}"
+          register: cvr_status
+          until: "cvr_status.stdout=='Healthy'"
+          retries: 30
+          delay: 2
+
         - name: Check openebs.io version in cvr post upgrading
-          shell: kubectl get cvr -n openebs -o json
-          register: cvr
-          failed_when: "cvr.stdout | from_json | json_query('items[0].metadata.labels.\"openebs.io/version\"')!='1.5.0'"
+          shell: kubectl get cvr -n openebs -l openebs.io/version=1.5.0 --no-headers | wc -l
+          register: version_count
+          failed_when: "version_count.stdout!='3'"
 
         - name: Get target pod status post volume upgrade
           shell: kubectl get po -n openebs -l app=cstor-volume-manager -o json
