@@ -1,0 +1,68 @@
+---
+- hosts: localhost
+  connection: local
+
+  vars_files:
+    - test_vars.yml
+
+  tasks:
+    - block:
+
+          ## Generating the testname for deployment
+        - include_tasks: /ansible-utils/create_testname.yml
+
+          ## RECORD START-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'SOT'
+
+        - set_fact:
+            director_url : "http://{{ director_ip }}:30380"
+        
+        - name: Get username
+          shell: cat /etc/secret-volume/username
+          register: username
+            
+        - name: Get password
+          shell: cat /etc/secret-volume/password
+          register: password
+
+        - set_fact: 
+            credential_pair: "{{ username.stdout }}:{{ password.stdout }}"
+
+        - set_fact:
+            api_key: "{{ credential_pair | b64encode }}"
+
+        - name: Get list of namespaces in the cluster
+          shell: kubectl get ns --no-headers | awk '{print $1}' 
+          register: namespaces
+               
+        - name : Get namespaces data
+          uri:
+            url: "{{ director_url }}/k8s/groups/{{ group_id }}/clusters/{{ cluster_id }}/api/v1/namespaces"
+            headers:
+              Authorization: "Basic {{ api_key }}"
+            method: GET
+            body_format: json
+            status_code: 200
+          register: namespace_data
+        
+        - name: Get data
+          shell: echo "{{ item['metadata']['name'] }}"
+          with_items: "{{ namespace_data.json['items'] }}"
+          register: namespace
+          failed_when: "namespace.stdout not in namespaces.stdout_lines"
+
+        - set_fact:
+            flag: "Pass"
+
+      rescue:
+        - name: Setting fail flag
+          set_fact:
+            flag: "Fail"
+
+      always:
+        ## RECORD END-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'EOT'
