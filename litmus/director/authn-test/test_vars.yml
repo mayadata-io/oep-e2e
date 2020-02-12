@@ -1,3 +1,4 @@
 test_name: ad-authentication-test
 ad_username: "{{ lookup('env','AD_USERNAME') }}"
 ad_password: "{{ lookup('env','AD_PASSWORD') }}"
+director_ip: "{{ lookup('env','DIRECTOR_IP') }}"

@@ -22,6 +22,11 @@ spec:
             value: Administrator
           - name: ADMIN_PASSWORD
             value: Test@123
+          - name: DIRECTOR_IP
+            valueFrom:
+              configMapKeyRef:
+                name: config
+                key: url
         command: ["/bin/bash"]
         args: ["-c", "ansible-playbook ./litmus/director/ad-authentication-test/test.yaml -i /etc/ansible/hosts -v; exit 0"]
       imagePullSecrets:
