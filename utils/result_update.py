@@ -50,7 +50,6 @@ job_url ="<a href= \"https://gitlab.mayadata.io/oep/oep-e2e-gcp/-/jobs/{0}\">{0}
 def fetch_file_content():
     # fetching file contents of github file_path readme.md
     file = repo.get_contents(file_path)
-    file_content=str(file.decoded_content)
     file_content=str(file.decoded_content, 'utf-8')
     content_list = file_content.split('\n')
 
@@ -76,7 +75,7 @@ file, updated_file_content = fetch_file_content()
 # github commit message 
 commit_message = "new job result update"
 exception = ''
-# file update retry interator
+# file update retry iterator
 loop_itr = 0
 # file update try count
 try_count = 5
