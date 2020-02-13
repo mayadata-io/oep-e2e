@@ -1,0 +1,7 @@
+ 
+test_name: openebs-self-install
+openebs_components: ['openebs-provisioner','openebs-ndm-operator','openebs-ndm','openebs-snapshot-operator','openebs-admission-server','openebs-localpv-provisioner','maya-apiserver']
+group_id: "{{ lookup('env','GROUP_ID') }}"
+director_ip: "{{ lookup('env','DIRECTOR_IP') }}"
+username: "E3FDC100BD93CF2A7B6F"
+password: "fzfn8PDjtMQ7XJcid2ieW8sTJQakAKC4PW2XZPtZ"
