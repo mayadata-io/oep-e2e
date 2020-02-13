@@ -37,7 +37,7 @@
           shell: kubectl get ns --no-headers | awk '{print $1}' 
           register: namespaces
                
-        - name : Get namespaces data
+        - name : Get namespaces data from topology api call
           uri:
             url: "{{ director_url }}/k8s/groups/{{ group_id }}/clusters/{{ cluster_id }}/api/v1/namespaces"
             headers:
@@ -47,7 +47,7 @@
             status_code: 200
           register: namespace_data
         
-        - name: Get data
+        - name: Traversing over the namespace data and checking if namespace exists in cluster 
           shell: echo "{{ item['metadata']['name'] }}"
           with_items: "{{ namespace_data.json['items'] }}"
           register: namespace
