@@ -10,29 +10,71 @@
     ## Generating the testname for deployment
     - include_tasks: /ansible-utils/create_testname.yml
 
-    ## RECORD START-OF-TEST IN LITMUS RESULT CR
+    ## Record Start-Of-Test In Litmus Result CR
     - include_tasks: /ansible-utils/update_litmus_result_resource.yml
       vars:
         status: 'SOT'
       
+    ## Saving the director url
     - set_fact:
         director_url : "http://{{ director_ip }}:30380"
+    
+    ## Getting username
+    - name: Get username
+      shell: cat /etc/secret-volume/username
+      register: username
 
-    ## Checking if openebs is allready installed
-    - name: pre-checking the installation of OpenEBS
+    ## Getting password     
+    - name: Get password
+      shell: cat /etc/secret-volume/password
+      register: password
+
+    ## Checking if openebs is already installed
+    - name: Check if openebs is already installed
       shell: kubectl get deploy maya-apiserver --all-namespaces | wc -l
       args:
         executable: /bin/bash
       register: maya_api
       failed_when: "{{ maya_api.stdout }} != 0"
 
-    ## Checking the node-1 of DOP Cluster
-    - name: Get into node-1 of the cluster
+    ## Fetch the projectid of the project where the cluster is running
+    - name: Fetch the project id of the project where the cluster is running
       uri:
-        url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes/1n1"
+        url: "{{ director_url }}/v3/groups/{{ group_id }}/project"
         method: GET
-        url_username: "{{ username }}"
-        url_password: "{{ password }}"
+        url_username: "{{ username.stdout }}"
+        url_password: "{{ password.stdout }}"
+        force_basic_auth: yes
+        return_content: yes
+        status_code: 200
+      register: project_details
+
+    ## Saving Project id
+    - name: Saving the project id
+      set_fact:
+        project_id: "{{ project_details.json.data[0].id }}"
+
+    ## Getting the total number of nodes in the cluster
+    - name: Getting the number of nodes in the cluster
+      shell: kubectl get nodes --no-headers | wc -l
+      args:
+        executable: /bin/bash
+      register: nodes
+
+    ## Fail the test if it contains less than two nodes
+    ## Minimum two nodes required
+    - fail:
+        msg: Minimum two nodes is required to install openebs in this cluster
+      when: "{{ nodes.stdout }} < 2"
+
+    ## Getting node details of the clluster
+    ## Selecting the node which is in active state present in the cluster
+    - name: Getting the node details of the cluster
+      uri:
+        url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes?state=active&clusterId={{ cluster_id }}"
+        method: GET
+        url_username: "{{ username.stdout }}"
+        url_password: "{{ password.stdout }}"
         force_basic_auth: yes
         return_content: yes
         body_format: json
@@ -40,114 +82,103 @@
           status_code: 202
       register: node1_cluster
 
-    ## Labeling the node-1 of DOP Cluster with controlPlaneNode=true and dataPlaneNode=true
-    - name: Giving POST request on labelnodes
-      uri:
-        url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes/1n1/?action=labelnodes"
-        method: POST
-        url_username: "{{ username }}"
-        url_password: "{{ password }}"
-        force_basic_auth: yes
-        return_content: yes
-        body_format: json
-        body: '{"controlPlaneNode": true, "dataPlaneNode": true}'
-        status_code: 200,202
-      register: labelnode1
-      retries: 20
-      delay: 5
+    ## Define variable node_id
+    - set_fact:
+        node_id: []
 
-    ## Checking the node-2 of DOP Cluster
-    - name: Get into node-2 of the cluster
-      uri:
-        url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes/1n2"
-        method: GET
-        url_username: "{{ username }}"
-        url_password: "{{ password }}"
-        force_basic_auth: yes
-        return_content: yes
-        body_format: json
-        body:
-          status_code: 202
-      register: node2_cluster
+    ## Storing the node id of the nodes in the cluster
+    - name: Storing the node id of node in the cluster
+      set_fact:
+        node_id: "{{ node_id  + [item.id] }}"
+      loop: "{{ node1_cluster.json.data }}"
 
-    ## Labeling the node-2 of DOP Cluster with controlPlaneNode=true and dataPlaneNode=flase
-    - name: Giving POST request on labelnodes
-      uri:
-        url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes/1n2/?action=labelnodes"
-        method: POST
-        url_username: "{{ username }}"
-        url_password: "{{ password }}"
-        force_basic_auth: yes
-        return_content: yes
-        body_format: json
-        body: '{"controlPlaneNode": true, "dataPlaneNode": false}'
-        status_code: 200,202
-      register: labelnode2
-      retries: 20
-      delay: 5
+    - block:
 
-    ## Creating openebs
-    - name: Fetch openebses and create openebs
+        ## Labeling the node-1 of the Cluster with controlPlaneNode=true and dataPlaneNode=true
+        ## With first element in the node_id list
+        - name: Labeling the node-1 of the cluster
+          uri:
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes/{{ node_id[0] }}/?action=labelnodes"
+            method: POST
+            url_username: "{{ username.stdout }}"
+            url_password: "{{ password.stdout }}"
+            force_basic_auth: yes
+            return_content: yes
+            body_format: json
+            body: '{"controlPlaneNode": true, "dataPlaneNode": true}'
+            status_code: 202
+          register: labelnode1
+
+
+        ## Labeling node-2 of the Cluster with controlPlaneNode=true and dataPlaneNode=false
+        ## With the second element in the node_id list
+        - name: labeling node-2 of the cluster
+          uri:
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes/{{ node_id[1] }}/?action=labelnodes"
+            method: POST
+            url_username: "{{ username.stdout }}"
+            url_password: "{{ password.stdout }}"
+            force_basic_auth: yes
+            return_content: yes
+            body_format: json
+            body: '{"controlPlaneNode": true, "dataPlaneNode": false}'
+            status_code: 202
+          register: labelnode2
+
+      when: "{{ nodes.stdout }} > 1"
+
+    ## Passing the value for openebs creation in the cluster
+    - name: Passing the values required for openebs creation
       uri:
         url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses"
         method: POST
-        url_username: "{{ username }}"
-        url_password: "{{ password }}"
+        url_username: "{{ username.stdout }}"
+        url_password: "{{ password.stdout }}"
         force_basic_auth: yes
         return_content: yes
         body_format: json
-        body: '{"clusterId": "1c2","creatorId": "1a14","projectId": "1p2","templateId": "1ot1","namespace": "openebs-test","defaultDirectory": "/var/director","dockerRegistry": "","includeDeviceFilters": "","excludeDeviceFilters": "","cpuResourceLimit": "","memoryResourceLimit": "","installationMode": "advance"}'            
+        body: "{ \"clusterId\": \"{{ cluster_id }}\",\"creatorId\": \"{{ group_id }}\",\"projectId\": \"{{ project_id }}\",\"templateId\": \"{{ template_id }}\",\"namespace\": \"{{ namespace }}\",\"defaultDirectory\": \"{{ default_directory }}\",\"dockerRegistry\": \"{{ docker_registry }}\",\"includeDeviceFilters\": \"{{ include_device_filters }}\",\"excludeDeviceFilters\": \"{{ exclude_device_filters }}\",\"cpuResourceLimit\": \"{{ cpu_resource_limit }}\",\"memoryResourceLimit\": \" {{ memory_resource_limit }}\",\"installationMode\": \"{{ installation_mode }}\" }"            
         status_code: 201
       register: get_openebs
-      retries: 20
-      delay: 5
 
-    - name: Getting the yaml for openebs installation
+    - name: Saving the yaml for openebs installation
       set_fact:
         installopenebs: "{{ get_openebs.json.installationManifest }}"
 
-    - name: Getting the id
+    - name: Saving the id
       set_fact:
         openebsid: "{{ get_openebs.json.id }}"
-
-    - name: Getting the namespace where openebs will be installed
-      set_fact:
-        openebs_ns: "{{ get_openebs.json.namespace }}"
 
     ## Checking the id
     - name: Getting into the openebs installtion stage and checking the id
       uri:
         url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses/{{ openebsid }}"
         method: GET
-        url_username: "{{ username }}"
-        url_password: "{{ password }}"
+        url_username: "{{ username.stdout }}"
+        url_password: "{{ password.stdout }}"
         force_basic_auth: yes
         return_content: yes
         body_format: json
         status_code: 200
       register: install_openebs
-      retries: 20
-      delay: 5
 
     ## Installing openebs
     - name: Installing openebs on the DOP self cluster
       uri:
         url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses/{{ openebsid }}/?action=openebsinstall"
         method: POST
-        url_username: "{{ username }}"
-        url_password: "{{ password }}"
+        url_username: "{{ username.stdout }}"
+        url_password: "{{ password.stdout }}"
         force_basic_auth: yes
         return_content: yes
         body_format: json
         body: '{{ installopenebs }}'
         status_code: 200
-      register: openebs
-      retries: 20
-      delay: 5
+      register: res_openebs
 
     ## Checking the openebs Installation    
     - name: Fetch OpenEBS control plane pods state
-      shell: kubectl get pods -n {{ openebs_ns }}  | grep {{ item }} | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
+      shell: kubectl get pods -n {{ namespace }}  | grep {{ item }} | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
       register: app_status
       until: app_status.stdout == 'Running'
       with_items:
