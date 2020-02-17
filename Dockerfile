@@ -14,4 +14,5 @@ RUN mkdir /etc/ansible/ /ansible && \
 COPY ./ ./
 RUN pip3 install -r api_testing/requirements.txt
 RUN cd api_testing && python setup.py install
+RUN pip install pygithub
 
