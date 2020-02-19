@@ -1,0 +1,264 @@
+---
+- hosts: localhost
+  connection: local
+
+  vars_files:
+    - test_vars.yml
+
+  tasks:
+  
+    ## Generating the testname for deployment
+    - include_tasks: /ansible-utils/create_testname.yml
+
+    ## Record Start-Of-Test In Litmus Result CR
+    - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+      vars:
+        status: 'SOT'
+      
+    ## Saving the director url
+    - set_fact:
+        director_url : "http://{{ director_ip }}:30380"
+    
+    ## Getting username
+    - name: Get username
+      shell: cat /etc/secret-volume/username
+      register: username
+
+    ## Getting password     
+    - name: Get password
+      shell: cat /etc/secret-volume/password
+      register: password
+
+    ## Get the project id of the project on which the cluster is running
+    - name: Fetch the project id of the project on which the cluster is running
+      uri:
+        url: "{{ director_url }}/v3/groups/{{ group_id }}/project"
+        method: GET
+        url_username: "{{ username.stdout }}"
+        url_password: "{{ password.stdout }}"
+        force_basic_auth: yes
+        return_content: yes
+        status_code: 200
+      register: project_details
+
+    ## Saving Project id
+    - name: Saving project id
+      set_fact:
+        project_id: "{{ project_details.json.data[0].id }}"
+
+    ## Getting node details of the cluster
+    ## Selecting the node which is in active state in the cluster
+    - name: Getting the node details of the cluster which is in active state
+      uri:
+        url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes?state=active&clusterId={{ cluster_id }}"
+        method: GET
+        url_username: "{{ username.stdout }}"
+        url_password: "{{ password.stdout }}"
+        force_basic_auth: yes
+        return_content: yes
+        body_format: json
+        status_code: 200
+      register: node_cluster
+
+    ## Define variable node_id
+    - set_fact:
+        node_id: []
+
+    ## Storing the id of the nodes in the cluster
+    - name: Storing the id of nodes in the cluster
+      set_fact:
+        node_id: "{{ node_id  + [item.id] }}"
+      loop: "{{ node_cluster.json.data }}"
+
+    ## Fail the test if the cluster contains less than three nodes
+    - fail:
+        msg: Minimum three nodes are required for the test
+      when: "{{ node_id | length }} < 3"
+
+    ## Labeling node-1 of the Cluster with controlPlaneNode=false and dataPlaneNode=true
+    ## With the first element in the node_id list
+    - name: Labeling node-1 of the cluster
+      uri:
+        url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes/{{ node_id[0] }}/?action=labelnodes"
+        method: POST
+        url_username: "{{ username.stdout }}"
+        url_password: "{{ password.stdout }}"
+        force_basic_auth: yes
+        return_content: yes
+        status_code: 202,200
+        body_format: json
+        body: '{"controlPlaneNode": false, "dataPlaneNode": true }'
+      register: labelnode1
+
+    ## Labeling node-2 of the Cluster with controlPlaneNode=true and dataPlaneNode=false
+    ## With the second element in the node_id list
+    - name: Labeling node-2 of the cluster
+      uri:
+        url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes/{{ node_id[1] }}/?action=labelnodes"
+        method: POST
+        url_username: "{{ username.stdout }}"
+        url_password: "{{ password.stdout }}"
+        force_basic_auth: yes
+        return_content: yes
+        body_format: json
+        status_code: 202,200
+        body: '{"controlPlaneNode": true, "dataPlaneNode": false }'
+      register: labelnode2
+
+
+    ## Labeling node-3 of the Cluster with controlPlaneNode=true and dataPlaneNode=false
+    ## With the third element in the node_id list
+    - name: Labeling node-3 of the cluster
+      uri:
+        url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes/{{ node_id[2] }}/?action=labelnodes"
+        method: POST
+        url_username: "{{ username.stdout }}"
+        url_password: "{{ password.stdout }}"
+        force_basic_auth: yes
+        return_content: yes
+        body_format: json
+        body: '{"controlPlaneNode": true, "dataPlaneNode": false }'
+        status_code: 202,200
+      register: labelnode3
+
+    ## Creating openebs
+    - name: Giving required variables for openebs installation
+      uri:
+        url: "{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/openebses"
+        method: POST
+        url_username: "{{ username.stdout }}"
+        url_password: "{{ password.stdout }}"
+        force_basic_auth: yes
+        return_content: yes
+        body_format: json
+        body: "{ \"clusterId\": \"{{ cluster_id }}\",\"creatorId\": \"{{ group_id }}\",\"projectId\": \"{{ project_id }}\",\"templateId\": \"{{ template_id }}\",\"namespace\": \"{{ namespace }}\",\"defaultDirectory\": \"{{ default_directory }}\",\"dockerRegistry\": \"{{ docker_registry }}\",\"includeDeviceFilters\": \"{{ include_device_filters }}\",\"excludeDeviceFilters\": \"{{ exclude_device_filters }}\",\"cpuResourceLimit\": \"{{ cpu_resource_limit }}\",\"memoryResourceLimit\": \" {{ memory_resource_limit }}\",\"installationMode\": \"{{ installation_mode }}\" }"            
+        status_code: 201
+      register: get_openebs
+
+    - name: Getting the installation Manifest for openebs installation
+      set_fact:
+        installopenebs: "{{ get_openebs.json.installationManifest }}"
+
+    - name: Getting the id
+      set_fact:
+        openebsid: "{{ get_openebs.json.id }}"
+
+    ## Checking the id
+    - name: Getting into the openebs installtion stage and checking the id
+      uri:
+        url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses/{{ openebsid }}"
+        method: GET
+        url_username: "{{ username.stdout }}"
+        url_password: "{{ password.stdout }}"
+        force_basic_auth: yes
+        return_content: yes
+        body_format: json
+        status_code: 200
+      register: install_openebs
+
+    # Installing openebs on the external cluster with labeled data plane components
+    - name: Installing openebs on the external cluster with data plane components at node-1 only
+      uri:
+        url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses/{{ openebsid }}/?action=openebsinstall"
+        method: POST
+        url_username: "{{ username.stdout }}"
+        url_password: "{{ password.stdout }}"
+        force_basic_auth: yes
+        return_content: yes
+        body_format: json
+        body: "{{ installopenebs }}"
+        status_code: 200
+      register: res_openebs
+
+
+    ## Getting openebs job id
+    - name: Getting openebs job id
+      set_fact: 
+        openebs_job_id: "{{ res_openebs.json.id }}"
+
+    ## Getting into the openebsjob
+    - name: Getting into openebs job
+      uri:
+        url: "{{ director_url }}/v3/groups/{{ group_id }}/openebsjobs/{{ openebs_job_id }}"
+        method: GET
+        url_username: "{{ username.stdout }}"
+        url_password: "{{ password.stdout }}"
+        force_basic_auth: yes
+        return_content: yes
+        body_format: json
+        status_code: 200
+      register: openebs_job  
+
+    ## Getting the openebs jobstatus
+    ## Wait for some time to get the job status
+    - name: Getting the openebs jobStatus
+      set_fact: 
+         jobstatus: "{{ openebs_job.json.jobStatus }}"
+      until: "{{ jobstatus | length }} != 0"
+      delay: 5
+      retries: 10
+
+    ## When we get the job Status as not null
+    ## phase can be Online/Failed
+    - name: Getting jobStatus phase
+      set_fact: 
+        phase: "{{ jobStatus.phase }}"   
+
+    ## Fail when the jobStatus is Failed
+    - fail:
+        msg: "{{ jabstatus.reason }}"
+      when: "{{ phase }} == 'Failed'"
+
+    ## Checking the data plane  label on the first node
+    - name: Checking the label on first node of the cluster
+      uri:
+        url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes/{{ node_id[0] }}"
+        method: GET
+        url_username: "{{ username.stdout }}"
+        url_password: "{{ password.stdout }}"
+        force_basic_auth: yes
+        return_content: yes
+        body_format: json
+        status_code: 200
+      register: node1
+
+    ## Fail when it gives 'false' to data plane component as we didn't set it 'false' for node-1
+    - fail:
+        msg: The node-1 does not contains the label of data-plane as false
+      when: "{{ node1.labels['mayadata.io/data-plane'] }} != 'true'"
+
+    ## Checking the data plane  label on the second node
+    - name: Checking the label on the second node of the cluster
+      uri:
+        url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes/{{ node_id[1] }}"
+        method: GET
+        url_username: "{{ username.stdout }}"
+        url_password: "{{ password.stdout }}"
+        force_basic_auth: yes
+        return_content: yes
+        body_format: json
+        status_code: 200
+      register: node2
+
+    ## Fail when it gives 'true' to data plane component as we didn't set it 'true' for node-2
+    - fail:
+        msg: The node does not contains the label of data-plane as true
+      when: "{{ node2.labels['mayadata.io/data-plane'] }} != 'false'"
+
+    ## Checking the data plane label on the third node
+    - name: Checking the label on the third node of the cluster
+      uri:
+        url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes/{{ node_id[3] }}"
+        method: GET
+        url_username: "{{ username.stdout }}"
+        url_password: "{{ password.stdout }}"
+        force_basic_auth: yes
+        return_content: yes
+        body_format: json
+        status_code: 200
+      register: node3
+
+    # ## Fail when it gives 'true' to data plane component as we didn't set it 'true' for node-3
+    # - fail:
+    #     msg: The node does not contains the label of data-plane as true
+    #   when: "{{ node3.labels['mayadata.io/data-plane'] }} != 'false'"
