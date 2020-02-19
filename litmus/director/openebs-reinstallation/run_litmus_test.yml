@@ -1,0 +1,94 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: openebs-reinstallation-
+  namespace: litmus
+spec:
+  template:
+    metadata:
+      name: litmus
+      labels:
+        app: openebs-reinstallation-litmus
+    spec:
+      serviceAccountName: litmus
+      restartPolicy: Never
+      volumes:
+      - name: secret-volume
+        secret:
+          secretName: director-user-pass
+      containers:
+      - name: ansibletest
+        image: mayadataio/dop-validator:ci
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: secret-volume
+          readOnly: true
+          mountPath: "/etc/secret-volume"
+        env:
+          
+          ## Take url from configmap config
+          - name: DIRECTOR_IP
+            valueFrom:
+              configMapKeyRef:
+                name: config
+                key: url
+
+          ## Take cluster_id from configmap clusterid
+          - name: CLUSTER_ID    
+            valueFrom:
+              configMapKeyRef:
+                name: clusterid
+                key: cluster_id
+
+          ## Takes group_id from configmap groupid
+          - name: GROUP_ID
+            valueFrom:
+              configMapKeyRef:
+                name: groupid
+                key: group_id
+
+          ## It should be 1ot1 Mandatory
+          - name: TEMPLATE_ID
+            value: '1ot1'
+
+          ## Namespace where openebs is installed
+          ## By default in basic mode it is openebs
+          - name: NAMESPACE
+            value: ''
+
+          ## Enter the default directory - It can be /var/openebs
+          - name: DEFAULT_DIRECTORY
+            value: ''
+
+          ##Enter docker registry
+          - name: DOCKER_REGISTRY
+            value: ''
+
+          ## Enter include device filter
+          - name: INCLUDE_DEVICE_FILTERS
+            value: ''
+
+          ## Enter exclude device filter  
+          - name: EXCLUDE_DEVICE_FILTER
+            value: ''
+
+          ## Enter CPU resource limit
+          - name: CPU_RESOURCE_LIMIT
+            value: ''
+
+          ## Enter Memory resource limit
+          - name: MEMORY_RESOURCE_LIMIT
+            value: ''
+          
+          ## It will have values basic/advance
+          ## Note: For basic installation only template value slould be provided
+          ## For adding any additional value - change the installation mode to advance
+          - name: INSTALLATION_MODE
+            value: 'basic'
+
+          - name: ANSIBLE_STDOUT_CALLBACK
+            value: 'default'  
+
+        command: ["/bin/bash"]
+        args: ["-c", "ansible-playbook ./litmus/director/openebs-reinstallation/test.yml -i /etc/ansible/hosts -v; exit 0"]
