@@ -1,0 +1,133 @@
+---
+- hosts: localhost
+  connection: local
+
+  vars_files:
+    - test_vars.yml
+
+  tasks:
+  
+    ## Generating the testname for deployment
+    - include_tasks: /ansible-utils/create_testname.yml
+
+    ## RECORD START-OF-TEST IN LITMUS RESULT CR
+    - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+      vars:
+        status: 'SOT'
+      
+    - set_fact:
+        director_url : "http://{{ director_ip }}:30380"
+    
+    ## Getting username
+    - name: Get username
+      shell: cat /etc/secret-volume/username
+      register: username
+
+    ## Getting password     
+    - name: Get password
+      shell: cat /etc/secret-volume/password
+      register: password
+
+    ## Getting into the cluster
+    - name: Check if the cluster is up and running
+      uri:
+        url: "{{ director_url }}/v3/groups/{{ group_id }}/cluster/{{ cluster_id }}"
+        method: GET
+        url_username: "{{ username.stdout }}"
+        url_password: "{{ password.stdout }}"
+        force_basic_auth: yes
+        return_content: yes
+        status_code: 200
+      register: get_openebs
+
+    # Checking if openebs is already installed
+    - name: Checking the installation of OpenEBS
+      shell: kubectl get deploy maya-apiserver --all-namespaces --no-headers | wc -l
+      args:
+        executable: /bin/bash
+      register: maya_api
+
+    ## Install openebs if it is not already installed
+    - name: Install openebs if it is not already installed
+      shell: kubectl apply -f https://openebs.github.io/charts/openebs-operator-{{ openebs_version }}.yaml -n {{ namespace }}
+      args:
+        executable: /bin/bash
+      when: "{{ maya_api.stdout }} == 0"
+
+    ## Getting node details of the cluster
+    ## Selecting the node which is in active state in the cluster
+    - name: Getting the node details of the cluster which is in active state
+      uri:
+        url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes?state=active&clusterId={{ cluster_id }}"
+        method: GET
+        url_username: "{{ username.stdout }}"
+        url_password: "{{ password.stdout }}"
+        force_basic_auth: yes
+        return_content: yes
+        body_format: json
+        status_code: 200
+      register: node_cluster
+
+    ## Define variable node_id
+    - set_fact:
+        node_id: []
+
+    ## Storing the id of the nodes in the cluster
+    - name: Storing the id of nodes in the cluster
+      set_fact:
+        node_id: "{{ node_id  + [item.id] }}"
+      loop: "{{ node_cluster.json.data }}"
+
+    - block:
+
+        ## Labeling node-1 of the Cluster with controlPlaneNode=true and dataPlaneNode=false
+        ## With the first element in the node_id list
+        - name: Labeling node-1 of the cluster
+          uri:
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes/{{ node_id[0] }}/?action=labelnodes"
+            method: POST
+            url_username: "{{ username.stdout }}"
+            url_password: "{{ password.stdout }}"
+            force_basic_auth: yes
+            return_content: yes
+            status_code: 202
+            body_format: json
+            body: '{"controlPlaneNode": true, "dataPlaneNode": false }'
+          register: labelnode1
+
+        ## Labeling node-2 of the Cluster with controlPlaneNode=false and dataPlaneNode=true
+        ## With the second element in the node_id list
+        - name: Labeling node-2 of the cluster
+          uri:
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes/{{ node_id[1] }}/?action=labelnodes"
+            method: POST
+            url_username: "{{ username.stdout }}"
+            url_password: "{{ password.stdout }}"
+            force_basic_auth: yes
+            return_content: yes
+            body_format: json
+            status_code: 202
+            body: '{"controlPlaneNode": false, "dataPlaneNode": true }'
+          register: labelnode2
+
+      when: "{{ node_id | length }} < 2"
+
+    ## Creating openebs
+    - name: Giving required variables for openebs installation
+      uri:
+        url: "{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/openebses"
+        method: POST
+        url_username: "{{ username.stdout }}"
+        url_password: "{{ password.stdout }}"
+        force_basic_auth: yes
+        return_content: yes
+        body_format: json
+        body: "{ \"clusterId\": \"{{ cluster_id }}\",\"creatorId\": \"{{ group_id }}\",\"projectId\": \"{{ project_id }}\",\"templateId\": \"{{ template_id }}\",\"namespace\": \"{{ namespace }}\",\"defaultDirectory\": \"{{ default_directory }}\",\"dockerRegistry\": \"{{ docker_registry }}\",\"includeDeviceFilters\": \"{{ include_device_filters }}\",\"excludeDeviceFilters\": \"{{ exclude_device_filters }}\",\"cpuResourceLimit\": \"{{ cpu_resource_limit }}\",\"memoryResourceLimit\": \" {{ memory_resource_limit }}\",\"installationMode\": \"{{ installation_mode }}\" }"            
+        status_code: 405
+      register: get_openebs
+
+    ## Giving warning
+    - name: Warning
+      debug:
+        msg: OpenEBS is Already  installed in your cluster. If you still want to install then please remove the older one and try again.     
+      when: "{{ create_openebs.json.status }} == 405"    
