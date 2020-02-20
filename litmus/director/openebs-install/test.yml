@@ -130,9 +130,6 @@
         return_content: yes
         body_format: json
         status_code: 200
-      register: install_openebs
-      retries: 20
-      delay: 5
 
     ## Installing openebs
     - name: Installing openebs on the cluster
