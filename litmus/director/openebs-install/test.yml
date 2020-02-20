@@ -44,7 +44,7 @@
       set_fact:
         project_id: "{{ project_details.json.data[0].id }}"
     
-    ## Checking the node of DOP Cluster
+    ## Checking the node of connected Cluster
     - name: Get into node of the cluster
       uri:
         url: "{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/nodes"
@@ -67,7 +67,7 @@
       set_fact:
         node2_id: "{{ node_cluster.json.data[1].id}}"
 
-    ## Labeling the node-1 of DOP Cluster with controlPlaneNode=true and dataPlaneNode=true
+    ## Labeling the node-1 of connected Cluster with controlPlaneNode=true and dataPlaneNode=true
     - name: Giving POST request on labelnodes
       uri:
         url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes/{{ node1_id }}/?action=labelnodes"
@@ -80,7 +80,7 @@
         body: '{"controlPlaneNode": true, "dataPlaneNode": true}'
         status_code: 202
 
-    ## Labeling the node-2 of DOP Cluster with controlPlaneNode=true and dataPlaneNode=flase
+    ## Labeling the node-2 of connected Cluster with controlPlaneNode=true and dataPlaneNode=flase
     - name: Giving POST request on labelnodes
       uri:
         url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes/{{ node2_id }}/?action=labelnodes"
