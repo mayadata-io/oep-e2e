@@ -37,22 +37,44 @@
       args:
         executable: /bin/bash
     
+    - name: Creating namespace
+      command: >
+         kubectl create ns {{ namespace }}
+
     ## Fetching current context
     - name: Fetching current context
       command: >
          kubectl config current-context
       register: context
-
+    
     - name: set context
       command: >
-         kubectl config set-context {{ context }} --namespace=openebs
+         kubectl config set-context {{ context }} --namespace={{ namespace }}
       register: set_context 
     
+    ## Checking if the openebs is already present in the cluster before installing by helm
+    - name: Requesting for openebs installation in the cluster again
+      uri:
+        url: "{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/openebses"
+        method: POST
+        url_username: "{{ username.stdout }}"
+        url_password: "{{ password.stdout }}"
+        force_basic_auth: yes
+        return_content: yes
+        body_format: json
+        body: "{ \"clusterId\": \"{{ cluster_id }}\",\"creatorId\": \"{{ group_id }}\",\"projectId\": \"{{ project_id }}\",\"templateId\": \"{{ template_id }}\",\"namespace\": \"{{ namespace }}\",\"defaultDirectory\": \"{{ default_directory }}\",\"dockerRegistry\": \"{{ docker_registry }}\",\"includeDeviceFilters\": \"{{ include_device_filters }}\",\"excludeDeviceFilters\": \"{{ exclude_device_filters }}\",\"cpuResourceLimit\": \"{{ cpu_resource_limit }}\",\"memoryResourceLimit\": \" {{ memory_resource_limit }}\",\"installationMode\": \"{{ installation_mode }}\" }"            
+        status_code: 405
+      register: check_openebs
+
+    - fail:
+        msg: OpenEBS is Already  installed in your cluster. If you still want to install then please remove the older one and try again.
+      when: "{{ check_openebs.status }} == '405'"
+
     ## Installing openebs
     - name: Installing openebs using helm
       shell: | 
          helm repo add stable https://kubernetes-charts.storage.googleapis.com
-         helm install --namespace openebs openebs stable/openebs --version 1.7.0
+         helm install --namespace {{ namespace }} openebs stable/openebs --version {{ openebs_version }}
       args:
         executable: /bin/bash
     
@@ -188,6 +210,27 @@
         status_code: 200
       register: openebs
     
-    - fail:
-        msg: "openEbs reinstallation failed"
-      when: "{{ install_openebs.json.status }} == 405"
+    - name: fetching job id to check status
+      set_fact:
+        openebs_id: "{{ openebs.json.id }}"
+
+    - name: fetch job details
+      uri:
+        url: "{{ director_url }}/v3/groups/1a14/openebsjobs/{{openebs_id}}"
+        method: GET
+        url_username: "{{ username }}"
+        url_password: "{{ password }}"
+        force_basic_auth: yes
+        return_content: yes
+        body_format: json
+        status_code: 200
+      register: openebs_job
+
+    - name: check wheather openebs is installed or not.
+      set_fact:
+        job_status: "{{ openebs_job.json.jobStatus.phase }}"
+
+    - name: Warning
+      debug:
+        msg: unable to reinstall openebs.     
+      when: "'{{  job_status }}' != 'Online'"   
