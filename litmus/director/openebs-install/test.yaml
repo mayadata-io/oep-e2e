@@ -1,0 +1,80 @@
+---
+- hosts: localhost
+  connection: local
+
+  vars_files:
+    - test_vars.yml
+
+  tasks:
+    - block:
+
+          ## Generating the testname for deployment
+        - include_tasks: /ansible-utils/create_testname.yml
+
+          ## RECORD START-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'SOT'
+
+        - set_fact:
+            director_url : "http://{{ director_ip }}:30380"
+
+        - name: Get username
+          shell: cat /etc/secret-volume/username
+          register: username
+            
+        - name: Get password
+          shell: cat /etc/secret-volume/password
+          register: password
+
+        - name: Get the number of CSP
+          shell: kubectl get csp --no-headers | wc -l
+          args:
+            executable: /bin/bash
+          register: csp_count
+
+
+        - name: Install OpenEBS through director
+          uri:
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/openebsinstall"
+            method: POST
+            url_username: "{{ username.stdout }}"
+            url_password: "{{ password.stdout }}"
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+            body: '{"clusterId":"{{ cluster_id }}","kind":"poolUpgrade","targetVersion":"1.5.0","upgradeComponents":[{"id":"{{ storage_pool.json.data[0].id }}"},{"id":"{{ storage_pool.json.data[1].id }}"},{"id":"{{ storage_pool.json.data[2].id }}"}]}'
+            status_code: 201
+          register: director_openebs_install
+
+        - name: Fetch OpenEBS control plane pods state
+          shell: kubectl get pods -n openebs  | grep {{ item }} | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
+          register: app_status
+          until: app_status.stdout == 'Running'
+          with_items:
+            - "{{ openebs_components }}"
+          retries: 20
+          delay: 5
+        
+        - name: Fetch OpenEBS control plane pods ready status
+          shell: kubectl get pods -n openebs | grep {{ item }} | awk '{print $2}' | awk -F'/' '{print $1}' && kubectl get pods -n openebs | grep {{ item }} | awk '{print $2}' | awk -F'/' '{print $2}'
+          register: ready_status
+          with_items:
+            - "{{ openebs_components }}"
+          until: "{{ ready_status.stdout_lines | unique | length == 1 }}"
+          retries: 20
+          delay: 5
+
+        - set_fact:
+            flag: "Pass"
+
+      rescue:
+        - name: Setting fail flag
+          set_fact:
+            flag: "Fail"
+
+      always:
+        ## RECORD END-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'EOT'
