@@ -2,7 +2,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: openebs-install
+  generateName: openebs-install-
   namespace: litmus
 spec:
   template:
