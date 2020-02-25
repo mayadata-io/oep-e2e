@@ -45,7 +45,7 @@ spec:
           - name: TEMPLATE_ID
             value: '1ot1' 
 
-           - name: NAMESPACE
+          - name: NAMESPACE
             value: ''
 
           ## Enter the default directory - It can be /var/openebs
