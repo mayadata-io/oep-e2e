@@ -1,0 +1,216 @@
+---
+- hosts: localhost
+  connection: local
+
+  vars_files:
+    - test_vars.yml
+
+  tasks:
+  
+    ## Generating the testname for deployment
+    - include_tasks: /ansible-utils/create_testname.yml
+
+    ## RECORD START-OF-TEST IN LITMUS RESULT CR
+    - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+      vars:
+        status: 'SOT'
+      
+    - set_fact:
+        director_url : "http://{{ director_ip }}:30380"
+
+    ## Getting the username
+    - name: Get username
+      shell: cat /etc/secret-volume/username
+      register: username
+
+    ## Getting the password.stdout     
+    - name: Get password
+      shell: cat /etc/secret-volume/password
+      register: password
+    
+    - block:
+        ## Install openebs using operator yaml
+        - name: Install openebs using operator yaml
+          shell: kubectl apply -f https://openebs.github.io/charts/openebs-operator-{{ openebs_current_version }}.yaml
+
+        ## Check whether openebs components are in Running state or not
+        - name: Fetch OpenEBS control plane pods state
+          shell: kubectl get pods -n {{ namespace }}  | grep {{ item }} | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
+          register: app_status
+          until: app_status.stdout == 'Running'
+          with_items:
+            - "{{ openebs_components }}"
+          retries: 20
+          delay: 5
+        
+        ## Create namespace in which application is to be deployed
+        - name: create namespace 
+          shell: kubectl create ns {{ app_namespace }}
+
+        ## Create PVC
+        - name: create PVC 
+          shell: kubectl create -f pvc.yaml -n {{ app_namespace }}
+      
+        ## Create application 
+        - name: Create application
+          shell: kubectl create -f busybox_app.yaml -n {{ app_namespace }}
+
+        ## Get application volume health status for replica-1
+        - name: Get application volume health status for replica-1
+          uri:
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayaapplications'
+            method: GET
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+          register: volume_health
+          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[0].state=='Running'"
+          retries: 20
+          delay: 2
+        
+        ## Get application volume health status for replica-2
+        - name: Get application volume health status for replica-2
+          uri:
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayaapplications'
+            method: GET
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+          register: volume_health
+          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[1].state=='Running'"
+          retries: 20
+          delay: 2
+
+        ## Get application volume health status for replica-3
+        - name: Get application volume health status for replica-3
+          uri:
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayaapplications'
+            method: GET
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+          register: volume_health
+          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[2].state=='Running'"
+          retries: 20
+          delay: 2
+         
+        ## Upgrade openebs control plane
+        - name: Upgrade openebs control plane
+          shell: kubectl apply -f https://openebs.github.io/charts/openebs-operator-{{ openebs_target_version }}.yaml
+
+        ## Fetch OpenEBS control plane pods state after control plane upgrade
+        - name: Fetch OpenEBS control plane pods state after control plane upgrade
+          shell: kubectl get pods -n {{namespace}}  | grep {{ item }} | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
+          register: app_status
+          until: app_status.stdout == 'Running'
+          with_items:
+            - "{{ openebs_components }}"
+          retries: 20
+          delay: 5
+        
+        ## Get application details
+        - name: Get application details
+          uri:
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayaapplications'
+            method: GET
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+          register: maya_app
+        
+        ## Upgrade application volume
+        - name: Upgrade application volume
+          uri:
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/openebsupgradeclaims'
+            method: GET
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            status_code: 200
+          register: upgrade_claim
+        
+        ## Check application volume upgrade job status
+        - name: Check application volume upgrade job status
+          uri:
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/openebsupgradeclaims/{{ upgrade_claim.json.data[0].id}}/openebsupgradejobs'
+            method: GET
+            url_username: '{{ username.stdout }}'  
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+          register: upgrade_job
+          until: "upgrade_job.json.data[0].state=='Success'"
+          retries: 40
+          delay: 5
+
+        ## Get application volume health status for replica-1
+        - name: Get application volume health status for replica-1
+          uri:
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayaapplications'
+            method: GET
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+          register: volume_health
+          until: "volume_health.json.data[11].data.pods[0].volumes[0].replica[0].state=='Running'"
+          retries: 20
+          delay: 2
+
+        ## Get application volume health status for replica-2
+        - name: Get application volume health status for replica-2
+          uri:
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayaapplications'
+            method: GET
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+          register: volume_health
+          until: "volume_health.json.data[11].data.pods[0].volumes[0].replica[1].state=='Running'"
+          retries: 20
+          delay: 2
+        
+        ## Get application volume health status for replica-3
+        - name: Get application volume health status for replica-3
+          uri:
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayaapplications'
+            method: GET
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+          register: volume_health
+          until: "volume_health.json.data[11].data.pods[0].volumes[0].replica[2].state=='Running'"
+          retries: 20
+          delay: 2
+
+        ## Setting flag as pass
+        - set_fact:
+              flag: 'Pass'
+
+      rescue:
+        - name: Setting fail flag
+          set_fact:
+            flag: 'Fail'
+    
+      always:
+        ## RECORD END-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'EOT'
+
+        
