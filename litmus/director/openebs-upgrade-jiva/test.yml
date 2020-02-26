@@ -44,11 +44,11 @@
           delay: 5
         
         ## Create namespace in which application is to be deployed
-        - name: create namespace 
+        - name: Create namespace 
           shell: kubectl create ns {{ app_namespace }}
 
         ## Create PVC
-        - name: create PVC 
+        - name: Create PVC 
           shell: kubectl create -f pvc.yaml -n {{ app_namespace }}
       
         ## Create application 
