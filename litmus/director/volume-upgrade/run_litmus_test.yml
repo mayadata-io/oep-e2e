@@ -1,0 +1,62 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: volume-upgrade-check
+  namespace: litmus
+spec:
+  template:
+    metadata:
+      name: litmus
+      labels:
+        app: volume-upgrade-check-litmus
+    spec:
+      serviceAccountName: litmus
+      restartPolicy: Never
+      volumes:
+        - name: secret-volume
+          secret:
+            secretName: director-user-pass
+        - name: kube-config
+          configMap:
+            name: kubeconfig
+      containers:
+        - name: ansibletest
+          image: mayadataio/dop-validator:ci
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: secret-volume
+              readOnly: true
+              mountPath: '/etc/secret-volume'
+            - name: kube-config
+              mountPath: '/etc/kube'
+          env:
+            - name: DIRECTOR_IP
+              valueFrom:
+                configMapKeyRef:
+                  name: config
+                  key: url
+            - name: OPENEBS_CURRENT_VERSION
+              value: 1.4.0
+            - name: OPENEBS_TARGET_VERSION
+              value: 1.5.0
+            - name: GROUP_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: groupid
+                  key: group_id
+            - name: CLUSTER_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: clusterid
+                  key: cluster_id
+            - name: ANSIBLE_STDOUT_CALLBACK
+              value: default
+          command: ['/bin/bash']
+          args:
+            [
+              '-c',
+              'ansible-playbook ./litmus/director/volume-upgrade/test.yml -i /etc/ansible/hosts -v; exit 0',
+            ]
+      imagePullSecrets:
+        - name: oep-secret
