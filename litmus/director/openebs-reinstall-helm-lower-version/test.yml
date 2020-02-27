@@ -1,0 +1,253 @@
+---
+- hosts: localhost
+  connection: local
+
+  vars_files:
+    - test_vars.yml
+
+  tasks:
+  
+    ## Generating the testname for deployment
+    - include_tasks: /ansible-utils/create_testname.yml
+
+    ## RECORD START-OF-TEST IN LITMUS RESULT CR
+    - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+      vars:
+        status: 'SOT'
+      
+    - set_fact:
+        director_url : "http://{{ director_ip }}:30380"
+
+    ## Getting the username
+    - name: Get username
+      shell: cat /etc/secret-volume/username
+      register: username
+
+    ## Getting the password     
+    - name: Get password
+      shell: cat /etc/secret-volume/password
+      register: password
+
+    - block:
+        
+        ## Installing helm
+        - name: Installing Helm
+          shell: | 
+              curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+              chmod 700 get_helm.sh
+              ./get_helm.sh
+          args:
+            executable: /bin/bash
+        
+        - name: Creating namespace
+          command: >
+              kubectl create ns {{ namespace }}
+
+        ## Fetching current context
+        - name: Fetching current context
+          command: >
+              kubectl config current-context
+          register: context
+
+        ## Set context 
+        - name: set context
+          command: >
+              kubectl config set-context {{ context.stdout }} --namespace={{ namespace }}
+          register: set_context 
+        
+        ## Checking if the openebs is already present in the cluster before installing by helm
+        - name: Requesting for openebs installation in the cluster again
+          uri:
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/openebses"
+            method: POST
+            url_username: "{{ username.stdout }}"
+            url_password: "{{ password.stdout }}"
+            force_basic_auth: yes
+            return_content: yes
+            body_format: json
+            body: "{ \"clusterId\": \"{{ cluster_id }}\",\"creatorId\": \"{{ group_id }}\",\"projectId\": \"{{ project_id }}\",\"templateId\": \"{{ template_id }}\",\"namespace\": \"{{ namespace }}\",\"defaultDirectory\": \"{{ default_directory }}\",\"dockerRegistry\": \"{{ docker_registry }}\",\"includeDeviceFilters\": \"{{ include_device_filters }}\",\"excludeDeviceFilters\": \"{{ exclude_device_filters }}\",\"cpuResourceLimit\": \"{{ cpu_resource_limit }}\",\"memoryResourceLimit\": \" {{ memory_resource_limit }}\",\"installationMode\": \"{{ installation_mode }}\" }"            
+            status_code: 405
+          register: check_openebs
+
+        - fail:
+            msg: OpenEBS is Already  installed in your cluster. If you still want to install then please remove the older one and try again.
+          when: "{{ check_openebs.status }} == '405'"
+
+        ## Installing openebs
+        - name: Installing openebs using helm
+          shell: | 
+              helm repo add stable https://kubernetes-charts.storage.googleapis.com
+              helm install --namespace {{ namespace }} openebs stable/openebs --version {{ openebs_version }}
+          args:
+            executable: /bin/bash
+        
+        ## check whether all the pods of openebs are in running state or not.
+        - name:  check whether all the pods of openebs are in running state or not.
+          shell: kubectl get pods -n {{ namespace }}  | grep {{ item }} | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
+          register: app_status
+          until: app_status.stdout == 'Running'
+          with_items:
+            - "{{ openebs_components }}"
+          retries: 20
+          delay: 5 
+
+        ## Fetching project details
+        - name: Fetch the project id of the cluster
+          uri:
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/project"
+            method: GET
+            url_username: "{{ username.stdout }}"
+            url_password: "{{ password.stdout }}"
+            force_basic_auth: yes
+            return_content: yes
+            status_code: 200
+          register: project_details
+
+        ## Fetching project id
+        - name: Fetching project id
+          set_fact:
+            project_id: "{{ project_details.json.data[0].id }}"
+        
+        ## Checking the node of DOP Cluster
+        - name: Get into node of the cluster
+          uri:
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/nodes"
+            method: GET
+            url_username: "{{ username.stdout }}"
+            url_password: "{{ password.stdout }}"
+            force_basic_auth: yes
+            return_content: yes
+            body_format: json
+            status_code: 200
+          register: node_cluster
+        
+        ## Getting node-1 id.
+        - name: get node-1 id
+          set_fact:
+            node1_id: "{{ node_cluster.json.data[0].id}}"
+        
+        ## Getting node-2 id.
+        - name: get node-2 id
+          set_fact:
+            node2_id: "{{ node_cluster.json.data[1].id}}"
+
+        ## Labeling the node-1 of DOP Cluster with controlPlaneNode=true and dataPlaneNode=true
+        - name: Giving POST request on labelnodes
+          uri:
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes/{{ node1_id }}/?action=labelnodes"
+            method: POST
+            url_username: "{{ username.stdout }}"
+            url_password: "{{ password.stdout }}"
+            force_basic_auth: yes
+            return_content: yes
+            body_format: json
+            body: '{"controlPlaneNode": true, "dataPlaneNode": true}'
+            status_code: 202
+
+        ## Labeling the node-2 of DOP Cluster with controlPlaneNode=true and dataPlaneNode=flase
+        - name: Giving POST request on labelnodes
+          uri:
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes/{{ node2_id }}/?action=labelnodes"
+            method: POST
+            url_username: "{{ username.stdout }}"
+            url_password: "{{ password.stdout }}"
+            force_basic_auth: yes
+            return_content: yes
+            body_format: json
+            body: '{"controlPlaneNode": true, "dataPlaneNode": false}'
+            status_code: 202
+
+        ## Creating openebs
+        - name: Fetch openebses and create openebs
+          uri:
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses"
+            method: POST
+            url_username: "{{ username.stdout }}"
+            url_password: "{{ password.stdout }}"
+            force_basic_auth: yes
+            return_content: yes
+            body_format: json
+            body: "{ \"clusterId\": \"{{ cluster_id }}\",\"creatorId\": \"{{ group_id }}\",\"projectId\": \"{{ project_id }}\",\"templateId\": \"{{ template_id }}\",\"namespace\": \"{{ namespace }}\",\"defaultDirectory\": \"{{ default_directory }}\",\"dockerRegistry\": \"{{ docker_registry }}\",\"includeDeviceFilters\": \"{{ include_device_filters }}\",\"excludeDeviceFilters\": \"{{ exclude_device_filters }}\",\"cpuResourceLimit\": \"{{ cpu_resource_limit }}\",\"memoryResourceLimit\": \" {{ memory_resource_limit }}\",\"installationMode\": \"{{ installation_mode }}\" }"
+            status_code: 201
+          register: install_openebs
+
+        - name: Warning
+          debug:
+            msg: Openebs is Already  installed in your cluster.     
+          when: "{{ install_openebs.json.status }} == 405"    
+
+        - name: Getting the yaml for openebs installation
+          set_fact:
+            installopenebs: "{{ install_openebs.json.installationManifest }}"
+
+        - name: Getting the id
+          set_fact:
+            openebs_id: "{{ install_openebs.json.id }}"
+
+        - name: Getting into the openebs installation stage and checking the id
+          uri:
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses/{{ openebs_id }}"
+            method: GET
+            url_username: "{{ username.stdout }}"
+            url_password: "{{ password.stdout }}"
+            force_basic_auth: yes
+            return_content: yes
+            body_format: json
+            status_code: 200
+          register: install_openebs
+          retries: 20
+          delay: 5
+
+        ## Installing openebs
+        - name: Installing openebs on the cluster
+          uri:
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses/{{ openebs_id }}/?action=openebsinstall"
+            method: POST
+            url_username: "{{ username.stdout }}"
+            url_password: "{{ password.stdout }}"
+            force_basic_auth: yes
+            return_content: yes
+            body_format: json
+            body: '{{ installopenebs }}'
+            status_code: 200
+          register: openebs
+        
+        - name: fetching job id to check status
+          set_fact:
+            openebs_job_id: "{{ openebs.json.id }}"
+
+        
+        - name: Fetch openebsjob details
+          uri:
+            url: "{{ director_url }}/v3/groups/1a14/openebsjobs/{{openebs_job_id}}"
+            method: GET
+            url_username: "{{ username.stdout }}"
+            url_password: "{{ password.stdout }}"
+            force_basic_auth: yes
+            return_content: yes
+            body_format: json
+            status_code: 200
+          register: openebs_job
+          until: openebs_job.json.jobStatus != ""
+          delay: 10
+          retries: 10
+        
+        ## Checking wether the openebs_job pod is in online state or not.
+        - name: Checking phase of openebs_job 
+          shell:
+          failed_when: "'{{ openebs_job.json.jobStatus.phase }}' != 'Online'"
+    
+        ## Setting flag as Pass
+        - set_fact:
+            flag: "Pass"
+        
+      rescue:
+        - name: Setting fail flag
+          set_fact:
+            flag: "Fail"
+
+      always:
+        ## RECORD END-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'EOT'
