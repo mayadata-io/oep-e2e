@@ -2,14 +2,14 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: openebs-reinstall
+  generateName: openebs-reinstall-helm-
   namespace: litmus
 spec:
   template:
     metadata:
       name: litmus
       labels:
-        app: openebs-install-check-litmus
+        app: openebs-reinstall-check-litmus
     spec:
       serviceAccountName: litmus
       restartPolicy: Never
