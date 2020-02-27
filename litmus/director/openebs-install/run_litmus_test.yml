@@ -32,7 +32,7 @@ spec:
             valueFrom:
               configMapKeyRef:
                 name: config
-                key: ip
+                key: url
 
           ## Takes group-id from configmap group-id
           - name: GROUP_ID
