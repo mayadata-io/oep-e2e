@@ -54,24 +54,6 @@
           command: >
               kubectl config set-context {{ context.stdout }} --namespace={{ namespace }}
           register: set_context 
-        
-        ## Checking if the openebs is already present in the cluster before installing by helm
-        - name: Requesting for openebs installation in the cluster again
-          uri:
-            url: "{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/openebses"
-            method: POST
-            url_username: "{{ username.stdout }}"
-            url_password: "{{ password.stdout }}"
-            force_basic_auth: yes
-            return_content: yes
-            body_format: json
-            body: "{ \"clusterId\": \"{{ cluster_id }}\",\"creatorId\": \"{{ group_id }}\",\"projectId\": \"{{ project_id }}\",\"templateId\": \"{{ template_id }}\",\"namespace\": \"{{ namespace }}\",\"defaultDirectory\": \"{{ default_directory }}\",\"dockerRegistry\": \"{{ docker_registry }}\",\"includeDeviceFilters\": \"{{ include_device_filters }}\",\"excludeDeviceFilters\": \"{{ exclude_device_filters }}\",\"cpuResourceLimit\": \"{{ cpu_resource_limit }}\",\"memoryResourceLimit\": \" {{ memory_resource_limit }}\",\"installationMode\": \"{{ installation_mode }}\" }"            
-            status_code: 405
-          register: check_openebs
-
-        - fail:
-            msg: OpenEBS is Already  installed in your cluster. If you still want to install then please remove the older one and try again.
-          when: "{{ check_openebs.status }} == '405'"
 
         ## Installing openebs
         - name: Installing openebs using helm
@@ -168,74 +150,8 @@
             return_content: yes
             body_format: json
             body: "{ \"clusterId\": \"{{ cluster_id }}\",\"creatorId\": \"{{ group_id }}\",\"projectId\": \"{{ project_id }}\",\"templateId\": \"{{ template_id }}\",\"namespace\": \"{{ namespace }}\",\"defaultDirectory\": \"{{ default_directory }}\",\"dockerRegistry\": \"{{ docker_registry }}\",\"includeDeviceFilters\": \"{{ include_device_filters }}\",\"excludeDeviceFilters\": \"{{ exclude_device_filters }}\",\"cpuResourceLimit\": \"{{ cpu_resource_limit }}\",\"memoryResourceLimit\": \" {{ memory_resource_limit }}\",\"installationMode\": \"{{ installation_mode }}\" }"
-            status_code: 201
+            status_code: 405
           register: install_openebs
-
-        - name: Warning
-          debug:
-            msg: Openebs is Already  installed in your cluster.     
-          when: "{{ install_openebs.json.status }} == 405"    
-
-        - name: Getting the yaml for openebs installation
-          set_fact:
-            installopenebs: "{{ install_openebs.json.installationManifest }}"
-
-        - name: Getting the id
-          set_fact:
-            openebs_id: "{{ install_openebs.json.id }}"
-
-        - name: Getting into the openebs installation stage and checking the id
-          uri:
-            url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses/{{ openebs_id }}"
-            method: GET
-            url_username: "{{ username.stdout }}"
-            url_password: "{{ password.stdout }}"
-            force_basic_auth: yes
-            return_content: yes
-            body_format: json
-            status_code: 200
-          register: install_openebs
-          retries: 20
-          delay: 5
-
-        ## Installing openebs
-        - name: Installing openebs on the cluster
-          uri:
-            url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses/{{ openebs_id }}/?action=openebsinstall"
-            method: POST
-            url_username: "{{ username.stdout }}"
-            url_password: "{{ password.stdout }}"
-            force_basic_auth: yes
-            return_content: yes
-            body_format: json
-            body: '{{ installopenebs }}'
-            status_code: 200
-          register: openebs
-        
-        - name: fetching job id to check status
-          set_fact:
-            openebs_job_id: "{{ openebs.json.id }}"
-
-        
-        - name: Fetch openebsjob details
-          uri:
-            url: "{{ director_url }}/v3/groups/1a14/openebsjobs/{{openebs_job_id}}"
-            method: GET
-            url_username: "{{ username.stdout }}"
-            url_password: "{{ password.stdout }}"
-            force_basic_auth: yes
-            return_content: yes
-            body_format: json
-            status_code: 200
-          register: openebs_job
-          until: openebs_job.json.jobStatus != ""
-          delay: 10
-          retries: 10
-        
-        ## Checking wether the openebs_job pod is in online state or not.
-        - name: Checking phase of openebs_job 
-          shell:
-          failed_when: "'{{ openebs_job.json.jobStatus.phase }}' != 'Online'"
     
         ## Setting flag as Pass
         - set_fact:
