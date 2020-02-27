@@ -44,8 +44,6 @@ spec:
           - name: NAMESPACE
             value: ''
 
-          - name: OPENEBS_CURRENT_VERSION
-            value: 1.6.0
             
           - name: OPENEBS_TARGET_VERSION
             value: 1.7.0

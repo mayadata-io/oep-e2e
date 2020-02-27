@@ -29,9 +29,6 @@
       register: password
     
     - block:
-        ## Install openebs using operator yaml
-        - name: Install openebs using operator yaml
-          shell: kubectl apply -f https://openebs.github.io/charts/openebs-operator-{{ openebs_current_version }}.yaml
 
         ## Check whether openebs components are in Running state or not
         - name: Fetch OpenEBS control plane pods state
@@ -53,7 +50,7 @@
       
         ## Create application 
         - name: Create application
-          shell: kubectl create -f busybox_app.yaml -n {{ app_namespace }}
+          shell: kubectl create -f mongo_statefulset.yaml -n {{ app_namespace }}
 
         ## Get application volume health status for replica-1
         - name: Get application volume health status for replica-1

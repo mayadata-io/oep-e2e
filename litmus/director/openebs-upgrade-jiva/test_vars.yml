@@ -1,6 +1,5 @@
 test_name: openebs-upgrade-jiva
-openebs_current_version: "{{ lookup('env','OPENEBS_TARGET_VERSION') }}"
-openebs_target_version: "{{ lookup('env','OPENEBS_CURRENT_VERSION') }}"
+openebs_target_version: "{{ lookup('env','OPENEBS_TARGET_VERSION') }}"
 openebs_components:
   [
     'openebs-provisioner',
