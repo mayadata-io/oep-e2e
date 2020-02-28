@@ -6,29 +6,29 @@
     - test_vars.yml
 
   tasks:
-  
-    ## Generating the testname for deployment
-    - include_tasks: /ansible-utils/create_testname.yml
 
-    ## RECORD START-OF-TEST IN LITMUS RESULT CR
-    - include_tasks: /ansible-utils/update_litmus_result_resource.yml
-      vars:
-        status: 'SOT'
-      
-    - set_fact:
-        director_url : "http://{{ director_ip }}:30380"
-
-    ## Getting the username
-    - name: Get username
-      shell: cat /etc/secret-volume/username
-      register: username
-
-    ## Getting the password.stdout     
-    - name: Get password
-      shell: cat /etc/secret-volume/password
-      register: password
-    
     - block:
+  
+        ## Generating the testname for deployment
+        - include_tasks: /ansible-utils/create_testname.yml
+
+        ## RECORD START-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'SOT'
+          
+        - set_fact:
+            director_url : "http://{{ director_ip }}:30380"
+
+        ## Getting the username
+        - name: Get username
+          shell: cat /etc/secret-volume/username
+          register: username
+
+        ## Getting the password.stdout     
+        - name: Get password
+          shell: cat /etc/secret-volume/password
+          register: password
 
         ## Check whether openebs components are in Running state or not
         - name: Fetch OpenEBS control plane pods state
@@ -51,7 +51,7 @@
             force_basic_auth: yes
             body_format: json
           register: volume_health
-          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[0].state=='Running'"
+          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[0].state=='Healthy'"
           retries: 20
           delay: 2
         
@@ -66,7 +66,7 @@
             force_basic_auth: yes
             body_format: json
           register: volume_health
-          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[1].state=='Running'"
+          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[1].state=='Healthy'"
           retries: 20
           delay: 2
 
@@ -81,7 +81,7 @@
             force_basic_auth: yes
             body_format: json
           register: volume_health
-          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[2].state=='Running'"
+          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[2].state=='Healthy'"
           retries: 20
           delay: 2
          
@@ -149,7 +149,7 @@
             force_basic_auth: yes
             body_format: json
           register: volume_health
-          until: "volume_health.json.data[11].data.pods[0].volumes[0].replica[0].state=='Running'"
+          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[0].state=='Healthy'"
           retries: 20
           delay: 2
 
@@ -164,7 +164,7 @@
             force_basic_auth: yes
             body_format: json
           register: volume_health
-          until: "volume_health.json.data[11].data.pods[0].volumes[0].replica[1].state=='Running'"
+          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[1].state=='Healthy'"
           retries: 20
           delay: 2
         
@@ -179,7 +179,7 @@
             force_basic_auth: yes
             body_format: json
           register: volume_health
-          until: "volume_health.json.data[11].data.pods[0].volumes[0].replica[2].state=='Running'"
+          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[2].state=='Healthy'"
           retries: 20
           delay: 2
 
