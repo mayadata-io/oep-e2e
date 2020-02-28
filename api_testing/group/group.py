@@ -23,12 +23,51 @@ class Groups():
         for dict in groupsList:
             if account == dict["name"]:
                 Groups.projectAccData = dict
-                return True
+                return Groups.projectAccData
         print("Project Account does not exist")
-        return False
+        return None
+        
+    def setClusterAccountDataIfExists(self):
+        groupsList = self.request.get(self.base_url)
+        account = "ClusterAccount"
+        #cluster_id = id
+        for dict in groupsList:
+            #if account == dict["name"] and cluster_id == dict['clusterId']:
+            if account == dict["name"]:
+                clusterAccData = dict
+                return clusterAccData
+        print(f"Cluster Account does not exist")
+        return None
+
+    def getMayaApps(self, acc):
+        if acc == "ClusterAccount":
+            account_data = self.setClusterAccountDataIfExists()
+        elif acc == "ProjectAccount":
+            account_data = self.setProjectAccountDataIfExists()
+        if account_data != None:
+            apps_api_endpoint = account_data['links']['mayaApplications']
+            apps_data = self.request.get(apps_api_endpoint)
+            for app_data in apps_data:
+                print(app_data['name'])
+        else:
+            print("Data is None")
+        
+    def getMayaStoragePools(self, acc):
+        if acc == "ClusterAccount":
+            account_data = self.setClusterAccountDataIfExists()
+        elif acc == "ProjectAccount":
+            account_data = self.setProjectAccountDataIfExists()
+        if account_data != None:
+            apps_pool_endpoint = account_data['links']['mayaStoragePools']
+            pools_data = self.request.get(apps_pool_endpoint)
+            for pool_data in pools_data:
+                print(pool_data['data']['pods'][0]['name'])
+        else:
+            print("Data is None")
         
     def getProjectAccountID(self):
-        if self.setProjectAccountDataIfExists():
+        data = self.setProjectAccountDataIfExists()
+        if data:
             return self.projectAccData['id']
         else:
             return None

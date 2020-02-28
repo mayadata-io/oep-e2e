@@ -2,14 +2,14 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: openebs-upgrade-check
+  generateName: openebs-upgrade-jiva-
   namespace: litmus
 spec:
   template:
     metadata:
       name: litmus
       labels:
-        app: openebs-upgrade-check-litmus
+        app: openebs-upgrade-jiva-check-litmus
     spec:
       serviceAccountName: litmus
       restartPolicy: Never
@@ -17,38 +17,47 @@ spec:
       - name: secret-volume
         secret:
           secretName: director-user-pass
-      - name: kube-config
-        configMap:
-          name: kubeconfig
       containers:
       - name: ansibletest
-        image: mayadataio/dop-validator:ci
+        image: mayadataio/dop-validator:ci 
         imagePullPolicy: Always
         volumeMounts:
         - name: secret-volume
           readOnly: true
           mountPath: "/etc/secret-volume"
-        - name: kube-config
-          mountPath: "/etc/kube"
         env:
+
+          ## Takes director-ip from configmap director-ip
           - name: DIRECTOR_IP
             valueFrom:
               configMapKeyRef:
                 name: config
                 key: url
+
+          ## Takes group-id from configmap group-id
           - name: GROUP_ID
             valueFrom:
               configMapKeyRef:
                 name: groupid
                 key: group_id
+
+          - name: NAMESPACE
+            value: ''
+
+            
+          - name: OPENEBS_TARGET_VERSION
+            value: 1.7.0
+
+          ## Takes cluster_id from configmap
           - name: CLUSTER_ID
             valueFrom:
               configMapKeyRef:
                 name: clusterid
                 key: cluster_id
+
           - name: ANSIBLE_STDOUT_CALLBACK
-            value: default              
+            value: default  
+
         command: ["/bin/bash"]
-        args: ["-c", "ansible-playbook ./litmus/director/openebs-upgrade/test.yaml -i /etc/ansible/hosts -v; exit 0"]
-      imagePullSecrets:
-      - name: oep-secret
+        args: ["-c", "ansible-playbook ./litmus/director/openebs-upgrade-jiva/test.yml -i /etc/ansible/hosts -v; exit 0"]
+        
