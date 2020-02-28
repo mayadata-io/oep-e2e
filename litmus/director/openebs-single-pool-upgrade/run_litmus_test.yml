@@ -2,14 +2,14 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: cspc-upgrade-check
+  generateName: openebs-single-pool-upgrade-check
   namespace: litmus
 spec:
   template:
     metadata:
       name: litmus
       labels:
-        app: cspc-upgrade-check-litmus
+        app: openebs-single-pool-upgrade-check-litmus
     spec:
       serviceAccountName: litmus
       restartPolicy: Never
@@ -49,6 +49,6 @@ spec:
           - name: ANSIBLE_STDOUT_CALLBACK
             value: default              
         command: ["/bin/bash"]
-        args: ["-c", "ansible-playbook ./litmus/director/cspc-upgrade/test.yaml -i /etc/ansible/hosts -v; exit 0"]
+        args: ["-c", "ansible-playbook ./litmus/director/openebs-single-pool-upgrade/test.yaml -i /etc/ansible/hosts -v; exit 0"]
       imagePullSecrets:
       - name: oep-secret

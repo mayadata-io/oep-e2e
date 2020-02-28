@@ -27,11 +27,39 @@
           shell: cat /etc/secret-volume/password
           register: password
 
-        - name: Get the number of CSPs
+        - name: Get the number of CSP
           shell: kubectl get csp --no-headers | wc -l
           args:
             executable: /bin/bash
           register: csp_count
+
+        - name: Checking whether all the pool pods are in running state before upgrading
+          shell: kubectl get po -l app=cstor-pool -n openebs -o jsonpath='{.items[?(@.status.phase=="Running")].metadata.name}' | wc -w
+          register: pool_pods
+          until: "pool_pods.stdout == csp_count.stdout"
+          retries: 10
+          delay: 5
+
+        - name: Upgrade OpenEBS control plane
+          shell: kubectl apply -f https://openebs.github.io/charts/openebs-operator-1.5.0.yaml
+        
+        - name: Fetch OpenEBS control plane pods state
+          shell: kubectl get pods -n openebs  | grep {{ item }} | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
+          register: app_status
+          until: app_status.stdout == 'Running'
+          with_items:
+            - "{{ openebs_components }}"
+          retries: 20
+          delay: 5
+        
+        - name: Fetch OpenEBS control plane pods ready status
+          shell: kubectl get pods -n openebs | grep {{ item }} | awk '{print $2}' | awk -F'/' '{print $1}' && kubectl get pods -n openebs | grep {{ item }} | awk '{print $2}' | awk -F'/' '{print $2}'
+          register: ready_status
+          with_items:
+            - "{{ openebs_components }}"
+          until: "{{ ready_status.stdout_lines | unique | length == 1 }}"
+          retries: 20
+          delay: 5
 
         - name: Get OpenEBS storage pool details
           uri:
@@ -44,7 +72,7 @@
             body_format: json
           register: storage_pool
 
-        - name: Upgrade OpenEBS storage pools
+        - name: Upgrade multiple pools
           uri:
             url: "{{ director_url }}/v3/groups/{{ group_id }}/openebsupgradeclaims"
             method: POST
@@ -53,23 +81,9 @@
             return_content: yes
             force_basic_auth: yes
             body_format: json
-            body: '{"clusterId":"{{ cluster_id }}","kind":"poolUpgrade","targetVersion":"1.5.0","upgradeComponents":[{"id":"{{ storage_pool.json.data[0].id }}"},{"id":"{{ storage_pool.json.data[1].id }}"},{"id":"{{ storage_pool.json.data[2].id }}"}]}'
+            body: '{"clusterId":"{{ cluster_id }}","kind":"poolUpgrade","targetVersion":"1.5.0","upgradeComponents":[{"id":"{{ storage_pool.json.data[1].id }}"},{"id":"{{ storage_pool.json.data[2].id }}"}]}'
             status_code: 201
           register: upgrade_claim
-
-        - name: Check pool-1 upgrade job status
-          uri:
-            url: "{{ director_url }}/v3/groups/{{ group_id }}/openebsupgradeclaims/{{ upgrade_claim.json.id }}/openebsupgradejobs"
-            method: GET
-            url_username: "{{ username.stdout }}"
-            url_password: "{{ password.stdout }}"
-            return_content: yes
-            force_basic_auth: yes
-            body_format: json
-          register: upgrade_job
-          until: "upgrade_job.json.data[0].state=='Success'"
-          retries: 25
-          delay: 5
 
         - name: Check pool-2 upgrade job status
           uri:
@@ -102,7 +116,6 @@
         - name: Checking whether all the pool pods are in running state after upgrading
           shell: kubectl get po -n openebs -l app=cstor-pool --no-headers| grep {{ item }} | awk '{print $3}'
           loop:
-            - "{{ storage_pool.json.data[0].name }}"
             - "{{ storage_pool.json.data[1].name }}"
             - "{{ storage_pool.json.data[2].name }}"
           register: pool_pod_state
@@ -113,26 +126,11 @@
         - name: Checking pool pod's container status after upgrading
           shell: kubectl get po -n openebs -l app=cstor-pool --no-headers | grep {{ item }} | awk '{print $2}' | awk -F'/' '{print $1}' && kubectl get po -n openebs -l app=cstor-pool --no-headers | grep {{ item }} | awk '{print $2}' | awk -F'/' '{print $2}'
           loop:
-            - "{{ storage_pool.json.data[0].name }}"
             - "{{ storage_pool.json.data[1].name }}"
             - "{{ storage_pool.json.data[2].name }}"
           register: pool_pod_status
           until: "{{ pool_pod_status.stdout_lines | unique | length == 1 }}"
           retries: 20
-          delay: 2
-
-        - name: Get openebs version of pool-1
-          uri:
-            url: "{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayastoragepools"
-            method: GET
-            url_username: "{{ username.stdout }}"
-            url_password: "{{ password.stdout }}"
-            return_content: yes
-            force_basic_auth: yes
-            body_format: json
-          register: storage_pool
-          until: "storage_pool.json.data[0].data.version=='1.5.0'"
-          retries: 10
           delay: 2
 
         - name: Get openebs version of pool-2
