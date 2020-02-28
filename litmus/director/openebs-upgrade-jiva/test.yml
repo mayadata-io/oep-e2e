@@ -39,18 +39,6 @@
             - "{{ openebs_components }}"
           retries: 20
           delay: 5
-        
-        ## Create namespace in which application is to be deployed
-        - name: Create namespace 
-          shell: kubectl create ns {{ app_namespace }}
-
-        ## Create PVC
-        - name: Create PVC 
-          shell: kubectl create -f pvc.yaml -n {{ app_namespace }}
-      
-        ## Create application 
-        - name: Create application
-          shell: kubectl create -f mongo_statefulset.yaml -n {{ app_namespace }}
 
         ## Get application volume health status for replica-1
         - name: Get application volume health status for replica-1
