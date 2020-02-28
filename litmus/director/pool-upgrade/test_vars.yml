@@ -1,0 +1,16 @@
+test_name: pool-upgrade-check
+openebs_current_version: "{{ lookup('env','OPENEBS_CURRENT_VERSION') }}"
+openebs_target_version: "{{ lookup('env','OPENEBS_TARGET_VERSION') }}"
+openebs_components:
+  [
+    'openebs-provisioner',
+    'openebs-ndm-operator',
+    'openebs-ndm',
+    'openebs-snapshot-operator',
+    'openebs-admission-server',
+    'openebs-localpv-provisioner',
+    'maya-apiserver',
+  ]
+group_id: "{{ lookup('env','GROUP_ID') }}"
+cluster_id: "{{ lookup('env','CLUSTER_ID') }}"
+director_ip: "{{ lookup('env','DIRECTOR_IP') }}"
