@@ -65,8 +65,8 @@
           set_fact:
             node1_id: "{{ node_cluster.json.data[0].id}}"
         
-        ## Fetch node-1 details of the cluster
-        - name: Fetch node-1 details of the cluster
+        ## Fetch node-2 details of the cluster
+        - name: Fetch node-2 details of the cluster
           set_fact:
             node2_id: "{{ node_cluster.json.data[1].id}}"
 
@@ -166,7 +166,7 @@
         
         ## Checking wether the openebs_job pod is in online state or not.
         - name: Checking phase of openebs_job 
-          shell:
+          shell: echo "{{ openebs_job.json.jobStatus.phase }}"
           failed_when: "'{{ openebs_job.json.jobStatus.phase }}' != 'Online'"
     
         ## Setting flag as Pass
