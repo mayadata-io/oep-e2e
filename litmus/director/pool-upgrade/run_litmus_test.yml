@@ -2,7 +2,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: pool-upgrade-check
+  generateName: pool-upgrade-check-
   namespace: litmus
 spec:
   template:

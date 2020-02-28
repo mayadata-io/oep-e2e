@@ -2,7 +2,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: volume-upgrade-check
+  generateName: volume-upgrade-check-
   namespace: litmus
 spec:
   template:
