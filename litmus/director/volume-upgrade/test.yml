@@ -1,0 +1,236 @@
+---
+- hosts: localhost
+  connection: local
+
+  vars_files:
+    - test_vars.yml
+
+  tasks:
+    - block:
+        ## Generating the testname for deployment
+        - include_tasks: /ansible-utils/create_testname.yml
+          ## RECORD START-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'SOT'
+
+        - set_fact:
+            director_url: 'http://{{ director_ip }}:30380'
+
+        - name: Get username
+          shell: cat /etc/secret-volume/username
+          register: username
+
+        - name: Get password
+          shell: cat /etc/secret-volume/password
+          register: password
+
+        - name: Fetch OpenEBS control plane pods ready status
+          shell: kubectl get pods -n openebs | grep {{ item }} | awk '{print $2}' | awk -F'/' '{print $1}' && kubectl get pods -n openebs | grep {{ item }} | awk '{print $2}' | awk -F'/' '{print $2}'
+          register: ready_status
+          with_items:
+            - '{{ openebs_components }}'
+          until: '{{ ready_status.stdout_lines | unique | length == 1 }}'
+          retries: 20
+          delay: 5
+
+        - name: Get the number of CSP
+          shell: kubectl get csp --no-headers | wc -l
+          args:
+            executable: /bin/bash
+          register: csp_count
+
+        - name: Checking whether all the pool pods are in running state
+          shell: kubectl get po -l app=cstor-pool -n openebs -o jsonpath='{.items[?(@.status.phase=="Running")].metadata.name}' | wc -w
+          register: pool_pods
+          until: 'pool_pods.stdout == csp_count.stdout'
+          retries: 10
+          delay: 5
+
+        - name: Checking pool pod's container status
+          shell: kubectl get po -n openebs -l app=cstor-pool --no-headers | grep {{ item }} | awk '{print $2}' | awk -F'/' '{print $1}' && kubectl get po -n openebs -l app=cstor-pool --no-headers | grep {{ item }} | awk '{print $2}' | awk -F'/' '{print $2}'
+          loop:
+            - '{{ storage_pool.json.data[0].name }}'
+            - '{{ storage_pool.json.data[1].name }}'
+            - '{{ storage_pool.json.data[2].name }}'
+          register: pool_pod_status
+          until: '{{ pool_pod_status.stdout_lines | unique | length == 1 }}'
+          retries: 20
+          delay: 2
+
+        - name: Get OpenEBS storage pool details
+          uri:
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayastoragepools'
+            method: GET
+            url_username: '{{ username }}'
+            url_password: '{{ password }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+          register: storage_pool
+
+        - name: Get openebs version of pool-1
+          uri:
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayastoragepools'
+            method: GET
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+          register: storage_pool
+          until: "storage_pool.json.data[0].data.version=='{{ openebs_target_version }}'"
+          retries: 10
+          delay: 2
+
+        - name: Get openebs version of pool-2
+          uri:
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayastoragepools'
+            method: GET
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+          register: storage_pool
+          until: "storage_pool.json.data[1].data.version=='{{ openebs_target_version }}'"
+          retries: 10
+          delay: 2
+
+        - name: Get openebs version of pool-3
+          uri:
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayastoragepools'
+            method: GET
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+          register: storage_pool
+          until: "storage_pool.json.data[2].data.version=='{{ openebs_target_version }}'"
+          retries: 10
+          delay: 2
+
+        - name: Get application volume health status for replica-1
+          uri:
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayaapplications'
+            method: GET
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+          register: volume_health
+          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[0].state=='Healthy'"
+          retries: 20
+          delay: 2
+
+        - name: Get application volume health status for replica-2
+          uri:
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayaapplications'
+            method: GET
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+          register: volume_health
+          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[1].state=='Healthy'"
+          retries: 20
+          delay: 2
+
+        - name: Get application volume health status for replica-3
+          uri:
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayaapplications'
+            method: GET
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+          register: volume_health
+          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[2].state=='Healthy'"
+          retries: 20
+          delay: 2
+
+        - name: Get application details
+          uri:
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayaapplications'
+            method: GET
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+          register: maya_app
+
+        - name: Upgrade application volume
+          uri:
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/openebsupgradeclaims'
+            method: POST
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+            body:
+              clusterId: '{{ cluster_id }}'
+              kind: applicationUpgrade
+              targetVersion: '{{ openebs_target_version }}'
+              upgradeComponents:
+                id: '{{ maya_app.json.data[0].id }}'
+            status_code: 201
+          register: upgrade_claim
+
+        - name: Check application volume upgrade job status
+          uri:
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/openebsupgradeclaims/{{ upgrade_claim.json.id }}/openebsupgradejobs'
+            method: GET
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+          register: upgrade_job
+          until: "upgrade_job.json.data[0].state=='Success'"
+          retries: 40
+          delay: 5
+
+        - name: Get cvr list
+          shell: kubectl get cvr -n openebs --no-headers | awk '{print $1}'
+          register: cvr_list
+
+        - name: Check cvr status post upgrading
+          shell: kubectl get cvr -n openebs --no-headers {{ item }} | awk '{print $4}'
+          with_items:
+            - '{{ cvr_list.stdout_lines }}'
+          register: cvr_status
+          until: "cvr_status.stdout=='Healthy'"
+          retries: 30
+          delay: 2
+
+        - name: Check openebs.io version in cvr post upgrading
+          shell: kubectl get cvr -n openebs -l openebs.io/version={{ openebs_target_version }} --no-headers | wc -l
+          register: version_count
+          failed_when: "version_count.stdout!='3'"
+
+        - name: Get target pod status post volume upgrade
+          shell: kubectl get po -n openebs -l app=cstor-volume-manager --no-headers | awk '{print $3}'
+          register: target_status
+          until: "target_status.stdout=='Running'"
+          retries: 20
+          delay: 2
+
+        - set_fact:
+            flag: 'Pass'
+
+      rescue:
+        - name: Setting fail flag
+          set_fact:
+            flag: 'Fail'
+
+      always:
+        ## RECORD END-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'EOT'
