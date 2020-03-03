@@ -1,4 +1,4 @@
-test_name: openebs-upgrade-jiva
+test_name: volume-upgrade-jiva-check
 openebs_target_version: "{{ lookup('env','OPENEBS_TARGET_VERSION') }}"
 openebs_components:
   [

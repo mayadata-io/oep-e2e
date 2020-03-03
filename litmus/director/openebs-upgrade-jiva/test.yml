@@ -115,12 +115,19 @@
         - name: Upgrade application volume
           uri:
             url: '{{ director_url }}/v3/groups/{{ group_id }}/openebsupgradeclaims'
-            method: GET
+            method: POST
             url_username: '{{ username.stdout }}'
             url_password: '{{ password.stdout }}'
             return_content: yes
             force_basic_auth: yes
-            status_code: 200
+            body_format: json
+            body:
+              clusterId: '{{ cluster_id }}'
+              kind: applicationUpgrade
+              targetVersion: '{{ openebs_target_version }}'
+              upgradeComponents:
+                id: '{{ maya_app.json.data[0].id }}'
+            status_code: 201
           register: upgrade_claim
         
         ## Check application volume upgrade job status

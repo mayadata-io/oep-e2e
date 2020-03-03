@@ -2,7 +2,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: openebs-upgrade-jiva-
+  generateName: volume-upgrade-jiva-check-
   namespace: litmus
 spec:
   template:
@@ -43,8 +43,7 @@ spec:
 
           - name: NAMESPACE
             value: ''
-
-            
+     
           - name: OPENEBS_TARGET_VERSION
             value: 1.7.0
 
