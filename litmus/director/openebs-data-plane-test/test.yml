@@ -178,9 +178,14 @@
             body_format: json
             status_code: 200
           register: openebs_job
-          until: openebs_job.json.jobStatus.phase is defined and openebs_job.json.jobStatus.phase == "Online"
+          until: openebs_job.json.jobStatus != ""
           delay: 5
           retries: 20
+
+        ## Checking wether the openebs_job pod is in online state or not.
+        - name: Checking phase of openebs_job 
+          shell: echo "{{ openebs_job.json.jobStatus.phase }}"
+          failed_when: "'{{ openebs_job.json.jobStatus.phase }}' != 'Online'"
 
         ## Checking the data plane label on the first node
         - name: Checking the label on first node of the cluster
@@ -224,6 +229,15 @@
           register: node3
           failed_when: "node3.json.labels['mayadata.io/data-plane'] != 'true'"
 
+        ## Removing the labels from the cluster nodes
+        - include_tasks: ../../../utils/openebs-label-cleanup.yaml
+
+        ## Deleting openebs 
+        - name: Deleting openebs
+          shell: kubectl delete ns {{ namespace }}
+          args:
+            executable: /bin/bash
+            
         - set_fact:
             flag: "Pass"
 
