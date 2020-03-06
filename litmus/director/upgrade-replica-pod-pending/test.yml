@@ -143,6 +143,11 @@
                 id: '{{ maya_app.json.data[0].id }}'
             status_code: 405
           register: upgrade_claim
+
+        ## Removed taint from node1
+        - name: Remove the taint from node1
+          shell: >
+            kubectl taint nodes {{ node_name.stdout }} l-
         
         ## Setting flag as pass
         - set_fact:
