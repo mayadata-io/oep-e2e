@@ -180,8 +180,8 @@
           shell: >
             kubectl taint nodes {{ node_name.stdout }} l-
           
-        ## Removed taint from node1
-        - name: Remove the taint from node1
+        ## Removed taint from node2
+        - name: Remove the taint from node2
           shell: >
             kubectl taint nodes {{ node_name2.stdout }} l-
         
