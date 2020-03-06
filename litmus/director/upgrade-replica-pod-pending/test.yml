@@ -100,7 +100,7 @@
         ##  Get the node_name of corresponding job
         - name: Get the node_name of corresponding job
           shell: >
-            kubectl get pod {{replica_pod_name.stdout}} -n {{ pod_namespace.stdout }} -o jsonpath={.spec.nodeName}
+            kubectl get pod {{ pod_name.stdout }} -n {{ pod_namespace.stdout }} -o jsonpath={.spec.nodeName}
           register: node_name
         
         ## Taint the node in which the pod is scheduled
