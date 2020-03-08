@@ -194,11 +194,8 @@
         ## Removing the labels from the cluster nodes
         - include_tasks: ../../../utils/openebs-label-cleanup.yaml
 
-        ## Deleting openebs 
-        - name: Deleting openebs
-          shell: kubectl delete ns {{ namespace }}
-          args:
-            executable: /bin/bash
+        ## Deleting openebs from the cluster
+        - include_tasks: ../../../utils/openebs-cleanup.yml
     
         ## Setting flag as Pass
         - set_fact:
