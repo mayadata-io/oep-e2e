@@ -4,7 +4,7 @@
         
     ## Removing Application
     - name: Deleting application namespace
-      shell: kubectl delete ns app-mongo-ns
+      shell: kubectl delete ns {{ app_ns }}
       args:
         executable: /bin/bash  
 
