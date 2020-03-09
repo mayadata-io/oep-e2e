@@ -2,14 +2,14 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: openebs-install-
+  generateName: openebs-resource-limit-installation-
   namespace: litmus
 spec:
   template:
     metadata:
       name: litmus
       labels:
-        app: openebs-install-check-litmus
+        app: openebs-resource-litmit-installation
     spec:
       serviceAccountName: litmus
       restartPolicy: Never
@@ -19,32 +19,41 @@ spec:
           secretName: director-user-pass
       containers:
       - name: ansibletest
-        image: mayadataio/dop-validator:ci 
+        image: mayadataio/dop-validator:ci
         imagePullPolicy: Always
         volumeMounts:
         - name: secret-volume
           readOnly: true
           mountPath: "/etc/secret-volume"
         env:
-
-          ## Takes director-ip from configmap director-ip
+          
+          ## Take url from configmap config
           - name: DIRECTOR_IP
             valueFrom:
               configMapKeyRef:
                 name: config
                 key: url
 
-          ## Takes group-id from configmap group-id
+          ## Take cluster_id from configmap clusterid
+          - name: CLUSTER_ID    
+            valueFrom:
+              configMapKeyRef:
+                name: clusterid
+                key: cluster_id
+
+          ## Takes group_id from configmap groupid
           - name: GROUP_ID
             valueFrom:
               configMapKeyRef:
                 name: groupid
                 key: group_id
-          
+
           ## It should be 1ot1 Mandatory
           - name: TEMPLATE_ID
-            value: '1ot1' 
+            value: '1ot1'
 
+          ## Namespace where openebs is installed
+          ## By default in basic mode it is openebs
           - name: NAMESPACE
             value: ''
 
@@ -64,32 +73,25 @@ spec:
           - name: EXCLUDE_DEVICE_FILTER
             value: ''
 
-          ## Enter CPU resource limit
+          ## CPU resource limit is provided
           - name: CPU_RESOURCE_LIMIT
-            value: ''
+            value: '150m'
 
-          ## Enter Memory resource limit
+          ## Memory resource limit provided
           - name: MEMORY_RESOURCE_LIMIT
-            value: ''
-
+            value: '250Mi'
+          
           ## It will have values basic/advance
-          ## Note: For basic installation only template value slould be provided
-          ## For adding any additional value change the installation mode to advance
+          ## Note: For this test we will be using advance mode as basic mode is used
+          ## For default values of above fields
           - name: INSTALLATION_MODE
-            value: 'basic'
-
-          ## Takes cluster_id from configmap
-          - name: CLUSTER_ID
-            valueFrom:
-              configMapKeyRef:
-                name: clusterid
-                key: cluster_id
+            value: 'advance'
 
           - name: ANSIBLE_STDOUT_CALLBACK
-            value: default  
+            value: 'default'  
 
         command: ["/bin/bash"]
-        args: ["-c", "ansible-playbook ./litmus/director/openebs-install/test.yml -i /etc/ansible/hosts -v; exit 0"]
+        args: ["-c", "ansible-playbook ./litmus/director/openebs-resource-limit-installation/test.yml -i /etc/ansible/hosts -v; exit 0"]
 
       imagePullSecrets:
-      - name: oep-secret
+      - name: oep-secret        

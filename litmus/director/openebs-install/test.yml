@@ -27,9 +27,31 @@
     - name: Get password
       shell: cat /etc/secret-volume/password
       register: password
-    ## Fetch Project deatils
 
     - block:
+
+        ## Checking if openebs is already installed in the cluster
+        - name: Check if openebs is already installed
+          shell: kubectl get deploy --all-namespaces | grep maya-apiserver | awk '{print $1}' | wc -l
+          args:
+            executable: /bin/bash
+          register: count_maya_api
+
+        ## If openebs is installed in the cluster then get the namespace
+        - name: Getting the namespace where openebs is installed 
+          shell: kubectl get deploy --all-namespaces | grep maya-apiserver | awk '{print $1}'
+          args:
+            executable: /bin/bash
+          register: openebs_namespace
+          when: "count_maya_api.stdout == '1'"
+
+        ## Delete openebs 
+        - name: Deleting openebs
+          shell: kubectl delete namespace {{ openebs_namespace.stdout }}
+          args:
+            executable: /bin/bash
+          when: "count_maya_api.stdout == '1'"
+          
         ## Fetch Project deatils
         - name: Fetch the project details
           uri:
@@ -168,6 +190,12 @@
         - name: Checking phase of openebs_job 
           shell: echo "{{ openebs_job.json.jobStatus.phase }}"
           failed_when: "'{{ openebs_job.json.jobStatus.phase }}' != 'Online'"
+
+        ## Removing the labels from the cluster nodes
+        - include_tasks: ../../../utils/openebs-label-cleanup.yaml
+
+        ## Deleting openebs from the cluster
+        - include_tasks: ../../../utils/openebs-cleanup.yml
     
         ## Setting flag as Pass
         - set_fact:

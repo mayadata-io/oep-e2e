@@ -31,27 +31,13 @@
           shell: cat /etc/secret-volume/password
           register: password
 
-        ## Checking if openebs is already installed in the cluster
+        ## Checking if openebs is already installed
         - name: Check if openebs is already installed
-          shell: kubectl get deploy --all-namespaces | grep maya-apiserver | awk '{print $1}' | wc -l
+          shell: kubectl get deploy maya-apiserver --all-namespaces | wc -l
           args:
             executable: /bin/bash
-          register: count_maya_api
-
-        ## If openebs is installed in the cluster then get the namespace
-        - name: Getting the namespace where openebs is installed 
-          shell: kubectl get deploy --all-namespaces | grep maya-apiserver | awk '{print $1}'
-          args:
-            executable: /bin/bash
-          register: openebs_namespace
-          when: "count_maya_api.stdout == '1'"
-
-        ## Delete openebs 
-        - name: Deleting openebs
-          shell: kubectl delete namespace {{ openebs_namespace.stdout }}
-          args:
-            executable: /bin/bash
-          when: "count_maya_api.stdout == '1'"
+          register: maya_api
+          failed_when: "{{ maya_api.stdout }} != 0"
 
         ## Fetch the projectid of the project where the cluster is running
         - name: Fetch the project details of the project where the cluster is running
@@ -110,7 +96,7 @@
           loop: "{{ node_details.json.data }}"
 
 
-        ## Labeling the node-1 of the Cluster with controlPlaneNode=true and dataPlaneNode=true
+        ## Labeling the node-1 of the Cluster with controlPlaneNode=true and dataPlaneNode=false
         ## With first element in the node_id list
         - name: Labeling the node-1 of the cluster
           uri:
@@ -121,11 +107,11 @@
             force_basic_auth: yes
             return_content: yes
             body_format: json
-            body: '{"controlPlaneNode": true, "dataPlaneNode": true}'
+            body: '{"controlPlaneNode": true, "dataPlaneNode": false}'
             status_code: 202
           register: labelnode1
 
-        ## Labeling node-2 of the Cluster with controlPlaneNode=true and dataPlaneNode=false
+        ## Labeling node-2 of the Cluster with controlPlaneNode=false and dataPlaneNode=true
         ## With the second element in the node_id list
         - name: Labeling node-2 of the cluster
           uri:
@@ -134,9 +120,10 @@
             url_username: "{{ username.stdout }}"
             url_password: "{{ password.stdout }}"
             force_basic_auth: yes
-            return_content: yes
+            return_content: yes          args:
+            executable: /bin/bash
             body_format: json
-            body: '{"controlPlaneNode": true, "dataPlaneNode": false}'
+            body: '{"controlPlaneNode": false, "dataPlaneNode": true}'
             status_code: 202
           register: labelnode2
 
@@ -209,13 +196,23 @@
           register: containerStatus
           until: "containerStatus.stdout == 'true'"
           retries: 20
-          delay: 2         
+          delay: 2
 
-        ## Removing the labels from the cluster nodes
-        - include_tasks: ../../../utils/openebs-label-cleanup.yaml
+        ## Checking the resource litmit is imposed perfectly or not
+        - name: Getting the CPU limit of maya-api-server
+          shell: kubectl get deploy maya-apiserver -n {{ namespace }} jsonpath='{.spec.template.spec.containers[*].resources.limits.cpu}'
+          args:
+            executable: /bin/bash
+          register: cpu_limit
+          failed_when: "cpu_limit != cpu_resource_limit"
 
-        ## Deleting openebs from the cluster
-        - include_tasks: ../../../utils/openebs-cleanup.yml
+        ## Checking the resource litmit is imposed perfectly or not
+        - name: Getting the Memory limit of maya-api-server
+          shell: kubectl get deploy maya-apiserver -n {{ namespace }} jsonpath='{.spec.template.spec.containers[*].resources.limits.memory}'
+          args:
+            executable: /bin/bash
+          register: memory_limit
+          failed_when: "memory_limit != memory_resource_limit"
 
         - set_fact:
             flag: "Pass"
@@ -226,7 +223,7 @@
             flag: "Fail"
 
       always:
-        ## RECORD END-OF-TEST IN LITMUS RESULT CR
+        ## RECORD END-OF-TEST IN LITMUS RESULT CRhttps://github.com/mayadata-io/oep-e2e-gcp/blob/dc8f3585e5debe12a700220066b204a0b35cbb5c/stages/9-openebs-install-check/openebs-reinstallation.md)
         - include_tasks: /ansible-utils/update_litmus_result_resource.yml
           vars:
             status: 'EOT'
