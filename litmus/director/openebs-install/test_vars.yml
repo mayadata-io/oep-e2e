@@ -11,3 +11,4 @@ exclude_device_filters: "{{ lookup('env','EXCLUDE_DEVICE_FILTER') }}"
 cpu_resource_limit: "{{ lookup('env','CPU_RESOURCE_LIMIT') }}"
 memory_resource_limit: "{{ lookup('env','MEMORY_RESOURCE_LIMIT') }}"
 installation_mode: "{{ lookup('env','INSTALLATION_MODE') }}"
+app_ns: app-mongo-ns
