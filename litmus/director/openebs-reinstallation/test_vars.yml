@@ -12,4 +12,4 @@ exclude_device_filters: "{{ lookup('env','EXCLUDE_DEVICE_FILTER') }}"
 cpu_resource_limit: "{{ lookup('env','CPU_RESOURCE_LIMIT') }}"
 memory_resource_limit: "{{ lookup('env','MEMORY_RESOURCE_LIMIT') }}"
 installation_mode: "{{ lookup('env','INSTALLATION_MODE') }}"
-openebs_version: 1.7.0
+openebs_version: "{{ lookup('env','OPENEBS_VERSION') }}"

@@ -32,7 +32,7 @@
 
 ## Exit Criteria
 
-- Kubernetes nodes are up and running with openebs installed twice in the cluster . 
+- Kubernetes nodes are up and running with an error message 405 that openebs is already installed. 
 
 ## Details of Test 
 

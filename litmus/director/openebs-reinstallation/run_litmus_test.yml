@@ -48,6 +48,10 @@ spec:
                 name: groupid
                 key: group_id
 
+          ## Enter OpenEBS Version for installing it from operator.yml
+          - name: OPENEBS_VERSION
+            value: '1.7.0'                
+
           ## It should be 1ot1 Mandatory
           - name: TEMPLATE_ID
             value: '1ot1'
