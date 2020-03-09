@@ -1,0 +1,167 @@
+---
+- hosts: localhost
+  connection: local
+
+  vars_files:
+    - test_vars.yml
+
+  tasks:
+
+    - block:
+  
+        ## Generating the testname for deployment
+        - include_tasks: /ansible-utils/create_testname.yml
+
+        ## RECORD START-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'SOT'
+          
+        - set_fact:
+            director_url : "http://{{ director_ip }}:30380"
+
+        ## Getting the username
+        - name: Get username
+          shell: cat /etc/secret-volume/username
+          register: username
+
+        ## Getting the password.stdout     
+        - name: Get password
+          shell: cat /etc/secret-volume/password
+          register: password
+
+        ## Check whether openebs components are in Running state or not
+        - name: Fetch OpenEBS control plane pods state
+          shell: kubectl get pods -n {{ namespace }}  | grep {{ item }} | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
+          register: app_status
+          until: app_status.stdout == 'Running'
+          with_items:
+            - "{{ openebs_components }}"
+          retries: 20
+          delay: 5
+
+        ## Get application volume health status for replica-1
+        - name: Get application volume health status for replica-1
+          uri:
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayaapplications'
+            method: GET
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+          register: volume_health
+          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[0].state=='Healthy'"
+          retries: 20
+          delay: 2
+        
+        ## Get application volume health status for replica-2
+        - name: Get application volume health status for replica-2
+          uri:
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayaapplications'
+            method: GET
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+          register: volume_health
+          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[1].state=='Healthy'"
+          retries: 20
+          delay: 2
+
+        ## Get application volume health status for replica-3
+        - name: Get application volume health status for replica-3
+          uri:
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayaapplications'
+            method: GET
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+          register: volume_health
+          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[2].state=='Healthy'"
+          retries: 20
+          delay: 2
+        
+        ## Get replicas of application volumes
+        - name: Get replicas of application volumes
+          shell: >
+            kubectl get pods --all-namespaces -l {{ pod_label }} -o jsonpath='{.items[0].metadata.name}'
+          register: pod_name
+
+        ## Fetch namespace of replica pod
+        - name: Fetch namespace of replica pod
+          shell: >
+            kubectl get pods --all-namespaces -l {{ pod_label }} -o jsonpath='{.items[0].metadata.namespace}'
+          register: pod_namespace
+        
+        ##  Get the node_name of corresponding job
+        - name: Get the node_name of corresponding job
+          shell: >
+            kubectl get pod {{ pod_name.stdout }} -n {{ pod_namespace.stdout }} -o jsonpath={.spec.nodeName}
+          register: node_name
+        
+        ## Taint the node in which the pod is scheduled
+        - name: Taint the node in which pod is scheduled
+          shell: >
+            kubectl taint nodes {{ node_name.stdout }} l=b:NoSchedule
+        
+        ## Delete the replica pod of volume
+        - name: Delete the replica pod of volume
+          shell: > 
+            kubectl delete pod {{ pod_name.stdout }} -n {{ pod_namespace.stdout }}
+
+        ## Get application details
+        - name: Get application details
+          uri:
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayaapplications'
+            method: GET
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+          register: maya_app
+        
+        ## Upgrade application volume
+        - name: Upgrade application volume
+          uri:
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/openebsupgradeclaims'
+            method: POST
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+            body:
+              clusterId: '{{ cluster_id }}'
+              kind: applicationUpgrade
+              targetVersion: '{{ openebs_target_version }}'
+              upgradeComponents:
+                id: '{{ maya_app.json.data[0].id }}'
+            status_code: 405
+          register: upgrade_claim
+
+        ## Removed taint from node1
+        - name: Remove the taint from node1
+          shell: >
+            kubectl taint nodes {{ node_name.stdout }} l-
+        
+        ## Setting flag as pass
+        - set_fact:
+              flag: 'Pass'
+
+      rescue:
+        - name: Setting fail flag
+          set_fact:
+            flag: 'Fail'
+    
+      always:
+        ## RECORD END-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'EOT'
+
+        
