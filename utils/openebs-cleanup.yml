@@ -20,12 +20,6 @@
       args:
         executable: /bin/bash
 
-    ## Cleaning CRDs
-    - name: Removing CRDs
-      shell: kubectl delete crds --all
-      args:
-        executable: /bin/bash
-
     ## Cleaning up Blockdevices
     - name: Removing Blockdevices
       shell: kubectl delete bd -n {{ namespace }} --all
