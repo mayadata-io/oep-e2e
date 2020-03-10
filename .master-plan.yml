@@ -1,0 +1,589 @@
+kind: MasterPlan
+apiVersion: e2e.mayadata.io/v1alpha1
+metadata:
+  name: masterTestplan
+spec:
+  tests:
+  ### Installation of OpenEBS
+  - tcid: iuoi01
+    name: "Install OpenEBS on a Director Onprem Cluster"
+    description: "Test the components are installed properly using both backend and Director apis. Check from the status from status agent response for the OpenEBS components."
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Install OpenEBS ControlPlane"
+      test/priority: "P0"
+      git/location: ""
+      test/status: "Automated"
+
+  - tcid: iuoi02
+    name: "Install OpenEBS on a K8S Cluster connected to Director Onprem Cluster"
+    description: "Optional skipping here"
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Install OpenEBS ControlPlane"
+      test/priority: "P0"
+      git/location: ""
+      test/status: "Automated"
+
+  - tcid: iuoi03
+    name: "Install OpenEBS Controlplane components on specific set of nodes"
+    description: "Optional skipping here"
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Install OpenEBS ControlPlane"
+      test/priority: "P0"
+      git/location: ""
+      test/status: "Automated"
+
+  - tcid: iuoi04
+    name: "Install OpenEBS Dataplane{NDM DS} components on specific set of nodes"
+    description: "Optional skipping here"
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Install OpenEBS Controllane"
+      test/priority: "P0"
+      git/location: ""
+      test/status: "Automated"
+
+  - tcid: iuoi05
+    name: "Install OpenEBS on a low resource machine"
+    description: "Optional skipping here"
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Install OpenEBS ControlPlane"
+      test/priority: "P2"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuoi06
+    name: "Install OpenEBS on a machine already OpenEBS is installed with same version using operator.yaml"
+    description: "Optional skipping here"
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Install OpenEBS ControlPlane"
+      test/priority: "P1"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuoi07
+    name: "Install OpenEBS on a machine already OpenEBS is installed with same version using Helm"
+    description: "Optional skipping here"
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Install OpenEBS ControlPlane"
+      test/priority: "P2"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuoi08
+    name: "Install OpenEBS on a machine already OpenEBS is installed with higher version using Helm"
+    description: "Optional skipping here"
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Install OpenEBS ControlPlane"
+      test/priority: "P2"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuoi09
+    name: "Install OpenEBS on a machine already OpenEBS is installed with lower version of OpenEBS using operator.yaml"
+    description: "Optional skipping here"
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Install OpenEBS ControlPlane"
+      test/priority: "P2"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuoi10
+    name: "Uninstall of OpenEBS"
+    description: "Optional skipping here"
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Install OpenEBS ControlPlane"
+      test/priority: "P3"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuoi11
+    name: "Install OpenEBS from valid custom docker registry"
+    description: "Optional skipping here"
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Install OpenEBS ControlPlane"
+      test/priority: "P1"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuoi12
+    name: "Install OpenEBS from invalid custom docker registry"
+    description: "Optional skipping here"
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Install OpenEBS ControlPlane"
+      test/priority: "P2"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuoi13
+    name: "Install using custom input"
+    description: " -- NDM Path filters -- NDM Vendor -- OS Disks"
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Install OpenEBS ControlPlane"
+      test/priority: "P1"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuoi14
+    name: "Install using custom resource limits"
+    description: "-- Set with CPU and RAM for all control plane"
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Install OpenEBS ControlPlane"
+      test/priority: "P1"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuoc01
+    name: "Upgrade OpenEBS ControlPlane installed by Director"
+    description: "Test the components are upgraded properly using both backend and Director apis. Check from the status from status agent response for the OpenEBS components."
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Upgrade OpenEBS ControlPlane Components"
+      test/priority: "P1"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuoc02
+    name: "Upgrade OpenEBS installed using operator.yaml(Not using Director)"
+    description: "Upgrade should not proceed"
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Upgrade OpenEBS ControlPlane Components"
+      test/priority: "P1"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuoc03
+    name: "Upgrade of control plane(1.6) which is lower version of Data plane (1.7)"
+    description: "Upgrade should not proceed"
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Upgrade OpenEBS ControlPlane Components"
+      test/priority: "P2"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuoc04
+    name: "Upgrade of control plane(1.7) which is higher version of Data plane(1.6)"
+    description: "Upgrade should proceed"
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Upgrade OpenEBS ControlPlane Components"
+      test/priority: "P1"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuod12
+    name: "Upgrade one application consuming cStor volume cStor"
+    description: "Test the components are upgraded properly using both backend and Director apis. Check from the status from status agent response for the OpenEBS components."
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Upgrade OpenEBS DataPlane Components"
+      test/priority: "P0"
+      test/storageEgnine: "cStor"
+      git/location: ""
+      test/status: "Automated"
+
+  - tcid: iuod02
+    name: "Upgrade OpenEBS Pool and Volume installed using operator.yaml(Not using Director)"
+    description: "Test the components are upgraded properly using both backend and Director apis. Check from the status from status agent response for the OpenEBS components."
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Upgrade OpenEBS DataPlane Components"
+      test/priority: "P1"
+      test/storageEgnine: "cStor"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuod03
+    name: "Upgrade OpenEBS Pool and Volume installed using Helm(Not using Director)"
+    description: "Test the components are upgraded properly using both backend and Director apis. Check from the status from status agent response for the OpenEBS components."
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Upgrade OpenEBS DataPlane Components"
+      test/priority: "P2"
+      test/storageEgnine: "cStor"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuod04
+    name: "Upgrade of data plane with higher version of control plane --  Dataplane 1.7 Control plane 1.6"
+    description: "For Eg Start with 1.5 for both control and data plane, Control plane will be upgraded to 1.6, Try Data plane will be upgraded to 1.7"
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Upgrade OpenEBS DataPlane Components"
+      test/storageEgnine: "cStor"
+      test/priority: "P2"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuod05
+    name: "Upgrade of data plane with lower version of control plan -- Dataplane 1.6 Control plane 1.7"
+    description: "For Eg Start with 1.5 for both control and data plane, Control plane will be upgraded to 1.6 then to 1.7, Data plane will be upgraded to 1.6"
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Upgrade OpenEBS DataPlane Components"
+      test/priority: "P2"
+      test/storageEgnine: "cStor"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuod06
+    name: "Upgrade of data plane with same version of control plane -- Dataplane 1.7 Control plane 1.7"
+    description: "For Eg Start with 1.5 for both control and data plane, Control plane will be upgraded to 1.7, Data plane will be upgraded to 1.6"
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Upgrade OpenEBS DataPlane Components"
+      test/priority: "P2"
+      test/storageEgnine: "cStor"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuod07
+    name: "Upgrade cStor Pools (CSPC)  select one CSPC"
+    description: ""
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Upgrade OpenEBS DataPlane Components"
+      test/priority: "P0"
+      test/storageEgnine: "cStor"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuod08
+    name: "Upgrade cStor Pools (CSPC)  select multiple CSPC"
+    description: ""
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Upgrade OpenEBS DataPlane Components"
+      test/priority: "P1"
+      test/storageEgnine: "cStor"
+      git/location: ""
+      test/status: "Automated"
+
+  - tcid: iuod09
+    name: "Upgrade a single pool with in a CSPC"
+    description: ""
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Upgrade OpenEBS DataPlane Components"
+      test/priority: "P1"
+      test/storageEgnine: "cStor"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuod10
+    name: "Upgrade multiple pools with in a CSPC"
+    description: ""
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Upgrade OpenEBS DataPlane Components"
+      test/priority: "P0"
+      test/storageEgnine: "cStor"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuod11
+    name: "Upgrade multiple pools across two CSPC"
+    description: ""
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Upgrade OpenEBS DataPlane Components"
+      test/priority: "P1"
+      test/storageEgnine: "cStor"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuod13
+    name: "Upgrade one application consuming multiple cStor volumes"
+    description: ""
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Upgrade OpenEBS DataPlane Components"
+      test/priority: "P1"
+      test/storageEgnine: "cStor"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuod14
+    name: "Upgrade one application consuming multiple storage engines cstor and Jiva"
+    description: ""
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Upgrade OpenEBS DataPlane Components"
+      test/priority: "P1"
+      test/storageEgnine: "cStor/Jiva"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuod15
+    name: "Upgrade mulitple application from same CSPC"
+    description: ""
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Upgrade OpenEBS DataPlane Components"
+      test/priority: "P1"
+      test/storageEgnine: "cStor"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuod16
+    name: "Upgrade multiple applications across CSPC"
+    description: ""
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Upgrade OpenEBS DataPlane Components"
+      test/priority: "P1"
+      test/storageEgnine: "cStor"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuod17
+    name: "Upgrade application Volumes to higher version(1.7) than cStor Pool of lower version (1.6)"
+    description: ""
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Upgrade OpenEBS DataPlane Components"
+      test/priority: "P2"
+      test/storageEgnine: "cStor"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuod18
+    name: "Select upgrade of same pool while upgrade is in progress"
+    description: ""
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Upgrade OpenEBS DataPlane Components"
+      test/priority: "P2"
+      test/storageEgnine: "cStor"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuod19
+    name: "Select upgrade of different pool while upgrade is in progress"
+    description: ""
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Upgrade OpenEBS DataPlane Components"
+      test/priority: "P1"
+      test/storageEgnine: "cStor"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuod20
+    name: "Upgrade a pool when the pool pod is in not running"
+    description: ""
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Upgrade OpenEBS DataPlane Components"
+      test/priority: "P1"
+      test/storageEgnine: "cStor"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuod21
+    name: "Upgrade a CSPC when one of the pool pod is in not running"
+    description: ""
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Upgrade OpenEBS DataPlane Components"
+      test/priority: "P1"
+      test/storageEgnine: "cStor"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuod22
+    name: "Upgrade a CSPC when all the pool pod is in not running"
+    description: ""
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Upgrade OpenEBS DataPlane Components"
+      test/priority: "P2"
+      test/storageEgnine: "cStor"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuod23
+    name: "Upgrade the application with 3 replicas when all pool pods are running"
+    description: ""
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Upgrade OpenEBS DataPlane Components"
+      test/priority: "P1"
+      test/storageEgnine: "cStor"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuod24
+    name: "Upgrade the application with 3 replicas when one pool pods is not running"
+    description: ""
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Upgrade OpenEBS DataPlane Components"
+      test/priority: "P1"
+      test/storageEgnine: "cStor"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuod25
+    name: "Upgrade the application with 3 replicas when two pool pods is not running"
+    description: ""
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Upgrade OpenEBS DataPlane Components"
+      test/priority: "P2"
+      test/storageEgnine: "cStor"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuod26
+    name: "Upgrade the application with 3 replicas when three(all) pool pods is not running"
+    description: ""
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Upgrade OpenEBS DataPlane Components"
+      test/priority: "P2"
+      test/storageEgnine: "cStor"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuod27
+    name: "Upgrade the application with 3 replicas when all replica pods are running"
+    description: ""
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Upgrade OpenEBS DataPlane Components"
+      test/priority: "P0"
+      test/storageEgnine: "Jiva"
+      git/location: ""
+      test/status: "Automated"
+
+  - tcid: iuod28
+    name: "Upgrade the application with 3 replicas when one replica pods is not running"
+    description: ""
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Upgrade OpenEBS DataPlane Components"
+      test/priority: "P1"
+      test/storageEgnine: "Jiva"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuod29
+    name: "Upgrade the application with 3 replicas when two replica pods is not running"
+    description: ""
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Upgrade OpenEBS DataPlane Components"
+      test/priority: "P2"
+      test/storageEgnine: "Jiva"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuod30
+    name: "Upgrade the application with 3 replicas when all replica pods is not running"
+    description: ""
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Upgrade OpenEBS DataPlane Components"
+      test/priority: "P1"
+      test/storageEgnine: "Jiva"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuod31
+    name: "Upgrade one application consuming multiple jiva volumes"
+    description: ""
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Upgrade OpenEBS DataPlane Components"
+      test/priority: "P0"
+      test/storageEgnine: "Jiva"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: iuod32
+    name: "Upgrade one application having single replica jiva volume"
+    description: ""
+    labels:
+      test/feature: "Install and Upgrade of OpenEBS"
+      test/subFeature: "Upgrade OpenEBS DataPlane Components"
+      test/priority: "P1"
+      test/storageEgnine: "Jiva"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: triv01
+    name: "Invite a user as Project Admin, Project member and Project Read Only Admin"
+    description: "Invited users should be able to manage the cluster and add other cluster with the permission"
+    labels:
+      test/feature: "Teaming and RBAC"
+      test/subFeature: "Invite"
+      test/priority: "P1"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+ 
+  - tcid: trrc01
+    name: "Check the user can connect cluster using the roles Project Admin, Project Member, Project Read Only Admin"
+    description: "Except read only can do the operation."
+    labels:
+      test/feature: "Teaming and RBAC"
+      test/subFeature: "Role Change"
+      test/priority: "P1"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: trrc02
+    name: "Positive Change role"
+    description: "PM to PA or PRO, PA to PRO or PM, PRO to PM or PA and verify the functionality"
+    labels:
+      test/feature: "Teaming and RBAC"
+      test/subFeature: "Role Change"
+      test/priority: "P1"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: trrc03
+    name: "Negative change role"
+    description: "Change role of PM, PRO, PA to PO this should fail"
+    labels:
+      test/feature: "Teaming and RBAC"
+      test/subFeature: "Role Change"
+      test/priority: "P1"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+ 
+  - tcid: trrc04
+    name: "Check the user can connect cluster using the roles Project Admin, Project Member, Project Read Only Admin"
+    description: "Except read only can do the operation."
+    labels:
+      test/feature: "Teaming and RBAC"
+      test/subFeature: "Role Change"
+      test/priority: "P1"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+ 
+###### Abbreviations
+#Details of abbreviation in readme file master-plan.md , One of the example as below
+# iu  -- Install and Upgrade of OpenEBS"
+# tr  -- Teaming and RBAC
+### iuoiXX iuocXX iuodXX 
+ ## oi -- OpenEBS Install 
+ ## oc -- OpenEBS ControlPlane
+ ## od -- OpenEBS DataPlane
+
