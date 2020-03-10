@@ -46,12 +46,13 @@
           register: openebs_namespace
           when: "count_maya_api.stdout == '1'"
 
-        ## Delete openebs 
-        - name: Deleting openebs
-          shell: kubectl delete namespace {{ openebs_namespace.stdout }}
-          args:
-            executable: /bin/bash
-          when: "count_maya_api.stdout == '1'"
+        ## Removing the labels from the cluster nodes
+        - include_tasks: ../../../utils/openebs-label-cleanup.yaml
+
+        ## Deleting openebs from the cluster
+        - include_tasks: ../../../utils/openebs-cleanup.yml
+          vars:
+            namespace: "{{ openebs_namespace.stdout }}"
 
         ## Fetch the projectid of the project where the cluster is running
         - name: Fetch the project details of the project where the cluster is running
