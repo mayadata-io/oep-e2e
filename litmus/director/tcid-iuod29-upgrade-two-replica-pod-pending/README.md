@@ -1,4 +1,4 @@
-# Upgrade the application with 3 replicas when all replica pod is not running
+# Upgrade the application with 3 replicas when two replica pod is not running
 
 <b>tcid:</b> iuod29 <br>
 <b>name:</b> "Upgrade the application with 3 replicas when two replica pod is not running"<br>
