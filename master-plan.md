@@ -62,6 +62,11 @@ Example
 |                           | rc -- Role Change |
 |                           | iv -- Invite |
 | pp -- Pool Provisioning   | cp -- cstor Pool            |
+|                           | jp -- Jiva Pool  |
+|                           | lh -- local PV hostpath |
+|                           | ld -- local PV device |
+| ga -- Gui Automation      | au -- cstor Pool            |
+|                           | cc -- cluster connect |
 
 ##### `name` --  test case name
 ##### `description` -- Testcase description
