@@ -701,7 +701,7 @@ spec:
     name: "Local Authentication Testcase using Browser"
     description: "Gui Auth Check"
     labels:
-      test/feature: "GUI Authentication"
+      test/feature: "GUI Automation"
       test/subFeature: "Authentication"
       test/priority: "P0"
       git/location: "Add the actual link to TC readme"
@@ -711,7 +711,7 @@ spec:
     name: "DOP should be shown as (self) connected cluster by default"
     description: "Self connected cluster"
     labels:
-      test/feature: "GUI Authentication"
+      test/feature: "GUI Automation"
       test/subFeature: "Cluster Connect"
       test/priority: "P0"
       git/location: "Add the actual link to TC readme"
@@ -721,7 +721,7 @@ spec:
     name: "External cluster connect to DOP"
     description: "External cluster connect to DOP"
     labels:
-      test/feature: "GUI Authentication"
+      test/feature: "GUI Automation"
       test/subFeature: "Cluster Connect"
       test/priority: "P0"
       git/location: "Add the actual link to TC readme"
