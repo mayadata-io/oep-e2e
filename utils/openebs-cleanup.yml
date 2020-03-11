@@ -1,43 +1,43 @@
-  tasks:
+tasks:
+      
+  ## Removing Application
+  - name: Deleting application namespace
+    shell: kubectl delete ns {{ app_ns }}
+    args:
+      executable: /bin/bash  
+
+  ## Cleaning SPC from the cluster
+  - name: Removing SPC from the cluster
+    shell: kubectl delete spc --all
+    args:
+      executable: /bin/bash
         
-    ## Removing Application
-    - name: Deleting application namespace
-      shell: kubectl delete ns {{ app_ns }}
-      args:
-        executable: /bin/bash  
+  ## Cleaning PV form the cluster
+  - name: Removing PV from the cluster
+    shell: kubectl delete pv -n {{ namespace }} --all
+    args:
+      executable: /bin/bash
 
-    ## Cleaning SPC from the cluster
-    - name: Removing SPC from the cluster
-      shell: kubectl delete spc --all
-      args:
-        executable: /bin/bash
-          
-    ## Cleaning PV form the cluster
-    - name: Removing PV from the cluster
-      shell: kubectl delete pv -n {{ namespace }} --all
-      args:
-        executable: /bin/bash
+  ## Cleaning up Blockdevices
+  - name: Removing Blockdevices
+    shell: kubectl delete bd -n {{ namespace }} --all
+    args:
+      executable: /bin/bash
+        
+  ## Cleaning up deployment
+  - name: Removing deployment from openebs namespace
+    shell: kubectl delete deploy -n {{ namespace }} --all
+    args:
+      executable: /bin/bash
 
-    ## Cleaning up Blockdevices
-    - name: Removing Blockdevices
-      shell: kubectl delete bd -n {{ namespace }} --all
-      args:
-        executable: /bin/bash
-          
-    ## Cleaning up deployment
-    - name: Removing deployment from openebs namespace
-      shell: kubectl delete deploy -n {{ namespace }} --all
-      args:
-        executable: /bin/bash
+  ## Cleaning up NDM Daemonset
+  - name: Removing NDM DaemonSet
+    shell: kubectl delete ds -n {{ namespace }} --all
+    args:
+      executable: /bin/bash
 
-    ## Cleaning up NDM Daemonset
-    - name: Removing NDM DaemonSet
-      shell: kubectl delete ds -n {{ namespace }} --all
-      args:
-        executable: /bin/bash
-  
-    ## Cleaning up OpenEBS Namespace
-    - name: Removing openebs namespace
-      shell: kubectl delete ns {{ namespace }}
-      args:
-        executable: /bin/bash        
+  ## Cleaning up OpenEBS Namespace
+  - name: Removing openebs namespace
+    shell: kubectl delete ns {{ namespace }}
+    args:
+      executable: /bin/bash        
