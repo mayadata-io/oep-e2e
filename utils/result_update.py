@@ -23,6 +23,9 @@ parser.add_argument("--token",
        help="github authentication token")
 parser.add_argument("--test_name",
        help="test name")
+parser.add_argument("--job_name",
+       help="job name")
+
 
 args = parser.parse_args()
 job_id = args.job_id
@@ -32,10 +35,11 @@ test_result = args.test_result
 time_stamp = args.time_stamp
 token = args.token
 test_name = args.test_name
+job_name = args.job_name
 
 github_token = Github(token)
-repo = github_token.get_repo("mayadata-io/oep-e2e-gcp")
-contents = repo.get_contents("/stages/"+stage+"/"+test_name+".md")
+repo = github_token.get_repo("mayadata-io/oep-e2e")
+contents = repo.get_contents("litmus/director/"+job_name+"/README.md")
 file = repo.get_contents(contents.path)
 file_path = contents.path
 file_content=str(file.decoded_content)
