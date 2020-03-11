@@ -577,7 +577,156 @@ spec:
       git/location: "Add the actual link to TC readme"
       test/status: "Not Automated"
 
- 
+  - tcid: ppcp01
+    name: "Create a CSPC with Striped pool lowest possible list"
+    description: "Have 4 disks of 100GB, 100GB, 200GB, 300GB on each nodes (3 cluster), Select pool of 50 GB, Post recommendation create the pool"
+    labels:
+      test/feature: "Pool Provisioning"
+      test/subFeature: "cStor Pool"
+      test/priority: "P0"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: ppcp02
+    name: "Create a CSPC with Mirror pool lowest possible list"
+    description: "Have 4 disks of 100GB, 100GB, 200GB, 300GB on each nodes (3 cluster), Select pool of 50 GB, Post recommendation create the pool"
+    labels:
+      test/feature: "Pool Provisioning"
+      test/subFeature: "cStor Pool"
+      test/priority: "P1"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: ppcp03
+    name: "Create a CSPC with RAIDZ1 pool lowest possible list"
+    description: "Have 4 disks of 100GB, 100GB, 100GB, 300GB on each nodes (3 cluster), Select pool of 50 GB, Post recommendation create the pool"
+    labels:
+      test/feature: "Pool Provisioning"
+      test/subFeature: "cStor Pool"
+      test/priority: "P2"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: ppcp04
+    name: "Create a CSPC with RAIDZ2  pool lowest possible list"
+    description: "Have 4 disks of 100GB, 100GB, 100GB, 300GB on each nodes (3 cluster), Select pool of 50 GB, Post recommendation create the pool"
+    labels:
+      test/feature: "Pool Provisioning"
+      test/subFeature: "cStor Pool"
+      test/priority: "P3"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: ppcp05
+    name: "Create a CSPC with Striped pool highest possible list"
+    description: "Have 4 disks of 100GB, 100GB, 200GB, 300GB on each nodes (3 cluster), Select pool of 250 GB, Post recommendation create the pool"
+    labels:
+      test/feature: "Pool Provisioning"
+      test/subFeature: "cStor Pool"
+      test/priority: "P1"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: ppcp06
+    name: "Create a CSPC with Striped pool upper bound"
+    description: "Have 4 disks of 100GB, 100GB, 200GB, 300GB on each nodes (3 cluster), Select pool of 350 GB, Recommendation fails"
+    labels:
+      test/feature: "Pool Provisioning"
+      test/subFeature: "cStor Pool"
+      test/priority: "P1"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: ppcp07
+    name: "Create a CSPC with Striped pool with different size of disks across nodes"
+    description: "Have 3 node cluster;  - Node1 - 100GB, 200GB, 400GB; - Node2 - 100GB, 200GB; - Node3 - 400GB; Select pool 300GB"
+    labels:
+      test/feature: "Pool Provisioning"
+      test/subFeature: "cStor Pool"
+      test/priority: "P2"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: ppcp08
+    name: "Create a CSPC with Striped pool with different size and different type of disks across nodes"
+    description: "Have 3 node cluster; - Node1 - 100GBSAS, 100GB SSD, 200GBSSD, 400GBSAS; - Node2 - 100GB, 200GB; - Node3 - 400GB SSD;  Select pool 300GB"
+    labels:
+      test/feature: "Pool Provisioning"
+      test/subFeature: "cStor Pool"
+      test/priority: "P2"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: ppcp09
+    name: "Over ride recommendation (mirror)"
+    description: "Have 4 disks of 100GB, 100GB, 200GB, 300GB on each nodes (3 cluster), Select pool of 50 GB, Post recommendation, create the pool with different recoomendation"
+    labels:
+      test/feature: "Pool Provisioning"
+      test/subFeature: "cStor Pool"
+      test/priority: "P2"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: ppcp10
+    name: "Already used disks should not be part of recommendation"
+    description: "Have 4 disks of 100GB, 100GB, 200GB, 300GB on each nodes (3 cluster), Select pool of 50 GB, Recommendation should not include disk of other pools (Already claimed)"
+    labels:
+      test/feature: "Pool Provisioning"
+      test/subFeature: "cStor Pool"
+      test/priority: "P2"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: ppcp11
+    name: "Nodes not labelled for OpenEBS should not be part of recommendation"
+    description: ""
+    labels:
+      test/feature: "Pool Provisioning"
+      test/subFeature: "cStor Pool"
+      test/priority: "P2"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: ppcp12
+    name: "Invalid raid configuration"
+    description: "Try passing the arguement for RAIDZ8; it should fail"
+    labels:
+      test/feature: "Pool Provisioning"
+      test/subFeature: "cStor Pool"
+      test/priority: "P2"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: gaau01
+    name: "Local Authentication Testcase using Browser"
+    description: "Gui Auth Check"
+    labels:
+      test/feature: "GUI Authentication"
+      test/subFeature: "Authentication"
+      test/priority: "P0"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: gacc01
+    name: "DOP should be shown as (self) connected cluster by default"
+    description: "Self connected cluster"
+    labels:
+      test/feature: "GUI Authentication"
+      test/subFeature: "Cluster Connect"
+      test/priority: "P0"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: gacc02
+    name: "External cluster connect to DOP"
+    description: "External cluster connect to DOP"
+    labels:
+      test/feature: "GUI Authentication"
+      test/subFeature: "Cluster Connect"
+      test/priority: "P0"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
 ###### Abbreviations
 #Details of abbreviation in readme file master-plan.md , One of the example as below
 # iu  -- Install and Upgrade of OpenEBS"
