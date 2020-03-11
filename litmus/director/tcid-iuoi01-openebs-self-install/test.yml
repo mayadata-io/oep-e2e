@@ -47,10 +47,10 @@
           when: "count_maya_api.stdout == '1'"
 
         ## Removing the labels from the cluster nodes
-        - include_tasks: ../../../utils/openebs-label-cleanup.yaml
+        - include_tasks: /utils/openebs-label-cleanup.yml
 
         ## Deleting openebs from the cluster
-        - include_tasks: ../../../utils/openebs-cleanup.yml
+        - include_tasks: /utils/openebs-cleanup.yml
           vars:
             namespace: "{{ openebs_namespace.stdout }}"
 
@@ -213,10 +213,10 @@
           delay: 2         
 
         ## Removing the labels from the cluster nodes
-        - include_tasks: ../../../utils/openebs-label-cleanup.yaml
+        - include_tasks: /utils/openebs-label-cleanup.yml
 
         ## Deleting openebs from the cluster
-        - include_tasks: ../../../utils/openebs-cleanup.yml
+        - include_tasks: /utils/openebs-cleanup.yml
 
         - set_fact:
             flag: "Pass"
