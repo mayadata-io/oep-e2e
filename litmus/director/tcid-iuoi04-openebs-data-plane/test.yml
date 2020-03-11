@@ -230,10 +230,10 @@
           failed_when: "node3.json.labels['mayadata.io/data-plane'] != 'true'"
 
         ## Removing the labels from the cluster nodes
-        - include_tasks: ../../../utils/openebs-label-cleanup.yaml
+        - include_tasks: /utils/openebs-label-cleanup.yml
 
         ## Deleting openebs from the cluster
-        - include_tasks: ../../../utils/openebs-cleanup.yml
+        - include_tasks: /utils/openebs-cleanup.yml
             
         - set_fact:
             flag: "Pass"
