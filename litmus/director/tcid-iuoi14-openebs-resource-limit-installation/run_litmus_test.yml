@@ -91,7 +91,7 @@ spec:
             value: 'default'  
 
         command: ["/bin/bash"]
-        args: ["-c", "ansible-playbook ./litmus/director/openebs-resource-limit-installation/test.yml -i /etc/ansible/hosts -v; exit 0"]
+        args: ["-c", "ansible-playbook ./litmus/director/tcid-iuoi14-openebs-resource-limit-installation/test.yml -i /etc/ansible/hosts -v; exit 0"]
 
       imagePullSecrets:
       - name: oep-secret        
