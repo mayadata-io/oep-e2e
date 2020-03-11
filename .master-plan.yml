@@ -534,7 +534,7 @@ spec:
       test/subFeature: "Invite"
       test/priority: "P1"
       git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
+      test/status: "Automated"
 
  
   - tcid: trrc01
@@ -555,7 +555,7 @@ spec:
       test/subFeature: "Role Change"
       test/priority: "P1"
       git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
+      test/status: "Automated"
 
   - tcid: trrc03
     name: "Negative change role"
@@ -565,18 +565,8 @@ spec:
       test/subFeature: "Role Change"
       test/priority: "P1"
       git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
+      test/status: "Automated"
  
-  - tcid: trrc04
-    name: "Check the user can connect cluster using the roles Project Admin, Project Member, Project Read Only Admin"
-    description: "Except read only can do the operation."
-    labels:
-      test/feature: "Teaming and RBAC"
-      test/subFeature: "Role Change"
-      test/priority: "P1"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
   - tcid: ppcp01
     name: "Create a CSPC with Striped pool lowest possible list"
     description: "Have 4 disks of 100GB, 100GB, 200GB, 300GB on each nodes (3 cluster), Select pool of 50 GB, Post recommendation create the pool"
@@ -701,7 +691,7 @@ spec:
     name: "Local Authentication Testcase using Browser"
     description: "Gui Auth Check"
     labels:
-      test/feature: "GUI Authentication"
+      test/feature: "GUI Automation"
       test/subFeature: "Authentication"
       test/priority: "P0"
       git/location: "Add the actual link to TC readme"
@@ -711,7 +701,7 @@ spec:
     name: "DOP should be shown as (self) connected cluster by default"
     description: "Self connected cluster"
     labels:
-      test/feature: "GUI Authentication"
+      test/feature: "GUI Automation"
       test/subFeature: "Cluster Connect"
       test/priority: "P0"
       git/location: "Add the actual link to TC readme"
@@ -721,7 +711,7 @@ spec:
     name: "External cluster connect to DOP"
     description: "External cluster connect to DOP"
     labels:
-      test/feature: "GUI Authentication"
+      test/feature: "GUI Automation"
       test/subFeature: "Cluster Connect"
       test/priority: "P0"
       git/location: "Add the actual link to TC readme"
