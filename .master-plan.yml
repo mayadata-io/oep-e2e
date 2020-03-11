@@ -697,6 +697,36 @@ spec:
       git/location: "Add the actual link to TC readme"
       test/status: "Not Automated"
 
+  - tcid: gaau01
+    name: "Local Authentication Testcase using Browser"
+    description: "Gui Auth Check"
+    labels:
+      test/feature: "GUI Authentication"
+      test/subFeature: "Authentication"
+      test/priority: "P0"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: gacc01
+    name: "DOP should be shown as (self) connected cluster by default"
+    description: "Self connected cluster"
+    labels:
+      test/feature: "GUI Authentication"
+      test/subFeature: "Cluster Connect"
+      test/priority: "P0"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: gacc02
+    name: "External cluster connect to DOP"
+    description: "External cluster connect to DOP"
+    labels:
+      test/feature: "GUI Authentication"
+      test/subFeature: "Cluster Connect"
+      test/priority: "P0"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
 ###### Abbreviations
 #Details of abbreviation in readme file master-plan.md , One of the example as below
 # iu  -- Install and Upgrade of OpenEBS"
