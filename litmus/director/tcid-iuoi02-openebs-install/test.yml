@@ -45,6 +45,31 @@
           register: openebs_namespace
           when: "count_maya_api.stdout == '1'"
 
+        # Getting node details of the cluster
+        ## Selecting the node which is in active state present in the cluster
+        - name: Getting the node details of the cluster
+          uri:
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes?state=active&clusterId={{ cluster_id }}"
+            method: GET
+            url_username: "{{ username.stdout }}"
+            url_password: "{{ password.stdout }}"
+            force_basic_auth: yes
+            return_content: yes
+            body_format: json
+            body:
+              status_code: 202
+          register: node_details
+
+        ## Define variable node_id
+        - set_fact:
+            node_id: []
+        
+        ## Storing the node id of the nodes in the cluster
+        - name: Storing the node id of node in the cluster
+          set_fact:
+            node_id: "{{ node_id  + [item.id] }}"
+          loop: "{{ node_details.json.data }}"
+
         ## Removing the labels from the cluster nodes
         - include_tasks: /utils/openebs-label-cleanup.yml
 
@@ -83,31 +108,6 @@
             body_format: json
             status_code: 200
           register: node_cluster
-
-        ## Getting node details of the cluster
-        ## Selecting the node which is in active state present in the cluster
-        - name: Getting the node details of the cluster
-          uri:
-            url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes?state=active&clusterId={{ cluster_id }}"
-            method: GET
-            url_username: "{{ username.stdout }}"
-            url_password: "{{ password.stdout }}"
-            force_basic_auth: yes
-            return_content: yes
-            body_format: json
-            body:
-              status_code: 202
-          register: node_details
-
-        ## Define variable node_id
-        - set_fact:
-            node_id: []
-        
-        ## Storing the node id of the nodes in the cluster
-        - name: Storing the node id of node in the cluster
-          set_fact:
-            node_id: "{{ node_id  + [item.id] }}"
-          loop: "{{ node_details.json.data }}"
 
         ## Fetch node-1 details of the cluster
         - name: Fetch node-1 details of the cluster
