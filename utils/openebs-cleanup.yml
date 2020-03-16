@@ -34,6 +34,15 @@
   args:
     executable: /bin/bash
 
+- name: Check the openebs components are still ther or not
+  shell: kubectl get deploy -n {{ namespace }} --no-headers | awk '{print $1}'
+  args:
+    executable: /bin/bash
+  register: deploy_list
+  until: "deploy_list.rc == ''"
+  retries: 20
+  delay: 10
+  
 ## Cleaning up OpenEBS Namespace
 - name: Removing openebs namespace
   shell: kubectl delete ns {{ namespace }}
