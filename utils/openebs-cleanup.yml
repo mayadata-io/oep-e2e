@@ -40,8 +40,8 @@
     executable: /bin/bash
   register: pod_list
   until: "pod_list.stdout=='0'"
-  retries: 20
-  delay: 10
+  retries: 30
+  delay: 5
 
 ## Cleaning up OpenEBS Namespace
 - name: Removing openebs namespace
@@ -56,5 +56,5 @@
     executable: /bin/bash
   register: openebs_ns
   until: "openebs_ns.stdout=='0'"
-  retries: 15
-  delay: 10
+  retries: 30
+  delay: 5
