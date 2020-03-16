@@ -34,6 +34,16 @@
   args:
     executable: /bin/bash
 
+- name: Removing pods from ns
+  shell: kubectl delete pods --all -n {{ namespace }}
+  args:
+    executable: /bin/bash
+
+- name: Removing jobs from ns
+  shell: kubectl delete jobs --all -n {{ namespace }}
+  args:
+    executable: /bin/bash
+
 - name: Waiting for graceful termination of openebs pods
   shell: kubectl get pods -n {{ namespace }} --no-headers | awk '{print $1}' | wc -l
   args:
