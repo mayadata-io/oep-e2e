@@ -34,31 +34,12 @@
   args:
     executable: /bin/bash
 
-- name: Removing pods from ns
-  shell: kubectl delete pods --all -n {{ namespace }}
-  args:
-    executable: /bin/bash
-
-- name: Removing jobs from ns
-  shell: kubectl delete jobs --all -n {{ namespace }}
-  args:
-    executable: /bin/bash
-
-- name: Waiting for graceful termination of openebs pods
-  shell: kubectl get pods -n {{ namespace }} --no-headers | awk '{print $1}' | wc -l
-  args:
-    executable: /bin/bash
-  register: pod_list
-  until: "pod_list.stdout=='0'"
-  retries: 30
-  delay: 5
-
 ## Cleaning up OpenEBS Namespace
 - name: Removing openebs namespace
   shell: kubectl delete ns {{ namespace }}
   args:
     executable: /bin/bash
-
+             
 ## Checking openebs ns is deleted or not
 - name: Waiting for graceful termination of openebs namespace
   shell: kubectl get ns --no-headers | grep {{ namespace }} | awk '{print $1}' | wc -l
@@ -68,3 +49,12 @@
   until: "openebs_ns.stdout=='0'"
   retries: 30
   delay: 2
+
+- name: Waiting for graceful termination of openebs pods
+  shell: kubectl get pods -n {{ namespace }} --no-headers | awk '{print $1}' | wc -l
+  args:
+    executable: /bin/bash
+  register: pod_list
+  until: "pod_list.stdout=='0'"
+  retries: 30
+  delay: 5
