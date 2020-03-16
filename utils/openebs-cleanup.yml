@@ -34,12 +34,12 @@
   args:
     executable: /bin/bash
 
-- name: Check the openebs components are still ther or not
-  shell: kubectl get deploy -n {{ namespace }} --no-headers | awk '{print $1}'
+- name: Check the openebs components are still there or not
+  shell: kubectl get pods -n {{ namespace }} --no-headers | awk '{print $1}' | wc -l
   args:
     executable: /bin/bash
-  register: deploy_list
-  until: "deploy_list.rc == ''"
+  register: pod_list
+  until: "pod_list.stdout=='0'"
   retries: 20
   delay: 10
 
