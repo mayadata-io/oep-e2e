@@ -31,7 +31,7 @@
           register: password
 
         ## Check whether openebs components are in Running state or not
-        - name: Fetch OpenEBS control plane pods state
+        - name: Check whether openebs components are in Running state or not
           shell: kubectl get pods -n {{ namespace }}  | grep {{ item }} | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
           register: app_status
           until: app_status.stdout == 'Running'
