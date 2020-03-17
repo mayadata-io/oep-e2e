@@ -19,6 +19,14 @@
         - set_fact:
             director_url : "http://{{ director_ip }}:30380"
 
+        - name: username
+          shell: cat /etc/secret-volume/username
+          register: username
+          
+        - name: password
+          shell: cat /etc/secret-volume/password
+          register: password
+
         - name: Fetch connected cluster id
           shell: python3 /api_testing/cluster/cluster-connect.py --cluster_name {{ cluster_name }} --provider {{ provider }} --url {{ director_url }} --username {{ username.stdout }} --password {{ password.stdout }}
           register: cluster_id
@@ -28,7 +36,7 @@
 
         - name: Create configmap for cluster_id 
           shell: kubectl create configmap clusterid --from-literal=cluster_id="{{ cluster_id }}" -n litmus
-          
+
         - name : Check if namespace exists
           shell: kubectl get ns | grep {{ director_client_namespace }}
           register: result
