@@ -1,0 +1,6 @@
+test_name: cluster-connect
+director_client_namespace: "{{ lookup('env','DIRECTOR_CLIENT_NAMESPACE') }}"
+director_server_namespace: "{{ lookup('env','DIRECTOR_SERVER_NAMESPACE') }}"
+director_ip: "{{ lookup('env','DIRECTOR_IP') }}"
+cluster_name: "{{ lookup('env','CLUSTER_NAME') }}"
+provider: "{{ lookup('env','PROVIDER') }}"
