@@ -26,7 +26,11 @@ spec:
           - name: ANSIBLE_STDOUT_CALLBACK
             value: default  
           - name: DIRECTOR_CLIENT_NAMESPACE
-            value: maya-system     
+            value: maya-system    
+          - name: PROVIDER
+            value: gcp
+          - name: CLUSTER_NAME
+            value: oep-cluster 
         command: ["/bin/bash"]
         args: ["-c", "ansible-playbook ./litmus/director/cluster-connect-check/test.yaml -i /etc/ansible/hosts -v; exit 0"]
       imagePullSecrets:
