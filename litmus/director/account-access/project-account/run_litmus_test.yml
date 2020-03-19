@@ -2,14 +2,14 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: account-resources-check
+  generateName: project-account-resources-check
   namespace: litmus
 spec:
   template:
     metadata:
       name: litmus
       labels:
-        app: account-resources-check-litmus
+        app: project-account-resources-check-litmus
     spec:
       serviceAccountName: litmus
       restartPolicy: Never
@@ -31,9 +31,17 @@ spec:
               configMapKeyRef:
                 name: config
                 key: url
+          - name: WEB_PROTOCOL
+            value: http
+          - name: DIRECTOR_PORT
+            value: "30380"
+          - name: STS_NAMESPACE_LIST
+            value: ["app-mongo-ns"]
+          - name: DEPLOYMENT_NAMESPACE_LIST
+            value: ''
           - name: ANSIBLE_STDOUT_CALLBACK
             value: default  
         command: ["/bin/bash"]
-        args: ["-c", "ansible-playbook ./litmus/director/account-access/test.yaml -i /etc/ansible/hosts -v; exit 0"]
+        args: ["-c", "ansible-playbook ./litmus/director/account-access/project-account/test.yaml -i /etc/ansible/hosts -v; exit 0"]
       imagePullSecrets:
       - name: oep-secret
