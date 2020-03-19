@@ -1,2 +1,0 @@
-test_name: account-resources-check
-director_ip: "{{ lookup('env','DIRECTOR_IP') }}"
