@@ -1,0 +1,4 @@
+test_name: create-admininstator-secret-check
+admin_username: "{{ lookup('env','ADMIN_USERNAME') }}"
+admin_password: "{{ lookup('env','ADMIN_PASSWORD') }}"
+director_ip: "{{ lookup('env','DIRECTOR_IP') }}"

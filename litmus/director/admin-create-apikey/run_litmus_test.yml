@@ -1,0 +1,43 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: create-admininstator-secret-check
+  namespace: litmus
+spec:
+  template:
+    metadata:
+      name: litmus
+      labels:
+        app: fetch-unique-id-litmus
+    spec:
+      serviceAccountName: litmus
+      restartPolicy: Never
+      volumes:
+      - name: secret-volume
+        secret:
+          secretName: director-user-pass
+      containers:
+      - name: ansibletest
+        image: mayadataio/dop-validator:ci
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: secret-volume
+          readOnly: true
+          mountPath: "/etc/secret-volume"
+        env:
+          - name: DIRECTOR_IP
+            valueFrom:
+              configMapKeyRef:
+                name: config
+                key: url
+          - name: ANSIBLE_STDOUT_CALLBACK
+            value: default  
+          - name: ADMIN_USERNAME
+            value: Administrator
+          - name: ADMIN_PASSWORD
+            value: password 
+        command: ["/bin/bash"]
+        args: ["-c", "ansible-playbook ./litmus/director/admin-create-apikey/test.yaml -i /etc/ansible/hosts -v; exit 0"]
+      imagePullSecrets:
+      - name: oep-secret
