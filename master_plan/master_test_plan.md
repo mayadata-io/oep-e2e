@@ -68,8 +68,8 @@ So, the features are the same for both Online as well as On-Premise version the 
 The objective should be to cover all the areas of DOP testing such as Authentication, Installation, cluster connect etc.
 
 #### 2.2 Tasks:
-a. Test the DOP product(features and functionality) on every release.
-b. Once testing is done file issues for the bug.
+a. Test the DOP product(features and functionality) on every release.     
+b. Once testing is done file issues for the bug.                    
 c. Set priority level for bug fixes.
 
 
