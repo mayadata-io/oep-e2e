@@ -17,7 +17,7 @@
             status: 'SOT'
 
         - set_fact:
-            director_url : "http://{{ director_ip }}:30380"
+            director_url : "{{ web_protocol }}://{{ director_ip }}:{{ director_port }}"
         
         - name: Get username
           shell: cat /etc/secret-volume/username
@@ -29,36 +29,40 @@
 
         - name: Fetch pool pods from cluster
           shell: kubectl get pods -n openebs | grep cstor | awk '{print $1}'
-          register: pool_pods
-
-        - name: Get cluster pool resources for ProjectAccount
-          shell: python3 /api_testing/group/access.py --username {{ username.stdout }} --password {{ password.stdout }} --account ProjectAccount --url {{ director_url }} --resource pool
-          register: projectacc_pool_pods_resources
-
-        - name: Get cluster application resources for ProjectAccount
-          shell: python3 /api_testing/group/access.py --username {{ username.stdout }} --password {{ password.stdout }} --account ProjectAccount --url {{ director_url }} --resource maya-app
-          register: projectacc_app_resources
-
+          register: cstor_pool_pods
+ 
         - name: Get cluster pool resources for ClusterAccount
           shell: python3 /api_testing/group/access.py --username {{ username.stdout }} --password {{ password.stdout }} --account ClusterAccount --url {{ director_url }} --resource pool
           register: clusteracc_pool_pods_resources
+
+        - name: Check if cluster pool pods is same as Cluster Account pool pod resources
+          shell: echo "pool pods list found on the cluster is same as director cluster account maya app resources"
+          failed_when: "cstor_pool_pods.stdout_lines != clusteracc_pool_pods_resources.stdout_lines"
 
         - name: Get cluster application resources for ClusterAccount
           shell: python3 /api_testing/group/access.py --username {{ username.stdout }} --password {{ password.stdout }} --account ClusterAccount --url {{ director_url }} --resource maya-app
           register: clusteracc_app_resources
 
-        - debug:
-            msg: pool pods list found on the cluster is same as provided by cluster account maya app resources
-          when: "pool_pods.stdout_lines == clusteracc_pool_pods_resources.stdout_lines"
+        - block:
 
-        - debug:
-            msg: "project account pool pods list is inclusive of cluster account pool pods list "
-          when: "clusteracc_pool_pods_resources.stdout_lines not in  projectacc_pool_pods_resources.stdout_lines"
-          
-        - debug:
-            msg: "project account maya apps list is inclusive of cluster account maya apps list "
-          when: "clusteracc_app_resources.stdout_lines not in  projectacc_app_resources.stdout_lines"
-          
+            - name: Fetch statefulset applications from cluster
+              shell: kubectl get sts -n {{ item }} --no-headers | awk '{print $1}'
+              register: sts
+              until: "sts.stdout in clusteracc_app_resources.stdout_lines"
+              with_items: "{{ sts_namespace_list }}"
+
+          when: "'' is not in sts_namespace_list"
+
+        - block:
+
+            - name: Fetch deployment applications from cluster
+              shell: kubectl get deployment -n {{ item }} --no-headers | awk '{print $1}'
+              register: deployment
+              until: "deployment.stdout in clusteracc_app_resources.stdout_lines"
+              with_items: "{{ deployment_namespace_list }}"
+
+          when: "'' is not in deployment_namespace_list"
+
         - set_fact:
             flag: "Pass"
 
