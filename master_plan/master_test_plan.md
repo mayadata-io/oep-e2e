@@ -65,12 +65,18 @@ So, the features are the same for both Online as well as On-Premise version the 
 ### 2.0 Objectives and tasks
 
 #### 2.1 Objectives:
-The objective should be to cover all the areas of DOP testing such as Authentication, Installation, cluster connect etc.
+The objective should be to cover all the areas of DOP testing such as Authentication, Installation, cluster connect etc. 
 
 #### 2.2 Tasks:
-a. Test the DOP product(features and functionality) on every release.     
-b. Once testing is done file issues for the bug.                    
-c. Set priority level for bug fixes.
+a. Test the DOP product(features and functionality) on every release.              
+b. DOP testing should be done using E2E automation.                    
+c. Manual testing will be require if E2E is not covered for any specfic feature or functionality.           
+d. Once testing is done file issues for the bug.                                        
+e. Set priority level for bug fixes for next release.    
+
+### 3.0 Scope:
+
+
 
 
 
