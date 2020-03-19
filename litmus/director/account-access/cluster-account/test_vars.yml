@@ -1,4 +1,4 @@
-test_name: account-resources-check
+test_name: cluster-account-resources-check
 director_ip: "{{ lookup('env','DIRECTOR_IP') }}"
 web_protocol: "{{ lookup('env','WEB_PROTOCOL') }}"
 director_port: "{{ lookup('env','DIRECTOR_PORT') }}"
