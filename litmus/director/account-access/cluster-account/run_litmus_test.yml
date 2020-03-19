@@ -2,14 +2,14 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: account-resources-check
+  generateName: cluster-account-resources-check
   namespace: litmus
 spec:
   template:
     metadata:
       name: litmus
       labels:
-        app: account-resources-check-litmus
+        app: cluster-account-resources-check-litmus
     spec:
       serviceAccountName: litmus
       restartPolicy: Never
