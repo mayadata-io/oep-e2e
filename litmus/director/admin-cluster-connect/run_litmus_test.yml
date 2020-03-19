@@ -2,14 +2,14 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: admin-cluster-connect
+  generateName: self-connect-cluster-check
   namespace: litmus
 spec:
   template:
     metadata:
       name: litmus
       labels:
-        app: admin-cluster-connect-litmus
+        app: self-connect-cluster-check
     spec:
       serviceAccountName: litmus
       restartPolicy: Never
