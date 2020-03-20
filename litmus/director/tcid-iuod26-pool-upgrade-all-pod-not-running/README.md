@@ -1,6 +1,6 @@
 # Upgrade the application with 3 replicas when all pool pods are not running
 
-<b>tcid:</b> iuod25 <br>
+<b>tcid:</b> iuod26 <br>
 <b>name:</b> "Upgrade the application with 3 replicas when all pool pods are not running" <br>
 
 
