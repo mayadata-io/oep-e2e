@@ -76,6 +76,77 @@ e. Set priority level for bug fixes for next release.
 
 ### 3.0 Scope:
 
+#### General:
+There are different features and functionality of DOP that are tested. Listing them below.
+a. Authentication.                        
+b. Browser                          
+c. Profile                                         
+d. connect cluster                                                                      
+e. Dashboard                                                                                 
+f. Scope                                         
+e. Metrics                                                          
+f. Alerts                                                  
+g. Dmaas                                                    
+h. Teaming                                                       
+i. upgrade                                                                          
+j. OpenEBS installation                                             
+etc
+
+#### Tactics:
+a.To get the build from Director team.                                                    
+b. Install DOP on any cluster.                                                                     
+c. Verify the installation part automated/manually.                                       
+d. Verify the different features and functionality manually for the onces which had not been automated.             
+e. End Goal is to have to e2e pipeline running for the new features and later on cover the existing features in E2E pipeline.
+
+### 4.0 Testing statergy:
+a. To verify the DOP installation should be smooth across different OnPrem clusters such as Kubeadm,konvoy, Rancher, Openshift etc.   
+b. For installation of DOP cstor storage class should be used for the pvc(mysql,cassandra,elasticsearch,grafana and mayastore)        
+c. After installation of DOP UI should be accessible.                              
+d. Verify the authentication functionality of DOP. The Main focus area should be Local authentication.                             
+e. Verify that UI should be accessible in chrome,firefox and safari.                                           
+f. Verify that self connected cluster are shown in Administrator account.                                                   
+g. Verify the cluster connect and disconnect functionality.                                                          
+h. Verify all the dashboards are showing the graphs or data.                                        
+i. Metrics are shown for volumes and pools.                                                        
+j. Alerts are getting generated at cluster level.                                                          
+k. Verify the teaming functionality.                                                                                             
+l. Verify the dmaas functionality. Cover all the 3 providers (GCP,AWS and Minio)                                   
+m. verify the OpenEBS installation functionality.                                                               
+n. Verify the OpenEBS upgrade functionality.                  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
