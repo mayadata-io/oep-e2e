@@ -2,12 +2,6 @@
 
 Director OnPrem
 
-### Prepared by:
-
-Prabhat kumar 
-
-Date: 19/03/2020
-
 ## TABLE OF CONTENTS
 
 ### 1.0 INTRODUCTION
@@ -21,41 +15,31 @@ Date: 19/03/2020
 
 ### 4.0	Testing Strategy 
 
-#### 4.1	Alpha Testing (Unit Testing) 
-#### 4.2	System and Integration Testing 
-#### 4.3	Performance and Stress Testing 
-#### 4.4	User Acceptance Testing 
-#### 4.5	Batch Testing 
-#### 4.6	Automated Regression Testing 
+#### 4.1	Sanity Testing  
+#### 4.2	Performance and Stress Testing 
+#### 4.3	Compatibilty Testing
+#### 4.4	Regression Testing 
+#### 4.5	API integration Testing
 
-### 5.0 Hardware Requirements
+### 5.0 Test Schedule
 
-### 6.0	Environment Requirements 
+### 6.0 Features to Be Tested
 
-#### 6.1	Main Frame 
-#### 6.2	Workstation 
-
-### 7.0 Test Schedule
-
-### 8.0 Control Procedures
-
-### 9.0 Features to Be Tested
-
-### 10.0 Features Not to Be Tested
+### 7.0 Features Not to Be Tested
  
-### 11.0 Resources/Roles & Responsibilities
+### 9.0 Resources/Roles & Responsibilities
 
-### 12.0 Schedules
+### 10.0 Schedules
 
-### 13.0 Significantly Impacted Departments (SIDs)
+### 11.0 Significantly Impacted Departments (SIDs)
 
-### 14.0 Dependencies
+### 12.0 Dependencies
 
-### 15.0 Risks/Assumptions
+### 13.0 Risks/Assumptions
 
-### 16.0 Tools
+### 14.0 Tools
 
-### 17.0	Approvals 
+### 15.0	Approvals 
 
 
 ### 1.0 Introduction:
@@ -77,7 +61,7 @@ e. Set priority level for bug fixes for next release.
 ### 3.0 Scope:
 
 #### General:
-There are different features and functionality of DOP that are tested. Listing them below.
+There are different features and functionality of DOP that needed to be tested. Listing them below.
 a. Authentication.                        
 b. Browser                          
 c. Profile                                         
@@ -90,7 +74,13 @@ g. Dmaas
 h. Teaming                                                       
 i. upgrade                                                                          
 j. OpenEBS installation                                             
+k. DOP upgrade
 etc
+
+#### List of items that will not be tested.                                          
+a. The IOPS,thorughput,latency etc values that are shown in graphs are not tested means the values shown in graph is right or wrong.    
+b. Exact error in the logs are not tested. We are not veryfing that whether we are getting exact logs with correct timestamp.
+c. Cross-cloud-monitoring graphs values are not verified.
 
 #### Tactics:
 a.To get the build from Director team.                                                    
@@ -113,7 +103,69 @@ j. Alerts are getting generated at cluster level.
 k. Verify the teaming functionality.                                                                                             
 l. Verify the dmaas functionality. Cover all the 3 providers (GCP,AWS and Minio)                                   
 m. verify the OpenEBS installation functionality.                                                               
-n. Verify the OpenEBS upgrade functionality.                  
+n. Verify the OpenEBS upgrade functionality.          
+
+#### 4.1 Sanity Testing
+a. DOP installation should be smooth. All the required images should be present in mayadata.
+b. Signup and signin should happen for local Auth.
+c. Cluster connect/disconnect check.
+d. All the links should be working fine.
+e. All the dashboards should show respectives info.
+
+
+#### 4.2 Performance and stress testing:
+a. Login to DOP from 500 browsers sessions.                                     
+b. Connect clusters having 200 nodes.             
+c. Connected cluster should have more than 50 Applications.                  
+
+#### 4.3 Compatibilty testing:                 
+a. Browsers(Chrome,firefox,safari).                                   
+b. Platforms(Rancher,Kubeadm,kubespray,Konvoy,Openshit, etc).                               
+c. Operating system(ubuntu 16.04 and other versions, Centos7.x,RancherOS, MicroOS, etc).
+d. Different platform and operating system versions should also be considered.
+
+#### 4.4	Regression Testing:
+
+To make sure all the features which was working in previous release should not break with the intorduction of new features in new release.
+
+#### 4.5 API Intergration testing.
+TO DO
+
+### 5.0 Test schedule.
+OpenEBS control plane upgrade- 1.9                       
+cstor pool provisioning - 1.9                                                                
+Extend E2E to konvoy - 1.9                                                              
+Extend E2E to Rancher - 1.9                                                          
+Selinium based automation(for couple of TCs) - 1.9
+
+### 6.0 Features to be tested:
+a. OpenEBS installation basic and Advance.                
+b. Teaming.                                                  
+c. Dmaas.                                                           
+d. OpenEBS upgrade.                                                                       
+f. Control Plane upgrade.                                                           
+
+### 7.0 Features not to be tested:
+a. AD authentication.                                                                          
+   Reason: We don't have configure AD server in cloud.                 
+   
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
