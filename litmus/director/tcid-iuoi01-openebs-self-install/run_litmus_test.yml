@@ -34,18 +34,18 @@ spec:
                 name: config
                 key: url
 
-          ## Take cluster_id from configmap clusterid
+          ## Take cluster_id from configmap admin-clusterid
           - name: CLUSTER_ID    
             valueFrom:
               configMapKeyRef:
-                name: clusterid
+                name: admin-clusterid
                 key: cluster_id
 
-          ## Takes group_id from configmap groupid
+          ## Takes group_id from configmap admin-groupid
           - name: GROUP_ID
             valueFrom:
               configMapKeyRef:
-                name: groupid
+                name: admin-groupid
                 key: group_id
 
           ## It should be 1ot1 Mandatory
