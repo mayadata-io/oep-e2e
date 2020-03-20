@@ -46,14 +46,6 @@
           register: openebs_namespace
           when: "count_maya_api.stdout == '1'"
 
-        ## Removing the labels from the cluster nodes
-        - include_tasks: /utils/openebs-label-cleanup.yml
-
-        ## Deleting openebs from the cluster
-        - include_tasks: /utils/openebs-cleanup.yml
-          vars:
-            namespace: "{{ openebs_namespace.stdout }}"
-
         ## Fetch the projectid of the project where the cluster is running
         - name: Fetch the project details of the project where the cluster is running
           uri:
@@ -70,6 +62,20 @@
         - name: Saving the project id
           set_fact:
             project_id: "{{ project_details.json.data[0].id }}"
+
+        ## Getting the total number of nodes in the cluster
+        - name: Getting the number of nodes in the cluster
+          shell: kubectl get nodes --no-headers | wc -l
+          args:
+            executable: /bin/bash
+          register: nodes
+
+        ## Fail the test if it contains less than two nodes
+        ## Minimum two nodes required
+        - name: Checking if the cluster contains atleast two nodes
+          fail:
+            msg: Minimum two nodes is required to install openebs in this cluster
+          when: "{{ nodes.stdout }} < 2"
 
         ## Getting node details of the cluster
         ## Selecting the node which is in active state present in the cluster
@@ -95,6 +101,14 @@
           set_fact:
             node_id: "{{ node_id  + [item.id] }}"
           loop: "{{ node_details.json.data }}"
+
+         ## Removing the labels from the cluster nodes
+        - include_tasks: /utils/openebs-label-cleanup.yml
+
+        ## Deleting openebs from the cluster
+        - include_tasks: /utils/openebs-cleanup.yml
+          vars:
+            namespace: "{{ openebs_namespace.stdout }}"
 
 
         ## Labeling the node-1 of the Cluster with controlPlaneNode=true and dataPlaneNode=true
