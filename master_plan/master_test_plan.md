@@ -27,19 +27,23 @@ Director OnPrem
 
 ### 7.0 Features Not to Be Tested
  
-### 9.0 Resources/Roles & Responsibilities
+### 8.0 Test execution cycle
 
-### 10.0 Schedules
+### 9.0 Correlation between testing cycles and release plan
 
-### 11.0 Significantly Impacted Departments (SIDs)
+### 10.0 Test budgets according to project or overall operational budget
 
-### 12.0 Dependencies
+### 11.0 Interrelation between other departments and testing team
 
-### 13.0 Risks/Assumptions
+### 12.0 Risks associated with test project
 
-### 14.0 Tools
+### 13.0 Management and control of testing
 
-### 15.0	Approvals 
+### 14.0 Roles and responsibilities
+
+### 15.0 Inputs and outputs for each test level
+
+### 16.0	Approvals 
 
 
 ### 1.0 Introduction:
@@ -149,8 +153,64 @@ f. Control Plane upgrade.
 a. AD authentication.                                                                          
    Reason: We don't have configure AD server in cloud.                 
    
-   
+### 8.0 Test execution cycle:
+a. Test cases will be written for new fearures.                                                           
+b. E2E team will get the APIs for new features 10 days in advance.                                                               
+c .E2E team will automate the test cases written for new features using the APIs given by dev team. Until the code is merge these test  cases will fail in pipeline. This is the first time tests will be executed.                                           
+d. Once dev team PR got merges the test cases will be validated in the pipeline. This is the second time tests will be executed.          e. Bases on the pipeline status dev and test team will verify either the code or test case implementation.                         
 
+### 9.0 Correlation between testing cycles and release plan:
+The release of DOP is 15th of every month.                                                               
+Test execution will happen in two cycles:                                                 
+ a. When E2E team ready will the automated test cases with the provided rest APIs from dev team.                                   
+ b. When code of dev team merges to master branch.                                        
+Before release all the test cases written for a feature(p0) should pass/fail based on the condition.                               
+Set of test cases taken for GUI automation for a particular release should also pass/fail based on the condition.                        
+### 10.0 Test budgets according to project or overall operational budget:                    
+The amount decided to be spend on servers,cloud providers, internet etc.                                      
+
+### 11.0 Interrelation between other departments and testing team:
+a. There should be shared responsibility between devloper and tester to make the product much stable and successful.                     
+b. If the pipeline fails then tester and developer should help each other to find the issue and fix the same.                           
+c. The end goal should be only product quality.                                                 
+
+### 12.0 Risks associated with test project
+a. Delay in the test build to test/E2E team.                                 
+b. Unavailability of test environment.                                      
+c. Delay in fixing defects by development team.                                      
+d. Major changes in the SRS(Software requirements specifications) which invalidates the current test cases and requires changes in the test case and its implementation.       
+
+### 13.0 Management and control of testing
+a. Priortizing the Test cases. P0 test cases should be must covered for every release.                                          
+b. Priortizing the test effort. In case, if automating a test case is taking more than expected time then we should pick next test case and put the current test case in backlog.
+c. If all the P0 test cases are covered then we can take P1 test cases.            
+
+### 14.0 Roles and responsibilities
+
+#### 14.1 Test lead is responsible for:
+a. Defining the testing activities for subordinates – testers or test engineers.                                        
+b. All responsibilities of test planning.                                                                    
+c. To check if the team has all the necessary resources to execute the testing activities.                                       
+d. To check if testing is going hand in hand with the software development in all phases.                                 
+e. Prepare the status report of testing activities.                                                         
+f. Required Interactions with customers.                                                                              
+g. Updating project manager regularly about the progress of testing activities.   
+h. Develop test cases and prioritize testing activities.                           
+
+#### 14.2 Tester/E2E engineer are responsible for:
+a. To read all the documents and understand what needs to be tested.                                                                     
+b. Based on the information procured in the above step decide how it is to be tested.                  
+c. Inform the test lead about what all resources will be required for software testing.                                   
+d. Execute all the test case and report defects, define severity and priority for each defect.      
+e. Carry out regression testing every time when changes are made to the code to fix defects.                   
+
+### 15.0 Inputs and outputs for each test level:
+TO DO
+
+### Approvals:
+Ajesh                                                                 
+Uma                                                                  
+Amit                                                                             
 
 
 
