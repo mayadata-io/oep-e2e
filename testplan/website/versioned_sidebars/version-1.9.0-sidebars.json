@@ -1,0 +1,23 @@
+{
+  "version-1.9.0-docs": {
+    "Overview": [
+      "version-1.9.0-getstarted",
+      "version-1.9.0-platforms",
+      "version-1.9.0-soaktesting",
+      "version-1.9.0-testbed"
+    ],
+    "Functional Tests": [
+      "version-1.9.0-director",
+      "version-1.9.0-openebs",
+      "version-1.9.0-dao"
+    ],
+    "GUI Automation": [
+      "version-1.9.0-functional",
+      "version-1.9.0-scalability"
+    ],
+    "Chaos Engineering": [
+      "version-1.9.0-pipelines",
+      "version-1.9.0-soakbed"
+    ]
+  }
+}

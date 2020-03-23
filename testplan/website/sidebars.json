@@ -1,0 +1,24 @@
+
+{
+  "docs": {
+    "Overview": [
+      "getstarted",
+      "platforms",
+      "soaktesting",
+      "testbed"
+    ],
+    "Functional Tests": [
+      "director",
+      "openebs",
+      "dao"
+    ],
+    "GUI Automation": [
+      "functional",
+      "scalability"
+    ],
+    "Chaos Engineering": [
+      "pipelines",
+      "soakbed"
+    ]
+  }
+}
