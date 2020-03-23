@@ -1,3 +1,3 @@
 **tcid**            **Test case name**                                                                                   
-aula01        Administrator can login.                                                                         
-aula02        User can signup using local auth                                                                        
+aula01        administrator can login.                                                                         
+aula02        user can signup using local auth                                                                        
