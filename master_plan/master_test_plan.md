@@ -20,6 +20,7 @@ Director OnPrem
 #### 4.3	Compatibilty Testing
 #### 4.4	Regression Testing 
 #### 4.5	API integration Testing
+#### 4.6 Functional Testing
 
 ### 5.0 Test Schedule
 
@@ -71,7 +72,7 @@ b. Browser
 c. Profile                                         
 d. connect cluster                                                                      
 e. Dashboard                                                                                 
-f. Scope                                         
+f. Topology                                                                                                                  
 e. Metrics                                                          
 f. Alerts                                                  
 g. Dmaas                                                    
@@ -135,6 +136,9 @@ To make sure all the features which was working in previous release should not b
 #### 4.5 API Intergration testing.
 TO DO
 
+#### Functional Testing.
+In functional testing we should test each of the functionality of DOP such as authentication,cluster connect etc. Have created a directory for functional testing. We add the content in it.
+
 ### 5.0 Test schedule.
 OpenEBS control plane upgrade- 1.9                       
 cstor pool provisioning - 1.9                                                                
@@ -147,11 +151,8 @@ a. OpenEBS installation basic and Advance.
 b. Teaming.                                                  
 c. Dmaas.                                                           
 d. OpenEBS upgrade.                                                                       
-f. Control Plane upgrade.                                                           
-
-### 7.0 Features not to be tested:
-a. AD authentication.                                                                          
-   Reason: We don't have configure AD server in cloud.                 
+f. Control Plane upgrade. 
+g. AD authentication(lowest priority)                                                   
    
 ### 8.0 Test execution cycle:
 a. Test cases will be written for new fearures.                                                           
