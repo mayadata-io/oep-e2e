@@ -58,3 +58,8 @@
   until: "pod_list.stdout=='0'"
   retries: 30
   delay: 5
+
+# Pause for some time so that openebs is removed from server
+- name: Pause for some time
+  pause:
+    minutes: 4
