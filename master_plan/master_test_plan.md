@@ -66,7 +66,7 @@ e. Set priority level for bug fixes for next release.
 ### 3.0 Scope:
 
 #### General:
-There are different features and functionality of DOP that needed to be tested. Listing them below.
+There are different features and functionality of DOP that needed to be tested. Listing them below.                             
 a. Authentication.                        
 b. Browser                          
 c. Profile                                         
