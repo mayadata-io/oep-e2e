@@ -534,7 +534,7 @@ spec:
       test/subFeature: "Invite"
       test/priority: "P1"
       git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
+      test/status: "Automated"
 
  
   - tcid: trrc01
@@ -555,7 +555,7 @@ spec:
       test/subFeature: "Role Change"
       test/priority: "P1"
       git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
+      test/status: "Automated"
 
   - tcid: trrc03
     name: "Negative change role"
@@ -565,18 +565,8 @@ spec:
       test/subFeature: "Role Change"
       test/priority: "P1"
       git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
+      test/status: "Automated"
  
-  - tcid: trrc04
-    name: "Check the user can connect cluster using the roles Project Admin, Project Member, Project Read Only Admin"
-    description: "Except read only can do the operation."
-    labels:
-      test/feature: "Teaming and RBAC"
-      test/subFeature: "Role Change"
-      test/priority: "P1"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
   - tcid: ppcp01
     name: "Create a CSPC with Striped pool lowest possible list"
     description: "Have 4 disks of 100GB, 100GB, 200GB, 300GB on each nodes (3 cluster), Select pool of 50 GB, Post recommendation create the pool"
@@ -701,17 +691,47 @@ spec:
     name: "Local Authentication Testcase using Browser"
     description: "Gui Auth Check"
     labels:
-      test/feature: "GUI Authentication"
+      test/feature: "GUI Automation"
       test/subFeature: "Authentication"
       test/priority: "P0"
       git/location: "Add the actual link to TC readme"
       test/status: "Not Automated"
 
+  - tcid: gaau02
+    name: "Github Authentication Testcase using Browser"
+    description: "Gui Auth Check"
+    labels:
+      test/feature: "GUI Automation"
+      test/subFeature: "Authentication"
+      test/priority: "P1"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: gaau03
+    name: "GMail Authentication Testcase using Browser"
+    description: "Gui Auth Check"
+    labels:
+      test/feature: "GUI Automation"
+      test/subFeature: "Authentication"
+      test/priority: "P1"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: gaau04
+    name: "AD Authentication Testcase using Browser"
+    description: "Gui Auth Check"
+    labels:
+      test/feature: "GUI Automation"
+      test/subFeature: "Authentication"
+      test/priority: "P2"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
   - tcid: gacc01
-    name: "DOP should be shown as (self) connected cluster by default"
+    name: "DOP self connected cluster Check"
     description: "Self connected cluster"
     labels:
-      test/feature: "GUI Authentication"
+      test/feature: "GUI Automation"
       test/subFeature: "Cluster Connect"
       test/priority: "P0"
       git/location: "Add the actual link to TC readme"
@@ -721,8 +741,58 @@ spec:
     name: "External cluster connect to DOP"
     description: "External cluster connect to DOP"
     labels:
-      test/feature: "GUI Authentication"
+      test/feature: "GUI Automation"
       test/subFeature: "Cluster Connect"
+      test/priority: "P0"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: gada01
+    name: "Project Dashboard"
+    description: ""
+    labels:
+      test/feature: "GUI Automation"
+      test/subFeature: "Dashboard"
+      test/priority: "P0"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: gada02
+    name: "Cluster Dashboard"
+    description: ""
+    labels:
+      test/feature: "GUI Automation"
+      test/subFeature: "Dashboard"
+      test/priority: "P0"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: gato01
+    name: "Topology Check for Volumes, PODs, Hosts"
+    description: ""
+    labels:
+      test/feature: "GUI Automation"
+      test/subFeature: "Topology"
+      test/priority: "P0"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: galo01
+    name: "Logging Check"
+    description: "Basic Logs should be visible"
+    labels:
+      test/feature: "GUI Automation"
+      test/subFeature: "Logging"
+      test/priority: "P0"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: gaal01
+    name: "Alerts Check"
+    description: "Default alerts like cluster connect, volume create should be available"
+    labels:
+      test/feature: "GUI Automation"
+      test/subFeature: "Alerts"
       test/priority: "P0"
       git/location: "Add the actual link to TC readme"
       test/status: "Not Automated"
@@ -733,6 +803,15 @@ spec:
 # tr  -- Teaming and RBAC
 ### iuoiXX iuocXX iuodXX 
  ## oi -- OpenEBS Install 
+ ## oc -- OpenEBS ControlPlane
+ ## od -- OpenEBS DataPlane
+
+###### Abbreviations
+#Details of abbreviation in readme file master-plan.md , One of the example as below
+# iu  -- Install and Upgrade of OpenEBS"
+# tr  -- Teaming and RBAC
+### iuoiXX iuocXX iuodXX
+ ## oi -- OpenEBS Install
  ## oc -- OpenEBS ControlPlane
  ## od -- OpenEBS DataPlane
 

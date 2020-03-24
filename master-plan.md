@@ -61,12 +61,16 @@ Example
 |                           | pr -- Project ReadOnly User |
 |                           | rc -- Role Change |
 |                           | iv -- Invite |
-| pp -- Pool Provisioning   | cp -- cstor Pool            |
+| pp -- Pool Provisioning   | cp -- cStor Pool            |
 |                           | jp -- Jiva Pool  |
-|                           | lh -- local PV hostpath |
-|                           | ld -- local PV device |
-| ga -- Gui Automation      | au -- cstor Pool            |
+|                           | lh -- Local PV hostpath |
+|                           | ld -- Local PV device |
+| ga -- Gui Automation      | au -- cStor Pool            |
 |                           | cc -- cluster connect |
+|                           | da -- Dashboard |
+|                           | al -- Alerts |
+|                           | lo -- Logging |
+|                           | to -- Topology |
 
 ##### `name` --  test case name
 ##### `description` -- Testcase description
