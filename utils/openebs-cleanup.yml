@@ -70,8 +70,8 @@
     body_format: json
   register: openebs_details
   until: "{{ openebs_details.json.data[0].state}} =='Removed'"
-  retries: 10
-  delay: 30
+  retries: 30
+  delay: 10
 
 - name: Verify openebs is removed or not
   uri:
@@ -84,6 +84,6 @@
     body_format: json
   register: openebs_components_details
      
-- name: Fetching specific component deatils to verify
+- name: Fetching specific component details to verify
   set_fact:
-    component_details: "{{ openebs_components_details.json.clusterComponents}}"
+    component_details: "{{ openebs_components_details.json.clusterComponents }}"
