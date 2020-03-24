@@ -1,0 +1,16 @@
+testplan/.DS_Store
+
+testplan/node_modules
+testplan/package-lock.json
+
+testplan/lib/core/metadata.js
+testplan/lib/core/MetadataBlog.js
+
+testplan/docs/embedmd-command.sh
+
+testplan/website/translated_docs
+testplan/website/build/
+testplan/website/yarn.lock
+testplan/website/node_modules
+testplan/website/i18n/*
+testplan/*.log
