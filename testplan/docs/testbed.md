@@ -1,11 +1,24 @@
 ---
 id: testbed
-title: OEP Testing
-sidebar_label: Test Bed
+title: OEP E2E TestBed
+sidebar_label: Testbed
 ---
 ------
 
-## Page Title
 
-- Sample text
+
+Pipelines are run sequentially on different platforms. The results are aggregated at ci.mayadata.io.
+
+
+
+Testbed diagram ([Original file for editing](https://docs.google.com/drawings/d/1zVjph5xAyXNuQm81wv43NaH-WSaH1hIiqyNYot2oTOQ/edit?usp=sharing))
+
+![OEP E2E Testbed](https://docs.google.com/drawings/d/e/2PACX-1vQqAMcNPh8ryFFy2IUz6S4Dl_0ZIoJGL1a1d87bbAMfLF9w4kHrMbEuHGQRHjy1xRu7LBgnhhcdq5rG/pub?w=960&h=720)
+
+[Soak testing](https://en.wikipedia.org/wiki/Soak_testing) is an important part of OEP test plan. There are multiple components to be considered for soak testing. 
+
+- OpenEBS installations on clusters that are connected to Director
+- Director On-Prem or DOP itself
+
+Currently, soak testing is being performed only for OpenEBS installations. Applications are deployment closer to the production style on a cluster where OpenEBS is used as storage. As part of the E2E pipeline, this cluster is connected to the Director OnPrem which is installed on the fly. Soak testing for OpenEBS includes mostly day2 operations such as scaling up the capacity, disk fill tests, resizing of the volumes etc.
 

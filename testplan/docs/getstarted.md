@@ -26,6 +26,25 @@ OEP, as the enterprise edition of the product, requires highest level of testing
 
 
 
+## Test repository structure:
+
+`oep-e2e` is the main repository that hosts the test plan and test cases and some elements of test cases implementations such as litmus wrappers. 
+
+`oep-e2e-gcp` is the repository containing implementation of test cases specific to GCP platform.
+
+`oep-e2e-rancher` is the repository containing implementation of test cases specific to Rancher platform.
+
+`oep-e2e-konvoy` is the repository containing implementation of test cases specific to D2IQ Konvoy platform.
+
+
+
+## Contributing guidelines:
+
+- You can [create a GitHub issue](https://github.com/mayadata-io/oep-e2e/issues/new/choose) if you are having an idea for improvement or to notify a missing test area/case.
+- If you want to suggest new changes to this page or any other page in the test plan, use the `Edit` button on the top right corner of the specific page. 
+
+
+
 
 
 
