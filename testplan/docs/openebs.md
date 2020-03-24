@@ -1,7 +1,7 @@
 ---
 id: openebs
 title: OEP Testing
-sidebar_label: OpenEBS features
+sidebar_label: OpenEBS
 ---
 ------
 

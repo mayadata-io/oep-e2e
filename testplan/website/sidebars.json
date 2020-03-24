@@ -7,9 +7,15 @@
       "soaktesting",
       "testbed"
     ],
-    "Functional Tests": [
-      "director",
+    "Feature Tests": [
+      "install",
+      "authentication",
+      "topology",
+      "metrics",
+      "logging",
       "openebs",
+      "provisioning",
+      "upgrade",
       "dao"
     ],
     "GUI Automation": [
