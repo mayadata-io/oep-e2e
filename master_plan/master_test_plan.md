@@ -42,7 +42,7 @@ Director OnPrem
 
 ### 14.0 Roles and responsibilities
 
-### 15.0 Inputs and outputs for each test level
+### 15.0 Entry and Exit criteria
 
 ### 16.0	Approvals 
 
@@ -205,8 +205,17 @@ c. Inform the test lead about what all resources will be required for software t
 d. Execute all the test case and report defects, define severity and priority for each defect.      
 e. Carry out regression testing every time when changes are made to the code to fix defects.                   
 
-### 15.0 Inputs and outputs for each test level:
-TO DO
+### 15.0 Entry and Exit criteria
+#### Entry Criteria:
+- The requirement Specification document is defined and approved.                                        
+- Test Cases have been prepared.                                                          
+- Test data has been created.                                                          
+- The environment for testing is ready, all the tools that are required are available and ready.                                
+
+#### Exit Criteria:
+- Execution of all the functional test cases has been completed.                              
+- No critical or P1, P2 bugs are open.                                                   
+- Reported bugs have been acknowledged.                                                 
 
 ### Approvals:
 Ajesh                                                                 
