@@ -1,0 +1,6 @@
+test_name: project-account-resources-check
+director_ip: "{{ lookup('env','DIRECTOR_IP') }}"
+web_protocol: "{{ lookup('env','WEB_PROTOCOL') }}"
+director_port: "{{ lookup('env','DIRECTOR_PORT') }}"
+sts_namespace_list: "{{ lookup('env','STS_NAMESPACE_LIST') }}"
+deployment_namespace_list: "{{ lookup('env','DEPLOYMENT_NAMESPACE_LIST') }}"
