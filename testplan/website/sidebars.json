@@ -6,17 +6,19 @@
       "platforms",
       "testbed"
     ],
-    "Feature Tests": [
-      "install",
-      "authentication",
-      "topology",
-      "metrics",
-      "logging",
-      "openebs",
-      "provisioning",
-      "upgrade",
-      "dao"
+    "Director Functional Tests": [
+      "Director/Install/install",
+      "Director/Authentication/authentication",
+      "Director/Visualization/visualization",
+      "Director/Alerts/alerts",
+      "Director/Logging/logging",
+      "Director/Provisioning/provisioning"
     ],
+    "OpenEBS Enterprise": [
+      "Openebs/Install/install",
+      "Openebs/DAO/dao"
+    ],
+
     "GUI Automation": [
       "functional",
       "scalability"
