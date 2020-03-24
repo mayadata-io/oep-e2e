@@ -1,0 +1,47 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: cluster-account-resources-check
+  namespace: litmus
+spec:
+  template:
+    metadata:
+      name: litmus
+      labels:
+        app: cluster-account-resources-check-litmus
+    spec:
+      serviceAccountName: litmus
+      restartPolicy: Never
+      volumes:
+      - name: secret-volume
+        secret:
+          secretName: director-user-pass
+      containers:
+      - name: ansibletest
+        image: mayadataio/dop-validator:ci
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: secret-volume
+          readOnly: true
+          mountPath: "/etc/secret-volume"
+        env:
+          - name: DIRECTOR_IP
+            valueFrom:
+              configMapKeyRef:
+                name: config
+                key: url
+          - name: WEB_PROTOCOL
+            value: http
+          - name: DIRECTOR_PORT
+            value: "30380"
+          - name: STS_NAMESPACE_LIST
+            value: ["app-mongo-ns"]
+          - name: DEPLOYMENT_NAMESPACE_LIST
+            value: ''
+          - name: ANSIBLE_STDOUT_CALLBACK
+            value: default  
+        command: ["/bin/bash"]
+        args: ["-c", "ansible-playbook ./litmus/director/account-access/cluster-account/test.yaml -i /etc/ansible/hosts -v; exit 0"]
+      imagePullSecrets:
+      - name: oep-secret

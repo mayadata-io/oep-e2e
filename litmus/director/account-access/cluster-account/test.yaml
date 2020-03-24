@@ -1,0 +1,78 @@
+---
+- hosts: localhost
+  connection: local
+
+  vars_files:
+    - test_vars.yml
+
+  tasks:
+    - block:
+
+          ## Generating the testname for deployment
+        - include_tasks: /ansible-utils/create_testname.yml
+
+          ## RECORD START-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'SOT'
+
+        - set_fact:
+            director_url : "{{ web_protocol }}://{{ director_ip }}:{{ director_port }}"
+        
+        - name: Get username
+          shell: cat /etc/secret-volume/username
+          register: username
+            
+        - name: Get password
+          shell: cat /etc/secret-volume/password
+          register: password
+
+        - name: Fetch pool pods from cluster
+          shell: kubectl get pods -n openebs | grep cstor | awk '{print $1}'
+          register: cstor_pool_pods
+ 
+        - name: Get cluster pool resources for ClusterAccount
+          shell: python3 /api_testing/group/access.py --username {{ username.stdout }} --password {{ password.stdout }} --account ClusterAccount --url {{ director_url }} --resource pool
+          register: clusteracc_pool_pods_resources
+
+        - name: Check if cluster pool pods is same as Cluster Account pool pod resources
+          shell: echo "pool pods list found on the cluster is same as director cluster account maya app resources"
+          failed_when: "cstor_pool_pods.stdout_lines != clusteracc_pool_pods_resources.stdout_lines"
+
+        - name: Get cluster application resources for ClusterAccount
+          shell: python3 /api_testing/group/access.py --username {{ username.stdout }} --password {{ password.stdout }} --account ClusterAccount --url {{ director_url }} --resource maya-app
+          register: clusteracc_app_resources
+
+        - block:
+
+            - name: Fetch statefulset applications from cluster
+              shell: kubectl get sts -n {{ item }} --no-headers | awk '{print $1}'
+              register: sts
+              until: "sts.stdout in clusteracc_app_resources.stdout_lines"
+              with_items: "{{ sts_namespace_list }}"
+
+          when: "'' is not in sts_namespace_list"
+
+        - block:
+
+            - name: Fetch deployment applications from cluster
+              shell: kubectl get deployment -n {{ item }} --no-headers | awk '{print $1}'
+              register: deployment
+              until: "deployment.stdout in clusteracc_app_resources.stdout_lines"
+              with_items: "{{ deployment_namespace_list }}"
+
+          when: "'' is not in deployment_namespace_list"
+
+        - set_fact:
+            flag: "Pass"
+
+      rescue:
+        - name: Setting fail flag
+          set_fact:
+            flag: "Fail"
+
+      always:
+        ## RECORD END-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'EOT'
