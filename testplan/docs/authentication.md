@@ -1,7 +1,7 @@
 ---
-id: dao 
+id: authentication
 title: OEP Testing
-sidebar_label: DAOs
+sidebar_label: Authentication
 ---
 ------
 

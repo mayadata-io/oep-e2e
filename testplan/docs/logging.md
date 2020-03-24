@@ -1,7 +1,7 @@
 ---
-id: director
+id: logging 
 title: OEP Testing
-sidebar_label: Director features
+sidebar_label: Logs
 ---
 ------
 
