@@ -6,13 +6,22 @@
       "platforms",
       "testbed"
     ],
+
     "Director Functional Tests": [
-      "Director/Install/install",
-      "Director/Authentication/authentication",
-      "Director/Visualization/visualization",
-      "Director/Alerts/alerts",
-      "Director/Logging/logging",
-      "Director/Provisioning/provisioning"
+	{
+        	"type": "subcategory",
+	        "label": "Install&Upgrade",
+	        "ids": [
+	        	"director/installation/directorinstall",
+	        	"director/installation/install-tcid-1240"
+          	]
+        },
+
+      "director/authentication/authentication",
+      "director/visualization/visualization",
+      "director/alerts/alerts",
+      "director/logging/logging",
+      "director/provisioning/provisioning"
     ],
     "OpenEBS Enterprise": [
       "Openebs/Install/install",
