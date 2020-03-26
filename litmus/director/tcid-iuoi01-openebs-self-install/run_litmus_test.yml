@@ -16,7 +16,7 @@ spec:
       volumes:
       - name: secret-volume
         secret:
-          secretName: director-user-pass
+          secretName: director-admin-pass
       containers:
       - name: ansibletest
         image: mayadataio/dop-validator:ci
