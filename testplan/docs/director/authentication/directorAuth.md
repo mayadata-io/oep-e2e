@@ -6,11 +6,16 @@ sidebar_label: Summary
 ------
 
 ## Authentication
+This page captures the test scenarios for Authentication methods supported in DOP(Director Onprem). DOP supports the following authentication methods against various Identity providers
+- Local Auth
+- Gitlab Auth
+- GMail Auth
+- Active Directory Auth
 
-Authentication supported in Director 
+
 - #### Local Authentication
 
-  Authentication is done against database in Director i.e MySQL
+In this authentication, credentials are validated against the Identity stored local database (MySQL) in Director.
 
 
 
@@ -22,9 +27,9 @@ Authentication supported in Director
 
 
 
-- #### Github Auth
+- #### Github Authentication
 
-OAuth using Github
+In this authentication, credentials are validated from Gitlab Identity provider using Oauth.
 
 | TCID | Breif Description | #Issue |
 | ---- | ----------------- | ------ |
@@ -34,9 +39,9 @@ OAuth using Github
 
 
 
-- #### Gmail Auth
+- #### GMail Authentication
 
-OAuth using Gmail
+In this authentication, credentials are validated from GMail Identity provider using Oauth.
 
 
 
@@ -48,7 +53,7 @@ OAuth using Gmail
 
 - #### Active Directory
 
-Authentication is done against enterprise Active Directory.
+In this authentication, credentials are validated against the Identities in Microsoft Active Directory using LDAP.
 
 
 

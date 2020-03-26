@@ -58,7 +58,14 @@ module.exports = {
 				'director/visualization/test1'
 			],
 		},
-
+		{
+		        type: 'category',
+		        label: 'Alerts',
+		        items: [
+				'director/alerts/alerts',
+				'director/alerts/test1'
+			],
+		},
     ],
     "OpenEBS Enterprise": [
 		{

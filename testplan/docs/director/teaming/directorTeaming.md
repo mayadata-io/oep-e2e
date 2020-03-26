@@ -5,38 +5,35 @@ sidebar_label: Summary
 ---
 ------
 
+This page captures the test scenarios for Teaming feature in Director. The following areas would be covered as part of teaming functionality
+- Invite User
+ - Project Account
+ - Cluster Account
+- Roles
+  - Owner
+  - Admin
+  - Member
+  - Read Only
+- Role Change
+
 ## Teaming
 
-Authentication supported in Director 
-- #### Local Authentication
+- #### Invite Users
 
-  Authentication is done against database in Director i.e MySQL
-
+An account member can invite users, to manage with the scope of cluster level or project level. Project account can invite cluster/project account user but not vice-versa.
 
 
-| TCID | Breif Description | #Issue |
-| ---- | ----------------- | ------ |
-|      |                   |        |
-|      |                   |        |
-|      |                   |        |
+- #### Roles
+There are 4 roles for an user as listed below with order of access level, where Owner is having the highest access.
+  1.  Owner
+  2.  Admin
+  3.  Member
+  4.  ReadOnly
 
 
+- #### Role Change
+  Role change can be done to a same or higher level. Where Owner is the highest and ReadOnly is the lowest level.
 
-- #### Github Auth
-
-OAuth using Github
-
-| TCID | Breif Description | #Issue |
-| ---- | ----------------- | ------ |
-|      |                   |        |
-|      |                   |        |
-|      |                   |        |
-
-
-
-- #### Gmail Auth
-
-OAuth using Gmail
 
 
 
@@ -45,16 +42,3 @@ OAuth using Gmail
 |      |                   |        |
 |      |                   |        |
 |      |                   |        |
-
-- #### Active Directory
-
-Authentication is done against enterprise Active Directory.
-
-
-
-| TCID | Breif Description | #Issue |
-| ---- | ----------------- | ------ |
-|      |                   |        |
-|      |                   |        |
-|      |                   |        |
-
