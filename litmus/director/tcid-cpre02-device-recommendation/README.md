@@ -26,12 +26,6 @@
 - Ensure that the `openebs data plane and control plane components` are available in the cluster.
 
 
-## Details
-- In this test case we have to upgrade only the `Data Plane` components using DOP when one volume replica pod is not in running state.
-
-
-- `Data Plane` components should not get upgraded because one volume replica pod is not in running state.
-
 ## Steps Performed in the test
 
 - Check whether OpenEBS is installed in the cluster or not.
