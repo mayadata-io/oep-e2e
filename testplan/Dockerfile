@@ -1,14 +1,15 @@
 #-----------------------------
 # build testplan site
 #-----------------------------
-FROM node:8.11.4 AS build-env
+FROM node:10.9.0 AS build-env
 
 WORKDIR /app/website
 
 EXPOSE 3000 35729
 
 COPY ./docs /app/docs
-COPY ./website /app/website
+#Docusauraus v2 has changed the directory structure. Contents inside website directory have been brought to the root folder. Check the following line
+#COPY ./website /app/website
 
 RUN yarn install
 RUN yarn build
