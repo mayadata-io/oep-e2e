@@ -1,79 +1,37 @@
-Documentation for the Litmus Project
+# Pre-requisites
+Node.js version >= 10.9.0 or above (which can be checked by running node -v). You can use nvm for managing multiple Node versions on a single machine installed
+Yarn version >= 1.5 (which can be checked by running yarn version). Yarn is a performant package manager for JavaScript and replaces the npm client. It is not strictly necessary but highly encouraged.
 
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Flitmuschaos%2Flitmus-docs.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Flitmuschaos%2Flitmus-docs?ref=badge_shield)
+# Website
 
-Additional details on the Docusaurus project can be found [here](https://docusaurus.io/docs/en/installation.html).
+This website is built using [Docusaurus 2](https://v2.docusaurus.io/), a modern static website generator.
 
-## For Developers
+### Installation
 
-### Clone litmus-docs repository
-
-```bash
-git clone https://github.com/litmuschaos/litmus-docs.git
-cd litmus-docs
+```
+$ yarn
 ```
 
-The website server can be setup manually or through docker and docker compose
+### Local Development
 
-## Use embedmd command before commiting changes
-
-The embedded code will be extracted from the file at `URL`, which can either be a relative path to a file in the local file system (using always forward slashes as directory separator) or a URL starting with `http://` or `https://.`
-
- Flags (needs to be done before commiting the changes): 
-
--w: Executing `embedmd -w docs.md` will modify docs.md and add the corresponding code snippets, as shown in sample/result.md.
-
--d: Executing `embedmd -d docs.md` will display the difference between the contents of docs.md and the output of embedmd docs.md.
-
-
-## Manual Setup
-
-### Install Node.js
-
-```bash
-sudo apt-get install software-properties-common
-curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
+```
+$ yarn start
 ```
 
-### Get the latest Node.js package
+This command starts a local development server and open up a browser window. Most changes are reflected live without having to restart the server.
 
-```bash
-sudo apt-get install -y nodejs
+### Build
+
+```
+$ yarn build
 ```
 
-### Install Yarn
+This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
-```bash
-npm install -g yarn
+### Deployment
+
+```
+$ GIT_USER=<Your GitHub username> USE_SSH=true yarn deploy
 ```
 
-### Start the server
-
-```bash
-cd website
-yarn install
-yarn start
-```
-
-## Using Docker compose
-
-### Install docker compose
-
-```bash
-sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-```
-
-### Run the server
-
-```bash
-docker-compose up
-```
-
-
-## Browse local documentation
-http://localhost:3000/docs/next/getstarted.html
-
-## License
-
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Flitmuschaos%2Flitmus-docs.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Flitmuschaos%2Flitmus-docs?ref=badge_large)
+If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
