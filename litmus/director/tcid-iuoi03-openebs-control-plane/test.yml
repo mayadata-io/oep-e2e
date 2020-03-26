@@ -178,7 +178,7 @@
             body_format: json
             status_code: 200
           register: openebs_job
-          until: openebs_job.json.jobStatus != ""
+          until: "openebs_job.json.jobStatus != ''"
           delay: 5
           retries: 20
 
