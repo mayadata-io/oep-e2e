@@ -1,6 +1,6 @@
 module.exports = {
   someSidebar: {
-    Overview: ['getstarted', 'platforms', 'testbed'],
+    Overview: ['getstarted', 'platforms', 'testbed', 'gitlabstages'],
     Director: [
 		{
 		        type: 'category',

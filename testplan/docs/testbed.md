@@ -22,27 +22,17 @@ Pipelines are run sequentially on different platforms. The results are aggregate
 
 Currently, soak testing is being performed only for OpenEBS installations. Applications are deployment closer to the production style on a cluster where OpenEBS is used as storage. As part of the E2E pipeline, this cluster is connected to the Director OnPrem which is installed on the fly. Soak testing for OpenEBS includes mostly day2 operations such as scaling up the capacity, disk fill tests, resizing of the volumes etc.
 
+## Cluster details used in Soak testing
 
 
-## Suggested `stages` 
 
-**Cluster setup**
+Different clusters are used on different platforms. Hence the clusters are descibed on per platform basis.
 
-Setup the cluster, underlying disks, networks or any pre-requisites that need to be done. This is not counted as a test case and hence is not calculated for coverage.
+### GCP
 
-**Director Install and upgrade**
+### OnPrem-Konvoy
 
-Director installation test cases, upgrade cases, day 2 operations of director, chaos tests around director are done in this stage.
+### OnPrem-Rancher
 
-**Functional testing with Rest**
-
-There are a set of tests that are written against REST api. All functional, scalable and chaos testing written using these APIs wil be under this stage. A separate user cluster or many user clusters are connected to Director for the tests under this stage.
-
-**Functional testing with Selenium**
-
-All the tests written using GUI automation or Selenium will be under this stage. A separate user cluster or many user clusters are connected to Director for the tests under this stage.
-
-**Cluster tier down**
-
-E2E metrics, finalizing the tests, disconnect the user clusters,clean up resources, delete Director OnPrem and scaledown/destroy cluster where DOP is installed.
+### AWS
 
