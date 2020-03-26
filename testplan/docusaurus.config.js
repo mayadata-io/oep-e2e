@@ -21,6 +21,11 @@ module.exports = {
           position: 'left',
         },
         {
+          href: 'https://ci.mayadata.io',
+          label: 'E2E Pipelines',
+          position: 'left',
+        },
+        {
           href: 'https://github.com/mayadata-io/oep-e2e',
           label: 'OEP-E2E on GitHub',
           position: 'right',
@@ -39,7 +44,7 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/',
+            'https://github.com/mayadata-io/oep-e2e/edit/master/testplan/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
