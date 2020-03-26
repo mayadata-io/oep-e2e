@@ -193,31 +193,16 @@
             status_code: 200
           register: openebs
         
-        ## Fetching job ID
-        - name: Fetching Job Id to of openebsjob
-          set_fact:
-            openebs_job_id: "{{ openebs.json.id }}"
-        
-        - name: Fetch openebsjob details
-          uri:
-            url: "{{ director_url }}/v3/groups/1a14/openebsjobs/{{openebs_job_id}}"
-            method: GET
-            url_username: "{{ username.stdout }}"
-            url_password: "{{ password.stdout }}"
-            force_basic_auth: yes
-            return_content: yes
-            body_format: json
-            status_code: 200
-          register: openebs_job
-          until: "openebs_job.json.jobStatus != ''"
+        ## Checking the openebs Installation    
+        - name: Fetch OpenEBS control plane pods state
+          shell: kubectl get pods -n {{ namespace }}  | grep {{ item }} | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
+          register: app_status
+          until: app_status.stdout == 'Running'
+          with_items:
+            - "{{ openebs_components }}"
+          retries: 30
           delay: 10
-          retries: 10
         
-        ## Checking wether the openebs_job pod is in online state or not.
-        - name: Checking phase of openebs_job 
-          shell: echo "{{ openebs_job.json.jobStatus.phase }}"
-          failed_when: "'{{ openebs_job.json.jobStatus.phase }}' != 'Online'"
-
         ## Removing the labels from the cluster nodes
         - include_tasks: /utils/openebs-label-cleanup.yml
 
