@@ -86,4 +86,4 @@
      
 - name: Fetching specific component details to verify
   set_fact:
-    component_details: "{{ openebs_components_details.json.clusterComponents }}"
+    component_details: "{{ openebs_components_details.json }}"
