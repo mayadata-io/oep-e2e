@@ -1,16 +1,20 @@
-testplan/.DS_Store
 
+# Dependencies
 testplan/node_modules
-testplan/package-lock.json
+# Production
+testplan/build
 
-testplan/lib/core/metadata.js
-testplan/lib/core/MetadataBlog.js
+# Generated files
+testplan/.docusaurus
+testplan/.cache-loader
 
-testplan/docs/embedmd-command.sh
+# Misc
+testplan/.DS_Store
+testplan/.env.local
+testplan/.env.development.local
+testplan/.env.test.local
+testplan/.env.production.local
 
-testplan/website/translated_docs
-testplan/website/build/
-testplan/website/yarn.lock
-testplan/website/node_modules
-testplan/website/i18n/*
-testplan/*.log
+testplan/npm-debug.log*
+testplan/yarn-debug.log*
+testplan/yarn-error.log*
