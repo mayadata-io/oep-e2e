@@ -3,11 +3,11 @@
 #-----------------------------
 FROM node:10.9.0 AS build-env
 
-WORKDIR /app/website
+WORKDIR /app/
 
 EXPOSE 3000 35729
 
-COPY ./docs /app/docs
+COPY . /app
 #Docusauraus v2 has changed the directory structure. Contents inside website directory have been brought to the root folder. Check the following line
 #COPY ./website /app/website
 
