@@ -1,5 +1,5 @@
 ---
-id: directorteaming
+id: directorTeaming
 title: Test plan for Director Teaming
 sidebar_label: Summary
 ---
