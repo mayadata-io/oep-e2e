@@ -1,7 +1,7 @@
 ---
 id: logging
 title: Logging
-sidebar_label: Logging
+sidebar_label: Summary
 ---
 ------
 

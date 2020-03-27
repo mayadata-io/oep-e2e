@@ -1,7 +1,7 @@
 ---
 id: visualization
 title: Monitoring and Visualization 
-sidebar_label: Visualziation 
+sidebar_label: Summary
 ---
 ------
 
