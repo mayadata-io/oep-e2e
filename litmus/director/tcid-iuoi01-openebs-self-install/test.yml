@@ -33,14 +33,14 @@
 
         ## Checking if openebs is already installed in the cluster
         - name: Check if openebs is already installed
-          shell: kubectl get deploy --all-namespaces | grep maya-apiserver | awk '{print $1}' | wc -l
+          shell: kubectl get deploy --all-namespaces -l name=maya-apiserver --no-headers | awk '{print $1}' | wc -l
           args:
             executable: /bin/bash
           register: count_maya_api
 
         ## If openebs is installed in the cluster then get the namespace
         - name: Getting the namespace where openebs is installed 
-          shell: kubectl get deploy --all-namespaces | grep maya-apiserver | awk '{print $1}'
+          shell: kubectl get deploy --all-namespaces -l name=maya-apiserver --no-headers | awk '{print $1}'
           args:
             executable: /bin/bash
           register: openebs_namespace
