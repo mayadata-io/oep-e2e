@@ -1,5 +1,5 @@
 ---
-id: directorinstall
+id: directorInstall
 title: Install and Upgrade of Director
 sidebar_label: Summary
 ---

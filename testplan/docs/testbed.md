@@ -13,7 +13,7 @@ Pipelines are run sequentially on different platforms. The results are aggregate
 
 ## Testbed diagram ([Original file for editing](https://docs.google.com/drawings/d/1zVjph5xAyXNuQm81wv43NaH-WSaH1hIiqyNYot2oTOQ/edit?usp=sharing))
 
-![OEP E2E Testbed](https://docs.google.com/drawings/d/e/2PACX-1vQqAMcNPh8ryFFy2IUz6S4Dl_0ZIoJGL1a1d87bbAMfLF9w4kHrMbEuHGQRHjy1xRu7LBgnhhcdq5rG/pub?w=960&h=720)
+![OEP E2E Testbed](https://docs.google.com/drawings/d/e/2PACX-1vSNvpvyPnyvHFTwJXT1E_M-KMydF3z5t3um_lCDSAEfbavDBFVkYFZVvu5G90yq7oZCZI0Jv_8kEMj_/pub?w=960&h=720)
 
 [Soak testing](https://en.wikipedia.org/wiki/Soak_testing) is an important part of OEP test plan. There are multiple components to be considered for soak testing. 
 

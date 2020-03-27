@@ -5,26 +5,18 @@ sidebar_label: Summary
 ---
 ------
 
-## Teaming
+## DMaaS
 
-Authentication supported in Director 
-- #### Local Authentication
+Data Management as a Service, this is supported for two ways
+- Storage snapshot for cStor Volume
+- Restic for Jiva / Local PV
 
-  Authentication is done against database in Director i.e MySQL
+DMaaS data is backed in following supported storage buckets. 
+- AWS S3
+- GCP Storage Bucket
+- Minio
 
-
-
-| TCID | Breif Description | #Issue |
-| ---- | ----------------- | ------ |
-|      |                   |        |
-|      |                   |        |
-|      |                   |        |
-
-
-
-- #### Github Auth
-
-OAuth using Github
+#### DMaaS using storage snapshot
 
 | TCID | Breif Description | #Issue |
 | ---- | ----------------- | ------ |
@@ -32,25 +24,7 @@ OAuth using Github
 |      |                   |        |
 |      |                   |        |
 
-
-
-- #### Gmail Auth
-
-OAuth using Gmail
-
-
-
-| TCID | Breif Description | #Issue |
-| ---- | ----------------- | ------ |
-|      |                   |        |
-|      |                   |        |
-|      |                   |        |
-
-- #### Active Directory
-
-Authentication is done against enterprise Active Directory.
-
-
+#### DMaaS using Restic
 
 | TCID | Breif Description | #Issue |
 | ---- | ----------------- | ------ |

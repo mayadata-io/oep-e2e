@@ -4,9 +4,9 @@ module.exports = {
     Director: [
 		{
 		        type: 'category',
-		        label: 'Install&Upgrade',
+		        label: 'Install and Upgrade',
 		        items: [
-				'director/installation/directorinstall',
+				'director/installation/directorInstall',
 				'director/installation/install-tcid-1240'
 			],
 		},
@@ -14,7 +14,7 @@ module.exports = {
 		        type: 'category',
 		        label: 'Authentication',
 		        items: [
-				'director/authentication/directorauth',
+				'director/authentication/directorAuth',
 				'director/authentication/test1'
 			],
 		},
@@ -22,15 +22,15 @@ module.exports = {
 		        type: 'category',
 		        label: 'Teaming',
 		        items: [
-				'director/authentication/directorauth',
-				'director/authentication/test1'
+				'director/teaming/directorTeaming',
+				'director/teaming/test1'
 			],
 		},
 		{
 		        type: 'category',
 		        label: 'OpenEBS',
 		        items: [
-				'director/openebs/summary',
+				'director/openebs/directorOpenebs',
 				'director/openebs/test1'
 			],
 		},
@@ -42,7 +42,41 @@ module.exports = {
 				'director/dmaas/test1'
 			],
 		},
+		{
+		        type: 'category',
+		        label: 'Logging',
+		        items: [
+				'director/logging/logging',
+				'director/logging/test1'
+			],
+		},
+		{
+		        type: 'category',
+		        label: 'Visualization',
+		        items: [
+				'director/visualization/visualization',
+				'director/visualization/test1'
+			],
+		},
+		{
+		        type: 'category',
+		        label: 'Alerts',
+		        items: [
+				'director/alerts/alerts',
+				'director/alerts/test1'
+			],
+		},
     ],
+    "OpenEBS Enterprise": [
+		{
+		        type: 'category',
+		        label: 'DAO',
+		        items: [
+				'openebs/dao/dao',
+				'openebs/dao/test1'
+			],
+		},
+    ],	  
     Help: ['doc1', 'mdx'],
   },
 };

@@ -1,42 +1,18 @@
 ---
-id: summary
-title: OpenEBS Provisioning
-sidebar_label: Summary
+id: test1
+title: OEP Testing
+sidebar_label: Test1
 ---
 ------
 
-##  OpenEBS Installation
-##  OpenEBS Upgrade
-##  Pool Provisioning
-- #### cStor Pool Provisioning 
+## Authentication
+
+Authentication supported in Director 
+- #### Local Authentication
+
+  Authentication is done against database in Director i.e MySQL
 
 
-| TCID | Breif Description | #Issue |
-| ---- | ----------------- | ------ |
-|      |                   |        |
-|      |                   |        |
-|      |                   |        |
-
-- #### Jiva Pool Provisioning 
-
-
-| TCID | Breif Description | #Issue |
-| ---- | ----------------- | ------ |
-|      |                   |        |
-
-- #### LocalPV Pool Provisioning 
-
-
-| TCID | Breif Description | #Issue |
-| ---- | ----------------- | ------ |
-|      |                   |        |
-
-##  Storage Class Provisioning
-
-- cStor
-- Jiva
-- Local PV Hostpath
-- Local PV Device
 
 | TCID | Breif Description | #Issue |
 | ---- | ----------------- | ------ |
@@ -46,12 +22,35 @@ sidebar_label: Summary
 
 
 
-##  Volume  Provisioning
+- #### Github Auth
 
-- cStor
-- Jiva
-- Local PV Hostpath
-- Local PV Device
+OAuth using Github
+
+| TCID | Breif Description | #Issue |
+| ---- | ----------------- | ------ |
+|      |                   |        |
+|      |                   |        |
+|      |                   |        |
+
+
+
+- #### Gmail Auth
+
+OAuth using Gmail
+
+
+
+| TCID | Breif Description | #Issue |
+| ---- | ----------------- | ------ |
+|      |                   |        |
+|      |                   |        |
+|      |                   |        |
+
+- #### Active Directory
+
+Authentication is done against enterprise Active Directory.
+
+
 
 | TCID | Breif Description | #Issue |
 | ---- | ----------------- | ------ |

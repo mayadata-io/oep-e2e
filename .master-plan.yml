@@ -797,6 +797,116 @@ spec:
       git/location: "Add the actual link to TC readme"
       test/status: "Not Automated"
 
+  - tcid: cpre01 
+    name: "List the capacity recommendation"
+    description: ""
+    labels:
+      test/feature: "cStor Pool"
+      test/subFeature: "Recommendation"
+      test/priority: "P0"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: cpre02
+    name: "List device recommendation"
+    description: ""
+    labels:
+      test/feature: "cStor Pool"
+      test/subFeature: "Recommendation"
+      test/priority: "P0"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: cpre03
+    name: "Create a CSPC with Striped pool lowest possible list"
+    description: ""
+    labels:
+      test/feature: "cStor Pool"
+      test/subFeature: "Recommendation"
+      test/priority: "P0"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: cpre04
+    name: "Create a CSPC with Striped pool highest possible list"
+    description: ""
+    labels:
+      test/feature: "cStor Pool"
+      test/subFeature: "Recommendation"
+      test/priority: "P1"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: cpre05
+    name: "Create a CSPC with Striped pool upper bound"
+    description: ""
+    labels:
+      test/feature: "cStor Pool"
+      test/subFeature: "Recommendation"
+      test/priority: "P1"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: cpre06
+    name: "Create a CSPC with Striped pool with different size of disks across nodes"
+    description: ""
+    labels:
+      test/feature: "cStor Pool"
+      test/subFeature: "Recommendation"
+      test/priority: "P1"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: cpre07
+    name: "Over ride recommendation (mirror) "
+    description: ""
+    labels:
+      test/feature: "cStor Pool"
+      test/subFeature: "Recommendation"
+      test/priority: "P1"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: cpre08 
+    name: "Create a CSPC with Striped pool with different size and different type of disks across nodes"
+    description: ""
+    labels:
+      test/feature: "cStor Pool"
+      test/subFeature: "Recommendation"
+      test/priority: "P2"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: cpre09
+    name: "Already used disks should not be part of recommendation"
+    description: ""
+    labels:
+      test/feature: "cStor Pool"
+      test/subFeature: "Recommendation"
+      test/priority: "P1"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: cpre10
+    name: "Nodes not labelled for OpenEBS should not be part of recommendation"
+    description: ""
+    labels:
+      test/feature: "cStor Pool"
+      test/subFeature: "Recommendation"
+      test/priority: "P2"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
+  - tcid: cpre11
+    name: "Invalid raid configuration"
+    description: ""
+    labels:
+      test/feature: "cStor Pool"
+      test/subFeature: "Recommendation"
+      test/priority: "P2"
+      git/location: "Add the actual link to TC readme"
+      test/status: "Not Automated"
+
 ###### Abbreviations
 #Details of abbreviation in readme file master-plan.md , One of the example as below
 # iu  -- Install and Upgrade of OpenEBS"
