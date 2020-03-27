@@ -17,7 +17,8 @@ Testing does not cover the usability aspects of Director OnPrem. It covers the i
 
 Director has three databases : mysql for user data, Cassandra for monitoring and alert metrics and ElasticsearchDB for logs. Director needs to be tested with various combinations of storage and resources for these databases
 
-- Install Director with all three databases as LocalPV with GPD/EBS underneath
+- Install Director using standard storage class with GPD/EBS underneath.
+- Install Director with all three databases as LocalPV with GPD/EBS underneath.
 - Install Director with all three databases as OpenEBS LocalPV with GPD/EBS underneath
 - Install Director with all three databases as OpenEBS LocalPV with local SSDs underneath
 - Install Director with all three databases as OpenEBS cStor with locall SSDs underneath
@@ -26,7 +27,7 @@ Director has three databases : mysql for user data, Cassandra for monitoring and
 
 | TestCase                             | Breif Description             | #Issue       | Platform | Status  |
 | ------------------------------------ | ----------------------------- | ------------ | -------- | ------- |
-| [Dir-Install-GCP](install-tcid-1240) | Install DOP using helm on GCP | Not-assigned | GCP      | In-Prod |
+| [Dir-Install-GCP](install-tcid-iudi01) | Install DOP using helm on GCP | Not-assigned | GCP      | In-Prod |
 |                                      |                               |              |          |         |
 |                                      |                               |              |          |         |
 
