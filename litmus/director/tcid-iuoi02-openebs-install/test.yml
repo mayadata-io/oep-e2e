@@ -200,7 +200,7 @@
         
         - name: Fetch openebsjob details
           uri:
-            url: "{{ director_url }}/v3/groups/1a14/openebsjobs/{{openebs_job_id}}"
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/openebsjobs/{{openebs_job_id}}"
             method: GET
             url_username: "{{ username.stdout }}"
             url_password: "{{ password.stdout }}"
