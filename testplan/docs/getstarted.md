@@ -1,13 +1,11 @@
 ---
 id: getstarted
-title: Test Plan for OpenEBS Enterprise Edition
+title: Test Plan for MayaData OpenEBS Enterprise Platform (OEP)
 sidebar_label: Introduction
 ---
 ------
 
-## Test Plan for OpenEBS Enterprise Edition or OEP
-
-OEP, as the enterprise edition of the product, requires highest level of testing interms of covering areas of testing such as scalability, security, interoperability, functional and chaos engineering. This test plan covers all these areas and serves as the top level guide for those who are contributing to the quality of the product.
+MayaData delivers it's vision of delivering data agility for DevOps by converting Kubernetes into a data layer. MayaData's product is called OpenEBS Enterprise Platform or OEP. OEP is a combination of multiple tools and projects and it currently comprises of OpenEBS Enterprise Edition, Director and Litmus. OEP, as the enterprise edition of the product, requires highest level of testing interms of covering areas of testing such as scalability, security, interoperability, functional and chaos engineering. This test plan covers all these areas and serves as the top level guide for those who are contributing to the quality of the product.
 
 
 
