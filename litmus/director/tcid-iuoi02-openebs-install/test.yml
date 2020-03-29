@@ -189,7 +189,7 @@
             force_basic_auth: yes
             return_content: yes
             body_format: json
-            body: '{{ installopenebs }}'
+            body: '{"yaml": {{ installopenebs }}}'
             status_code: 200
           register: openebs
         
