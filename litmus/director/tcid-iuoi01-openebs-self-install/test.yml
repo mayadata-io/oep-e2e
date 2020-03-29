@@ -177,7 +177,7 @@
             force_basic_auth: yes
             return_content: yes
             body_format: json
-            body: '{{ installopenebs }}'
+            body: '{"yaml": {{ installopenebs }}}'
             status_code: 200
           register: res_openebs
 
@@ -188,8 +188,8 @@
           until: app_status.stdout == 'Running'
           with_items:
             - "{{ openebs_components }}"
-          retries: 20
-          delay: 5
+          retries: 30
+          delay: 10
 
         ## Get the container Status of the openebs pods
         - name: Get the container status of the openebs pods.
@@ -201,7 +201,7 @@
           register: containerStatus
           until: "containerStatus.stdout == 'true'"
           retries: 20
-          delay: 2         
+          delay: 2        
 
         - set_fact:
             flag: "Pass"
