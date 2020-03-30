@@ -1,6 +1,6 @@
 ---
 id: directorAuth
-title: Test plan for Director Authentication
+title: Director Authentication
 sidebar_label: Test Strategy
 ---
 ------
@@ -19,11 +19,12 @@ In this authentication, credentials are validated against the Identity stored lo
 
 
 
-| TCID | Breif Description | #Issue |
-| ---- | ----------------- | ------ |
-|      |                   |        |
-|      |                   |        |
-|      |                   |        |
+| TCID                        | Breif Description | #Issue | Platform |
+| --------------------------- | ----------------- | ------ | -------- |
+| [Admin Auth](tcid-aula01)   |                   |        | All      |
+| [User Auth](tcid-aula02)    |                   |        | All      |
+| [Sign Up](tcid-aula03)      |                   |        | All      |
+|                             |                   |        |          |
 
 
 
