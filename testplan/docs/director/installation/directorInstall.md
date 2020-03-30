@@ -25,11 +25,12 @@ Director has three databases : mysql for user data, Cassandra for monitoring and
 
 ### Actual test cases
 
-| TestCase                             | Breif Description             | #Issue       | Platform | Status  |
-| ------------------------------------ | ----------------------------- | ------------ | -------- | ------- |
-| [Dir-Install-GCP](install-tcid-iudi01) | Install DOP using helm on GCP | Not-assigned | GCP      | In-Prod |
-|                                      |                               |              |          |         |
-|                                      |                               |              |          |         |
+| TestCase                               | Breif Description                | #Issue       | Platform | Status  |
+| -------------------------------------- | ---------------------------------| ------------ | -------- | ------- |
+| [Dir-Install-GCP](install-tcid-iudi01) | Install DOP using helm on GCP    | Not-assigned | GCP      | In-Prod |
+| [Dir-Install-GCP](install-tcid-iudi02) | Install DOP using openebslocal pv| Not-assigned | GCP      | Not-done|
+|                                        |                                  |              |          |         |
+|                                        |                                  |              |          |         |
 
 ## Upgrade of Director OnPrem
 

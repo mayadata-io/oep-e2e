@@ -7,7 +7,8 @@ module.exports = {
 		        label: 'Install and Upgrade',
 		        items: [
 				'director/installation/directorInstall',
-				'director/installation/install-tcid-iudi01'
+				'director/installation/install-tcid-iudi01',
+				'director/installation/install-tcid-iudi02'
 			],
 		},
 		{
