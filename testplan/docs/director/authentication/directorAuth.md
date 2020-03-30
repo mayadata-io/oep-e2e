@@ -1,7 +1,7 @@
 ---
 id: directorAuth
 title: Test plan for Director Authentication
-sidebar_label: Summary
+sidebar_label: Test Strategy
 ---
 ------
 

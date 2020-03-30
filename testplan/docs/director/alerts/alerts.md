@@ -1,7 +1,7 @@
 ---
 id: alerts 
 title: Alerts
-sidebar_label: Summary
+sidebar_label: Test Strategy
 ---
 ------
 

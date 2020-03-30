@@ -1,7 +1,7 @@
 ---
 id: logging
 title: Logging
-sidebar_label: Summary
+sidebar_label: Test Strategy
 ---
 ------
 

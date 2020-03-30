@@ -1,7 +1,7 @@
 ---
 id: install
 title: Install and Upgrade of OpenEBS
-sidebar_label: Install and Upgrade
+sidebar_label: Test Strategy
 ---
 ------
 

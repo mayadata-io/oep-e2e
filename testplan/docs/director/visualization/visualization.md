@@ -1,7 +1,7 @@
 ---
 id: visualization
 title: Monitoring and Visualization 
-sidebar_label: Summary
+sidebar_label: Test Strategy
 ---
 ------
 
