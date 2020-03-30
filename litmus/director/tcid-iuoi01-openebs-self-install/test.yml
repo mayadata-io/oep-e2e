@@ -200,8 +200,8 @@
             executable: /bin/bash
           register: containerStatus
           until: "containerStatus.stdout == 'true'"
-          retries: 20
-          delay: 2        
+          retries: 30
+          delay: 10        
 
         - set_fact:
             flag: "Pass"
