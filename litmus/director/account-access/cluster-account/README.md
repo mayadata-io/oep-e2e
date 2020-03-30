@@ -38,7 +38,7 @@ name: "Check Cluster Account access resources"
 
 ## Details
 
-- **_Fetching account resources
+- **_Fetching account resources:_**
   - Running /api_testing/group/access.py script with account as argument i.e., ClusterAccount in this caseto fetch pool and maya resources
 
 - **_Generating the request for openebs installation:_**
