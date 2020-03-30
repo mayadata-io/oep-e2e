@@ -39,7 +39,7 @@ Director installation test cases, upgrade cases, day 2 operations of director, c
 
 **Functional testing with Rest**
 
-There are a set of tests that are written against REST api. All functional, scalable and chaos testing written using these APIs wil be under this stage. A separate user cluster or many user clusters are connected to Director for the tests under this stage.
+There are a set of tests that are written against REST api. All functional, scalable and chaos testing written using these APIs will be under this stage. A separate user cluster or many user clusters are connected to Director for the tests under this stage.
 
 **Functional testing with Selenium**
 
