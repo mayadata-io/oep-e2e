@@ -1,11 +1,29 @@
 ---
 id: gitlabstages
-title: GitLab Stages
-sidebar_label: GitLab Stages
+title: E2E Pipelines
+sidebar_label: Pipelines
 ---
 ------
 
+## GitLab
 
+OEP E2E is done using GitLab. Each PR in any of the Director Repositories or DAO Respositories will trigger a set of E2E piplines. It is also possible to trigger the pipelines manually. 
+
+### Director Repositories
+
+Following repositories will have gitlab-ci.yml files which will trigger pipelines in [oep-e2e-gcp](https://github.com/mayadata-io/oep-e2e-gcp), [oep-e2e-konvoy](https://github.com/mayadata-io/oep-e2e-konvoy) and [oep-e2e-rancher](https://github.com/mayadata-io/oep-e2e-rancher) repositories.
+
+
+
+Maya-io-server, maya-ui, maya-chatops, openebs-manager, dmaas-agent etc. 
+
+
+
+### DAO Repositories
+
+Following repositories will have gitlab-ci.yml files which will trigger pipelines in [oep-e2e-gcp](https://github.com/mayadata-io/oep-e2e-gcp), [oep-e2e-konvoy](https://github.com/mayadata-io/oep-e2e-konvoy) and [oep-e2e-rancher](https://github.com/mayadata-io/oep-e2e-rancher) repositories.
+
+[cstorpoolauto](https://github.com/mayadata-io/cstorpoolauto) and [storage-provisioner](https://github.com/mayadata-io/storage-provisioner).
 
 ## GitLab Stages
 
@@ -21,7 +39,7 @@ Director installation test cases, upgrade cases, day 2 operations of director, c
 
 **Functional testing with Rest**
 
-There are a set of tests that are written against REST api. All functional, scalable and chaos testing written using these APIs wil be under this stage. A separate user cluster or many user clusters are connected to Director for the tests under this stage.
+There are a set of tests that are written against REST api. All functional, scalable and chaos testing written using these APIs will be under this stage. A separate user cluster or many user clusters are connected to Director for the tests under this stage.
 
 **Functional testing with Selenium**
 

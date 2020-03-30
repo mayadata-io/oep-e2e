@@ -189,7 +189,7 @@
             force_basic_auth: yes
             return_content: yes
             body_format: json
-            body: '{{ installopenebs }}'
+            body: '{"yaml": {{ installopenebs }}}'
             status_code: 200
           register: openebs
         
@@ -200,7 +200,7 @@
         
         - name: Fetch openebsjob details
           uri:
-            url: "{{ director_url }}/v3/groups/1a14/openebsjobs/{{openebs_job_id}}"
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{cluster_id}}/openebsjobs/{{openebs_job_id}}"
             method: GET
             url_username: "{{ username.stdout }}"
             url_password: "{{ password.stdout }}"
@@ -209,9 +209,9 @@
             body_format: json
             status_code: 200
           register: openebs_job
-          until: "openebs_job.json.jobStatus != ''"
+          until: "openebs_job.json.state == 'Success'"
           delay: 10
-          retries: 10
+          retries: 30
         
         ## Checking wether the openebs_job pod is in online state or not.
         - name: Checking phase of openebs_job 
