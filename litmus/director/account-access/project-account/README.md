@@ -2,6 +2,7 @@
 
 ---
 tcid: 
+
 name: "Check Project Account access resources"
 ---
 ------
@@ -36,6 +37,9 @@ name: "Check Project Account access resources"
 - Check if cluster applications is same as ProjectAccount maya-app resources.
 
 ## Expected results
+
+- Inside project account we should get all connected clusters resources i.e., pools, maya   applications
+Note: For current since only one cluster is connected to Director OnPrem
 
 ## Entry Criteria
 
