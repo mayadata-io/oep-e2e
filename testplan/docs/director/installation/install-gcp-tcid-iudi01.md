@@ -8,10 +8,6 @@ sidebar_label: TCID-IUDI01
 
 ## Install DOP using helm on GCP with GPD underneath
 
-<b>tcid:</b> iudi01 <br>
-<b>name:</b> "Install DOP using helm on GCP with GPD underneath" <br>
-
-
 ### Experiment Metadata
 
 <table>
@@ -32,10 +28,10 @@ sidebar_label: TCID-IUDI01
 - Bring up 4 Vms in GCP 1 master 3 node.                                         
 - Use any tool such as kops to spin up k8s cluster. It is suggested to have k8s version >= 1.12.0                         
 - All the nodes of the cluster should be in healthy state.     
-- helm 3 should be installed on the k8s cluster
+- helm 3 should be installed on the k8s cluster.
 
 
-## Details
+### Details
 - In this test case we have to spin up a k8s cluster on top of GCP VMs and install DOP on the k8s cluster.       
 
 ### Steps Performed in the test
@@ -58,6 +54,3 @@ sidebar_label: TCID-IUDI01
 - All the DOP pods should come in running state.
 - All the pods in maya-system namespace should be running state.
 - DOP ui should be accessible in any browser.
-
-
-
