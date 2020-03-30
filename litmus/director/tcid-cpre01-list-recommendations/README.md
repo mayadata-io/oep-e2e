@@ -32,22 +32,8 @@
 
 ### Expected output
 
-```
-"data": [
-    {
-        "id": null,
-        "type": "cStorPoolCapacityRecommendationOutput",
-        "links": { },
-        "actions": { },
-        "baseType": "cStorPoolCapacityRecommendationOutput",
-        "deviceGroupName": "sparse",
-        "maxCapacity": "107374182400",
-        "minCapacity": "10737418240"
-    }
-],
-```
-
-
+- The output of this test case will be the list of capacity recommendations including min and max 
+capacity of cstor pools.
 
 ## Steps Performed in the test
 
@@ -75,64 +61,6 @@
 - Create `run_litmus_test.yml` file in `litmus` namespace. 
 - Check the test log using `kubectl logs -f <jobs-pod-name> -n <litmus>` command.
 
-#### Sample run_litmus_test.yml
-
-```
-apiVersion: batch/v1
-kind: Job
-metadata:
-  generateName: <test-name>-
-  namespace: litmus
-spec:
-  template:
-    metadata:
-      name: litmus
-      labels:
-        app: <test-name>
-    spec:
-      serviceAccountName: litmus
-      restartPolicy: Never
-      volumes:
-      - name: secret-volume
-        secret:
-          secretName: director-user-pass
-      containers:
-      - name: ansibletest
-        image: mayadataio/dop-validator:ci
-        imagePullPolicy: Always
-        volumeMounts:
-        - name: secret-volume
-          readOnly: true
-          mountPath: "/etc/secret-volume"
-        env:
-          
-          ## Take url from configmap config
-          - name: DIRECTOR_IP
-            valueFrom:
-              configMapKeyRef:
-                name: config
-                key: url
-          ## Take cluster_id from configmap clusterid
-          - name: CLUSTER_ID    
-            valueFrom:
-              configMapKeyRef:
-                name: clusterid
-                key: cluster_id
-          ## Takes group_id from configmap groupid
-          - name: GROUP_ID
-            valueFrom:
-              configMapKeyRef:
-                name: groupid
-                key: group_id
-          
-          - name: ANSIBLE_STDOUT_CALLBACK
-            value: 'default'  
-        command: ["/bin/bash"]
-        args: ["-c", "ansible-playbook ./litmus/director/<test-path>/test.yml -i /etc/ansible/hosts -v; exit 0"]
-        
-      imagePullSecrets:
-        - name: oep-secret 
-```
 
 ### Watch Test progress
 

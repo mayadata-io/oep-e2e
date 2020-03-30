@@ -31,61 +31,8 @@
 - Test case will list the device recommendations with `dataDevices`
 
 ### Expected output
-```
-{
-    "type": "poolInstanceConfig",
-    "blockDevices": {
-        "type": "blockDeviceTopology",
-        "dataDevices": [
-            {
-                "type": "k8sReference",
-                "apiVersion": "openebs.io/v1alpha1",
-                "kind": "BlockDevice",
-                "name": "sparse-3c46b77091368067ef6e2e120e7c0766",
-                "namespace": "openebs",
-                "uid": "ebde03b9-e3e6-4983-a72b-a1bd75e60d6b"
-            }
-        ],
-        "writeCacheDevices": null
-    },
-    "capacity": "10737418240",
-    "node": {
-        "type": "k8sReference",
-        "apiVersion": "",
-        "kind": "",
-        "name": "gke-cstor-pool-provision-default-pool-a88ccaf1-11zv",
-        "namespace": "",
-        "uid": ""
-    }
-},
-{
-    "type": "poolInstanceConfig",
-    "blockDevices": {
-        "type": "blockDeviceTopology",
-        "dataDevices": [
-            {
-                "type": "k8sReference",
-                "apiVersion": "openebs.io/v1alpha1",
-                "kind": "BlockDevice",
-                "name": "sparse-8b047f03be10f05c9d8974bc0876ddd0",
-                "namespace": "openebs",
-                "uid": "628a8ff4-2660-4d45-b108-8d3e2f0da9f3"
-            }
-        ],
-        "writeCacheDevices": null
-    },
-    "capacity": "10737418240",
-    "node": {
-        "type": "k8sReference",
-        "apiVersion": "",
-        "kind": "",
-        "name": "gke-cstor-pool-provision-default-pool-a88ccaf1-dw2q",
-        "namespace": "",
-        "uid": ""
-    }
-}
-```
 
+- The output of this test case will be the list of device recommendations of cstorpools.
 
 ## Steps Performed in the test
 
@@ -113,64 +60,6 @@
 - Create `run_litmus_test.yml` file in `litmus` namespace. 
 - Check the test log using `kubectl logs -f <jobs-pod-name> -n <litmus>` command.
 
-#### Sample run_litmus_test.yml
-
-```
-apiVersion: batch/v1
-kind: Job
-metadata:
-  generateName: <test-name>-
-  namespace: litmus
-spec:
-  template:
-    metadata:
-      name: litmus
-      labels:
-        app: <test-name>
-    spec:
-      serviceAccountName: litmus
-      restartPolicy: Never
-      volumes:
-      - name: secret-volume
-        secret:
-          secretName: director-user-pass
-      containers:
-      - name: ansibletest
-        image: mayadataio/dop-validator:ci
-        imagePullPolicy: Always
-        volumeMounts:
-        - name: secret-volume
-          readOnly: true
-          mountPath: "/etc/secret-volume"
-        env:
-          
-          ## Take url from configmap config
-          - name: DIRECTOR_IP
-            valueFrom:
-              configMapKeyRef:
-                name: config
-                key: url
-          ## Take cluster_id from configmap clusterid
-          - name: CLUSTER_ID    
-            valueFrom:
-              configMapKeyRef:
-                name: clusterid
-                key: cluster_id
-          ## Takes group_id from configmap groupid
-          - name: GROUP_ID
-            valueFrom:
-              configMapKeyRef:
-                name: groupid
-                key: group_id
-          
-          - name: ANSIBLE_STDOUT_CALLBACK
-            value: 'default'  
-        command: ["/bin/bash"]
-        args: ["-c", "ansible-playbook ./litmus/director/<test-path>/test.yml -i /etc/ansible/hosts -v; exit 0"]
-        
-      imagePullSecrets:
-        - name: oep-secret 
-```
 
 ### Watch Test progress
 
