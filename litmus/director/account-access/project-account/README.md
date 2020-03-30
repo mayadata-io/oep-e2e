@@ -1,9 +1,10 @@
 # teaming-project-account-resources-check
 
 ---
+
 tcid: TRPA01
 
-name: "Check Project Account access resources"
+name: Check Project Account access resources
 ---
 ------
 

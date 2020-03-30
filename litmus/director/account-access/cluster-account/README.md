@@ -1,9 +1,10 @@
 # teaming-cluster-account-resources-check
 
 ---
+
 tcid: TRCA01
 
-name: "Check Cluster Account access resources"
+name: Check Cluster Account access resources
 ---
 ------
 
