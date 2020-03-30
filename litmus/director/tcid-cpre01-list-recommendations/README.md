@@ -25,6 +25,29 @@
 - Every component of DOP cluster should be healthy and running.
 - Ensure that the `openebs data plane and control plane components` are available in the cluster.
 
+## Details
+
+- This test case is to list the capacity recommendations of cstorpools.
+- Test case will list the capacity with `maxCapacity` and `minCapacity`
+
+### Expected output
+
+```
+"data": [
+    {
+        "id": null,
+        "type": "cStorPoolCapacityRecommendationOutput",
+        "links": { },
+        "actions": { },
+        "baseType": "cStorPoolCapacityRecommendationOutput",
+        "deviceGroupName": "sparse",
+        "maxCapacity": "107374182400",
+        "minCapacity": "10737418240"
+    }
+],
+```
+
+
 
 ## Steps Performed in the test
 
