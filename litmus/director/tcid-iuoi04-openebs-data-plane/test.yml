@@ -218,7 +218,7 @@
 
           ## Fetching job ID
           - name: Fetching Job Id to of openebsjob
-            set_fact:node_cluster
+            set_fact:
               openebs_job_id: "{{ openebs.json.id }}"
 
           - name: Fetch openebsjob details
