@@ -9,7 +9,8 @@ module.exports = {
 				'director/installation/directorInstall',
 				'director/installation/install-tcid-iudi01',
 				'director/installation/install-tcid-iudi02',
-				'director/installation/install-tcid-iudi03'
+				'director/installation/install-tcid-iudi03',
+				'director/installation/install-tcid-iudi04'
 			],
 		},
 		{

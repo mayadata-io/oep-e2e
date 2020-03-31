@@ -29,6 +29,7 @@ Director has three databases : mysql for user data, Cassandra for monitoring and
 | [Dir-Install-GCP](install-tcid-iudi01) | Install DOP using helm on GCP     | Not-assigned | GCP      | In-Prod |
 | [Dir-Install-GCP](install-tcid-iudi02) | Install DOP using openebs local pv| Not-assigned | GCP      | Not-done|
 | [Dir-Install-GCP](install-tcid-iudi03) | Install DOP using openebs local pv| Not-assigned | GCP      | Not-done|
+| [Dir-Install-GCP](install-tcid-iudi04) | Install DOP using openebs cstor sc| Not-assigned | GCP      | Not-done|
 |                                        |                                   |              |          |         |
 |                                        |                                   |              |          |         |
 
