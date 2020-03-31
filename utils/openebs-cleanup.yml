@@ -1,9 +1,3 @@
-## Removing Application
-- name: Deleting application namespace
-  shell: kubectl delete ns {{ app_ns }}
-  args:
-    executable: /bin/bash  
-
 ## Cleaning SPC from the cluster
 - name: Removing SPC from the cluster
   shell: kubectl delete spc --all
