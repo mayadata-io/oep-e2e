@@ -73,6 +73,9 @@
         ## Removing the labels from the cluster nodes
         - include_tasks: /utils/openebs-label-cleanup.yml
 
+        ## Removing application ns
+        - include_tasks: /utils/app-cleanup.yml
+
         ## Deleting openebs from the cluster
         - include_tasks: /utils/openebs-cleanup.yml
           vars:

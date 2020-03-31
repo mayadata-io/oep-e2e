@@ -1,0 +1,5 @@
+## Removing application ns
+- name: Deleting application namespace	
+  shell: kubectl delete ns {{ app_ns }}	
+  args:	
+    executable: /bin/bash  
