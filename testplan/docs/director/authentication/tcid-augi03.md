@@ -1,10 +1,12 @@
 ---
-id: tcid-aula03
-title: Local Auth Non Admin user Signup
-sidebar_label: LA Signup
+id: tcid-augi03
+title: Github Auth user Signup
+sidebar_label:  Github Signup
 ---
 ------
 
+
+## Github Authentication User Signup
 
 ### Experiment Metadata
 
@@ -15,7 +17,7 @@ sidebar_label: LA Signup
     <th> Tested K8s Platform </th>
   </tr>
   <tr>
-    <td> Local Authentication </td>
+    <td> Github Authentication </td>
     <td> Signup verification </td>
     <td> ALL </td>
   </tr>
@@ -24,7 +26,7 @@ sidebar_label: LA Signup
 ### Prerequisites
 - Cluster create setup should be done
 - DOP should be installed
-- TC id tcid-lau01 and tcid-lau02 should be executed
+- TC id tcid-laffu01 and tcid-lau02 should be executed
 
 
 ### Details
@@ -35,11 +37,6 @@ sidebar_label: LA Signup
 - Signup for a new user signuser1
 - Check for user name 
   - create with user1 
-  - boundary value (min length)
-  - boundary value (max length)
-- Password validity check
-  - Check for min char length (8 chars)
-  - Check for complexity 
 - email check should be unique
 - User should be enabled
 - Update profile
@@ -50,8 +47,6 @@ sidebar_label: LA Signup
 - Able to login with required profile updated.
 - User name checks
   - create with user1 (It should fail as user1 exists)
-- Passowrd checks
-  - should pass (complexity should match)
 - email checks
   - should pass (no duplicate should work)
 - User should be able to login

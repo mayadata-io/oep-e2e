@@ -34,19 +34,12 @@ sidebar_label: LA Non Admin User
 ### Steps Performed in the test
 
 - Login using user1
-
 - Enable user1
-
 - Disable user1
-
 - Login with wrong password
-
 - Logout
-
 - Change password
-
 - Time out
-
 - Update profile
 
 

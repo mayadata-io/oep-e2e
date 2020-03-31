@@ -1,12 +1,10 @@
 ---
-id: tcid-aula01
-title: Local Auth Admin user
-sidebar_label: LA Admin
+id: tcid-auad02
+title: Active Directory Auth user
+sidebar_label: AD User
 ---
 ------
 
-
-### Local Authentication Admin User
 
 ### Experiment Metadata
 
@@ -17,8 +15,8 @@ sidebar_label: LA Admin
     <th> Tested K8s Platform </th>
   </tr>
   <tr>
-    <td> Local Authentication </td>
-    <td> Admin user verification </td>
+    <td> AD Authentication </td>
+    <td> User verification </td>
     <td> ALL </td>
   </tr>
 </table>
@@ -26,32 +24,23 @@ sidebar_label: LA Admin
 ### Prerequisites
 - Cluster create setup should be done
 - DOP should be installed
+- AD access should be configured
 
 
 ### Details
-- Check the login for Admin user 
+- Check the login for AD user1 
 
 ### Steps Performed in the test
 
-- Login using Administrator user
-- Create 2 new users
-  - user1
-  - user2
-- Enable user1
-- Disable user2
-- Login with wrong password
+- Login using user1
 - Logout
-- Change password
 - Time out
 - Update profile
+
 
 ### Expected output
 
 - Able to login
-- Able to create users
-- Able to login with user1
-- Unable to login with user2
-- Unable to login with wrong password
 - Logout, then on access it should ask for login
 - Timeout, on an time out it should logout and ask for re-login
 - Update profile fields

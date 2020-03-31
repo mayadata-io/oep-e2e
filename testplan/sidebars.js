@@ -14,8 +14,7 @@ module.exports = {
 		        type: 'category',
 		        label: 'Authentication',
 		        items: [
-				'director/authentication/directorAuth',
-				'director/authentication/test1'
+				'director/authentication/directorAuth'
 			],
 		},
 		{
