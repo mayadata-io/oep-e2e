@@ -251,6 +251,8 @@
 
         ## Deleting openebs from the cluster
         - include_tasks: /utils/openebs-cleanup.yml
+          vars:
+            namespace: "{{ openebs_namespace.stdout }}"
     
         ## Setting flag as Pass
         - set_fact:
