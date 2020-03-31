@@ -17,20 +17,20 @@ Testing does not cover the usability aspects of Director OnPrem. It covers the i
 
 Director has three databases : mysql for user data, Cassandra for monitoring and alert metrics and ElasticsearchDB for logs. Director needs to be tested with various combinations of storage and resources for these databases
 
-- Install Director using standard storage class with GPD/EBS underneath.
 - Install Director with all three databases as LocalPV with GPD/EBS underneath.
-- Install Director with all three databases as OpenEBS LocalPV with GPD/EBS underneath
-- Install Director with all three databases as OpenEBS LocalPV with local SSDs underneath
-- Install Director with all three databases as OpenEBS cStor with locall SSDs underneath
+- Install Director with all three databases as OpenEBS LocalPV with local SSDs underneath.
+- Install Director with all three databases as OpenEBS LocalPV with GPD/EBS underneath.
+- Install Director with all three databases as OpenEBS cStor with locall SSDs underneath.
 
 ### Actual test cases
 
-| TestCase                               | Breif Description                | #Issue       | Platform | Status  |
-| -------------------------------------- | ---------------------------------| ------------ | -------- | ------- |
-| [Dir-Install-GCP](install-tcid-iudi01) | Install DOP using helm on GCP    | Not-assigned | GCP      | In-Prod |
-| [Dir-Install-GCP](install-tcid-iudi02) | Install DOP using openebslocal pv| Not-assigned | GCP      | Not-done|
-|                                        |                                  |              |          |         |
-|                                        |                                  |              |          |         |
+| TestCase                               | Breif Description                 | #Issue       | Platform | Status  |
+| -------------------------------------- | --------------------------------- | ------------ | -------- | ------- |
+| [Dir-Install-GCP](install-tcid-iudi01) | Install DOP using helm on GCP     | Not-assigned | GCP      | In-Prod |
+| [Dir-Install-GCP](install-tcid-iudi02) | Install DOP using openebs local pv| Not-assigned | GCP      | Not-done|
+| [Dir-Install-GCP](install-tcid-iudi03) | Install DOP using openebs local pv| Not-assigned | GCP      | Not-done|
+|                                        |                                   |              |          |         |
+|                                        |                                   |              |          |         |
 
 ## Upgrade of Director OnPrem
 
