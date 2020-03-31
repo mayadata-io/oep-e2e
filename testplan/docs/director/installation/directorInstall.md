@@ -20,16 +20,20 @@ Director has three databases : mysql for user data, Cassandra for monitoring and
 - Install Director with all three databases as LocalPV with GPD/EBS underneath.
 - Install Director with all three databases as OpenEBS LocalPV with local SSDs underneath.
 - Install Director with all three databases as OpenEBS LocalPV with GPD/EBS underneath.
-- Install Director with all three databases as OpenEBS cStor with locall SSDs underneath.
+- Install Director with all three databases as OpenEBS cStor with local SSDs underneath.
+- Install Director using only openebs-jiva-default storage class.
+- Install Director using cstor,jiva and local-pv storage class.
 
 ### Actual test cases
 
-| TestCase                               | Breif Description                 | #Issue       | Platform | Status  |
-| -------------------------------------- | --------------------------------- | ------------ | -------- | ------- |
-| [Dir-Install-GCP](install-tcid-iudi01) | Install DOP using helm on GCP     | Not-assigned | GCP      | In-Prod |
-| [Dir-Install-GCP](install-tcid-iudi02) | Install DOP using openebs local pv| Not-assigned | GCP      | Not-done|
-| [Dir-Install-GCP](install-tcid-iudi03) | Install DOP using openebs local pv| Not-assigned | GCP      | Not-done|
-| [Dir-Install-GCP](install-tcid-iudi04) | Install DOP using openebs cstor sc| Not-assigned | GCP      | Not-done|
+| TestCase                               | Breif Description                       | #Issue       | Platform | Status  |
+| -------------------------------------- | --------------------------------------- | ------------ | -------- | ------- |
+| [Dir-Install-GCP](install-tcid-iudi01) | Install DOP using helm on GCP           | Not-assigned | GCP      | In-Prod |
+| [Dir-Install-GCP](install-tcid-iudi02) | Install DOP using openebs local pv      | Not-assigned | GCP      | Not-done|
+| [Dir-Install-GCP](install-tcid-iudi03) | Install DOP using openebs local pv      | Not-assigned | GCP      | Not-done|
+| [Dir-Install-GCP](install-tcid-iudi04) | Install DOP using openebs cstor sc      | Not-assigned | GCP      | Not-done|
+| [Dir-Install-GCP](install-tcid-iudi05) | Install DOP using openebs jiva sc       | Not-assigned | GCP      | Not-done|
+| [Dir-Install-GCP](install-tcid-iudi06) | Install DOP using cstor,jiva and localpv| Not-assigned | GCP      | Not-done|
 |                                        |                                   |              |          |         |
 |                                        |                                   |              |          |         |
 
