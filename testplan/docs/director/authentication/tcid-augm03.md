@@ -1,7 +1,7 @@
 ---
 id: tcid-augm03
 title: GMail Auth user Signup
-sidebar_label: GMail Signup
+sidebar_label: TC-GMail-Signup
 ---
 ------
 
@@ -9,11 +9,13 @@ sidebar_label: GMail Signup
 
 <table>
   <tr>
+    <th> TCID </th>
     <th> Type </th>
     <th> Description </th>
     <th> Tested K8s Platform </th>
   </tr>
   <tr>
+    <td> TCID-augm03 </td>
     <td> GMail Authentication </td>
     <td> Signup verification </td>
     <td> ALL </td>

@@ -1,7 +1,7 @@
 ---
 id: tcid-aula02
 title: Local Auth Non Admin user
-sidebar_label: LA Non Admin User
+sidebar_label: TC-LA-Non-Admin-User
 ---
 ------
 
@@ -12,11 +12,13 @@ sidebar_label: LA Non Admin User
 
 <table>
   <tr>
+    <th> TCID </th>
     <th> Type </th>
     <th> Description </th>
     <th> Tested K8s Platform </th>
   </tr>
   <tr>
+    <td> TCID-aula02 </td>
     <td> Local Authentication </td>
     <td> Non Admin user verification </td>
     <td> ALL </td>

@@ -1,7 +1,7 @@
 ---
 id: tcid-auad03
 title: Active Directory Auth user Signup
-sidebar_label: AD Signup
+sidebar_label: TC-AD-Signup
 ---
 ------
 
@@ -11,11 +11,13 @@ sidebar_label: AD Signup
 
 <table>
   <tr>
+    <th> TCID </th>
     <th> Type </th>
     <th> Description </th>
     <th> Tested K8s Platform </th>
   </tr>
   <tr>
+    <td> TCID-auad03 </td>
     <td> AD Authentication </td>
     <td> Signup verification </td>
     <td> ALL </td>

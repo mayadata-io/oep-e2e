@@ -14,7 +14,16 @@ module.exports = {
 		        type: 'category',
 		        label: 'Authentication',
 		        items: [
-				'director/authentication/directorAuth'
+				'director/authentication/directorAuth',
+				'director/authentication/tcid-aula01',
+				'director/authentication/tcid-aula02',
+				'director/authentication/tcid-aula03',
+				'director/authentication/tcid-augi02',
+				'director/authentication/tcid-augi03',
+				'director/authentication/tcid-augm02',
+				'director/authentication/tcid-augm03',
+				'director/authentication/tcid-auad02',
+				'director/authentication/tcid-auad03'
 			],
 		},
 		{

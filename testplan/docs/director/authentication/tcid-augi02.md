@@ -1,7 +1,7 @@
 ---
 id: tcid-augi02
 title: Github Auth user
-sidebar_label: Github User
+sidebar_label: TC-Github-User
 ---
 ------
 
@@ -12,11 +12,13 @@ sidebar_label: Github User
 
 <table>
   <tr>
+    <th> TCID </th>
     <th> Type </th>
     <th> Description </th>
     <th> Tested K8s Platform </th>
   </tr>
   <tr>
+    <td> TCID-augi02 </td>
     <td> Github Authentication </td>
     <td> User verification </td>
     <td> ALL </td>

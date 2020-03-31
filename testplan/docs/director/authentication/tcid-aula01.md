@@ -1,7 +1,7 @@
 ---
 id: tcid-aula01
 title: Local Auth Admin user
-sidebar_label: LA Admin
+sidebar_label: TC-LA-Admin
 ---
 ------
 
@@ -12,11 +12,13 @@ sidebar_label: LA Admin
 
 <table>
   <tr>
+    <th> TCID </th>
     <th> Type </th>
     <th> Description </th>
     <th> Tested K8s Platform </th>
   </tr>
   <tr>
+    <td> TCID-aula01 </td>
     <td> Local Authentication </td>
     <td> Admin user verification </td>
     <td> ALL </td>
