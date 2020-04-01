@@ -250,7 +250,7 @@
             body_format: json
             status_code: 200
           register: node1
-          failed_when: "node1.json.labels['mayadata.io/data-plane'] != 'true'"
+          failed_when: "node1.json.nodeType['mayadata.io/data-plane'] != 'true'"
 
         ## Checking the data plane label on the second node
         - name: Checking the label on the second node of the cluster
@@ -264,7 +264,7 @@
             body_format: json
             status_code: 200
           register: node2
-          failed_when: "node2.json.labels['mayadata.io/data-plane'] != 'true'"        
+          failed_when: "node2.json.nodeType['mayadata.io/control-plane'] != 'true'"        
 
         ## Checking the data plane label on the third node
         - name: Checking the label on the third node of the cluster
@@ -278,7 +278,7 @@
             body_format: json
             status_code: 200
           register: node3
-          failed_when: "node3.json.labels['mayadata.io/data-plane'] != 'true'"
+          failed_when: "node3.json.nodeType['mayadata.io/control-plane'] != 'true'"
 
         ## If openebs is installed in the cluster then get the namespace
         - name: Getting the namespace where openebs is installed 
