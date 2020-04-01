@@ -1,7 +1,7 @@
 ---
 id: directorInstall
 title: Install and Upgrade of Director
-sidebar_label: Summary
+sidebar_label: Test Strategy
 ---
 ------
 

@@ -1,7 +1,7 @@
 ---
 id: dao 
 title: DAOs
-sidebar_label: Summary
+sidebar_label: Test Strategy
 ---
 ------
 

@@ -1,7 +1,7 @@
 ---
 id: directorOpenebs
 title: OpenEBS Installation, Upgrade and Provisioning
-sidebar_label: Summary
+sidebar_label: Test Strategy
 ---
 ------
 

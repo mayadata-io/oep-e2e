@@ -1,7 +1,7 @@
 ---
 id: dmaas
 title: Test plan for Director DMaaS
-sidebar_label: Summary
+sidebar_label: Test Strategy
 ---
 ------
 
