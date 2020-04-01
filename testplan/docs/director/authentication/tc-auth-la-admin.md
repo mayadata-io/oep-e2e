@@ -1,27 +1,27 @@
 ---
-id: tcid-aula02
-title: Local Auth Non Admin user
-sidebar_label: TC-LA-Non-Admin-User
+id: tc-auth-la-admin
+title: Local Auth Admin user
+sidebar_label: TC-Auth-LA-Admin
 ---
 ------
 
 
-## Local Authentication Normal User (Non Admin)
+### Local Authentication Admin User
 
 ### Experiment Metadata
 
 <table>
   <tr>
     <th> TCID </th>
+    <th> TCNAME </th>
     <th> Type </th>
     <th> Description </th>
-    <th> Tested K8s Platform </th>
   </tr>
   <tr>
-    <td> TCID-aula02 </td>
+    <td> TCID-aula01 </td>
+    <td> TC-Auth-LA-Admin </td>
     <td> Local Authentication </td>
-    <td> Non Admin user verification </td>
-    <td> ALL </td>
+    <td> Admin user verification </td>
   </tr>
 </table>
 
@@ -31,25 +31,28 @@ sidebar_label: TC-LA-Non-Admin-User
 
 
 ### Details
-- Check the login for user1 
+- Check the login for Admin user 
 
 ### Steps Performed in the test
 
-- Login using user1
+- Login using Administrator user
+- Create 2 new users
+  - user1
+  - user2
 - Enable user1
-- Disable user1
+- Disable user2
 - Login with wrong password
 - Logout
 - Change password
 - Time out
 - Update profile
 
-
 ### Expected output
 
 - Able to login
-- Unable to change the enable setting
-- Unable to change the disable setting
+- Able to create users
+- Able to login with user1
+- Unable to login with user2
 - Unable to login with wrong password
 - Logout, then on access it should ask for login
 - Timeout, on an time out it should logout and ask for re-login

@@ -1,7 +1,7 @@
 ---
-id: tcid-augm03
-title: GMail Auth user Signup
-sidebar_label: TC-GMail-Signup
+id: tc-auth-ad-signup
+title: Active Directory Auth user Signup
+sidebar_label: TC-Auth-AD-Signup
 ---
 ------
 
@@ -10,22 +10,23 @@ sidebar_label: TC-GMail-Signup
 <table>
   <tr>
     <th> TCID </th>
+    <th> TCNAME </th>
     <th> Type </th>
     <th> Description </th>
-    <th> Tested K8s Platform </th>
   </tr>
   <tr>
-    <td> TCID-augm03 </td>
-    <td> GMail Authentication </td>
+    <td> TCID-auad03 </td>
+    <td> TC-Auth-AD-Signup </td>
+    <td> AD Authentication </td>
     <td> Signup verification </td>
-    <td> ALL </td>
   </tr>
 </table>
 
 ### Prerequisites
 - Cluster create setup should be done
 - DOP should be installed
-- TC id tcid-laffu01 and tcid-lau02 should be executed
+- TC id tcid-auad02 should be executed
+- AD access should be setup
 
 
 ### Details

@@ -15,15 +15,15 @@ module.exports = {
 		        label: 'Authentication',
 		        items: [
 				'director/authentication/directorAuth',
-				'director/authentication/tcid-aula01',
-				'director/authentication/tcid-aula02',
-				'director/authentication/tcid-aula03',
-				'director/authentication/tcid-augi02',
-				'director/authentication/tcid-augi03',
-				'director/authentication/tcid-augm02',
-				'director/authentication/tcid-augm03',
-				'director/authentication/tcid-auad02',
-				'director/authentication/tcid-auad03'
+				'director/authentication/tc-auth-la-admin',
+				'director/authentication/tc-auth-la-user',
+				'director/authentication/tc-auth-la-signup',
+				'director/authentication/tc-auth-github-user',
+				'director/authentication/tc-auth-github-signup',
+				'director/authentication/tc-auth-gmail-user',
+				'director/authentication/tc-auth-gmail-signup',
+				'director/authentication/tc-auth-ad-user',
+				'director/authentication/tc-auth-ad-signup'
 			],
 		},
 		{

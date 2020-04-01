@@ -1,7 +1,7 @@
 ---
-id: tcid-auad02
+id: tc-auth-ad-user
 title: Active Directory Auth user
-sidebar_label: TC-AD-User
+sidebar_label: TC-Auth-AD-User
 ---
 ------
 
@@ -11,15 +11,15 @@ sidebar_label: TC-AD-User
 <table>
   <tr>
     <th> TCID </th>
+    <th> TCNAME </th>
     <th> Type </th>
     <th> Description </th>
-    <th> Tested K8s Platform </th>
   </tr>
   <tr>
     <td> TCID-auad02 </td>
+    <td> TC-Auth-AD-User </td>
     <td> AD Authentication </td>
     <td> User verification </td>
-    <td> ALL </td>
   </tr>
 </table>
 

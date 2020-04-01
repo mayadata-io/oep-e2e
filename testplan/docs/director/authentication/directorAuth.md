@@ -26,33 +26,35 @@ Test cases covered for the all the above authentication methods are as mentioned
   - Profile status updation
 
 
-- #### Local Authentication
 
-| TCID                                                   | Brief Description         | #Issue | Platform |
-| ------------------------------------------------------ | ----------------------- - | ------ | -------- |
-| <a href="tcid-aula01" target="_blank">Admin Auth</a>   | Admin User authentication |        | All      |
-| <a href="tcid-aula02" target="_blank">User Auth</a>    | User authentication       |        | All      |
-| <a href="tcid-aula03" target="_blank">Sign up</a>      | Signup Functionality      |        | All      |
+- - #### Local Authentication
+
+| TCID                                   | TC Name | GCP               | Rancher | Konvoy | AWS  |
+| -------------------------------------- | ------------------------- | ----------------- | ------- | ------ | ---- |
+| [tcid-aula01](tc-auth-la-admin) | TC-Auth-LA-Admin | Y | W | W | W |
+| [tcid-aula02](tc-auth-la-user)   | TC-Auth-LA-User | Y    | W       | W | W |
+| [tcid-aula03](tc-auth-la-signup)     | TC-Auth-LA-Signup | Y              | W | W | W |
 
 - #### Github Authentication
 
-| TCID                                                   | Brief Description      | #Issue | Platform |
-| ------------------------------------------------------ | ---------------------- | ------ | -------- |
-| <a href="tcid-augi02" target="_blank">User Auth</a>    | User authentication    |        | All      |
-| <a href="tcid-augi03" target="_blank">Sign up</a>      | Signup Functionality   |        | All      |
-
+| TCID                                   | TC Name | GCP               | Rancher | Konvoy | AWS  |
+| -------------------------------------- | ------------------------- | ----------------- | ------- | ------ | ---- |
+| [tcid-augh02](tc-auth-github-user)   | TC-Auth-Github-User | Y    | W       | N | W |
+| [tcid-augh03](tc-auth-github-signup)     | TC-Auth-Github-Signup | Y              | W | N | W |
 
 - #### GMail Authentication
 
-| TCID                                                   | Brief Description      | #Issue | Platform |
-| ------------------------------------------------------ | ---------------------- | ------ | -------- |
-| <a href="tcid-augm02" target="_blank">User Auth</a>    | User authentication    |        | All      |
-| <a href="tcid-augm03" target="_blank">Sign up</a>      | Signup Functionality   |        | All      |
+| TCID                                   | TC Name | GCP               | Rancher | Konvoy | AWS  |
+| -------------------------------------- | ------------------------- | ----------------- | ------- | ------ | ---- |
+| [tcid-augm02](tc-auth-gmail-user)   | TC-Auth-Gmail-User | Y    | N      | N | W |
+| [tcid-augm03](tc-auth-gmail-signup)     | TC-Auth-Gmail-Signup | Y              | N | N | W |
+
 
 - #### Active Directory
 
-| TCID                                                   | Brief Description      | #Issue | Platform |
-| ------------------------------------------------------ | ---------------------- | ------ | -------- |
-| <a href="tcid-auad02" target="_blank">User Auth</a>    | User authentication    |        | All      |
-| <a href="tcid-auad03" target="_blank">Sign up</a>      | Signup Functionality   |        | All      |
+
+| TCID                                   | TC Name | GCP               | Rancher | Konvoy | AWS  |
+| -------------------------------------- | ------------------------- | ----------------- | ------- | ------ | ---- |
+| [tcid-augm02](tc-auth-ad-user)   | TC-Auth-Gmail-User | N   | W       | W | N |
+| [tcid-augm03](tc-auth-ad-signup)     | TC-Auth-Gmail-Signup | N             | W | W | N |
 

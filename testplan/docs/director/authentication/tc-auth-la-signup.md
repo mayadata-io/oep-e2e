@@ -1,7 +1,7 @@
 ---
-id: tcid-aula03
+id: tc-auth-la-signup
 title: Local Auth Non Admin user Signup
-sidebar_label: TC-LA-Signup
+sidebar_label: TC-Auth-LA-Signup
 ---
 ------
 
@@ -11,15 +11,15 @@ sidebar_label: TC-LA-Signup
 <table>
   <tr>
     <th> TCID </th>
+    <th> TCNAME </th>
     <th> Type </th>
     <th> Description </th>
-    <th> Tested K8s Platform </th>
   </tr>
   <tr>
     <td> TCID-aula03 </td>
+    <td> TC-Auth-LA-Signup </td>
     <td> Local Authentication </td>
     <td> Signup verification </td>
-    <td> ALL </td>
   </tr>
 </table>
 

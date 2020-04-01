@@ -1,27 +1,27 @@
 ---
-id: tcid-augi02
-title: Github Auth user
-sidebar_label: TC-Github-User
+id: tc-auth-gmail-user
+title: GMail Auth user
+sidebar_label: TC-Auth-GMail-User
 ---
 ------
 
 
-## Github Authentication User
+## GMail Authentication User
 
 ### Experiment Metadata
 
 <table>
   <tr>
     <th> TCID </th>
+    <th> TCNAME </th>
     <th> Type </th>
     <th> Description </th>
-    <th> Tested K8s Platform </th>
   </tr>
   <tr>
-    <td> TCID-augi02 </td>
-    <td> Github Authentication </td>
+    <td> TCID-augm02 </td>
+    <td> TC-Auth-Gmail-User </td>
+    <td> GMail Authentication </td>
     <td> User verification </td>
-    <td> ALL </td>
   </tr>
 </table>
 
@@ -31,7 +31,7 @@ sidebar_label: TC-Github-User
 
 
 ### Details
-- Check the login for Github user1 
+- Check the login for GMail user1@gmail.com
 
 ### Steps Performed in the test
 
