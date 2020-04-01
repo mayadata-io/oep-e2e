@@ -281,6 +281,14 @@
           register: node3
           failed_when: "node3.json.nodeType['mayadata.io/data-plane'] != 'true'"
 
+        
+        ## Checking if openebs is installed or not.
+        - name: Check if openebs is already installed
+          shell: kubectl get deploy --all-namespaces -l name=maya-apiserver --no-headers | awk '{print $1}' | wc -l
+          args:
+            executable: /bin/bash
+          register: count_maya_api
+
         ## If openebs is installed in the cluster then get the namespace
         - name: Getting the namespace where openebs is installed 
           shell: kubectl get deploy --all-namespaces -l name=maya-apiserver --no-headers | awk '{print $1}'
