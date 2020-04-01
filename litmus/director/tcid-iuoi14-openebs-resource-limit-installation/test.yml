@@ -107,7 +107,6 @@
             url_password: "{{ password.stdout }}"
             force_basic_auth: yes
             return_content: yes      
-            executable: /bin/bash
             body_format: json
             body: '{"controlPlaneNode": false, "dataPlaneNode": true}'
             status_code: 202
@@ -169,8 +168,8 @@
           until: app_status.stdout == 'Running'
           with_items:
             - "{{ openebs_components }}"
-          retries: 20
-          delay: 5
+          retries: 30
+          delay: 10
 
         ## Get the container Status of the openebs pods
         - name: Get the container status of the openebs pods.
@@ -181,24 +180,24 @@
             executable: /bin/bash
           register: containerStatus
           until: "containerStatus.stdout == 'true'"
-          retries: 20
-          delay: 2
+          retries: 30
+          delay: 10
 
         ## Checking the resource litmit is imposed perfectly or not
         - name: Getting the CPU limit of maya-api-server
-          shell: kubectl get deploy maya-apiserver -n {{ namespace }} jsonpath='{.spec.template.spec.containers[*].resources.limits.cpu}'
+          shell: kubectl get deploy maya-apiserver -n {{ namespace }} -o=jsonpath='{.spec.template.spec.containers[*].resources.limits.cpu}'
           args:
             executable: /bin/bash
           register: cpu_limit
-          failed_when: "cpu_limit != cpu_resource_limit"
+          failed_when: "cpu_limit.stdout != cpu_resource_limit"
 
         ## Checking the resource litmit is imposed perfectly or not
         - name: Getting the Memory limit of maya-api-server
-          shell: kubectl get deploy maya-apiserver -n {{ namespace }} jsonpath='{.spec.template.spec.containers[*].resources.limits.memory}'
+          shell: kubectl get deploy maya-apiserver -n {{ namespace }} -o=jsonpath='{.spec.template.spec.containers[*].resources.limits.memory}'
           args:
             executable: /bin/bash
           register: memory_limit
-          failed_when: "memory_limit != memory_resource_limit"
+          failed_when: "memory_limit.stdout != memory_resource_limit"
 
         ## Checking if openebs is installed or not.
         - name: Check if openebs is installed or not.
