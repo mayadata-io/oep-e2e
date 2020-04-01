@@ -27,7 +27,7 @@ Test cases covered for the all the above authentication methods are as mentioned
 
 
 
-- - #### Local Authentication
+### Local Authentication
 
 | TCID                                   | TC Name | GCP               | Rancher | Konvoy | AWS  |
 | -------------------------------------- | ------------------------- | ----------------- | ------- | ------ | ---- |
@@ -35,14 +35,14 @@ Test cases covered for the all the above authentication methods are as mentioned
 | [tcid-aula02](tc-auth-la-user)   | TC-Auth-LA-User | Y    | W       | W | W |
 | [tcid-aula03](tc-auth-la-signup)     | TC-Auth-LA-Signup | Y              | W | W | W |
 
-- #### Github Authentication
+### Github Authentication
 
 | TCID                                   | TC Name | GCP               | Rancher | Konvoy | AWS  |
 | -------------------------------------- | ------------------------- | ----------------- | ------- | ------ | ---- |
 | [tcid-augh02](tc-auth-github-user)   | TC-Auth-Github-User | Y    | W       | N | W |
 | [tcid-augh03](tc-auth-github-signup)     | TC-Auth-Github-Signup | Y              | W | N | W |
 
-- #### GMail Authentication
+### GMail Authentication
 
 | TCID                                   | TC Name | GCP               | Rancher | Konvoy | AWS  |
 | -------------------------------------- | ------------------------- | ----------------- | ------- | ------ | ---- |
@@ -50,7 +50,7 @@ Test cases covered for the all the above authentication methods are as mentioned
 | [tcid-augm03](tc-auth-gmail-signup)     | TC-Auth-Gmail-Signup | Y              | N | N | W |
 
 
-- #### Active Directory
+### Active Directory Authentication
 
 
 | TCID                                   | TC Name | GCP               | Rancher | Konvoy | AWS  |
