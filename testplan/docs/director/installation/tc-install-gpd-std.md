@@ -1,34 +1,34 @@
 ---
-id: tc-install-gcp-std
+id: tc-install-gpd-std
 title: DOP Install on GCP 
-sidebar_label: TC-Install-GCP-STD
+sidebar_label: TC-Install-GPD-Std
 ---
 ------
 
 
-### Install DOP using helm on GCP with GPD underneath
+### Install DOP using helm with GPD underneath
 
 ### Experiment Metadata
 
 <table>
   <tr>
     <th> TCID </th>
-    <th> TCNAME </th>
+    <th> TC NAME </th>
     <th> Type </th>
     <th> Description </th>
   </tr>
   <tr>
     <td> TCID-iudi01 </td>
-    <td> TC-Install-GCP-STD </td>
+    <td> TC-Install-GPD-Std </td>
     <td> Install of DOP </td>
-    <td> Install DOP using helm on GCP with GPD underneath </td>
+    <td> Install DOP using helm with GPD underneath </td>
   </tr>
 </table>
 
 
 ### Prerequisites
 
-- Bring up 4 Vms in GCP 1 master 3 node.                                         
+- Bring up 4 Vms 1 master 3 node.                                         
 - Use any tool such as kops to spin up k8s cluster. It is suggested to have k8s version >= 1.12.0                         
 - All the nodes of the cluster should be in healthy state.     
 - helm 3 should be installed on the k8s cluster.

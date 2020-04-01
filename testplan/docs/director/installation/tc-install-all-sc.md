@@ -1,7 +1,7 @@
 ---
-id: tc-install-gcp-allsc
-title: DOP Install with Allsc
-sidebar_label: TC-Install-GCP-Allsc
+id: tc-install-all-sc
+title: DOP Install with All sc
+sidebar_label: TC-Install-All-sc
 ---
 ------
 
@@ -19,7 +19,7 @@ sidebar_label: TC-Install-GCP-Allsc
   </tr>
   <tr>
     <td> TCID-iudi06 </td>
-    <td> TC-Install-GCP-Allsc </td>
+    <td> TC-Install-All-sc </td>
     <td> Install of DOP </td>
     <td> Install DOP using cstor,jiva and local pv sc </td>
   </tr>
@@ -27,7 +27,8 @@ sidebar_label: TC-Install-GCP-Allsc
 
 ### Prerequisites
 
-- Bring up 4 Vms in GCP 1 master 3 node.
+- Bring up 4 Vms 1 master 3 node.
+- SSD disks should be used as OS disk.
 - SSD disks should be attached to each of the nodes.
 - Use any tool such as kops to spin up k8s cluster. It is suggested to have k8s version >= 1.12.0                         
 - All the nodes of the cluster should be in healthy state.     

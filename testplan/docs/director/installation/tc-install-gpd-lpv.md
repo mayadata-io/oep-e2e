@@ -1,12 +1,12 @@
 ---
-id: tc-install-gcp-cstor
-title: DOP Install on GCP With cStor
-sidebar_label: TC-Install-GCP-Cstor
+id: tc-install-gpd-lpv
+title: DOP Install on GCP With GPD
+sidebar_label: TC-Install-GPD-Lpv
 ---
 ------
 
 
-### Install DOP using cstor storage class with SSD disks
+### Install DOP using helm with GPD underneath and sc as local-pv
 
 ### Experiment Metadata
 
@@ -18,31 +18,27 @@ sidebar_label: TC-Install-GCP-Cstor
     <th> Description </th>
   </tr>
   <tr>
-    <td> TCID-iudi04 </td>
-    <td> TC-Install-GCP-Cstor </td>
+    <td> TCID-iudi03 </td>
+    <td> TC-Install-GPD-Lpv </td>
     <td> Install of DOP </td>
-    <td> Install DOP using helm on GCP and sc as cstor </td>
+    <td> Install DOP using helm with GPD underneath and sc as local-pv </td>
   </tr>
 </table>
 
-
 ### Prerequisites
 
-- Bring up 4 Vms in GCP 1 master 3 node.            
-- SSD disks should be attached to each of the nodes.
+- Bring up 4 Vms 1 master 3 node.                                           
 - Use any tool such as kops to spin up k8s cluster. It is suggested to have k8s version >= 1.12.0                         
 - All the nodes of the cluster should be in healthy state.     
 - helm 3 should be installed on the k8s cluster.
 
 
 ### Details
-- In this test case we will install DOP on the k8s cluster using storage class as cstor. For storage pool creation we will use ssd disks.       
+- In this test case we will install DOP on the k8s cluster using storage class as openebs-hostpath.       
 
 ### Steps Performed in the test
 
-- Install OpenEBS latest version from OpenEBS doc. Use helm or operator method for it.
-
-- Create cstor storage pool using ssd disks and use this pool in cstor storage class. Follow the openebs doc to create storage pool and storage class.
+- Install OpenEBS latest version from OpenEBS doc. Use helm or operator method for it. 
 
 - Clone the director-charts-internal repo.
 
@@ -52,7 +48,7 @@ sidebar_label: TC-Install-GCP-Cstor
 
 - Provide the secret and  URL in the values.yaml.
 
-- Use storage class as cstor-storage-class for all the PVCs .
+- Use storage class as openebs-hostpath for all the PVCs .
 
 - Execute the helm install command. Follow the helpcenter doc for detailed information.                      
 

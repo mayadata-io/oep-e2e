@@ -28,12 +28,12 @@ Director has three databases : mysql for user data, Cassandra for monitoring and
 
 | TCID                                   | TC Name                   | GCP             | Rancher | Konvoy | AWS  |
 | -------------------------------------- | ------------------------- | --------------- | ------- | ------ | ---- |
-| [tcid-iudi01](tc-install-gcp-std)      | TC-Install-GCP-STD        | Y               | W       | W      | W    |
-| [tcid-iudi02](tc-install-gcp-ssdlpv)   | TC-Install-GCP-SSDLPV     | W               | W       | W      | W    |
-| [tcid-iudi03](tc-install-gcp-gpdlpv)   | TC-Install-GCP-GPDLPV     | W               | W       | W      | W    |
-| [tcid-iudi04](tc-install-gcp-cstor)    | TC-Install-GCP-Cstor	     | W               | W       | W      | W    |
-| [tcid-iudi05](tc-install-gcp-jiva)     | TC-Install-GCP-Jiva	     | W               | W       | W      | W    |
-| [tcid-iudi06](tc-install-gcp-allsc)    | TC-Install-GCP-Allsc	     | W               | W       | W      | W    |
+| [tcid-iudi01](tc-install-gpd-std)      | TC-Install-GPD-Std        | Y               | W       | W      | W    |
+| [tcid-iudi02](tc-install-ssd-lpv)      | TC-Install-SSD-Lpv        | W               | Y       | Y      | W    |
+| [tcid-iudi03](tc-install-gpd-lpv)      | TC-Install-GPD-Lpv        | W               | W       | W      | W    |
+| [tcid-iudi04](tc-install-ssd-cstor)    | TC-Install-SSD-Cstor	     | W               | W       | W      | W    |
+| [tcid-iudi05](tc-install-ssd-jiva)     | TC-Install-SSD-Jiva	     | W               | W       | W      | W    |
+| [tcid-iudi06](tc-install-all-sc)       | TC-Install-All-sc	     | W               | W       | W      | W    |
 
 
 

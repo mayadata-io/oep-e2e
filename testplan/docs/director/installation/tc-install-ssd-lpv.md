@@ -1,12 +1,12 @@
 ---
-id: tc-install-gcp-gpdlpv
-title: DOP Install on GCP With GPD
-sidebar_label: TC-Install-GCP-GPDLPV
+id: tc-install-ssd-lpv
+title: DOP Install on GCP With SSD
+sidebar_label: TC-Install-SSD-Lpv
 ---
 ------
 
 
-### Install DOP using helm on GCP with SSD underneath
+### Install DOP using helm with SSD underneath
 
 ### Experiment Metadata
 
@@ -18,16 +18,17 @@ sidebar_label: TC-Install-GCP-GPDLPV
     <th> Description </th>
   </tr>
   <tr>
-    <td> TCID-iudi03 </td>
-    <td> TC-Install-GCP-GPDLPV </td>
+    <td> TCID-iudi02 </td>
+    <td> TC-Install-SSD-Lpv </td>
     <td> Install of DOP </td>
-    <td> Install DOP using helm on GCP with GPD underneath and sc as local-pv </td>
+    <td> Install DOP using helm with SSD underneath </td>
   </tr>
 </table>
 
 ### Prerequisites
 
-- Bring up 4 Vms in GCP 1 master 3 node. Select SSD disk during bringing up Vms.                                          
+- Bring up 4 Vms 1 master 3 node.
+- SSD disk should be the OS disk.
 - Use any tool such as kops to spin up k8s cluster. It is suggested to have k8s version >= 1.12.0                         
 - All the nodes of the cluster should be in healthy state.     
 - helm 3 should be installed on the k8s cluster.

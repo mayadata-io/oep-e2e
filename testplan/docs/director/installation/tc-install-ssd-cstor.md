@@ -1,44 +1,48 @@
 ---
-id: tc-install-gcp-ssdlpv
-title: DOP Install on GCP With SSD
-sidebar_label: TC-Install-GCP-SSDLPV
+id: tc-install-ssd-cstor
+title: DOP Install on GCP With cStor
+sidebar_label: TC-Install-SSD-Cstor
 ---
 ------
 
 
-### Install DOP using helm on GCP with SSD underneath
+### Install DOP using cstor storage class with SSD disks
 
 ### Experiment Metadata
 
 <table>
   <tr>
     <th> TCID </th>
-    <th> TCNAME </th>
+    <th> TC NAME </th>
     <th> Type </th>
     <th> Description </th>
   </tr>
   <tr>
-    <td> TCID-iudi02 </td>
-    <td> TC-Install-GCP-SSDLPV </td>
+    <td> TCID-iudi04 </td>
+    <td> TC-Install-SSD-Cstor </td>
     <td> Install of DOP </td>
-    <td> Install DOP using helm on GCP with SSD underneath </td>
+    <td> Install DOP using helm and sc as cstor </td>
   </tr>
 </table>
 
+
 ### Prerequisites
 
-- Bring up 4 Vms in GCP 1 master 3 node. Select SSD disk during bringing up Vms.                                          
+- Bring up 4 Vms 1 master 3 node.            
+- SSD disks should be attached to each of the nodes.
 - Use any tool such as kops to spin up k8s cluster. It is suggested to have k8s version >= 1.12.0                         
 - All the nodes of the cluster should be in healthy state.     
 - helm 3 should be installed on the k8s cluster.
 
 
 ### Details
-- In this test case we will install DOP on the k8s cluster using storage class as openebs-hostpath.       
+- In this test case we will install DOP on the k8s cluster using storage class as cstor. For storage pool creation we will use ssd disks.       
 
 ### Steps Performed in the test
 
-- Install OpenEBS latest version from OpenEBS doc. Use helm or operator method for it. 
+- Install OpenEBS latest version from OpenEBS doc. Use helm or operator method for it.
+
+- Create cstor storage pool using ssd disks and use this pool in cstor storage class. Follow the openebs doc to create storage pool and storage class.
 
 - Clone the director-charts-internal repo.
 
@@ -48,7 +52,7 @@ sidebar_label: TC-Install-GCP-SSDLPV
 
 - Provide the secret and  URL in the values.yaml.
 
-- Use storage class as openebs-hostpath for all the PVCs .
+- Use storage class as cstor-storage-class for all the PVCs .
 
 - Execute the helm install command. Follow the helpcenter doc for detailed information.                      
 

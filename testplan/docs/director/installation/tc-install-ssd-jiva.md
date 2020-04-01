@@ -1,7 +1,7 @@
 ---
-id: tc-install-gcp-jiva
+id: tc-install-ssd-jiva
 title: DOP Install on GCP with Jiva
-sidebar_label: TC-Install-GCP-Jiva
+sidebar_label: TC-Install-SSD-Jiva
 ---
 ------
 
@@ -19,15 +19,16 @@ sidebar_label: TC-Install-GCP-Jiva
   </tr>
   <tr>
     <td> TCID-iudi05 </td>
-    <td> TC-Install-GCP-Jiva </td>
+    <td> TC-Install-SSD-Jiva </td>
     <td> Install of DOP </td>
-    <td> Install DOP using helm on GCP and sc as openebs-jiva-default </td>
+    <td> Install DOP using helm and sc as openebs-jiva-default </td>
   </tr>
 </table>
 
 ### Prerequisites
 
-- Bring up 4 Vms in GCP 1 master 3 node.Select SSD disk during bringing up Vms.            
+- Bring up 4 Vms 1 master 3 node.
+- SSD disk should be used as OS disk.
 - Use any tool such as kops to spin up k8s cluster. It is suggested to have k8s version >= 1.12.0                         
 - All the nodes of the cluster should be in healthy state.     
 - helm 3 should be installed on the k8s cluster.

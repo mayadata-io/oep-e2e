@@ -7,12 +7,12 @@ module.exports = {
 		        label: 'Install and Upgrade',
 		        items: [
 				'director/installation/directorInstall',
-				'director/installation/tc-install-gcp-std',
-				'director/installation/tc-install-gcp-ssdlpv',
-				'director/installation/tc-install-gcp-gpdlpv',
-				'director/installation/tc-install-gcp-cstor',
-				'director/installation/tc-install-gcp-jiva',
-				'director/installation/tc-install-gcp-allsc'
+				'director/installation/tc-install-gpd-std',
+				'director/installation/tc-install-ssd-lpv',
+				'director/installation/tc-install-gpd-lpv',
+				'director/installation/tc-install-ssd-cstor',
+				'director/installation/tc-install-ssd-jiva',
+				'director/installation/tc-install-all-sc'
 			],
 		},
 		{
