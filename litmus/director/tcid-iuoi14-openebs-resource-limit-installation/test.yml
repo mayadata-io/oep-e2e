@@ -56,20 +56,6 @@
           set_fact:
             project_id: "{{ project_details.json.data[0].id }}"
 
-        ## Getting the total number of nodes in the cluster
-        - name: Getting the number of nodes in the cluster
-          shell: kubectl get nodes --no-headers | wc -l
-          args:
-            executable: /bin/bash
-          register: nodes
-
-        ## Fail the test if it contains less than two nodes
-        ## Minimum two nodes required
-        - name: Checking if the cluster contains atleast two nodes
-          fail:
-            msg: Minimum two nodes is required to install openebs in this cluster
-          when: "{{ nodes.stdout }} < 2"
-
         ## Getting node details of the cluster
         ## Selecting the node which is in active state present in the cluster
         - name: Getting the node details of the cluster
@@ -213,6 +199,21 @@
             executable: /bin/bash
           register: memory_limit
           failed_when: "memory_limit != memory_resource_limit"
+
+        ## Checking if openebs is installed or not.
+        - name: Check if openebs is installed or not.
+          shell: kubectl get deploy --all-namespaces -l name=maya-apiserver --no-headers | awk '{print $1}' | wc -l
+          args:
+            executable: /bin/bash
+          register: count_maya_api
+
+        ## If openebs is installed in the cluster then get the namespace
+        - name: Getting the namespace where openebs is installed 
+          shell: kubectl get deploy --all-namespaces -l name=maya-apiserver --no-headers | awk '{print $1}'
+          args:
+            executable: /bin/bash
+          register: openebs_namespace
+          when: "count_maya_api.stdout == '1'"
 
         ## Removing the labels from the cluster nodes
         - include_tasks: /utils/openebs-label-cleanup.yml
