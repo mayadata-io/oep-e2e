@@ -1,40 +1,48 @@
 ---
-id: install-tcid-iudi01
-title: Install-GCP-TCID-IUDI01
-sidebar_label: TCID-IUDI01
+id: tc-install-gcp-cstor
+title: DOP Install on GCP With cStor
+sidebar_label: TC-Install-GCP-Cstor
 ---
 ------
 
 
-## Install DOP using helm on GCP with GPD underneath
+### Install DOP using cstor storage class with SSD disks
 
 ### Experiment Metadata
 
 <table>
   <tr>
+    <th> TCID </th>
+    <th> TC NAME </th>
     <th> Type </th>
     <th> Description </th>
-    <th> Tested K8s Platform </th>
   </tr>
   <tr>
+    <td> TCID-iudi04 </td>
+    <td> TC-Install-GCP-Cstor </td>
     <td> Install of DOP </td>
-    <td> Install DOP using helm on GCP with GPD underneath </td>
-    <td> GCP </td>
+    <td> Install DOP using helm on GCP and sc as cstor </td>
   </tr>
 </table>
 
+
 ### Prerequisites
 
-- Bring up 4 Vms in GCP 1 master 3 node.                                         
+- Bring up 4 Vms in GCP 1 master 3 node.            
+- SSD disks should be attached to each of the nodes.
 - Use any tool such as kops to spin up k8s cluster. It is suggested to have k8s version >= 1.12.0                         
 - All the nodes of the cluster should be in healthy state.     
 - helm 3 should be installed on the k8s cluster.
 
 
 ### Details
-- In this test case we will install DOP on the k8s cluster using storage class as standard.       
+- In this test case we will install DOP on the k8s cluster using storage class as cstor. For storage pool creation we will use ssd disks.       
 
 ### Steps Performed in the test
+
+- Install OpenEBS latest version from OpenEBS doc. Use helm or operator method for it.
+
+- Create cstor storage pool using ssd disks and use this pool in cstor storage class. Follow the openebs doc to create storage pool and storage class.
 
 - Clone the director-charts-internal repo.
 
@@ -44,12 +52,25 @@ sidebar_label: TCID-IUDI01
 
 - Provide the secret and  URL in the values.yaml.
 
-- Use storage class as standard for all the PVCs .
+- Use storage class as cstor-storage-class for all the PVCs .
 
 - Execute the helm install command. Follow the helpcenter doc for detailed information.                      
 
 
 ### Expected output
+
+- All the pods in openebs namespace should be in running state. List of pods:
+```
+maya-apiserver-77b49c99f5-vdckq                                   
+openebs-admission-server-77d489c57d-pxpm5                         
+openebs-localpv-provisioner-8447b496c7-jc927                      
+openebs-ndm-2fkfq                                                 
+openebs-ndm-k4tsh                                                 
+openebs-ndm-operator-f64c5bb7-qczqf                               
+openebs-ndm-sgrn7                                                 
+openebs-provisioner-557d489db8-kprrm                              
+openebs-snapshot-operator-6d48b74fdb-47qqp
+```
 
 - All the DOP pods should come in running state. List of pods:
 ```

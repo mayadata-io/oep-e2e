@@ -1,25 +1,27 @@
 ---
-id: install-tcid-iudi02
-title: Install-GCP-TCID-IUDI02
-sidebar_label: TCID-IUDI02
+id: tc-install-gcp-gpdlpv
+title: DOP Install on GCP With GPD
+sidebar_label: TC-Install-GCP-GPDLPV
 ---
 ------
 
 
-## Install DOP using helm on GCP with SSD underneath
+### Install DOP using helm on GCP with SSD underneath
 
 ### Experiment Metadata
 
 <table>
   <tr>
+    <th> TCID </th>
+    <th> TC NAME </th>
     <th> Type </th>
     <th> Description </th>
-    <th> Tested K8s Platform </th>
   </tr>
   <tr>
+    <td> TCID-iudi03 </td>
+    <td> TC-Install-GCP-GPDLPV </td>
     <td> Install of DOP </td>
-    <td> Install DOP using helm on GCP with SSD underneath </td>
-    <td> GCP </td>
+    <td> Install DOP using helm on GCP with GPD underneath and sc as local-pv </td>
   </tr>
 </table>
 

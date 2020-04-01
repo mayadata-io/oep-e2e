@@ -1,45 +1,44 @@
 ---
-id: install-tcid-iudi06
-title: Install-GCP-TCID-IUDI06
-sidebar_label: TCID-IUDI06
+id: tc-install-gcp-ssdlpv
+title: DOP Install on GCP With SSD
+sidebar_label: TC-Install-GCP-SSDLPV
 ---
 ------
 
 
-## Install DOP using cstor,Jiva and openebs-hostpath storage class 
+### Install DOP using helm on GCP with SSD underneath
 
 ### Experiment Metadata
 
 <table>
   <tr>
+    <th> TCID </th>
+    <th> TCNAME </th>
     <th> Type </th>
     <th> Description </th>
-    <th> Tested K8s Platform </th>
   </tr>
   <tr>
+    <td> TCID-iudi02 </td>
+    <td> TC-Install-GCP-SSDLPV </td>
     <td> Install of DOP </td>
-    <td> Install DOP using cstor,jiva and local pv sc </td>
-    <td> GCP </td>
+    <td> Install DOP using helm on GCP with SSD underneath </td>
   </tr>
 </table>
 
 ### Prerequisites
 
-- Bring up 4 Vms in GCP 1 master 3 node.
-- SSD disks should be attached to each of the nodes.
+- Bring up 4 Vms in GCP 1 master 3 node. Select SSD disk during bringing up Vms.                                          
 - Use any tool such as kops to spin up k8s cluster. It is suggested to have k8s version >= 1.12.0                         
 - All the nodes of the cluster should be in healthy state.     
 - helm 3 should be installed on the k8s cluster.
 
 
 ### Details
-- In this test case we will install DOP on the k8s cluster using 3 different storage class. cstor-storage-class will be used for mysql,elasticsearch and cassandra. openebs-jiva-default sc will be use for maya-grafana and openebs-hostpath sc will be used for mayastore.
+- In this test case we will install DOP on the k8s cluster using storage class as openebs-hostpath.       
 
 ### Steps Performed in the test
 
-- Install OpenEBS latest version from OpenEBS doc. Use helm or operator method for it.
-
-- Create cstor storage pool using ssd disks and use this pool in cstor storage class. Follow the openebs doc to create storage pool and storage class.
+- Install OpenEBS latest version from OpenEBS doc. Use helm or operator method for it. 
 
 - Clone the director-charts-internal repo.
 
@@ -49,11 +48,7 @@ sidebar_label: TCID-IUDI06
 
 - Provide the secret and  URL in the values.yaml.
 
-- Use storage class as cstor-storage-class for mysql,elasticsearch and cassandra pvcs. 
-
-- Use storage class as openebs-jiva-default for maya-grafana PVC.
-
-- Use storage class as openebs-hostpath for mayastore PVC.
+- Use storage class as openebs-hostpath for all the PVCs .
 
 - Execute the helm install command. Follow the helpcenter doc for detailed information.                      
 

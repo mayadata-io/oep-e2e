@@ -24,18 +24,19 @@ Director has three databases : mysql for user data, Cassandra for monitoring and
 - Install Director using only openebs-jiva-default storage class.
 - Install Director using cstor,jiva and local-pv storage class.
 
-### Actual test cases
+### Dop installation
 
-| TestCase                               | Breif Description                       | #Issue       | Platform | Status  |
-| -------------------------------------- | --------------------------------------- | ------------ | -------- | ------- |
-| [Dir-Install-GCP](install-tcid-iudi01) | Install DOP using helm on GCP           | Not-assigned | GCP      | In-Prod |
-| [Dir-Install-GCP](install-tcid-iudi02) | Install DOP using openebs local pv      | Not-assigned | GCP      | Not-done|
-| [Dir-Install-GCP](install-tcid-iudi03) | Install DOP using openebs local pv      | Not-assigned | GCP      | Not-done|
-| [Dir-Install-GCP](install-tcid-iudi04) | Install DOP using openebs cstor sc      | Not-assigned | GCP      | Not-done|
-| [Dir-Install-GCP](install-tcid-iudi05) | Install DOP using openebs jiva sc       | Not-assigned | GCP      | Not-done|
-| [Dir-Install-GCP](install-tcid-iudi06) | Install DOP using cstor,jiva and localpv| Not-assigned | GCP      | Not-done|
-|                                        |                                   |              |          |         |
-|                                        |                                   |              |          |         |
+| TCID                                   | TC Name                   | GCP             | Rancher | Konvoy | AWS  |
+| -------------------------------------- | ------------------------- | --------------- | ------- | ------ | ---- |
+| [tcid-iudi01](tc-install-gcp-std)      | TC-Install-GCP-STD        | Y               | W       | W      | W    |
+| [tcid-iudi02](tc-install-gcp-ssdlpv)   | TC-Install-GCP-SSDLPV     | W               | W       | W      | W    |
+| [tcid-iudi03](tc-install-gcp-gpdlpv)   | TC-Install-GCP-GPDLPV     | W               | W       | W      | W    |
+| [tcid-iudi04](tc-install-gcp-cstor)    | TC-Install-GCP-Cstor	     | W               | W       | W      | W    |
+| [tcid-iudi05](tc-install-gcp-jiva)     | TC-Install-GCP-Jiva	     | W               | W       | W      | W    |
+| [tcid-iudi06](tc-install-gcp-allsc)    | TC-Install-GCP-Allsc	     | W               | W       | W      | W    |
+
+
+
 
 ## Upgrade of Director OnPrem
 
