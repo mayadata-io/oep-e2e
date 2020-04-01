@@ -60,7 +60,7 @@
             return_content: yes
             body_format: json
             status_code: 200
-          register: node_cluster
+          register: node_details
 
         ## Define variable node_id
         - set_fact:
@@ -70,7 +70,7 @@
         - name: Storing the id of nodes in the cluster
           set_fact:
             node_id: "{{ node_id  + [item.id] }}"
-          loop: "{{ node_cluster.json.data }}"
+          loop: "{{ node_details.json.data }}"
 
 
         ## Labeling node-1 of the Cluster with controlPlaneNode=true and dataPlaneNode=false
