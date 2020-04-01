@@ -33,7 +33,7 @@
 
         ## Checking if openebs is already installed
         - name: Check if openebs is already installed
-          shell: kubectl get deploy maya-apiserver --all-namespaces | wc -l
+          shell: kubectl get deploy --all-namespaces -l name=maya-apiserver --no-headers | awk '{print $1}' | wc -l
           args:
             executable: /bin/bash
           register: maya_api
