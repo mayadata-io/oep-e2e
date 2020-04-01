@@ -38,8 +38,11 @@ module.exports = {
 		        type: 'category',
 		        label: 'OpenEBS',
 		        items: [
-				'director/openebs/directorOpenebs',
-				'director/openebs/test1'
+				'director/openebs/directorOpenEBS',
+                'director/openebs/tc-csp-rec-list',
+                'director/openebs/tc-csp-rec-list-no-ndm',
+                'director/openebs/tc-csp-rec-list-stripe',
+                'director/openebs/tc-csp-rec-list-mirror'
 			],
 		},
 		{
