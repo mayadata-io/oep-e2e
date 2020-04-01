@@ -106,7 +106,7 @@
             url_username: "{{ username.stdout }}"
             url_password: "{{ password.stdout }}"
             force_basic_auth: yes
-            return_content: yes          args:
+            return_content: yes      
             executable: /bin/bash
             body_format: json
             body: '{"controlPlaneNode": false, "dataPlaneNode": true}'

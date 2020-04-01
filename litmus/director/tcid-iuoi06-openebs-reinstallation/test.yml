@@ -110,7 +110,7 @@
             return_content: yes
             status_code: 202
             body_format: json
-            body: '{"controlPlaneNode": true, "dataPlaneNode": flase }'
+            body: '{"controlPlaneNode": true, "dataPlaneNode": false }'
           register: labelnode1
 
         ## Labeling node-2 of the Cluster with controlPlaneNode=false and dataPlaneNode=true
