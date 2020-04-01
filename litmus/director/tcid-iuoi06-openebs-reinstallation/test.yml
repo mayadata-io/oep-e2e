@@ -145,7 +145,7 @@
 
         
         ## Checking if openebs is installed or not.
-        - name: Check if openebs is already installed
+        - name: Check if openebs is installed or not.
           shell: kubectl get deploy --all-namespaces -l name=maya-apiserver --no-headers | awk '{print $1}' | wc -l
           args:
             executable: /bin/bash
