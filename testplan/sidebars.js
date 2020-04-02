@@ -7,7 +7,10 @@ module.exports = {
 		        label: 'Install and Upgrade',
 		        items: [
 				'director/installation/directorInstall',
-				'director/installation/install-tcid-iudi01'
+				'director/installation/tc-install-gpd-std',
+				'director/installation/tc-install-ssd-lpv',
+				'director/installation/tc-install-gpd-lpv',
+				'director/installation/tc-install-ssd-cstor'
 			],
 		},
 		{
