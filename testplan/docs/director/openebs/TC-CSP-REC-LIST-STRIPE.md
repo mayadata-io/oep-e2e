@@ -1,7 +1,7 @@
 ---
-id: tc-csp-rec-list-mirror
+id: TC-CSP-REC-LIST-STRIPE
 title: List stripe based cstor pool recommendations
-sidebar_label: tc-csp-rec-list-mirror
+sidebar_label: TC-CSP-REC-LIST-STRIPE
 ---
 ------
 
@@ -16,9 +16,9 @@ sidebar_label: tc-csp-rec-list-mirror
   </tr>
   <tr>
     <td> tcid-csprec003 </td>
-    <td> tc-csp-rec-list-mirror </td>
+    <td> TC-CSP-REC-LIST-STRIPE </td>
     <td> CStorPool Recommendation </td>
-    <td> Verify List of Mirror Recommendations </td>
+    <td> Verify List of Stripe Recommendations </td>
   </tr>
 </table>
 
@@ -29,14 +29,15 @@ sidebar_label: tc-csp-rec-list-mirror
 
 ### Details
 - Director version 1.9 onwards
+- Positive test case
 
 ### Steps Performed in the test
 
 - Invoke API to list recommendations
 - Invoke API to get capacity based recommendations
 - Invoke API to get device based recommendations
-- Invoke API to get mirror based cstor pool recommendations
+- Invoke API to get stripe based cstor pool recommendations
 
 ### Expected output
 
-- Director should list mirror based cstor pool recommendations
+- Director should list stripe based cstor pool recommendations

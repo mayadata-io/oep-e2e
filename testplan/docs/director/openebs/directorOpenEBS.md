@@ -45,21 +45,21 @@ This can be perfromed only post Control plane components are upgraded. Data plan
 
 ###  Pool Provisioning
 - #### cStor Pool Recommendations 
-  - [ ] tc-csp-rec-list - List all cstor pool recommendations
-  - [ ] tc-csp-rec-list-no-ndm - List all cstor pool recommendations with NDM not running
-  - [ ] tc-csp-rec-list-stripe - List all stripe cstor pool recommendations
-  - [ ] tc-csp-rec-list-mirror - List all mirror cstor pool recommendations
-  - [ ] tc-csp-rec-create-mirror - Create mirror cstor pool cluster
-  - [ ] tc-csp-rec-create-stripe - Create stripe cstor pool cluster
+  - [ ] TC-CSP-REC-LIST - List all cstor pool recommendations
+  - [ ] TC-CSP-REC-LIST-NO-NDM - List all cstor pool recommendations with NDM not running
+  - [ ] TC-CSP-REC-LIST-STRIPE - List all stripe cstor pool recommendations
+  - [ ] TC-CSP-REC-LIST-MIRROR - List all mirror cstor pool recommendations
+  - [ ] TC-CSP-REC-CREATE-MIRROR - Create mirror cstor pool cluster
+  - [ ] TC-CSP-REC-CREATE-STRIPE - Create stripe cstor pool cluster
 
 | TCID                                        | TC NAME                 | Konvoy | GKE  |
 | ------------------------------------------- | ----------------------- | ------ | ---- |
-| [tcid-csprec001](tc-csp-rec-list)           | tc-csp-rec-list         | N      | N    |
-| [tcid-csprec002](tc-csp-rec-list-no-ndm)    | tc-csp-rec-list-no-ndm  | N      | N    |
-| [tcid-csprec003](tc-csp-rec-list-stripe)    | tc-csp-rec-list-stripe  | N      | N    |
-| [tcid-csprec004](tc-csp-rec-list-mirror)    | tc-csp-rec-list-mirror  | N      | N    |
-| [tcid-csprec005](tc-csp-rec-create-mirror)  | tc-csp-rec-create-mirror| N      | N    |
-| [tcid-csprec006](tc-csp-rec-create-stripe)  | tc-csp-rec-create-stripe| N      | N    |
+| [tcid-csprec001](TC-CSP-REC-LIST)           | TC-CSP-REC-LIST         | N      | N    |
+| [tcid-csprec002](TC-CSP-REC-LIST-NO-NDM)    | TC-CSP-REC-LIST-NO-NDM  | N      | N    |
+| [tcid-csprec003](TC-CSP-REC-LIST-STRIPE)    | TC-CSP-REC-LIST-STRIPE  | N      | N    |
+| [tcid-csprec004](TC-CSP-REC-LIST-MIRROR)    | TC-CSP-REC-LIST-MIRROR  | N      | N    |
+| [tcid-csprec005](TC-CSP-REC-CREATE-MIRROR)  | TC-CSP-REC-CREATE-MIRROR| N      | N    |
+| [tcid-csprec006](TC-CSP-REC-CREATE-STRIPE)  | TC-CSP-REC-CREATE-STRIPE| N      | N    |
 
 
 - #### Jiva Pool Provisioning 
