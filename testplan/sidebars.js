@@ -39,10 +39,13 @@ module.exports = {
 		        label: 'OpenEBS',
 		        items: [
 				'director/openebs/directorOpenEBS',
-                		'director/openebs/tc-csp-rec-list',
-                		'director/openebs/tc-csp-rec-list-no-ndm',
-                		'director/openebs/tc-csp-rec-list-stripe',
-                		'director/openebs/tc-csp-rec-list-mirror'
+                'director/openebs/TC-CSP-REC-LIST',
+                'director/openebs/TC-CSP-REC-LIST-NO-NDM',
+                'director/openebs/TC-CSP-REC-LIST-STRIPE',
+                'director/openebs/TC-CSP-REC-CREATE-STRIPE',
+                'director/openebs/TC-CSP-REC-LIST-MIRROR',
+                'director/openebs/TC-CSP-REC-CREATE-MIRROR'
+>>>>>>> d3cd0cf75c08c3023671fedca8daeb0c143ae9b7
 			],
 		},
 		{

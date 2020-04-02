@@ -1,7 +1,7 @@
 ---
-id: tc-csp-rec-list-no-ndm
+id: TC-CSP-REC-LIST-NO-NDM
 title: List cstor pool recommendations
-sidebar_label: tc-csp-rec-list-no-ndm
+sidebar_label: TC-CSP-REC-LIST-NO-NDM
 ---
 ------
 
@@ -16,7 +16,7 @@ sidebar_label: tc-csp-rec-list-no-ndm
   </tr>
   <tr>
     <td> tcid-csprec002 </td>
-    <td> tc-csp-rec-list-no-ndm </td>
+    <td> TC-CSP-REC-LIST-NO-NDM </td>
     <td> CStorPool Recommendation </td>
     <td> List Verification Without NDM </td>
   </tr>
@@ -29,6 +29,7 @@ sidebar_label: tc-csp-rec-list-no-ndm
 
 ### Details
 - Director version 1.9 onwards
+- Negative test case
 
 ### Steps Performed in the test
 

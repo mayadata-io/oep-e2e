@@ -1,7 +1,7 @@
 ---
-id: tc-csp-rec-list
-title: List cstor pool recommendations
-sidebar_label: tc-csp-rec-list
+id: TC-CSP-REC-LIST-MIRROR
+title: List mirror based cstor pool recommendations
+sidebar_label: TC-CSP-REC-LIST-MIRROR
 ---
 ------
 
@@ -15,10 +15,10 @@ sidebar_label: tc-csp-rec-list
     <th> Description </th>
   </tr>
   <tr>
-    <td> tcid-csprec001 </td>
-    <td> tc-csp-rec-list </td>
+    <td> tcid-csprec003 </td>
+    <td> TC-CSP-REC-LIST-MIRROR </td>
     <td> CStorPool Recommendation </td>
-    <td> List Verification </td>
+    <td> Verify List of Mirror Recommendations </td>
   </tr>
 </table>
 
@@ -29,15 +29,15 @@ sidebar_label: tc-csp-rec-list
 
 ### Details
 - Director version 1.9 onwards
+- Positive test case
 
 ### Steps Performed in the test
 
 - Invoke API to list recommendations
 - Invoke API to get capacity based recommendations
 - Invoke API to get device based recommendations
+- Invoke API to get mirror based cstor pool recommendations
 
 ### Expected output
 
-- Director should list the supported recommendations
-- Director should list the capacity based recommendations
-- Director should list the device based recommendations
+- Director should list mirror based cstor pool recommendations

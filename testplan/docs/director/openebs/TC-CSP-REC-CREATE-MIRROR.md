@@ -1,7 +1,7 @@
 ---
-id: tc-csp-rec-list-stripe
-title: List stripe based cstor pool recommendations
-sidebar_label: tc-csp-rec-list-stripe
+id: TC-CSP-REC-CREATE-MIRROR
+title: Create mirror cstor pool cluster
+sidebar_label: TC-CSP-REC-CREATE-MIRROR
 ---
 ------
 
@@ -16,9 +16,9 @@ sidebar_label: tc-csp-rec-list-stripe
   </tr>
   <tr>
     <td> tcid-csprec003 </td>
-    <td> tc-csp-rec-list-stripe </td>
+    <td> TC-CSP-REC-CREATE-MIRROR </td>
     <td> CStorPool Recommendation </td>
-    <td> Verify List of Stripe Recommendations </td>
+    <td> Verify creation of mirror cstor pool cluster </td>
   </tr>
 </table>
 
@@ -29,14 +29,16 @@ sidebar_label: tc-csp-rec-list-stripe
 
 ### Details
 - Director version 1.9 onwards
+- Positive test case
 
 ### Steps Performed in the test
 
 - Invoke API to list recommendations
 - Invoke API to get capacity based recommendations
 - Invoke API to get device based recommendations
-- Invoke API to get stripe based cstor pool recommendations
+- Invoke API to get mirror based cstor pool recommendations
+- Invoke API to create mirror cstor pool cluster
 
 ### Expected output
 
-- Director should list stripe based cstor pool recommendations
+- Director should be able to create mirror cstor pool cluster
