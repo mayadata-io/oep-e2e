@@ -12,6 +12,7 @@ This page captures the test scenarios for Authentication methods supported in DO
 - **GMail Auth:** Credentials are validated from GMail Identity provider using Oauth.
 - **Active Directory Auth:** Credentials are validated against the Identities in Microsoft Active Directory using LDAP. 
 
+### Workflow TCs
 Test cases covered for the all the above authentication methods are as mentioned below,
 - Admin Authentication - Admin will have option to enable and disable users. This will be available for Local Auth and AD Auth only.
 - User Authentication - Regular users will have access to the portal. They will different roles based on teaming. Roles and access control will be covered in [Teaming](/docs/director/teaming/directorTeaming)
@@ -25,7 +26,23 @@ Test cases covered for the all the above authentication methods are as mentioned
   - Phone (optional)
   - Profile status updation
 
+### Edge Cases
+[WIP]
+- AD with SSL configured is not supported
+- IDP server is down and authenticate the same
+- IDP server taking time to respond
 
+### Scalability
+[WIP]
+- 500 Simultaneous login
+
+
+### Performance
+[WIP]
+- Do we get response with success page after authentication with in 20 sec for 100 simultaneous login
+
+### Security
+Todo
 
 ### Local Authentication
 
