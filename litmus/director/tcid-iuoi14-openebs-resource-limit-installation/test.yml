@@ -81,37 +81,6 @@
             node_id: "{{ node_id  + [item.id] }}"
           loop: "{{ node_details.json.data }}"
 
-
-        ## Labeling the node-1 of the Cluster with controlPlaneNode=true and dataPlaneNode=false
-        ## With first element in the node_id list
-        - name: Labeling the node-1 of the cluster
-          uri:
-            url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes/{{ node_id[0] }}/?action=labelnodes"
-            method: POST
-            url_username: "{{ username.stdout }}"
-            url_password: "{{ password.stdout }}"
-            force_basic_auth: yes
-            return_content: yes
-            body_format: json
-            body: '{"controlPlaneNode": true, "dataPlaneNode": false}'
-            status_code: 202
-          register: labelnode1
-
-        ## Labeling node-2 of the Cluster with controlPlaneNode=false and dataPlaneNode=true
-        ## With the second element in the node_id list
-        - name: Labeling node-2 of the cluster
-          uri:
-            url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes/{{ node_id[1] }}/?action=labelnodes"
-            method: POST
-            url_username: "{{ username.stdout }}"
-            url_password: "{{ password.stdout }}"
-            force_basic_auth: yes
-            return_content: yes      
-            body_format: json
-            body: '{"controlPlaneNode": false, "dataPlaneNode": true}'
-            status_code: 202
-          register: labelnode2
-
         ## Passing the value for openebs creation in the cluster
         - name: Passing the values required for openebs creation
           uri:
@@ -133,6 +102,27 @@
         - name: Saving the id
           set_fact:
             openebsid: "{{ get_openebs.json.id }}"
+
+        - name: Get the node1_id
+          set_fact:
+            node1_id: "{{ node_id[0].split('n')[1] }}"
+
+        - name: Get the node2_id
+          set_fact:
+            node2_id: "{{ node_id[1].split('n')[1] }}"
+
+        - name: labeling nodes with new approach
+          uri:
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses/{{ openebsid }}/?action=selectopenebsnodes"
+            method: POST
+            url_username: "{{ username.stdout }}"
+            url_password: "{{ password.stdout }}"
+            force_basic_auth: yes
+            return_content: yes
+            body_format: json
+            body: '{"controlPlaneNodes":["{{node1_id}}"], "dataPlaneNodes":["{{node2_id}}"]}'
+            status_code: 200
+          register: labelnodes
 
         ## Checking the id
         - name: Getting into the openebs installtion stage and checking the id
