@@ -45,7 +45,6 @@ module.exports = {
                 'director/openebs/TC-CSP-REC-CREATE-STRIPE',
                 'director/openebs/TC-CSP-REC-LIST-MIRROR',
                 'director/openebs/TC-CSP-REC-CREATE-MIRROR'
->>>>>>> d3cd0cf75c08c3023671fedca8daeb0c143ae9b7
 			],
 		},
 		{
