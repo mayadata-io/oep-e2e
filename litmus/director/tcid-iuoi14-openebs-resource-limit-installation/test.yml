@@ -111,7 +111,7 @@
           set_fact:
             node2_id: "{{ node_id[1].split('n')[1] }}"
 
-        - name: labeling nodes with new approach
+        - name: Labeling the nodes of the cluster
           uri:
             url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses/{{ openebsid }}/?action=selectopenebsnodes"
             method: POST
