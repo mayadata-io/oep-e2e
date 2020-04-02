@@ -10,9 +10,7 @@ module.exports = {
 				'director/installation/tc-install-gpd-std',
 				'director/installation/tc-install-ssd-lpv',
 				'director/installation/tc-install-gpd-lpv',
-				'director/installation/tc-install-ssd-cstor',
-				'director/installation/tc-install-ssd-jiva',
-				'director/installation/tc-install-all-sc'
+				'director/installation/tc-install-ssd-cstor'
 			],
 		},
 		{

@@ -21,8 +21,18 @@ Director has three databases : mysql for user data, Cassandra for monitoring and
 - Install Director with all three databases as OpenEBS LocalPV with local SSDs underneath.
 - Install Director with all three databases as OpenEBS LocalPV with GPD/EBS underneath.
 - Install Director with all three databases as OpenEBS cStor with local SSDs underneath.
+
+### Supported method will be 
+
+- standard sc
+- OpenEBS localPV (Recommended)
+- OpenEBS cStor
+- OpenEBS Jiva (Not Recommended)
+
+### List of uncovered scenarios 
+
+- DOP installation using 3 different storage class such as cstor-storage-class,openebs-jiva-default and openebs-hostpath.
 - Install Director using only openebs-jiva-default storage class.
-- Install Director using cstor,jiva and local-pv storage class.
 
 ### Dop installation
 
@@ -32,8 +42,6 @@ Director has three databases : mysql for user data, Cassandra for monitoring and
 | [tcid-iudi02](tc-install-ssd-lpv)      | TC-Install-SSD-Lpv        | W               | Y       | Y      | W    |
 | [tcid-iudi03](tc-install-gpd-lpv)      | TC-Install-GPD-Lpv        | W               | W       | W      | W    |
 | [tcid-iudi04](tc-install-ssd-cstor)    | TC-Install-SSD-Cstor	     | W               | W       | W      | W    |
-| [tcid-iudi05](tc-install-ssd-jiva)     | TC-Install-SSD-Jiva	     | W               | W       | W      | W    |
-| [tcid-iudi06](tc-install-all-sc)       | TC-Install-All-sc	     | W               | W       | W      | W    |
 
 
 
