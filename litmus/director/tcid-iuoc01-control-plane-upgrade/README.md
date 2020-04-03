@@ -1,7 +1,7 @@
 # Upgrade OpenEBS ControlPlane installed by Director
 
 ---
-tcid: iuoc02
+tcid: iuoc01
 name: "Upgrade OpenEBS ControlPlane installed by Director"
 
 ---
