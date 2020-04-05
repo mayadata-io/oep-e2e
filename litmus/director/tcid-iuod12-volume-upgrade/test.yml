@@ -40,6 +40,20 @@
             executable: /bin/bash
           register: csp_count
 
+        ## Upgrade openebs control plane
+        - name: Upgrade openebs control plane
+          shell: kubectl apply -f https://openebs.github.io/charts/openebs-operator-{{ openebs_target_version }}.yaml
+
+        ## Fetch OpenEBS control plane pods state after control plane upgrade
+        - name: Fetch OpenEBS control plane pods state after control plane upgrade
+          shell: kubectl get pods -n {{ namespace }}  | grep {{ item }} | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
+          register: app_status
+          until: app_status.stdout == 'Running'
+          with_items:
+            - "{{ openebs_components }}"
+          retries: 20
+          delay: 5
+
         - name: Checking whether all the pool pods are in running state
           shell: kubectl get po -l app=cstor-pool -n openebs -o jsonpath='{.items[?(@.status.phase=="Running")].metadata.name}' | wc -w
           register: pool_pods
