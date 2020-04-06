@@ -1,5 +1,4 @@
-test_name: volume-upgrade-check
-openebs_current_version: "{{ lookup('env','OPENEBS_CURRENT_VERSION') }}"
+test_name: control-plane-upgrade
 openebs_target_version: "{{ lookup('env','OPENEBS_TARGET_VERSION') }}"
 openebs_components:
   [
@@ -11,7 +10,7 @@ openebs_components:
     'openebs-localpv-provisioner',
     'maya-apiserver',
   ]
+namespace: "{{ lookup('env','NAMESPACE') }}"
 group_id: "{{ lookup('env','GROUP_ID') }}"
 cluster_id: "{{ lookup('env','CLUSTER_ID') }}"
 director_ip: "{{ lookup('env','DIRECTOR_IP') }}"
-namespace: "{{ lookup('env','NAMESPACE') }}"

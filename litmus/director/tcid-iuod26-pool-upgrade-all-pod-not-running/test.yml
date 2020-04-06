@@ -84,20 +84,6 @@
           until: "pool_health.json.data[2].data.pods[0].state=='Running'"
           retries: 20
           delay: 2
-         
-        ## Upgrade openebs control plane
-        - name: Upgrade openebs control plane
-          shell: kubectl apply -f https://openebs.github.io/charts/openebs-operator-{{ openebs_target_version }}.yaml
-
-        ## Fetch OpenEBS control plane pods state after control plane upgrade
-        - name: Fetch OpenEBS control plane pods state after control plane upgrade
-          shell: kubectl get pods -n {{ namespace }}  | grep {{ item }} | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
-          register: app_status
-          until: app_status.stdout == 'Running'
-          with_items:
-            - "{{ openebs_components }}"
-          retries: 20
-          delay: 5
         
         # Fetch name of cstor-disk-pool deployment 
         - name: Name of cstor-disk-pool

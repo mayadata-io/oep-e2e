@@ -42,10 +42,10 @@ spec:
                 key: group_id
 
           - name: NAMESPACE
-            value: ''
+            value: 'openebs'
      
           - name: OPENEBS_TARGET_VERSION
-            value: 1.7.0
+            value: 1.8.0
 
           ## Takes cluster_id from configmap
           - name: CLUSTER_ID

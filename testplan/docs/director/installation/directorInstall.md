@@ -17,19 +17,34 @@ Testing does not cover the usability aspects of Director OnPrem. It covers the i
 
 Director has three databases : mysql for user data, Cassandra for monitoring and alert metrics and ElasticsearchDB for logs. Director needs to be tested with various combinations of storage and resources for these databases
 
-- Install Director using standard storage class with GPD/EBS underneath.
 - Install Director with all three databases as LocalPV with GPD/EBS underneath.
-- Install Director with all three databases as OpenEBS LocalPV with GPD/EBS underneath
-- Install Director with all three databases as OpenEBS LocalPV with local SSDs underneath
-- Install Director with all three databases as OpenEBS cStor with locall SSDs underneath
+- Install Director with all three databases as OpenEBS LocalPV with local SSDs underneath.
+- Install Director with all three databases as OpenEBS LocalPV with GPD/EBS underneath.
+- Install Director with all three databases as OpenEBS cStor with local SSDs underneath.
 
-### Actual test cases
+### Supported method will be 
 
-| TestCase                             | Breif Description             | #Issue       | Platform | Status  |
-| ------------------------------------ | ----------------------------- | ------------ | -------- | ------- |
-| [Dir-Install-GCP](install-tcid-iudi01) | Install DOP using helm on GCP | Not-assigned | GCP      | In-Prod |
-|                                      |                               |              |          |         |
-|                                      |                               |              |          |         |
+- standard sc
+- OpenEBS localPV (Recommended)
+- OpenEBS cStor
+- OpenEBS Jiva (Not Recommended)
+
+### List of uncovered scenarios 
+
+- DOP installation using 3 different storage class such as cstor-storage-class,openebs-jiva-default and openebs-hostpath.
+- Install Director using only openebs-jiva-default storage class.
+
+### Dop installation
+
+| TCID                                   | TC Name                   | GCP             | Rancher | Konvoy | AWS  |
+| -------------------------------------- | ------------------------- | --------------- | ------- | ------ | ---- |
+| [tcid-iudi01](tc-install-gpd-std)      | TC-Install-GPD-Std        | Y               | W       | W      | W    |
+| [tcid-iudi02](tc-install-ssd-lpv)      | TC-Install-SSD-Lpv        | W               | Y       | Y      | W    |
+| [tcid-iudi03](tc-install-gpd-lpv)      | TC-Install-GPD-Lpv        | W               | W       | W      | W    |
+| [tcid-iudi04](tc-install-ssd-cstor)    | TC-Install-SSD-Cstor	     | W               | W       | W      | W    |
+
+
+
 
 ## Upgrade of Director OnPrem
 
@@ -37,14 +52,16 @@ Upgrade of Director consists of upgrading the Director micro services and upgrad
 
 ### Upgrade scenarios
 
-- Upgrade using helm chart
-- Upgrade the underlying databases manually using database operators or otherwise
+- Upgrade using helm chart when sc is standard.
+- Upgrade using helm chart when sc is localPV.
+- Upgrade using helm chart when sc is cstor.
+- Upgrade the underlying databases manually using database operators or otherwise.
 
-### Actual test cases
 
-| TCID | Breif Description | #Issue |
-| ---- | ----------------- | ------ |
-|      |                   |        |
-|      |                   |        |
-|      |                   |        |
+### Dop upgrade
 
+| TCID                                   | TC Name                   | GCP             | Rancher | Konvoy | AWS  |
+| -------------------------------------- | ------------------------- | --------------- | ------- | ------ | ---- |
+| [tcid-iudu01](tc-upgrade-gpd-std)      | TC-Upgrade-GPD-Std        | W               | W       | W      | W    |
+| [tcid-iudu02](tc-upgrade-ssd-lpv)      | TC-Upgrade-SSD-Lpv        | W               | W       | W      | W    |
+| [tcid-iudu03](tc-upgrade-ssd-cstor)    | TC-Upgrade-SSD-Cstor      | W               | W       | W      | W    |
