@@ -81,3 +81,9 @@ table-manager-bcd58f7df-wvrkr
 ```
 - All the pods in maya-system namespace should be running state.
 - DOP ui should be accessible in any browser.
+
+### Test Results
+
+To view the test results of the test case - `tcid-iudi01` across multiple runs visit the below link -
+
+- https://github.com/mayadata-io/oep-e2e-results/tree/master/tcid-iudi01
