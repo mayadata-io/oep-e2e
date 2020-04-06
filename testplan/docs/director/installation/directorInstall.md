@@ -52,14 +52,16 @@ Upgrade of Director consists of upgrading the Director micro services and upgrad
 
 ### Upgrade scenarios
 
-- Upgrade using helm chart
-- Upgrade the underlying databases manually using database operators or otherwise
+- Upgrade using helm chart when sc is standard.
+- Upgrade using helm chart when sc is localPV.
+- Upgrade using helm chart when sc is cstor.
+- Upgrade the underlying databases manually using database operators or otherwise.
 
-### Actual test cases
 
-| TCID | Breif Description | #Issue |
-| ---- | ----------------- | ------ |
-|      |                   |        |
-|      |                   |        |
-|      |                   |        |
+### Dop upgrade
 
+| TCID                                   | TC Name                   | GCP             | Rancher | Konvoy | AWS  |
+| -------------------------------------- | ------------------------- | --------------- | ------- | ------ | ---- |
+| [tcid-iudu01](tc-upgrade-gpd-std)      | TC-Upgrade-GPD-Std        | W               | W       | W      | W    |
+| [tcid-iudu02](tc-upgrade-ssd-lpv)      | TC-Upgrade-SSD-Lpv        | W               | W       | W      | W    |
+| [tcid-iudu03](tc-upgrade-ssd-cstor)    | TC-Upgrade-SSD-Cstor      | W               | W       | W      | W    |
