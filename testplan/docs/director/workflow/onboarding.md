@@ -1,10 +1,10 @@
 ---
-id: workflow
-title: Workflow
+id: onboarding
+title: Onboarding Workflow
 sidebar_label: Test Strategy
 ---
 ------
-Once DOP is installed, following workflow happens
+Once DOP is installed, following onboarding workflow happens
 - Project creation
 - Connect a cluster
 - Chatops configuration

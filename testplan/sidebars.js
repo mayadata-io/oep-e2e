@@ -20,7 +20,7 @@ module.exports = {
 		        type: 'category',
 		        label: 'Workflow',
 		        items: [
-				'director/workflow/workflow',
+				'director/workflow/onboarding',
 				'director/workflow/test1'
 			],
 		},
@@ -45,7 +45,9 @@ module.exports = {
 		        label: 'Teaming',
 		        items: [
 				'director/teaming/directorTeaming',
-				'director/teaming/test1'
+				'director/teaming/TC-Team-InviteUser',
+				'director/teaming/TC-Team-RoleChange',
+				'director/teaming/TC-Team-RoleChange-Negative'
 			],
 		},
 		{
@@ -97,10 +99,17 @@ module.exports = {
     "OpenEBS Enterprise": [
 		{
 		        type: 'category',
-		        label: 'DAO',
+		        label: 'MayaData OpenEBS',
 		        items: [
-				'openebs/dao/dao',
-				'openebs/dao/test1'
+				'openebsEnterprise/openebs/openebs'
+			],
+		},
+		{
+		        type: 'category',
+		        label: 'DAOs',
+		        items: [
+				'openebsEnterprise/dao/dao',
+				'openebsEnterprise/dao/test1'
 			],
 		},
     ],	  

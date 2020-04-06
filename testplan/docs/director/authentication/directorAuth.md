@@ -34,12 +34,14 @@ Test cases covered for the all the above authentication methods are as mentioned
 
 ### Scalability
 [WIP]
-- 500 Simultaneous login
+
+- 50000 Simultaneous login
 
 
 ### Performance
 [WIP]
-- Do we get response with success page after authentication with in 20 sec for 100 simultaneous login
+
+- Success page after authentication should be loaded with in 10 sec with 100 simultaneous login/sec
 
 ### Security
 Todo
