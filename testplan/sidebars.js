@@ -12,6 +12,14 @@ module.exports = {
 		},
 		{
 		        type: 'category',
+		        label: 'Workflow',
+		        items: [
+				'director/workflow/workflow',
+				'director/workflow/test1'
+			],
+		},
+		{
+		        type: 'category',
 		        label: 'Authentication',
 		        items: [
 				'director/authentication/directorAuth',
@@ -39,12 +47,12 @@ module.exports = {
 		        label: 'OpenEBS',
 		        items: [
 				'director/openebs/directorOpenEBS',
-                'director/openebs/TC-CSP-REC-LIST',
-                'director/openebs/TC-CSP-REC-LIST-NO-NDM',
-                'director/openebs/TC-CSP-REC-LIST-STRIPE',
-                'director/openebs/TC-CSP-REC-CREATE-STRIPE',
-                'director/openebs/TC-CSP-REC-LIST-MIRROR',
-                'director/openebs/TC-CSP-REC-CREATE-MIRROR'
+                		'director/openebs/TC-CSP-REC-LIST',
+                		'director/openebs/TC-CSP-REC-LIST-NO-NDM',
+                		'director/openebs/TC-CSP-REC-LIST-STRIPE',
+                		'director/openebs/TC-CSP-REC-CREATE-STRIPE',
+		                'director/openebs/TC-CSP-REC-LIST-MIRROR',
+                		'director/openebs/TC-CSP-REC-CREATE-MIRROR'
 			],
 		},
 		{
