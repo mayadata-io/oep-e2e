@@ -37,9 +37,9 @@ spec:
                   name: config
                   key: url
             - name: OPENEBS_CURRENT_VERSION
-              value: 1.4.0
-            - name: OPENEBS_TARGET_VERSION
               value: 1.5.0
+            - name: OPENEBS_TARGET_VERSION
+              value: 1.6.0
             - name: GROUP_ID
               valueFrom:
                 configMapKeyRef:
