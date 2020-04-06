@@ -84,6 +84,4 @@ table-manager-bcd58f7df-wvrkr
 
 ### Test Results
 
-To view the test results of the test case - `tcid-iudi01` across multiple runs visit the below link -
-
-- https://github.com/mayadata-io/oep-e2e-results/tree/master/tcid-iudi01
+<a href="https://github.com/mayadata-io/oep-e2e-results/tree/master/tcid-iudi01" target="_blank">View Test Results</a>
