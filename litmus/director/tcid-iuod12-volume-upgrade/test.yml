@@ -31,8 +31,8 @@
           with_items:
             - '{{ openebs_components }}'
           until: '{{ ready_status.stdout_lines | unique | length == 1 }}'
-          retries: 20
-          delay: 5
+          retries: 30
+          delay: 10
 
         - name: Get the number of CSP
           shell: kubectl get csp --no-headers | wc -l
@@ -58,19 +58,8 @@
           shell: kubectl get po -l app=cstor-pool -n openebs -o jsonpath='{.items[?(@.status.phase=="Running")].metadata.name}' | wc -w
           register: pool_pods
           until: 'pool_pods.stdout == csp_count.stdout'
-          retries: 10
-          delay: 5
-
-        - name: Checking pool pod's container status
-          shell: kubectl get po -n openebs -l app=cstor-pool --no-headers | grep {{ item }} | awk '{print $2}' | awk -F'/' '{print $1}' && kubectl get po -n openebs -l app=cstor-pool --no-headers | grep {{ item }} | awk '{print $2}' | awk -F'/' '{print $2}'
-          loop:
-            - '{{ storage_pool.json.data[0].name }}'
-            - '{{ storage_pool.json.data[1].name }}'
-            - '{{ storage_pool.json.data[2].name }}'
-          register: pool_pod_status
-          until: '{{ pool_pod_status.stdout_lines | unique | length == 1 }}'
-          retries: 20
-          delay: 2
+          retries: 30
+          delay: 10
 
         - name: Get OpenEBS storage pool details
           uri:
@@ -83,6 +72,17 @@
             body_format: json
           register: storage_pool
 
+        - name: Checking pool pod's container status
+          shell: kubectl get po -n openebs -l app=cstor-pool --no-headers | grep {{ item }} | awk '{print $2}' | awk -F'/' '{print $1}' && kubectl get po -n openebs -l app=cstor-pool --no-headers | grep {{ item }} | awk '{print $2}' | awk -F'/' '{print $2}'
+          loop:
+            - '{{ storage_pool.json.data[0].name }}'
+            - '{{ storage_pool.json.data[1].name }}'
+            - '{{ storage_pool.json.data[2].name }}'
+          register: pool_pod_status
+          until: '{{ pool_pod_status.stdout_lines | unique | length == 1 }}'
+          retries: 30
+          delay: 10
+
         - name: Get openebs version of pool-1
           uri:
             url: '{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayastoragepools'
@@ -94,8 +94,8 @@
             body_format: json
           register: storage_pool
           until: "storage_pool.json.data[0].data.version=='{{ openebs_target_version }}'"
-          retries: 10
-          delay: 2
+          retries: 30
+          delay: 10
 
         - name: Get openebs version of pool-2
           uri:
@@ -108,8 +108,8 @@
             body_format: json
           register: storage_pool
           until: "storage_pool.json.data[1].data.version=='{{ openebs_target_version }}'"
-          retries: 10
-          delay: 2
+          retries: 30
+          delay: 10
 
         - name: Get openebs version of pool-3
           uri:
@@ -122,8 +122,8 @@
             body_format: json
           register: storage_pool
           until: "storage_pool.json.data[2].data.version=='{{ openebs_target_version }}'"
-          retries: 10
-          delay: 2
+          retries: 30
+          delay: 10
 
         - name: Get application volume health status for replica-1
           uri:
@@ -136,8 +136,8 @@
             body_format: json
           register: volume_health
           until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[0].state=='Healthy'"
-          retries: 20
-          delay: 2
+          retries: 30
+          delay: 10
 
         - name: Get application volume health status for replica-2
           uri:
@@ -150,8 +150,8 @@
             body_format: json
           register: volume_health
           until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[1].state=='Healthy'"
-          retries: 20
-          delay: 2
+          retries: 30
+          delay: 10
 
         - name: Get application volume health status for replica-3
           uri:
@@ -164,8 +164,8 @@
             body_format: json
           register: volume_health
           until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[2].state=='Healthy'"
-          retries: 20
-          delay: 2
+          retries: 30
+          delay: 10
 
         - name: Get application details
           uri:
