@@ -42,7 +42,7 @@ spec:
                 key: group_id
 
           - name: NAMESPACE
-            value: ''
+            value: 'openebs'
      
           - name: OPENEBS_TARGET_VERSION
             value: 1.7.0
