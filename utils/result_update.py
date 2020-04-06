@@ -38,8 +38,8 @@ test_name = args.test_name
 job_name = args.job_name
 
 github_token = Github(token)
-repo = github_token.get_repo("mayadata-io/oep-e2e")
-contents = repo.get_contents("litmus/director/"+job_name+"/README.md")
+repo = github_token.get_repo("mayadata-io/oep-e2e-results")
+contents = repo.get_contents(job_name+"/README.md")
 file = repo.get_contents(contents.path)
 file_path = contents.path
 file_content=str(file.decoded_content)
