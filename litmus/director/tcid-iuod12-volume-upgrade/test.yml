@@ -61,17 +61,6 @@
           retries: 30
           delay: 10
 
-        - name: Checking pool pod's container status
-          shell: kubectl get po -n openebs -l app=cstor-pool --no-headers | grep {{ item }} | awk '{print $2}' | awk -F'/' '{print $1}' && kubectl get po -n openebs -l app=cstor-pool --no-headers | grep {{ item }} | awk '{print $2}' | awk -F'/' '{print $2}'
-          loop:
-            - '{{ storage_pool.json.data[0].name }}'
-            - '{{ storage_pool.json.data[1].name }}'
-            - '{{ storage_pool.json.data[2].name }}'
-          register: pool_pod_status
-          until: '{{ pool_pod_status.stdout_lines | unique | length == 1 }}'
-          retries: 30
-          delay: 10
-
         - name: Get OpenEBS storage pool details
           uri:
             url: '{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayastoragepools'
