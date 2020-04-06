@@ -1,7 +1,7 @@
 ---
-id: TC-CSP-REC-CREATE-STRIPE
-title: Create stripe cstor pool cluster
-sidebar_label: TC-CSP-REC-CREATE-STRIPE
+id: TCID-OP-CSP-REC-LIST-STRIPE
+title: List stripe based cstor pool recommendations
+sidebar_label: TCID-OP-CSP-REC-LIST-STRIPE
 ---
 ------
 
@@ -10,15 +10,13 @@ sidebar_label: TC-CSP-REC-CREATE-STRIPE
 <table>
   <tr>
     <th> TCID </th>
-    <th> TCNAME </th>
     <th> Type </th>
     <th> Description </th>
   </tr>
   <tr>
-    <td> tcid-csprec003 </td>
-    <td> TC-CSP-REC-CREATE-STRIPE </td>
+    <td> TCID-OP-CSP-REC-LIST-STRIPE </td>
     <td> CStorPool Recommendation </td>
-    <td> Verify creation of stripe cstor pool cluster </td>
+    <td> Verify List of Stripe Recommendations </td>
   </tr>
 </table>
 
@@ -37,8 +35,7 @@ sidebar_label: TC-CSP-REC-CREATE-STRIPE
 - Invoke API to get capacity based recommendations
 - Invoke API to get device based recommendations
 - Invoke API to get stripe based cstor pool recommendations
-- Invoke API to create stripe cstor pool cluster
 
 ### Expected output
 
-- Director should be able to create stripe cstor pool cluster
+- Director should list stripe based cstor pool recommendations
