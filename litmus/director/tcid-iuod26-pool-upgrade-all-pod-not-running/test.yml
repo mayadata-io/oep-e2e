@@ -239,6 +239,12 @@
           until: "pool_health.json.data[2].data.pods[0].state=='Running'"
           retries: 30
           delay: 5
+
+        ## Removing application ns
+        - include_tasks: /utils/app-cleanup.yml
+
+        ## Deleting openebs from the cluster
+        - include_tasks: /utils/openebs-cleanup.yml
         
         ## Setting flag as pass 
         - set_fact:

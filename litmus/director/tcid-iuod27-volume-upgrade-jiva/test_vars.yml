@@ -14,3 +14,4 @@ namespace: "{{ lookup('env','NAMESPACE') }}"
 group_id: "{{ lookup('env','GROUP_ID') }}"
 cluster_id: "{{ lookup('env','CLUSTER_ID') }}"
 director_ip: "{{ lookup('env','DIRECTOR_IP') }}"
+app_ns: app-mongo-ns
