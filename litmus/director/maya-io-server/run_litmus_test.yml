@@ -13,15 +13,22 @@ spec:
     spec:
       serviceAccountName: litmus
       restartPolicy: Never
+      volumes:
+        - name: director-url
+          configMap:
+            name: config
       containers:
       - name: ansibletest
         image: mayadataio/dop-validator:ci
         imagePullPolicy: Always
+        volumeMounts:
+          - name: director-url
+            mountPath: '/etc/director-url'
         env:
           - name: ANSIBLE_STDOUT_CALLBACK
-            value: default  
+            value: default
           - name: NAMESPACE
-            value: default              
+            value: default
         command: ["/bin/bash"]
         args: ["-c", "ansible-playbook ./litmus/director/maya-io-server/test.yaml -i /etc/ansible/hosts -v; exit 0"]
       imagePullSecrets:
