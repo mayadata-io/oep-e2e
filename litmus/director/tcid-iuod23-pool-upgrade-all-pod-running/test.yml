@@ -109,7 +109,7 @@
             return_content: yes
             force_basic_auth: yes
             body_format: json
-          register: storage_pools
+          register: storage_pool
         
         ## Upgrade data-plane component
         - name: Upgrade data-plane component
