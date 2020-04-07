@@ -27,7 +27,7 @@
           register: app_status
           until: app_status.stdout == 'Running'
           retries: 30
-          delay: 10
+          delay: 20
         
         - name : Fetch director url 
           shell: kubectl get node -o wide | awk {'print $7'} | head -n 4 | tail -n 1
