@@ -33,6 +33,12 @@
           shell: kubectl get node -o wide | awk {'print $7'} | head -n 4 | tail -n 1
           register: node_ip
 
+          ## Update director url when External IP is not availabe, i.e. 'none'
+        - name: Update director url
+          shell: kubectl get node -o wide | awk {'print $6'} | head -n 4 | tail -n 1
+          register: node_ip
+          when: node_ip.stdout == '<none>'
+
         - set_fact:
             url : "http://{{ node_ip.stdout }}:30380"
 
