@@ -25,6 +25,8 @@ parser.add_argument("--test_name",
        help="test name")
 parser.add_argument("--job_name",
        help="job name")
+parser.add_argument("--platform",
+       help="platform")
 
 
 args = parser.parse_args()
@@ -36,6 +38,7 @@ time_stamp = args.time_stamp
 token = args.token
 test_name = args.test_name
 job_name = args.job_name
+platform = args.platform
 
 github_token = Github(token)
 repo = github_token.get_repo("mayadata-io/oep-e2e-results")
@@ -59,16 +62,16 @@ def fetch_file_content():
 
     # updating result's table if the table is already there
     if file_content.find('|')>0:
-        new_job = '|     {}           |  {}           | {}  | {} |'.format(job_url,test_desc,time_stamp ,test_result)
-        index = content_list.index('| Job ID |   Test Description         | Execution Time |Test Result   |')
+        new_job = '|     {}           |  {}           | {}  | {} | {} |'.format(job_url,test_desc,time_stamp,platform,test_result)
+        index = content_list.index('| Job ID |   Test Description         | Execution Time | Platform |Test Result   |')
         content_list.insert(index+2,new_job)
         updated_file_content = ('\n').join(content_list)
         
     # creating result's table for first job result entry 
     else:
-        updated_file_content =  '| Job ID |   Test Description         | Execution Time |Test Result   |\n'
-        updated_file_content = updated_file_content + (' |---------|---------------------------| --------------|--------|\n')
-        updated_file_content = updated_file_content + (' |    {}   |  {}           |  {}     |{}  |\n'.format(job_url,test_desc,time_stamp, test_result))
+        updated_file_content =  '| Job ID |   Test Description         | Execution Time | Platform |Test Result   |\n'
+        updated_file_content = updated_file_content + (' |---------|---------------------------| --------------| -------- |--------|\n')
+        updated_file_content = updated_file_content + (' |    {}   |  {}           |  {}     |{}  |{}  |\n'.format(job_url,test_desc,time_stamp,platform,test_result))
         index = len(content_list)
         content_list.insert(index, updated_file_content)
         updated_file_content = ('\n').join(content_list)
