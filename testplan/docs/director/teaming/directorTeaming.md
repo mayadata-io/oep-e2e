@@ -27,7 +27,7 @@ An account member can invite users, to manage with the scope of cluster level or
 There are 4 roles for an user as listed below with order of access level, where Owner is having the highest access.
   1.  Owner
   2.  Admin
-  3.  Member
+  3.  Member (Restricted user no Access)
   4.  ReadOnly
 
 

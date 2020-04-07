@@ -15,7 +15,7 @@ This page captures the test scenarios for Authentication methods supported in DO
 ### Workflow TCs
 Test cases covered for the all the above authentication methods are as mentioned below,
 - Admin Authentication - Admin will have option to enable and disable users. This will be available for Local Auth and AD Auth only.
-- User Authentication - Regular users will have access to the portal. They will different roles based on teaming. Roles and access control will be covered in [Teaming](/docs/director/teaming/directorTeaming)
+- User Authentication - Regular users will have access to the portal. They will have different roles based on teaming. Roles and access control will be covered in [Teaming](/docs/director/teaming/directorTeaming)
 - Signup Feature
 - Password Complexity check
 - Profile field validation

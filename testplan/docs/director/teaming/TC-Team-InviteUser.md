@@ -29,10 +29,10 @@ sidebar_label: TC-Team-InviteUser
 - Project owner pouser1
 
 
-### Details
+### Testcase Info
 - Check the Invite user functionality works fine.
 
-### Steps Performed in the test
+### User Actions
 
 - Login as pouser1
 - Invite pauser1 as project Admin
@@ -41,9 +41,9 @@ sidebar_label: TC-Team-InviteUser
 - Login as the above user and verify the functionality
 
 
-### Expected output
+### Expected Results
 
 - Invitation should be sent to all users
 - pauser1 should be joined as project Admin, user should have all project access
 - pruser1 should be joined as Readonly, no write operation can be performed
-- pmuser1 should be joined as project member, user should have write permission, but will not have admin powers like disabling user etc.
+- pmuser1 should be joined as project member, user will be part of the project but no access to resources.w

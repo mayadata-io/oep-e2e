@@ -29,21 +29,18 @@ sidebar_label: TC-Team-RoleChange
 - Project owner pouser1
 
 
-### Details
+### Test Case Info
 - Check the Invite user functionality works fine.
 
-### Steps Performed in the test
+### User Action
 
 - Login as pouser1
   - Change pruser1 as projectAdmin, then to project Member and then back to project Readonly
 - Login as pauser1
   - Change pruser1 as project Admin, then to project Member and then back to project Readonly
-- Login as pmuser1
-  - Change pruser1 as project member, then back to project Readonly
 
 
-### Expected output
+### Expected Results
 
 - Role change of pruser1 should be changed to Admin, then to project member and then back to readonly
 - Role change of pruser1 should be changed to Admin, then to project member and then back to readonly
-- Role change of pruser1 should be changed to member and then back to readonly

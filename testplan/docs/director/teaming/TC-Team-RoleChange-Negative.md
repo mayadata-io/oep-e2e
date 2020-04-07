@@ -39,7 +39,7 @@ sidebar_label: TC-Team-RoleChange-Negative
 - Login as pauser1
   - Change pouser1 as project admin (self), then project owner
 - Login as pmuser1
-  - Change pouser1 as project member (self), then to project owner, then to project admin
+  - Change pouser1 as project member (self), then to project owner, then to project admin, then to project readonly
 - Login as pruser1
   - Change pouser1 as project readonly (self), then to project owner, then to project admin, then to project member
 
