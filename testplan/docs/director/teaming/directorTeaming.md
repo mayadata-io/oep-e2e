@@ -27,18 +27,17 @@ An account member can invite users, to manage with the scope of cluster level or
 There are 4 roles for an user as listed below with order of access level, where Owner is having the highest access.
   1.  Owner
   2.  Admin
-  3.  Member
+  3.  Member (Restricted user no Access)
   4.  ReadOnly
 
 
 - #### Role Change
   Role change can be done to a same or higher level. Where Owner is the highest and ReadOnly is the lowest level.
+  
+  | TCID                                       | TC Name                     | GCP  | Rancher | Konvoy | AWS  |
+  | ------------------------------------------ | --------------------------- | ---- | ------- | ------ | ---- |
+  | [tcid-triv01](TC-Team-InviteUser)          | TC-Teaming-InviteUser       | Y    | W       | W      | W    |
+  | [tcid-trrc02](TC-Team-RoleChange)          | TC-Team-RoleChange          | Y    | W       | W      | W    |
+  | [tcid-trrc03](TC-Team-RoleChange-Negative) | TC-Team-RoleChange-Negative | Y    | W       | W      | W    |
 
 
-
-
-| TCID | Breif Description | #Issue |
-| ---- | ----------------- | ------ |
-|      |                   |        |
-|      |                   |        |
-|      |                   |        |
