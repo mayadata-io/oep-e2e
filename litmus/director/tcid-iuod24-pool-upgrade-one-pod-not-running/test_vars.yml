@@ -1,4 +1,4 @@
-test_name: pool-upgrade-one-pod-not-running
+test_name: pool-upgrade-one-pod-not-running-check
 openebs_target_version: "{{ lookup('env','OPENEBS_TARGET_VERSION') }}"
 openebs_components:
   [
