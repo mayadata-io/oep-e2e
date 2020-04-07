@@ -170,7 +170,7 @@
             force_basic_auth: yes
             body_format: json
           register: storage_pool
-          until: "storage_pool.json.data[3].data.version=='{{ openebs_target_version }}'"
+          until: "storage_pool.json.data[0].data.version=='{{ openebs_target_version }}'"
           retries: 30
           delay: 10
 
@@ -184,7 +184,7 @@
             force_basic_auth: yes
             body_format: json
           register: storage_pool
-          until: "storage_pool.json.data[4].data.version=='{{ openebs_target_version }}'"
+          until: "storage_pool.json.data[1].data.version=='{{ openebs_target_version }}'"
           retries: 30
           delay: 10
 
@@ -198,7 +198,7 @@
             force_basic_auth: yes
             body_format: json
           register: storage_pool
-          until: "storage_pool.json.data[5].data.version=='{{ openebs_target_version }}'"
+          until: "storage_pool.json.data[2].data.version=='{{ openebs_target_version }}'"
           retries: 30
           delay: 10
 
