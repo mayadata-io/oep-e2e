@@ -65,8 +65,8 @@
           uri:
             url: '{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayastoragepools'
             method: GET
-            url_username: '{{ username }}'
-            url_password: '{{ password }}'
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
             return_content: yes
             force_basic_auth: yes
             body_format: json
