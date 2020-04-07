@@ -1,4 +1,4 @@
-test_name: pool-upgrade-all-pod-running
+test_name: pool-upgrade-all-pod-running-check
 openebs_target_version: "{{ lookup('env','OPENEBS_TARGET_VERSION') }}"
 openebs_components:
   [
