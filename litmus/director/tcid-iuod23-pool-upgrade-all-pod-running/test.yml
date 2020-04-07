@@ -121,7 +121,7 @@
             return_content: yes
             force_basic_auth: yes
             body_format: json
-            body: '{"clusterId":"{{ cluster_id }}","kind":"poolUpgrade","targetVersion":"{{ openebs_target_version }}","upgradeComponents":[{"id":"{{ storage_pool.json.data[0].id }}"},{"id":"{{ storage_pool.json.data[1].id }}"},{"id":"{{ storage_pools.json.data[2].id }}"}]}'
+            body: '{"clusterId":"{{ cluster_id }}","kind":"poolUpgrade","targetVersion":"{{ openebs_target_version }}","upgradeComponents":[{"id":"{{ storage_pool.json.data[0].id }}"},{"id":"{{ storage_pool.json.data[1].id }}"},{"id":"{{ storage_pool.json.data[2].id }}"}]}'
             status_code: 201
           register: upgrade_claim
         
