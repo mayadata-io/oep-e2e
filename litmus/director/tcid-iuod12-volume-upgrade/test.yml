@@ -110,20 +110,6 @@
           retries: 40
           delay: 5
 
-        - name: Check pool-1 upgrade job status
-          uri:
-            url: '{{ director_url }}/v3/groups/{{ group_id }}/openebsupgradeclaims/{{ upgrade_claim.json.id }}/openebsupgradejobs'
-            method: GET
-            url_username: '{{ username.stdout }}'
-            url_password: '{{ password.stdout }}'
-            return_content: yes
-            force_basic_auth: yes
-            body_format: json
-          register: upgrade_job
-          until: "upgrade_job.json.data[0].state=='Success'"
-          retries: 25
-          delay: 5
-
         - name: Check pool-2 upgrade job status
           uri:
             url: '{{ director_url }}/v3/groups/{{ group_id }}/openebsupgradeclaims/{{ upgrade_claim.json.id }}/openebsupgradejobs'
@@ -160,7 +146,7 @@
             - '{{ storage_pool.json.data[2].name }}'
           register: pool_pod_state
           until: "pool_pod_state.stdout=='Running'"
-          retries: 20
+          retries: 30
           delay: 2
 
         - name: Checking pool pod's container status after upgrading
@@ -171,8 +157,8 @@
             - '{{ storage_pool.json.data[2].name }}'
           register: pool_pod_status
           until: '{{ pool_pod_status.stdout_lines | unique | length == 1 }}'
-          retries: 20
-          delay: 2
+          retries: 30
+          delay: 10
 
         - name: Get openebs version of pool-1
           uri:
