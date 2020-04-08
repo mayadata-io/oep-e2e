@@ -33,6 +33,9 @@
         ## Installing openebs
         - include_tasks: /utils/install-openebs.yml
 
+        ## Deploying application mongodb
+        - include_tasks: /utils/mongo-app.yml
+
         ## Check whether openebs components are in Running state or not
         - name: Fetch OpenEBS control plane pods state
           shell: kubectl get pods -n {{ namespace }}  | grep {{ item }} | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
