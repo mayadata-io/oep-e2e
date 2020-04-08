@@ -1,6 +1,6 @@
 ## Install openebs control plane
 - name: Install openebs control plane
-  shell: kubectl apply -f https://openebs.github.io/charts/openebs-operator-{{ openebs_version }}.yaml
+  shell: kubectl apply -f https://openebs.github.io/charts/openebs-operator-{{ openebs_current_version }}.yaml
 
 ## Checking the openebs Installation    
 - name: Fetch OpenEBS control plane pods state
