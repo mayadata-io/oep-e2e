@@ -1,0 +1,106 @@
+---
+- hosts: localhost
+  connection: local
+
+  vars_files:
+    - test_vars.yml
+
+  tasks:
+
+    - block:
+  
+        ## Generating the testname for deployment
+        - include_tasks: /ansible-utils/create_testname.yml
+
+        ## RECORD START-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'SOT'
+          
+        - set_fact:
+            director_url : "http://{{ director_ip }}:30380"
+
+        ## Getting the username
+        - name: Get username
+          shell: cat /etc/secret-volume/username
+          register: username
+
+        ## Getting the password.stdout     
+        - name: Get password
+          shell: cat /etc/secret-volume/password
+          register: password
+        
+        ## Installing openebs
+        - include_tasks: /utils/install-openebs.yml
+
+        ## Check whether openebs components are in Running state or not
+        - name: Fetch OpenEBS control plane pods state
+          shell: kubectl get pods -n {{ namespace }}  | grep {{ item }} | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
+          register: app_status
+          until: app_status.stdout == 'Running'
+          with_items:
+            - "{{ openebs_components }}"
+          retries: 30
+          delay: 10
+
+        ## Get the container Status of the openebs pods
+        - name: Get the container status of the openebs pods.
+          shell: >
+            kubectl get pod -n {{ namespace }} --no-headers
+            -o jsonpath='{.items[*].status.containerStatuses[*].ready}' | tr ' ' '\n' | uniq
+          args:
+            executable: /bin/bash
+          register: containerStatus
+          until: "containerStatus.stdout == 'true'"
+          retries: 30
+          delay: 10        
+        
+        ## Get active openebses
+        - name: Get active openebses
+          uri:
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses?state=active&clusterId={{ cluster_id}}"
+            method: GET
+            url_username: "{{ username.stdout }}" 
+            url_password: "{{ password.stdout }}"
+            force_basic_auth: yes
+            return_content: yes
+            body_format: json
+            status_code: 200
+          register: openebses_active
+          failed_when: openebses_active.json.data == []
+
+        ## Getting the openebses id
+        - name: Getting the openebses id
+          set_fact:
+            openebs_id: "{{ openebses_active.json.data[0].id }}"
+        
+        ## Trying to upgrade openebs control plane components
+        - name: Trying to upgrade openebs control plane components
+          uri:
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses/{{ openebs_id }}/?action=upgradecontrolplane"
+            method: POST
+            url_username: "{{ username.stdout }}"
+            url_password: "{{ password.stdout }}"
+            force_basic_auth: yes
+            return_content: yes
+            body_format: json
+            body: '{"upgradeVersion":"{{ openebs_target_version }}"}'
+            status_code: 422
+          register: openebs_upgrade
+
+        ## Deleting openebs from the cluster
+        - include_tasks: /utils/openebs-cleanup.yml
+
+        - set_fact:
+            flag: "Pass"
+        
+      rescue:
+        - name: Setting fail flag
+          set_fact:
+            flag: "Fail"
+
+      always:
+        ## RECORD END-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'EOT'
