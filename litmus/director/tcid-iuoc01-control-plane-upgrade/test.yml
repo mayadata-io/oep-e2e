@@ -75,7 +75,7 @@
         ## Upgrading openebs control plane components
         - name: Upgrading openebs control plane components
           uri:
-            url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses/{{ openebs_id }}?"
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses/{{ openebs_id }}/?action=upgradecontrolplane"
             method: POST
             url_username: "{{ username.stdout }}"
             url_password: "{{ password.stdout }}"

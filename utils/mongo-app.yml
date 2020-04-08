@@ -4,11 +4,11 @@
 
 ## Deploying application mongo
 - name: Deploying application mongo
-  shell: kubectl apply -f mongodb-app.yml
+  shell: kubectl apply -f /utils/mongodb-app.yml
 
 ## Creating PVC
 - name: Creating PVC
-  shell: kubectl apply -f pvc.yml
+  shell: kubectl apply -f /utils/pvc.yml
 
 ## Confirm that the application is running
 - name: Confirming that the application is running
