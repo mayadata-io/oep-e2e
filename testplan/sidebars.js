@@ -52,15 +52,22 @@ module.exports = {
 		},
 		{
 		        type: 'category',
-		        label: 'OpenEBS',
+		        label: 'OpenEBS Provisioning',
 		        items: [
-				'director/openebs/directorOpenEBS',
-                		'director/openebs/TC-CSP-REC-LIST',
-                		'director/openebs/TC-CSP-REC-LIST-NO-NDM',
-                		'director/openebs/TC-CSP-REC-LIST-STRIPE',
-                		'director/openebs/TC-CSP-REC-CREATE-STRIPE',
-		                'director/openebs/TC-CSP-REC-LIST-MIRROR',
-                		'director/openebs/TC-CSP-REC-CREATE-MIRROR'
+                'director/openebs-provisioning/plan',
+                'director/openebs-provisioning/TCID-OP-BD-VIEW-ALL',
+                'director/openebs-provisioning/TCID-OP-BD-VIEW-SCALE',
+                'director/openebs-provisioning/TCID-OP-BD-VIEW-SCALE-RESTART',
+                'director/openebs-provisioning/TCID-OP-BD-FILTER-SSD',
+                'director/openebs-provisioning/TCID-OP-BD-FILTER-PATH',
+                'director/openebs-provisioning/TCID-OP-BD-IGNORE',
+                'director/openebs-provisioning/TCID-OP-BD-VIEW-TOGGLE',
+                'director/openebs-provisioning/TCID-OP-CSP-REC-LIST',
+                'director/openebs-provisioning/TCID-OP-CSP-REC-LIST-NO-NDM',
+                'director/openebs-provisioning/TCID-OP-CSP-REC-LIST-STRIPE',
+                'director/openebs-provisioning/TCID-OP-CSP-REC-CREATE-STRIPE',
+                'director/openebs-provisioning/TCID-OP-CSP-REC-LIST-MIRROR',
+                'director/openebs-provisioning/TCID-OP-CSP-REC-CREATE-MIRROR'
 			],
 		},
 		{
@@ -99,19 +106,11 @@ module.exports = {
     "OpenEBS Enterprise": [
 		{
 		        type: 'category',
-		        label: 'MayaData OpenEBS',
-		        items: [
-				'openebsEnterprise/openebs/openebs'
-			],
-		},
-		{
-		        type: 'category',
 		        label: 'DAOs',
 		        items: [
-				'openebsEnterprise/dao/dao',
-				'openebsEnterprise/dao/test1'
-			],
-		},
+				    'openebs-enterprise/dao/dao'
+			    ],
+        },
     ],	  
     Help: ['doc1', 'mdx'],
   },

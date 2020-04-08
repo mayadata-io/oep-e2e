@@ -1,7 +1,7 @@
 ---
-id: TC-CSP-REC-LIST
-title: List cstor pool recommendations
-sidebar_label: TC-CSP-REC-LIST
+id: TCID-OP-CSP-REC-CREATE-MIRROR
+title: Create mirror cstor pool cluster
+sidebar_label: TCID-OP-CSP-REC-CREATE-MIRROR
 ---
 ------
 
@@ -10,15 +10,13 @@ sidebar_label: TC-CSP-REC-LIST
 <table>
   <tr>
     <th> TCID </th>
-    <th> TCNAME </th>
     <th> Type </th>
     <th> Description </th>
   </tr>
   <tr>
-    <td> tcid-csprec001 </td>
-    <td> TC-CSP-REC-LIST </td>
+    <td> TCID-OP-CSP-REC-CREATE-MIRROR </td>
     <td> CStorPool Recommendation </td>
-    <td> List Verification </td>
+    <td> Verify creation of mirror cstor pool cluster </td>
   </tr>
 </table>
 
@@ -36,9 +34,9 @@ sidebar_label: TC-CSP-REC-LIST
 - Invoke API to list recommendations
 - Invoke API to get capacity based recommendations
 - Invoke API to get device based recommendations
+- Invoke API to get mirror based cstor pool recommendations
+- Invoke API to create mirror cstor pool cluster
 
 ### Expected output
 
-- Director should list the supported recommendations
-- Director should list the capacity based recommendations
-- Director should list the device based recommendations
+- Director should be able to create mirror cstor pool cluster
