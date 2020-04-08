@@ -30,7 +30,7 @@
           delay: 10
         
         - name: Fetch director url
-          shell: cat /etc/director-url
+          shell: cat /etc/director-url/url
           register: node_ip
 
         - set_fact:
