@@ -1,0 +1,24 @@
+## Creating ns app-mongo-ns
+- name: Creating ns app-mongo-ns
+  shell: kubectl create ns app-mongo-ns
+
+## Deploying application mongo
+- name: Deploying application mongo
+  shell: kubectl apply -f mongodb-app.yml
+
+## Creating PVC
+- name: Creating PVC
+  shell: kubectl apply -f pvc.yml
+
+## Confirm that the application is running
+- name: Confirming that the application is running
+  shell: >
+    kubectl get pod -l app=mongo
+    --no-headers -o custom-columns=:status.phase
+    -n {{ app_ns }} | sort | uniq
+  args:
+    executable: /bin/bash
+  register: result
+  until: "result.stdout == 'Running'"
+  delay: 40
+  retries: 10

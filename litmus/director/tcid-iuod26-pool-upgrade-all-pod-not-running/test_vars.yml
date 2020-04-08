@@ -16,3 +16,4 @@ cluster_id: "{{ lookup('env','CLUSTER_ID') }}"
 director_ip: "{{ lookup('env','DIRECTOR_IP') }}"
 pool_label: "app=cstor-pool"
 dummy_image: "dummy_image:123"
+app_ns: app-mongo-ns

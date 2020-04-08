@@ -15,3 +15,5 @@ group_id: "{{ lookup('env','GROUP_ID') }}"
 cluster_id: "{{ lookup('env','CLUSTER_ID') }}"
 director_ip: "{{ lookup('env','DIRECTOR_IP') }}"
 pod_label: "openebs.io/replica=jiva-replica"
+app_ns: app-mongo-ns
+openebs_current_version: "{{ lookup('env','OPENEBS_CURRENT_VERSION') }}"

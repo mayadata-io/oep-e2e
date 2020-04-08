@@ -47,6 +47,9 @@ spec:
           - name: OPENEBS_TARGET_VERSION
             value: 1.7.0
 
+          - name: OPENEBS_CURRENT_VERSION
+            value: 1.6.0
+
           ## Takes cluster_id from configmap
           - name: CLUSTER_ID
             valueFrom:

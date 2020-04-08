@@ -1,0 +1,25 @@
+## Install openebs control plane
+- name: Install openebs control plane
+  shell: kubectl apply -f https://openebs.github.io/charts/openebs-operator-{{ openebs_current_version }}.yaml
+
+## Checking the openebs Installation    
+- name: Fetch OpenEBS control plane pods state
+  shell: kubectl get pods -n {{ namespace }}  | grep {{ item }} | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
+  register: app_status
+  until: app_status.stdout == 'Running'
+  with_items:
+    - "{{ openebs_components }}"
+  retries: 30
+  delay: 10
+
+## Get the container Status of the openebs pods
+- name: Get the container status of the openebs pods.
+  shell: >
+    kubectl get pod -n {{ namespace }} --no-headers
+    -o jsonpath='{.items[*].status.containerStatuses[*].ready}' | tr ' ' '\n' | uniq
+  args:
+    executable: /bin/bash
+  register: containerStatus
+  until: "containerStatus.stdout == 'true'"
+  retries: 30
+  delay: 10

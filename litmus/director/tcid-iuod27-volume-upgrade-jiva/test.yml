@@ -37,8 +37,8 @@
           until: app_status.stdout == 'Running'
           with_items:
             - "{{ openebs_components }}"
-          retries: 20
-          delay: 5
+          retries: 30
+          delay: 10
 
         ## Get application volume health status for replica-1
         - name: Get application volume health status for replica-1
@@ -52,8 +52,8 @@
             body_format: json
           register: volume_health
           until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[0].state=='Healthy'"
-          retries: 20
-          delay: 2
+          retries: 30
+          delay: 10
         
         ## Get application volume health status for replica-2
         - name: Get application volume health status for replica-2
@@ -67,8 +67,8 @@
             body_format: json
           register: volume_health
           until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[1].state=='Healthy'"
-          retries: 20
-          delay: 2
+          retries: 30
+          delay: 10
 
         ## Get application volume health status for replica-3
         - name: Get application volume health status for replica-3
@@ -82,22 +82,8 @@
             body_format: json
           register: volume_health
           until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[2].state=='Healthy'"
-          retries: 20
-          delay: 2
-         
-        ## Upgrade openebs control plane
-        - name: Upgrade openebs control plane
-          shell: kubectl apply -f https://openebs.github.io/charts/openebs-operator-{{ openebs_target_version }}.yaml
-
-        ## Fetch OpenEBS control plane pods state after control plane upgrade
-        - name: Fetch OpenEBS control plane pods state after control plane upgrade
-          shell: kubectl get pods -n {{namespace}}  | grep {{ item }} | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
-          register: app_status
-          until: app_status.stdout == 'Running'
-          with_items:
-            - "{{ openebs_components }}"
-          retries: 20
-          delay: 5
+          retries: 30
+          delay: 10
         
         ## Get application details
         - name: Get application details
@@ -157,8 +143,8 @@
             body_format: json
           register: volume_health
           until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[0].state=='Healthy'"
-          retries: 20
-          delay: 2
+          retries: 30
+          delay: 10
 
         ## Get application volume health status for replica-2
         - name: Get application volume health status for replica-2
@@ -172,8 +158,8 @@
             body_format: json
           register: volume_health
           until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[1].state=='Healthy'"
-          retries: 20
-          delay: 2
+          retries: 30
+          delay: 10
         
         ## Get application volume health status for replica-3
         - name: Get application volume health status for replica-3
@@ -187,8 +173,8 @@
             body_format: json
           register: volume_health
           until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[2].state=='Healthy'"
-          retries: 20
-          delay: 2
+          retries: 30
+          delay: 10
 
         ## Setting flag as pass
         - set_fact:
