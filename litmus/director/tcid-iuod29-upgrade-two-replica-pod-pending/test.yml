@@ -84,6 +84,27 @@
           until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[2].state=='Healthy'"
           retries: 30
           delay: 10
+
+        - name: Verifying all replica pods are in runnig state 
+          shell: kubectl get pod -n {{ app_ns }} -l {{ pod_label }} -o jsonpath={.items[0].status.phase} 
+          register: pod_status
+          until: "'Running' in pod_status.stdout"
+          delay: 10
+          retries: 30
+        
+        - name: Verifying all replica pods are in runnig state 
+          shell: kubectl get pod -n {{ app_ns }} -l {{ pod_label }} -o jsonpath={.items[1].status.phase} 
+          register: pod_status
+          until: "'Running' in pod_status.stdout"
+          delay: 10
+          retries: 30
+
+        - name: Verifying all replica pods are in runnig state 
+          shell: kubectl get pod -n {{ app_ns }} -l {{ pod_label }} -o jsonpath={.items[2].status.phase} 
+          register: pod_status
+          until: "'Running' in pod_status.stdout"
+          delay: 10
+          retries: 30
         
         ## Get the information of volume replica pod 1
         ## Get replicas of application volumes
@@ -132,7 +153,7 @@
           shell: >
             kubectl get pod {{pod_name2.stdout}} -n {{ pod_namespace2.stdout }} -o jsonpath={.spec.nodeName}
           register: node_name2
-        
+          
         ## Taint the node in which the pod is scheduled
         - name: Taint the node in which pod is scheduled
           shell: >
