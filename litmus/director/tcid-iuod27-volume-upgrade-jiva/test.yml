@@ -51,7 +51,7 @@
             force_basic_auth: yes
             body_format: json
           register: volume_health
-          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[0].state=='Healthy'"
+          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[0].state=='Running'"
           retries: 30
           delay: 10
         
@@ -66,7 +66,7 @@
             force_basic_auth: yes
             body_format: json
           register: volume_health
-          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[1].state=='Healthy'"
+          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[1].state=='Running'"
           retries: 30
           delay: 10
 
@@ -81,7 +81,7 @@
             force_basic_auth: yes
             body_format: json
           register: volume_health
-          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[2].state=='Healthy'"
+          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[2].state=='Running'"
           retries: 30
           delay: 10
         
@@ -142,7 +142,7 @@
             force_basic_auth: yes
             body_format: json
           register: volume_health
-          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[0].state=='Healthy'"
+          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[0].state=='Running'"
           retries: 30
           delay: 10
 
@@ -157,7 +157,7 @@
             force_basic_auth: yes
             body_format: json
           register: volume_health
-          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[1].state=='Healthy'"
+          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[1].state=='Running'"
           retries: 30
           delay: 10
         
@@ -172,7 +172,7 @@
             force_basic_auth: yes
             body_format: json
           register: volume_health
-          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[2].state=='Healthy'"
+          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[2].state=='Running'"
           retries: 30
           delay: 10
 

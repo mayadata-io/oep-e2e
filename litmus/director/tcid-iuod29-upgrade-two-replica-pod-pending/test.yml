@@ -51,7 +51,7 @@
             force_basic_auth: yes
             body_format: json
           register: volume_health
-          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[0].state=='Healthy'"
+          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[0].state=='Running'"
           retries: 30
           delay: 10
         
@@ -66,7 +66,7 @@
             force_basic_auth: yes
             body_format: json
           register: volume_health
-          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[1].state=='Healthy'"
+          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[1].state=='Running'"
           retries: 30
           delay: 10
 
@@ -81,7 +81,7 @@
             force_basic_auth: yes
             body_format: json
           register: volume_health
-          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[2].state=='Healthy'"
+          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[2].state=='Running'"
           retries: 30
           delay: 10
         
@@ -142,6 +142,36 @@
         - name: Delete the replica pod of volume
           shell: > 
             kubectl delete pod {{ pod_name2.stdout }} -n {{ pod_namespace2.stdout }}
+
+        ## Check application health status for replica pod 1
+        - name: Check application health status for replica pod
+          uri: 
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayaapplications'
+            method: GET
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+          register: volume_health
+          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[0].state=='Pending'"
+          retries: 30
+          delay: 10
+
+        ## Check application health status for replica pod 2
+        - name: Check application health status for replica pod
+          uri: 
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayaapplications'
+            method: GET
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+          register: volume_health
+          until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[1].state=='Pending'"
+          retries: 30
+          delay: 10
 
        
         ## Get application details
