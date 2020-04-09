@@ -85,21 +85,21 @@
           retries: 30
           delay: 10
 
-        - name: Verifying all replica pods are in runnig state 
+        - name: Verifying all replica pods are in running state 
           shell: kubectl get pod -n {{ app_ns }} -l {{ pod_label }} -o jsonpath={.items[0].status.phase} 
           register: pod_status
           until: "'Running' in pod_status.stdout"
           delay: 10
           retries: 30
         
-        - name: Verifying all replica pods are in runnig state 
+        - name: Verifying all replica pods are in running state 
           shell: kubectl get pod -n {{ app_ns }} -l {{ pod_label }} -o jsonpath={.items[1].status.phase} 
           register: pod_status
           until: "'Running' in pod_status.stdout"
           delay: 10
           retries: 30
 
-        - name: Verifying all replica pods are in runnig state 
+        - name: Verifying all replica pods are in running state 
           shell: kubectl get pod -n {{ app_ns }} -l {{ pod_label }} -o jsonpath={.items[2].status.phase} 
           register: pod_status
           until: "'Running' in pod_status.stdout"
