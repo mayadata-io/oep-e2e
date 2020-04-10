@@ -168,13 +168,13 @@
         ## Get replica of application volume 3
         - name: Get replicas of application volume 3
           shell: >
-            kubectl get pods --all-namespaces -l {{ pod_label }} -o jsonpath='{.items[1].metadata.name}'
+            kubectl get pods --all-namespaces -l {{ pod_label }} -o jsonpath='{.items[2].metadata.name}'
           register: pod_name3
         
         ## Fetch namespace of replica pod 3
         - name: Fetch namespace of replica pod 3
           shell: >
-            kubectl get pods --all-namespaces -l {{ pod_label }} -o jsonpath='{.items[1].metadata.namespace}'
+            kubectl get pods --all-namespaces -l {{ pod_label }} -o jsonpath='{.items[2].metadata.namespace}'
           register: pod_namespace3
         
         ##  Get the node_name of corresponding job
