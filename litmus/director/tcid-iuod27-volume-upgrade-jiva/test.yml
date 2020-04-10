@@ -160,6 +160,7 @@
           until: "volume_health.json.data[0].data.pods[0].volumes[0].replica[2].state=='Running'"
           retries: 30
           delay: 10
+          
         ## Check version of replica pod
         - name: Check version of the replica pod
           uri:
