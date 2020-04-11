@@ -161,19 +161,20 @@
           retries: 30
           delay: 10
           
-        ## Check version of replica pod
-        - name: Check version of the replica pod
+        - name: Check application volume upgrade job status
           uri:
-            url: '{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayaapplications'
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/openebsupgradejobs/{{ upgrade_claim.json.id }}'
             method: GET
             url_username: '{{ username.stdout }}'
             url_password: '{{ password.stdout }}'
             return_content: yes
             force_basic_auth: yes
             body_format: json
-          register: version
-          failed_when: version.json.data[0].data.pods[0].volumes[0].replica[0].labels['openebs.io/version'] != openebs_target_version
-
+          register: upgrade_job
+          until: "upgrade_job.json.state=='Success'"
+          retries: 40
+          delay: 5
+    
         ## Setting flag as pass
         - set_fact:
               flag: 'Pass'
