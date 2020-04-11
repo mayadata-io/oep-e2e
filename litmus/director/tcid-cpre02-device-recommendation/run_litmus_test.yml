@@ -42,7 +42,7 @@ spec:
                 key: group_id
 
           - name: NAMESPACE
-            value: ''
+            value: 'openebs'
 
           ## Takes cluster_id from configmap
           - name: CLUSTER_ID
