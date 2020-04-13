@@ -1,2 +1,2 @@
 test_name: metrics-check
-director_ip: "{{ lookup('env','DIRECTOR_IP') }}"
+director_url: "{{ lookup('env','DIRECTOR_IP') }}"

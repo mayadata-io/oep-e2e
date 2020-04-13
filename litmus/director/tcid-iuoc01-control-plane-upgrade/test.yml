@@ -16,10 +16,6 @@
         - include_tasks: /ansible-utils/update_litmus_result_resource.yml
           vars:
             status: 'SOT'
-          
-        ## Saving the director url
-        - set_fact:
-            director_url : "http://{{ director_ip }}:30380"
         
         ## Getting username
         - name: Get username
