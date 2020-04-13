@@ -54,20 +54,20 @@ module.exports = {
 		        type: 'category',
 		        label: 'OpenEBS Provisioning',
 		        items: [
-                'director/openebs-provisioning/plan',
-                'director/openebs-provisioning/TCID-OP-BD-VIEW-ALL',
-                'director/openebs-provisioning/TCID-OP-BD-VIEW-SCALE',
-                'director/openebs-provisioning/TCID-OP-BD-VIEW-SCALE-RESTART',
-                'director/openebs-provisioning/TCID-OP-BD-FILTER-SSD',
-                'director/openebs-provisioning/TCID-OP-BD-FILTER-PATH',
-                'director/openebs-provisioning/TCID-OP-BD-IGNORE',
-                'director/openebs-provisioning/TCID-OP-BD-VIEW-TOGGLE',
-                'director/openebs-provisioning/TCID-OP-CSP-REC-LIST',
-                'director/openebs-provisioning/TCID-OP-CSP-REC-LIST-NO-NDM',
-                'director/openebs-provisioning/TCID-OP-CSP-REC-LIST-STRIPE',
-                'director/openebs-provisioning/TCID-OP-CSP-REC-CREATE-STRIPE',
-                'director/openebs-provisioning/TCID-OP-CSP-REC-LIST-MIRROR',
-                'director/openebs-provisioning/TCID-OP-CSP-REC-CREATE-MIRROR'
+                		'director/openebs-provisioning/plan',
+		                'director/openebs-provisioning/TCID-OP-BD-VIEW-ALL',
+                		'director/openebs-provisioning/TCID-OP-BD-VIEW-SCALE',
+		                'director/openebs-provisioning/TCID-OP-BD-VIEW-SCALE-RESTART',
+                		'director/openebs-provisioning/TCID-OP-BD-FILTER-SSD',
+		                'director/openebs-provisioning/TCID-OP-BD-FILTER-PATH',
+                		'director/openebs-provisioning/TCID-OP-BD-IGNORE',
+		                'director/openebs-provisioning/TCID-OP-BD-VIEW-TOGGLE',
+                		'director/openebs-provisioning/TCID-OP-CSP-REC-LIST',
+		                'director/openebs-provisioning/TCID-OP-CSP-REC-LIST-NO-NDM',
+                		'director/openebs-provisioning/TCID-OP-CSP-REC-LIST-STRIPE',
+		                'director/openebs-provisioning/TCID-OP-CSP-REC-CREATE-STRIPE',
+                		'director/openebs-provisioning/TCID-OP-CSP-REC-LIST-MIRROR',
+		                'director/openebs-provisioning/TCID-OP-CSP-REC-CREATE-MIRROR'
 			],
 		},
 		{
@@ -103,14 +103,21 @@ module.exports = {
 			],
 		},
     ],
-    "OpenEBS Enterprise": [
+    "MayaData OpenEBS Enterprise": [
+		{
+		        type: 'category',
+		        label: 'OpenEBS Enterprise',
+		        items: [
+				    'openebs-enterprise/openebs/OpenEBS-Enterprise'
+			    ],
+		},
 		{
 		        type: 'category',
 		        label: 'DAOs',
 		        items: [
 				    'openebs-enterprise/dao/dao'
 			    ],
-        },
+        	},
     ],	  
     Help: ['doc1', 'mdx'],
   },
