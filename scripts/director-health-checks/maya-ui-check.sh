@@ -65,7 +65,7 @@ kubectl logs -f $litmus_pod -n litmus
 mayauiCheck=$(kubectl get litmusresult $test_name --no-headers -o custom-columns=:spec.testStatus.result)
 echo $mayauiCheck
 
-if [ "$commonCheck" = Pass ] && [ "$elasticsearchCheck" = Pass ]; then
+if [ "$commonCheck" = Pass ] && [ "$mayauiCheck" = Pass ]; then
 testResult=Pass
 else
 testResult=Fail
