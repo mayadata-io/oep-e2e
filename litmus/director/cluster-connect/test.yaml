@@ -16,9 +16,6 @@
           vars:
             status: 'SOT'
         
-        - set_fact:
-            director_url : "http://{{ director_ip }}:30380"
-
         - name: username
           shell: cat /etc/secret-volume/username
           register: username

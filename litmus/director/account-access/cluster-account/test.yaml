@@ -15,9 +15,6 @@
         - include_tasks: /ansible-utils/update_litmus_result_resource.yml
           vars:
             status: 'SOT'
-
-        - set_fact:
-            director_url : "{{ web_protocol }}://{{ director_ip }}:{{ director_port }}"
         
         - name: Get username
           shell: cat /etc/secret-volume/username

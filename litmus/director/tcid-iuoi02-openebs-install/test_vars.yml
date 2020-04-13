@@ -1,6 +1,6 @@
 test_name: openebs-install
 group_id: "{{ lookup('env','GROUP_ID') }}"
-director_ip: "{{ lookup('env','DIRECTOR_IP') }}"
+director_url: "{{ lookup('env','DIRECTOR_IP') }}"
 cluster_id: "{{ lookup('env','CLUSTER_ID') }}"
 template_id: "{{ lookup('env','TEMPLATE_ID') }}"
 namespace: "{{ lookup('env','NAMESPACE') }}"

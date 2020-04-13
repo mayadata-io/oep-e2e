@@ -13,5 +13,5 @@ openebs_components:
   ]
 group_id: "{{ lookup('env','GROUP_ID') }}"
 cluster_id: "{{ lookup('env','CLUSTER_ID') }}"
-director_ip: "{{ lookup('env','DIRECTOR_IP') }}"
+director_url: "{{ lookup('env','DIRECTOR_IP') }}"
 namespace: "{{ lookup('env','NAMESPACE') }}"

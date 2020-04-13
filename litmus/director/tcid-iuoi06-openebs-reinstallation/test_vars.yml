@@ -1,7 +1,7 @@
 test_name: openebs-reinstallation
 openebs_components: ['openebs-provisioner','openebs-ndm-operator','openebs-ndm','openebs-snapshot-operator','openebs-admission-server','openebs-localpv-provisioner','maya-apiserver']
 group_id: "{{ lookup('env','GROUP_ID') }}"
-director_ip: "{{ lookup('env','DIRECTOR_IP') }}"
+director_url: "{{ lookup('env','DIRECTOR_IP') }}"
 cluster_id: "{{ lookup('env','CLUSTER_ID') }}"
 template_id: "{{ lookup('env','TEMPLATE_ID') }}"
 namespace: "{{ lookup('env','NAMESPACE') }}"

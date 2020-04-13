@@ -15,9 +15,6 @@
         - include_tasks: /ansible-utils/update_litmus_result_resource.yml
           vars:
             status: 'SOT'
-
-        - set_fact:
-            director_url : "http://{{ director_ip }}:30380"
         
         - name : Check new user signup
           uri:

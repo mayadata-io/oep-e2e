@@ -1,5 +1,5 @@
 test_name: change-role-negative-check
-director_ip: "{{ lookup('env','DIRECTOR_IP') }}"
+director_url: "{{ lookup('env','DIRECTOR_IP') }}"
 group_id: "{{ lookup('env','GROUP_ID') }}"
 role: "{{ lookup('env','ROLE') }}"
 member_emailId: "{{ lookup('env','MEMBER_EMAIL_ID') }}"
