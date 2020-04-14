@@ -2,7 +2,7 @@
 
 ## Run Prerequisites
 echo -e "\n Running Prerequisites  *********************************************************************\n";
-ls
+
 echo -e "\n********* [ Making logs directory ] **********\n";
 mkdir -p logs/director-health-checks -v
 
@@ -10,7 +10,7 @@ mkdir -p logs/director-health-checks -v
 echo -e "\n Running OEP Basic Sanity Checks ************************************************************\n";
 
 echo -e "------------------------------------------\n" >> result.txt
-pwd
+
 # Run maya-io-server check
 echo -e "\n********** [ Running maya-io-server check ] **********\n";
 chmod 755 ./oep/scripts/director-health-checks/maya-io-server-check.sh
