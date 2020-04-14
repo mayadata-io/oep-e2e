@@ -5,7 +5,7 @@ test_name=cassandra-check
 echo $test_name
 
 # Run cassandra check litmus job
-kubectl create -f oep/litmus/director/cassandra/run_litmus_test.yml
+kubectl create -f oep-e2e/litmus/director/cassandra/run_litmus_test.yml
 
 sleep 2;
 

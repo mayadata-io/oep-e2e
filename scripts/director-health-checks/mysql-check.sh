@@ -5,7 +5,7 @@ test_name=mysql-check
 echo $test_name
 
 # Run mysql check litmus job
-kubectl create -f oep/litmus/director/mysql/run_litmus_test.yml
+kubectl create -f oep-e2e/litmus/director/mysql/run_litmus_test.yml
 
 sleep 2;
 

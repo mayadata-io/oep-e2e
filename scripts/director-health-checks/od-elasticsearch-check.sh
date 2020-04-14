@@ -10,13 +10,13 @@ sed -e 's/generateName: app-check/generateName: od-elasticsearch-health-check/g'
 -e 's/app: app-litmus/app: od-elasticsearch-health-check-litmus/g' \
 -e 's/value: test-name/value: od-elasticsearch-health-check/g' \
 -e 's/value: default /value: default/g' \
--e 's/value: pod-name/value: od-elasticsearch/g' oep/litmus/director/common-checks/run_litmus_test.yml \
-> oep/litmus/director/common-checks/es_run_litmus_test.yml
+-e 's/value: pod-name/value: od-elasticsearch/g' oep-e2e/litmus/director/common-checks/run_litmus_test.yml \
+> oep-e2e/litmus/director/common-checks/es_run_litmus_test.yml
 
-cat oep/litmus/director/common-checks/es_run_litmus_test.yml
+cat oep-e2e/litmus/director/common-checks/es_run_litmus_test.yml
 
 # Run common health check litmus job
-kubectl create -f oep/litmus/director/common-checks/es_run_litmus_test.yml
+kubectl create -f oep-e2e/litmus/director/common-checks/es_run_litmus_test.yml
 
 sleep 2;
 
@@ -44,7 +44,7 @@ test_name=od-elasticsearch-check
 echo $test_name
 
 # Run od-elasticsearch specific tests limtus job
-kubectl create -f oep/litmus/director/od-elasticsearch/run_litmus_test.yml
+kubectl create -f oep-e2e/litmus/director/od-elasticsearch/run_litmus_test.yml
 
 sleep 2;
 

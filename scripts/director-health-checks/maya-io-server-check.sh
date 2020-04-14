@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Run maya-io-server-check litmus job
-kubectl create -f oep/litmus/director/maya-io-server/run_litmus_test.yml
+kubectl create -f oep-e2e/litmus/director/maya-io-server/run_litmus_test.yml
 
 test_name=maya-io-server-check
 echo $test_name
