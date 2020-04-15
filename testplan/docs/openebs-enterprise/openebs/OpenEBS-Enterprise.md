@@ -24,7 +24,7 @@ This section covers the test strategy of the OpenEBS EE component in OEP.
   - Jiva
   - ZFS on Local PV
   - MayaStor
-- Soak Testing - These tests are performed on the Kubernetes cluster( aka Workload Cluster) which has 10 worker nodes. Workload cluster has been deployed with various stateful applications, each of the workloads consumes different recommended OpenEBS storage engine. This setup will be continuously run with certain pre-defined load.  The following tests would be performed on the cluster
+- Soak Testing - These tests are performed on the Kubernetes cluster( aka Workload Cluster) which has 10 worker nodes. Workload cluster has been deployed with various stateful applications, each of the workloads consumes different recommended OpenEBS storage engine. This setup will be continuously run with certain pre-defined load.  The following tests would be performed on the cluster post upgrade of every build
   - Provisioning and de-provisioning of storage will be performed to find any deviation. 
   - Day2 operations will be performed on live cluster.
   - Storage chaos would be performed to verify the application resiliency. 
