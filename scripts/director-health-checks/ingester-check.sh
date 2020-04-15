@@ -10,13 +10,13 @@ sed -e 's/generateName: app-check/generateName: ingester-check/g' \
 -e 's/app: app-litmus/app: ingester-check-litmus/g' \
 -e 's/value: test-name/value: ingester-check/g' \
 -e 's/value: default /value: default/g' \
--e 's/value: pod-name/value: ingester/g' oep/litmus/director/common-checks/run_litmus_test.yml \
-> oep/litmus/director/common-checks/ingester_run_litmus_test.yml
+-e 's/value: pod-name/value: ingester/g' oep-e2e/litmus/director/common-checks/run_litmus_test.yml \
+> oep-e2e/litmus/director/common-checks/ingester_run_litmus_test.yml
 
-cat oep/litmus/director/common-checks/ingester_run_litmus_test.yml
+cat oep-e2e/litmus/director/common-checks/ingester_run_litmus_test.yml
 
 # Run common health check litmus job
-kubectl create -f oep/litmus/director/common-checks/ingester_run_litmus_test.yml
+kubectl create -f oep-e2e/litmus/director/common-checks/ingester_run_litmus_test.yml
 
 sleep 2;
 

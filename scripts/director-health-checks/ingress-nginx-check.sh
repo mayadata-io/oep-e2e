@@ -7,7 +7,7 @@ test_name=ingress-nginx-check
 echo $test_name
 
 # Run ingress-nginx check litmus job
-kubectl create -f oep/litmus/director/ingress-nginx/run_litmus_test.yml
+kubectl create -f oep-e2e/litmus/director/ingress-nginx/run_litmus_test.yml
 
 sleep 2;
 
