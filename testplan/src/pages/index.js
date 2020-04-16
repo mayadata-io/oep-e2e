@@ -17,11 +17,11 @@ const features = [
     ),
   },
   {
-    title: <>Our persona is Kubernetes is SRE</>,
+    title: <>Our persona is the Kubernetes SRE</>,
     imageUrl: 'img/undraw_docusaurus_tree.svg',
     description: (
       <>
-	OpenEBS Enterprise Platform or OEP converts Kuberentes into a Data layer. Using OEP, a Kubernetes SRE can increase the agility of DevOps, solve the issues around stateful applications.
+	OpenEBS Enterprise Platform or OEP converts Kuberentes into a Data layer. Using OEP, the Kubernetes SRE can increase the agility of DevOps, solve the issues around stateful applications.
       </>
     ),
   },
