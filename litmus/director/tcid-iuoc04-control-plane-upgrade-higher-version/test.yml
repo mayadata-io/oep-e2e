@@ -135,6 +135,11 @@
             status_code: 200
           register: openebses_active
 
+        ## Getting the openebses id
+        - name: Getting the openebses id
+          set_fact:
+            openebs_id: "{{ openebses_active.json.data[0].id }}"
+
         - block:
 
           - name: Installing openebs on the cluster
@@ -187,6 +192,10 @@
               body: '{ "clusterId": "{{ cluster_id }}","creatorId": "{{ group_id }}","projectId": "{{ project_id }}","templateId": "{{ template_id }}","namespace": "{{ namespace }}","defaultDirectory": "{{ default_directory }}","dockerRegistry": "{{ docker_registry }}","includeDeviceFilters": "{{ include_device_filters }}","excludeDeviceFilters": "{{ exclude_device_filters }}","cpuResourceLimit": "{{ cpu_resource_limit }}","memoryResourceLimit": " {{ memory_resource_limit }}","installationMode": "{{ installation_mode }}" }'
               status_code: 201
             register: install_openebs
+
+          - name: Getting the openebses id
+            set_fact:
+              openebs_id: "{{ install_openebs.json.data[0].id }}"
 
           ## Installing openebs
           - name: Installing openebs on the cluster
