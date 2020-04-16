@@ -120,10 +120,10 @@ The workload cluster will be used for Soak Testing. This would be always running
 ## Implementation Phase
 
 Pipelines would be implemented in the following way
-#### Phase 1 (AWS, Rancher)
+#### Phase 1 (AWS, Rancher) (25-May)
 - Install Stage : Cluster1 would be installed with DOP, Cluster2 would be connected to Director and OpeneEBS would be installed using Director and Functional Tests of Both Director and OpenEBS would be run in seperate Gitlab stage.
-#### Phase 2 (AWS, Rancher) 
+#### Phase 2 (AWS, Rancher) (15-May)
 - Install Stage: Cluster 3 OpenEBS installed with Helm. 
 - Upgrade stage would be incorporated.
-#### Phase 3 (AWS, Rancher)
+#### Phase 3 (AWS, Rancher) (1-June)
 - Workload Stage : This would be added into pipeline.
