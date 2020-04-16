@@ -44,21 +44,26 @@ E2E metrics, finalizing the tests, disconnect the user clusters,clean up resourc
 
 
 ## OEP E2E Pipelines
-### Install Pipeline
+OEP pipeline can be divided into following stages, each stage can have multiple stages as mentioned above
+- Install
+- Upgrade
+- Soak Test
 
-Setups are created and the current version of OEP components are installed and tested and post this clusters are deleted as part of the pipeline  [Link to Actual Image](https://docs.google.com/drawings/d/e/2PACX-1vS-SVez5ufcMTQTuvZAYrL4cFYaw7E0t57QB4Ega-OZjY1UTs0v2QPRaJZB4sdbHauBTEvvgWlviGzP/pub?w=788&h=245)
+### Install Stage
+
+Setups are created and the current version of OEP components are installed and tested and post this clusters are deleted as part of the stage [Link to Actual Image](https://docs.google.com/drawings/d/16e98Ty_LV0UwGJLIyiMung6DLoIbaQimfOUwvQtnAko/edit)
 
 ![Install Pipeline Image](https://docs.google.com/drawings/d/e/2PACX-1vS-SVez5ufcMTQTuvZAYrL4cFYaw7E0t57QB4Ega-OZjY1UTs0v2QPRaJZB4sdbHauBTEvvgWlviGzP/pub?w=788&h=245)
 
 
-### Upgrade Pipeline
-This pipeline would be run only if the Install Pipeline is successful. Setups are created, the prior version of OEP components are installed and then upgraded and deleted as part of the pipeline. [Link to Actual Image](https://docs.google.com/drawings/d/e/2PACX-1vSVDOO2JapUeVuoiSufGaISwuZufvB-F6X8x1Xsns3EUN0piW_b14cKHlYNZzJn3YvI7zc1jvR302Dv/pub?w=955&h=283)
+### Upgrade Stage
+This stage would be run only if the Install Pipeline is successful. Setups are created, the prior version of OEP components are installed and then upgraded and deleted as part of the stage. [Link to Actual Image](https://docs.google.com/drawings/d/1oaYLnNQXHIfBn7Jwr5K1N5PDdEhi2yE2jd4gFjbrC8o/edit)
 
 ![Upgrade Pipeline](https://docs.google.com/drawings/d/e/2PACX-1vSVDOO2JapUeVuoiSufGaISwuZufvB-F6X8x1Xsns3EUN0piW_b14cKHlYNZzJn3YvI7zc1jvR302Dv/pub?w=955&h=283)
 
-### Soak Test Pipeline
+### Soak Test Stage
 
-This pipeline would be run only if the upgrade pipeline is successful. Setups are already present with some load running. This is to create a customer environment. [Link to Actual Image](https://docs.google.com/drawings/d/e/2PACX-1vS56imUpkbH74X0f3Ty46dyAMQw_2EEm0eLjq1wp5K38GuR4db-QL7zdlSLsp5xqaeX4Po2Ig2n6w1Z/pub?w=741&h=232)
+This stagee would be run only if the upgrade pipeline is successful. Setups are already present with some load running. This is to create a customer environment. [Link to Actual Image](https://docs.google.com/drawings/d/1oqMYd80X4Vf2hIpkXhNNPGTBBsr8JYQGGi06UHbr0pY/edit)
 
 ![Soak Test Pipeline](https://docs.google.com/drawings/d/e/2PACX-1vS56imUpkbH74X0f3Ty46dyAMQw_2EEm0eLjq1wp5K38GuR4db-QL7zdlSLsp5xqaeX4Po2Ig2n6w1Z/pub?w=741&h=232)
 
@@ -112,4 +117,13 @@ The workload cluster will be used for Soak Testing. This would be always running
 | Ubuntu-16.4 K8s-Version 1.16 | Generic version 1.16 | OpenEBS Via Helm | Workload Clusters. This Cluster will be connected to above Onprem Cluster |
 
 
+## Implementation Phase
 
+Pipelines would be implemented in the following way
+#### Phase 1 (AWS, Rancher)
+- Install Stage : Cluster1 would be installed with DOP, Cluster2 would be connected to Director and OpeneEBS would be installed using Director and Functional Tests of Both Director and OpenEBS would be run in seperate Gitlab stage.
+#### Phase 2 (AWS, Rancher) 
+- Install Stage: Cluster 3 OpenEBS installed with Helm. 
+- Upgrade stage would be incorporated.
+#### Phase 3 (AWS, Rancher)
+- Workload Stage : This would be added into pipeline.
