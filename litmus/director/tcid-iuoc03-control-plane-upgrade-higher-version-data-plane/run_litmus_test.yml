@@ -1,0 +1,67 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: control-plane-upgrade-higher-version-data-plane
+  namespace: litmus
+spec:
+  template:
+    metadata:
+      name: litmus
+      labels:
+        app: control-plane-upgrade
+    spec:
+      serviceAccountName: litmus
+      restartPolicy: Never
+      volumes:
+      - name: secret-volume
+        secret:
+          secretName: director-user-pass
+      containers:
+      - name: ansibletest
+        image: mayadataio/dop-validator:ci 
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: secret-volume
+          readOnly: true
+          mountPath: "/etc/secret-volume"
+        env:
+
+          ## Takes director-ip from configmap director-ip
+          - name: DIRECTOR_IP
+            valueFrom:
+              configMapKeyRef:
+                name: config
+                key: url
+
+          ## Takes group-id from configmap group-id
+          - name: GROUP_ID
+            valueFrom:
+              configMapKeyRef:
+                name: groupid
+                key: group_id
+
+          - name: NAMESPACE
+            value: 'openebs'
+     
+          - name: OPENEBS_TARGET_VERSION
+            value: 1.7.0
+
+          - name: OPENEBS_CURRENT_VERSION
+            value: 1.6.0
+
+          ## Takes cluster_id from configmap
+          - name: CLUSTER_ID
+            valueFrom:
+              configMapKeyRef:
+                name: clusterid
+                key: cluster_id
+
+          - name: ANSIBLE_STDOUT_CALLBACK
+            value: default  
+
+        command: ["/bin/bash"]
+        args: ["-c", "ansible-playbook ./litmus/director/tcid-iuoc03-control-plane-upgrade-higher-version-data-plane/test.yml -i /etc/ansible/hosts -v; exit 0"]
+
+      imagePullSecrets:
+      - name: oep-secret   
