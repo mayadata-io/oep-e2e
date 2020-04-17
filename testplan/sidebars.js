@@ -103,12 +103,12 @@ module.exports = {
 			],
 		},
     ],
-    "MayaData OpenEBS Enterprise": [
+    "OpenEBS Enterprise": [
 		{
 		        type: 'category',
 		        label: 'OpenEBS Enterprise',
 		        items: [
-				    'openebs-enterprise/openebs/OpenEBS-Enterprise'
+				    'openebs-enterprise/openebs/openebs'
 			    ],
 		},
 		{
