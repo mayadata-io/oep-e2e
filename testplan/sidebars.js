@@ -75,7 +75,6 @@ module.exports = {
 		        label: 'DMaaS',
 		        items: [
 				'director/dmaas/dmaas',
-				'director/dmaas/test1'
 			],
 		},
 		{
