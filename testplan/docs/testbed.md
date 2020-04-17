@@ -61,4 +61,3 @@ AWS platform will be deployed on managed K8S,
 
 **Note --** Cluster1,2 or Cluster3,4 will be powered on at a point of time.
 
-### GCP (Not planned for now)
