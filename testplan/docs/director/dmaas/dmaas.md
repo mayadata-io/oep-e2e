@@ -1,34 +1,52 @@
 ---
 id: dmaas
-title: Test plan for Director DMaaS
+title: DMaaS
 sidebar_label: Test Strategy
 ---
 ------
 
 ## DMaaS
 
-Data Management as a Service, this is supported for two ways
-- Storage snapshot for cStor Volume
-- Restic for Jiva / Local PV
+Data Management as a Service provides backups & restore facility to stateful applications.
 
-DMaaS data is backed in following supported storage buckets. 
-- AWS S3
-- GCP Storage Bucket
-- Minio
+### TestStrategy
+- Configure DMAAS to provide scheduled backups with mixed types
+    - Schedule starts with a full backup
+    - Schedule should provide next 23 backups as incremental backups
+    - Schedule should run every hour
+    - Schedule should perform 2nd full in the 25th iteration
+    - Schedule should be able to backup the stateful application running on cStor volume
+    - DMAAS should upload these backups to AWS S3
+    - DMAAS should retain the S3 backups for last 3 days
+- On a separate cluster
+    - DMAAS should be able to connect to S3
+    - DMAAS should be able to discover the backups
+    - DMAAS should restore the stateful application using the oldest day's backups
+    - DMAAS should restore a new application using latest but one day's backups
+    - DMAAS should restore a new application using latest backups
 
-#### DMaaS using storage snapshot
+_NOTE: This setup involves two workload setups_
 
-| TCID | Breif Description | #Issue |
-| ---- | ----------------- | ------ |
-|      |                   |        |
-|      |                   |        |
-|      |                   |        |
 
-#### DMaaS using Restic
+### Test Case IDs
 
-| TCID | Breif Description | #Issue |
-| ---- | ----------------- | ------ |
-|      |                   |        |
-|      |                   |        |
-|      |                   |        |
+| TCID                            |  GCP  |  KONVOY | AWS |
+| ------------------------------- |  ---- |  ------ | --- |
+| TCID-DMAAS-CSTOR                |       |         |     |
+| TCID-DMAAS-JIVA                 |       |         |     |
+| TCID-DMAAS-LOCAL-PV             |       |         |     |
+| TCID-DMAAS-LOCAL-HOSTPATH       |       |         |     |
 
+
+| TCID                            |  GCP  | KONVOY  | AWS |
+| ------------------------------- |  ---- | ------- | ----|
+| TCID-DMAAS-CASSANDRA            |       |         |     |
+| TCID-DMAAS-KAFKA                |       |         |     |
+| TCID-DMAAS-MYSQL                |       |         |     |
+| TCID-DMAAS-WORDPRESS            |       |         |     |
+| TCID-DMAAS-NGINX                |       |         |     |
+| TCID-DMAAS-PERCONA              |       |         |     |
+
+
+## GLOSSARY
+- WORKLOAD SETUP: A k8s cluster that should be running continuously
