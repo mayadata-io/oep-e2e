@@ -1,0 +1,212 @@
+---
+- hosts: localhost
+  connection: local
+
+  vars_files:
+    - test_vars.yml
+
+  tasks:
+
+    - block:
+  
+        ## Generating the testname for deployment
+        - include_tasks: /ansible-utils/create_testname.yml
+
+        ## RECORD START-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'SOT'
+
+        ## Getting the username
+        - name: Get username
+          shell: cat /etc/secret-volume/username
+          register: username
+
+        ## Getting the password.stdout     
+        - name: Get password
+          shell: cat /etc/secret-volume/password
+          register: password
+
+        ## Check whether openebs components are in Running state or not
+        - name: Check whether openebs components are in Running state or not
+          shell: kubectl get pods -n {{ namespace }}  | grep {{ item }} | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
+          register: app_status
+          until: app_status.stdout == 'Running'
+          with_items:
+            - "{{ openebs_components }}"
+          retries: 20
+          delay: 5
+
+        ## Get application pool health status for replica-1
+        - name: Get application pool health status for replica-1
+          uri:
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayastoragepools'
+            method: GET
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+          register: pool_health
+          until: "pool_health.json.data[0].data.pods[0].state=='Running'"
+          retries: 20
+          delay: 2
+        
+        ## Get application pool health status for replica-2
+        - name: Get application pool health status for replica-2
+          uri:
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayastoragepools'
+            method: GET
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+          register: pool_health
+          until: "pool_health.json.data[1].data.pods[0].state=='Running'"
+          retries: 20
+          delay: 2
+
+        ## Get application pool health status for replica-3
+        - name: Get application pool health status for replica-3
+          uri:
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayastoragepools'
+            method: GET
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+          register: pool_health
+          until: "pool_health.json.data[2].data.pods[0].state=='Running'"
+          retries: 20
+          delay: 2
+        
+        # Fetch name of cstor-disk-pool deployment 
+        - name: Name of cstor-disk-pool
+          shell: kubectl get deploy -l {{ pool_label }} -n {{ namespace }} -o jsonpath='{.items[0].metadata.name}'
+          register: deployment_name
+        
+        # Replacing the image of deployment so that the pools pods will go in pending state
+        - name: Change image to some dummy value 
+          shell: kubectl set image deployment/{{ deployment_name.stdout }} cstor-pool={{ dummy_image }} -n {{ namespace }}
+
+        # Check the state of the pool pod
+        - name: Check the state of pool pod
+          uri:
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayastoragepools'
+            method: GET
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+          register: pool_health
+          until: "pool_health.json.data[0].data.pods[0].state=='Pending'"
+          retries: 30
+          delay: 5
+        
+        # Fetch name of cstor-disk-pool deployment 2
+        - name: Name of cstor-disk-pool
+          shell: kubectl get deploy -l {{ pool_label }} -n {{ namespace }} -o jsonpath='{.items[1].metadata.name}'
+          register: deployment_name2
+        
+        # Replacing the image of deployment 2 so that the pools pods will go in pending state
+        - name: Change image to some dummy value 
+          shell: kubectl set image deployment/{{ deployment_name2.stdout }} cstor-pool={{ dummy_image }} -n {{ namespace }}
+
+        # Check the state of the pool pod
+        - name: Check the state of pool pod
+          uri:
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayastoragepools'
+            method: GET
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+          register: pool_health
+          until: "pool_health.json.data[1].data.pods[0].state=='Pending'"
+          retries: 30
+          delay: 5
+
+        ## Get storage pool details
+        - name: Get application details
+          uri:
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayastoragepools'
+            method: GET
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+          register: storage_pools
+        
+        ## Upgrade data-plane component
+        - name: Upgrade data-plane component
+          uri:
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/openebsupgradeclaims'
+            method: POST
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+            body: '{"clusterId":"{{ cluster_id }}","kind":"poolUpgrade","targetVersion":"{{ openebs_target_version }}","upgradeComponents":[{"id":"{{ storage_pools.json.data[0].id }}"},{"id":"{{ storage_pools.json.data[1].id }}"},{"id":"{{ storage_pools.json.data[2].id }}"}]}'
+            status_code: 405
+          register: upgrade_claim
+        
+        # Rollout the changes performed in deployment 1
+        - name: Rollout the changes performed in deployment
+          shell: kubectl rollout undo deploy/{{deployment_name.stdout}} -n {{ namespace }}
+        
+        # wait untill pod comes in running state
+        - name: Wait untill the pod comes in running state
+          uri:
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayastoragepools'
+            method: GET
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+          register: pool_health
+          until: "pool_health.json.data[0].data.pods[0].state=='Running'"
+          retries: 30
+          delay: 5
+
+        # Rollout the changes performed in deployment 2
+        - name: Rollout the changes performed in deployment
+          shell: kubectl rollout undo deploy/{{deployment_name2.stdout}} -n {{ namespace }}
+        
+        # wait untill pod comes in running state
+        - name: Wait untill the pod comes in running state
+          uri:
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayastoragepools'
+            method: GET
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+          register: pool_health
+          until: "pool_health.json.data[1].data.pods[0].state=='Running'"
+          retries: 30
+          delay: 5
+        
+        ## Setting flag as pass 
+        - set_fact:
+              flag: 'Pass'
+
+      rescue:
+        - name: Setting fail flag
+          set_fact:
+            flag: 'Fail'
+    
+      always:
+        ## RECORD END-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'EOT'
+
+        
