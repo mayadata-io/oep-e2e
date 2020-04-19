@@ -98,7 +98,6 @@ module.exports = {
 		        label: 'Alerts',
 		        items: [
 				'director/alerts/alerts',
-				'director/alerts/test1'
 			],
 		},
     ],

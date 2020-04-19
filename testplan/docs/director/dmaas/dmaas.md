@@ -7,14 +7,14 @@ sidebar_label: Test Strategy
 
 ## DMaaS
 
-Data Management as a Service provides backups & restore facility to stateful applications.
+Data Management as a Service provides backup & restore options to stateful applications.
 
 ### TestStrategy
 - Configure DMAAS to provide scheduled backups with mixed types
     - Schedule starts with a full backup
     - Schedule should provide next 23 backups as incremental backups
     - Schedule should run every hour
-    - Schedule should perform 2nd full in the 25th iteration
+    - Schedule should perform the 2nd full backup in its 25th iteration
     - Schedule should be able to backup the stateful application running on cStor volume
     - DMAAS should upload these backups to AWS S3
     - DMAAS should retain the S3 backups for last 3 days
@@ -28,7 +28,7 @@ Data Management as a Service provides backups & restore facility to stateful app
 _NOTE: This setup involves two workload setups_
 
 
-### Test Case IDs
+### Test Case IDs -- Based on Storage Engine
 
 | TCID                            |  GCP  |  KONVOY | AWS |
 | ------------------------------- |  ---- |  ------ | --- |
@@ -37,6 +37,7 @@ _NOTE: This setup involves two workload setups_
 | TCID-DMAAS-LOCAL-PV             |       |         |     |
 | TCID-DMAAS-LOCAL-HOSTPATH       |       |         |     |
 
+### Test Case IDs -- Based on Applications
 
 | TCID                            |  GCP  | KONVOY  | AWS |
 | ------------------------------- |  ---- | ------- | ----|
@@ -49,4 +50,4 @@ _NOTE: This setup involves two workload setups_
 
 
 ## GLOSSARY
-- WORKLOAD SETUP: A k8s cluster that should be running continuously
+- WORKLOAD SETUP: A k8s cluster that runs continuously
