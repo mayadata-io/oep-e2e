@@ -30,9 +30,11 @@ Different clusters are used on different platforms. Hence the clusters are descr
 
 ### OnPrem-Konvoy
 
+**TODO**
+
 ### OnPrem-Rancher
 
-| K8S      | Master              | Worker Nodes                                  | Notes - Cluster Used           |
+| K8S Cluster | Master              | Worker Nodes                                  | Notes - Cluster Used           |
 | -------- | ------------------- | --------------------------------------------- | ----------------------------- |
 | Cluster1 | 1 Node, 16GB, 2 vCPU | 3 Node - Each node 16GB 4 vCPU                | Director Onprem Install       |
 | Cluster2 | 1 Node, 16GB, 2 vCPU | 5 Nodes - Each node  32GB 8CPU, 6x100GB Disks | OpenEBS Install Director      |
@@ -44,7 +46,7 @@ Different clusters are used on different platforms. Hence the clusters are descr
 
 **Note** -- Cluster1,2,3 or Cluster4,5,6 will be at a point of time. It can be same machines with cleanup
 
-Cluster7 will be running always with certain load  and continuously upgraded with each release builds.
+Cluster7 will be running always with certain load and continuously upgraded with each release builds.
 
 
 
@@ -63,11 +65,5 @@ AWS platform will be deployed on managed K8S,
 
 ## Implementation Phase
 
-Pipelines would be implemented in the following way
-#### Phase 1 (AWS, Rancher) (OEP 1.9)
-- Install Stage : Cluster1 would be installed with DOP, Cluster2 would be connected to Director and OpeneEBS would be installed using Director and Functional Tests of Both Director and OpenEBS would be run in seperate Gitlab stage.
-#### Phase 2 (AWS, Rancher) (OEP 1.10)
-- Install Stage: Cluster 3 OpenEBS installed with Helm. 
-- Upgrade stage would be incorporated.
-#### Phase 3 (AWS, Rancher) (OEP 1.10)
-- Workload Stage : This would be added into pipeline.
+As mentioned in [Pipeline](/docs/gitlabstages.md#implementation-phase)
+
