@@ -71,9 +71,9 @@ This stagee would be run only if the upgrade pipeline is successful. Setups are 
 
 ### Test Setups
 
-#### Install Pipeline
+#### Install Stage
 
-The following test setups are created on each platform and cleaned-up at the end of the pipeline. Cluster2 and Cluster3 would be connected to Cluster1 DOP for provisioning and monitoring.
+The following test setups are created on each platform and cleaned-up at the end of the stage. Cluster2 and Cluster3 would be connected to Cluster1 DOP for provisioning and monitoring.
 
 
 
@@ -91,9 +91,9 @@ The following test setups are created on each platform and cleaned-up at the end
 
 
 
-#### Upgrade Pipeline
+#### Upgrade Stage
 
-The following test setups are created with prior versions on each platform and cleaned-up at the end of the pipeline. Cluster2 and Cluster3 would be connected to Cluster1 DOP for provisioning and monitoring. 
+The following test setups are created with prior versions on each platform and cleaned-up at the end of the stage. Cluster2 and Cluster3 would be connected to Cluster1 DOP for provisioning and monitoring. 
 
 For Example, say **The current version is 1.11**
 
@@ -108,7 +108,7 @@ For Example, say **The current version is 1.11**
 
 
 
-#### Soak Testing Pipeline
+#### Soak Testing Stage
 The workload cluster will be used for Soak Testing. This would be always running. Any new builds will be upgraded to this and continue testing on the same.
 
 | Platform                     | K8S                  | Installation     | Remarks                                                      |
