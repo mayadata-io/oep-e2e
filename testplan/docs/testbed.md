@@ -36,17 +36,17 @@ Different clusters are used on different platforms. Hence the clusters are descr
 
 | K8S Cluster | Master              | Worker Nodes                                  | Notes - Cluster Used           |
 | -------- | ------------------- | --------------------------------------------- | ----------------------------- |
-| Cluster1 | 1 Node, 16GB, 2 vCPU | 3 Node - Each node 16GB 4 vCPU                | Director Onprem Install       |
-| Cluster2 | 1 Node, 16GB, 2 vCPU | 5 Nodes - Each node  32GB 8CPU, 6x100GB Disks | OpenEBS Install Director      |
-| Cluster3 | 1 Node, 16GB, 2 vCPU | 3 Nodes - Each node  16GB 8CPU, 3x100GB Disks | OpenEBS Install Helm          |
-| Cluster4 | 1 Node, 16GB, 2 vCPU | 1 Node - Each node 16GB 2 vCPU,               | Director Onprem Upgrade       |
-| Cluster5 | 1 Node, 16GB, 2 vCPU | 3 Nodes - Each node  32GB 2CPU, 3x100GB Disks | OpenEBS Install Upgrade       |
-| Cluster6 | 1 Node, 16GB, 2 vCPU | 3 Nodes - Each node  16GB 2CPU, 3x100GB Disks | OpenEBS Install Upgrade       |
-| Cluster7 | 1 Node, 32GB, 4 vCPU | 10Nodes, Each Node 32GB 6vCPU,  6x100GB SSDs  | **Workload Cluster  OpenEBS** |
+| Ran-C1 | 1 Node, 16GB, 2 vCPU | 3 Node - Each node 16GB 4 vCPU                | Director Onprem Install       |
+| Ran-C2 | 1 Node, 16GB, 2 vCPU | 5 Nodes - Each node  32GB 8CPU, 6x100GB Disks | OpenEBS Install Director      |
+| Ran-C3 | 1 Node, 16GB, 2 vCPU | 3 Nodes - Each node  16GB 8CPU, 3x100GB Disks | OpenEBS Install Helm          |
+| Ran-C4 | 1 Node, 16GB, 2 vCPU | 1 Node - Each node 16GB 2 vCPU,               | Director Onprem Upgrade       |
+| Ran-C5 | 1 Node, 16GB, 2 vCPU | 3 Nodes - Each node  32GB 2CPU, 3x100GB Disks | OpenEBS Install Upgrade       |
+| Ran-C6      | 1 Node, 16GB, 2 vCPU | 3 Nodes - Each node  16GB 2CPU, 3x100GB Disks | OpenEBS Install Upgrade       |
+| Ran-C7 | 1 Node, 32GB, 4 vCPU | 10Nodes, Each Node 32GB 6vCPU,  6x100GB SSDs  | **Workload Cluster  OpenEBS** |
 
-**Note** -- Cluster1,2,3 or Cluster4,5,6 will be at a point of time. It can be same machines with cleanup
+**Note** -- {C1,C2,C3 }clusters  or {C4,C5,C6} clusters will be at a point of time. 
 
-Cluster7 will be running always with certain load and continuously upgraded with each release builds.
+C7 will be running always with certain load and continuously upgraded with each release builds.
 
 
 
@@ -54,14 +54,14 @@ Cluster7 will be running always with certain load and continuously upgraded with
 
 AWS platform will be deployed on managed K8S, 
 
-| K8S      | Master  | Worker Nodes                                     | Notes - Cluster Used     |
-| -------- | ------- | ------------------------------------------------ | ------------------------ |
-| Cluster1 | Managed | 1 Node - Each node 16GB 2 vCPU                   | Director Onprem Install  |
-| Cluster2 | Managed | 3 Nodes - Each node  16GB 2CPU, 3x100GB EBS SSDs | OpenEBS Install Director |
-| Cluster3 | Managed | 1 Node - Each node 16GB 2 vCPU                   | Director Onprem Upgrade  |
-| Cluster4 | Managed | 3 Nodes - Each node  16GB 2CPU, 3x100GB EBS SSDs | OpenEBS Install Upgrade  |
+| K8S    | Master  | Worker Nodes                                     | Notes - Cluster Used     |
+| ------ | ------- | ------------------------------------------------ | ------------------------ |
+| AWS-C1 | Managed | 1 Node - Each node 16GB 2 vCPU                   | Director Onprem Install  |
+| AWS-C2 | Managed | 3 Nodes - Each node  16GB 2CPU, 3x100GB EBS SSDs | OpenEBS Install Director |
+| AWS-C3 | Managed | 1 Node - Each node 16GB 2 vCPU                   | Director Onprem Upgrade  |
+| AWS-C4 | Managed | 3 Nodes - Each node  16GB 2CPU, 3x100GB EBS SSDs | OpenEBS Install Upgrade  |
 
-**Note --** Cluster1,2 or Cluster3,4 will be powered on at a point of time.
+**Note --** {C1,C2 }clusters  or {C4,C5,}clusters will be at a point of time. 
 
 ## Implementation Phase
 

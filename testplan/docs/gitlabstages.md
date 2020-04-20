@@ -79,17 +79,17 @@ The following test setups are created on each platform and cleaned-up at the end
 
 
 
-| Platform    | Cluster  | Installation         | Remarks                                                      |
-| ----------- | -------- | -------------------- | ------------------------------------------------------------ |
-| AWS         | Cluster1 | Onprem Director      |                                                              |
-|             | Cluster2 | OpenEBS via Director | Cluster 2 will be connected to Cluster1.  Director Specific Tests |
-|             | Cluster3 | OpenEBS via Helm     | Cluster 3 will be connected to Cluster2.  OpenEBS specific Tests including OpenEBS CE pipeline |
-| Rancher LAB | Cluster1 | Onprem Director      |                                                              |
-|             | Cluster2 | OpenEBS via Director | Cluster 2 will be connected to Cluster1. Director Specific Tests |
-|             | Cluster3 | OpenEBS via Helm     | Cluster 3 will be connected to Cluster2. OpenEBS specific Tests including OpenEBS CE pipeline |
-| Konvoy Lab  | Cluster1 | Onprem Director      |                                                              |
-|             | Cluster2 | OpenEBS via Director | Cluster 2 will be connected to Cluster1. Director Specific Tests |
-|             | Cluster3 | OpenEBS via Helm     | Cluster 3 will be connected to Cluster2. OpenEBS specific Tests including OpenEBS CE pipeline |
+| Platform    | Cluster | Installation         | Remarks                                                      |
+| ----------- | ------- | -------------------- | ------------------------------------------------------------ |
+| AWS         | AWS-C1  | Onprem Director      |                                                              |
+|             | AWS-C2  | OpenEBS via Director | Cluster 2 will be connected to Cluster1.  Director Specific Tests |
+|             | AWS-C3  | OpenEBS via Helm     | Cluster 3 will be connected to Cluster2.  OpenEBS specific Tests including OpenEBS CE pipeline |
+| Rancher LAB | Ran-C1  | Onprem Director      |                                                              |
+|             | Ran-C2  | OpenEBS via Director | Cluster 2 will be connected to Cluster1. Director Specific Tests |
+|             | Ran-C3  | OpenEBS via Helm     | Cluster 3 will be connected to Cluster2. OpenEBS specific Tests including OpenEBS CE pipeline |
+| Konvoy Lab  | Kon-C1  | Onprem Director      |                                                              |
+|             | Kon-C2  | OpenEBS via Director | Cluster 2 will be connected to Cluster1. Director Specific Tests |
+|             | Kon-C3  | OpenEBS via Helm     | Cluster 3 will be connected to Cluster2. OpenEBS specific Tests including OpenEBS CE pipeline |
 
 
 
@@ -102,14 +102,14 @@ For Example, say the current version of OEP is  version **V**
 - Rancher would be running with v-1 version of product and upgraded to latest
 - Konvoy would be running with v-2 version of prouduct and upgraded to latest.
 
-| Platform    | Cluster  | Installation               | Installed version | Remarks                                                      |
-| ----------- | -------- | -------------------------- | ----------------- | ------------------------------------------------------------ |
-| Rancher LAB | Cluster4 | Onprem Director	Version | v-1               |                                                              |
-|             | Cluster5 | OpenEBS via Director       | v-1               | Cluster 2 will be connected to Cluster1. Director Specific Tests |
-|             | Cluster6 | OpenEBS via Helm           | v-1               | Cluster 3 will be connected to Cluster2. OpenEBS specific Tests including OpenEBS CE pipeline |
-| Konvoy Lab  | Cluster4 | Onprem Director            | v-2               |                                                              |
-|             | Cluster5 | OpenEBS via Director       | v-2               | Cluster 2 will be connected to Cluster1. Director Specific Tests |
-|             | Cluster6 | OpenEBS via Helm           | v-2               | Cluster 3 will be connected to Cluster2. OpenEBS specific Tests including OpenEBS CE pipeline |
+| Platform    | Cluster | Installation               | Installed version | Remarks                                                      |
+| ----------- | ------- | -------------------------- | ----------------- | ------------------------------------------------------------ |
+| Rancher LAB | Ran-C4  | Onprem Director	Version | v-1               |                                                              |
+|             | Ran-C5  | OpenEBS via Director       | v-1               | Cluster 2 will be connected to Cluster1. Director Specific Tests |
+|             | Ran-C6  | OpenEBS via Helm           | v-1               | Cluster 3 will be connected to Cluster2. OpenEBS specific Tests including OpenEBS CE pipeline |
+| Konvoy Lab  | Kon-C4  | Onprem Director            | v-2               |                                                              |
+|             | Kon-C5  | OpenEBS via Director       | v-2               | Cluster 2 will be connected to Cluster1. Director Specific Tests |
+|             | Kon-C6  | OpenEBS via Helm           | v-2               | Cluster 3 will be connected to Cluster2. OpenEBS specific Tests including OpenEBS CE pipeline |
 
 
 
