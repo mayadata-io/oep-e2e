@@ -44,7 +44,7 @@ Different clusters are used on different platforms. Hence the clusters are descr
 | Ran-C6      | 1 Node, 16GB, 2 vCPU | 3 Nodes - Each node  16GB 2CPU, 3x100GB Disks | OpenEBS Install Upgrade       |
 | Ran-C7 | 1 Node, 32GB, 4 vCPU | 10Nodes, Each Node 32GB 6vCPU,  6x100GB SSDs  | **Workload Cluster  OpenEBS** |
 
-**Note** -- {C1,C2,C3 }clusters  or {C4,C5,C6} clusters will be at a point of time. 
+**Note** -- {C1,C2,C3 }clusters  or {C4,C5,C6} clusters will be running at a point of time. 
 
 C7 will be running always with certain load and continuously upgraded with each release builds.
 
@@ -65,5 +65,5 @@ AWS platform will be deployed on managed K8S,
 
 ## Implementation Phase
 
-As mentioned in [Pipeline](/docs/gitlabstages.md#implementation-phase)
+As mentioned in [Pipeline](/docs/gitlabstages#implementation-phase)
 

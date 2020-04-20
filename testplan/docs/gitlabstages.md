@@ -20,8 +20,7 @@ Setups are created and the current version of OEP components are installed and t
 The Install Test Stage will have the following Gitlab Stages
 
 - Cluster Create - 3 K8S clusters would be created namely C1, C2, C3 as configuration mentioned in [Testbed](testbed.md)
-- Install Stage -- 
-  - In this setup of OEP components would be installed and setup. 
+- Install Stage -- In this stage  OEP components would be installed
   - C1 would be installed with DOP. 
   - C2 and C3 would be connected to C1 using DOP APIs.
   - OpenEBS Enterprise would be installed on C2 using DOP
@@ -30,7 +29,7 @@ The Install Test Stage will have the following Gitlab Stages
   - Functional Tests
   - Chaos Tests
   - Scalability Tests
-- Cluster Cleanup  - Cluster created would be destroyed in this stage.
+- Cluster Cleanup  - Cluster C1, C2, C3 would be destroyed.
 
 ### Upgrade Test Stage
 
@@ -42,7 +41,7 @@ The Upgrade Test Stage will have the following Gitlab Stages
 
 - Cluster Create - 3 K8S clusters would be created namely C4, C5, C6 as configuration mentioned in [Testbed](testbed.md)
 - Install Stage - In this setup of OEP components would be installed and setup. 
-  - C4 would be installed with DOP version mentioned in . 
+  - C4 would be installed with DOP version mentioned in [Ugrade Test Stage](#upgrade-stage-test-setup)
   - C5 and C6 would be connected to C1 using DOP APIs.
   - OpenEBS Enterprise would be installed on C5 using DOP
   - OpenEBS Enterprise would be installed on C6 using Helm
@@ -62,10 +61,10 @@ This stage would be run only if the upgrade pipeline is successful. Setups are a
 
 The Soak Test Stage will have the following Gitlab Stages
 
-- C7 working health work load cluster would be imported to DOP. This setup would be continuously running with pre-defined load.  The load/workload will be running on this setup pre, during and post of this stage. This cluster would not be brought down and would be continuously upgraded with each release builds to mimic production work load scenarios. 
+- C7 working healthywork load cluster would be imported to DOP. This setup would be continuously running with pre-defined load.  The load/workload will be running on this setup pre, during and post test stages. This cluster would not be brought down and would be continuously upgraded with each release builds to mimic production work load scenarios. 
 - Upgraded to latest version using DOP APIs
 - Following tests would be performed
-  - Functional Tests like provision
+  - Functional Tests like provisioning
   - Chaos Tests
   - Day2 Operation.
 
@@ -95,12 +94,14 @@ The following test setups are created on each platform and cleaned-up at the end
 
 #### Upgrade Stage Test Setup
 
-The following test setups are created with prior versions on each platform and cleaned-up at the end of the stage. Cluster2 and Cluster3 would be connected to Cluster1 DOP for provisioning and monitoring. 
+The following test setups are created with prior versions on each platform and cleaned-up at the end of the stage. Cluster5 and Cluster6 would be connected to Cluster4 DOP for provisioning and monitoring. 
+
+**Note** - Cluster4, Cluster5, Cluster6 should have predefined configuration. One of implementation way would be for Rancher and Konvoy, We will be using Install stage automation with older version GA build and take a snapshot.
 
 For Example, say the current version of OEP is  version **V**
 
 - Rancher would be running with v-1 version of product and upgraded to latest
-- Konvoy would be running with v-2 version of prouduct and upgraded to latest.
+- Konvoy would be running with v-2 version of product and upgraded to latest.
 
 | Platform    | Cluster | Installation               | Installed version | Remarks                                                      |
 | ----------- | ------- | -------------------------- | ----------------- | ------------------------------------------------------------ |
@@ -152,11 +153,12 @@ E2E metrics, finalizing the tests, disconnect the user clusters,clean up resourc
 ## Implementation Phase
 
 Pipelines would be implemented in the following way
+
 #### Phase 1 (AWS, Rancher) (OEP 1.9)
-- Install Stage : Cluster1 would be installed with DOP, Cluster2 would be connected to Director and OpeneEBS would be installed using Director and Functional Tests of Both Director and OpenEBS would be run in separate Gitlab stage. 
+- Install Stage : Cluster1 would be installed with DOP,  Cluster2 would be connected to Director and OpeneEBS would be installed using Director and Functional Tests of Both Director and OpenEBS would be run in separate Gitlab stage. 
 - Workload cluster would be upgraded manually and connected to Cluster1
 #### Phase 2 (AWS, Rancher) (OEP 1.10)
 - Install Stage: Cluster 3 OpenEBS installed with Helm. 
-- Upgrade stage would be incorporated.
+- Upgrade stage using Cluster 4, Cluster5, Cluster6 would be incorporated.
 #### Phase 3 (AWS, Rancher) (OEP 1.10)
 - Workload Stage : This would be upgraded and added into cluster C1.
