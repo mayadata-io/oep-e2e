@@ -5,122 +5,140 @@ sidebar_label: Pipelines
 ---
 ## OEP E2E Pipelines
 
-OEP E2E is done using GitLab. Each release build of OEP will trigger the following test stages. Trigger of the pipelines will be done manually most cases or initiated as part of release builds.  OEP pipeline can be broadly divided into following test stages, each test stage can have multiple gitlab stages as mentioned in [Gitlab Stages](#gitlab-stages) section. 
+OEP E2E pipelines are GitLab based pipelines. Each OEP release triggers these pipelines. Some pipelines are triggered manually while others get triggered as part of release builds.  OEP pipeline can be broadly divided into following stages, where each stage can have multiple gitlab stages as mentioned in [Gitlab Stages](#gitlab-stages) section. 
 
 - Install Test Stage
 - Upgrade Test Stage
-- Soak Test Test Stage
+- Soak Test Stage
 
 ### Install Test Stage
 
-Setups are created and the current version of OEP components are installed and tested and post this clusters are deleted as part of the stage [Link to Actual Image](https://docs.google.com/drawings/d/16e98Ty_LV0UwGJLIyiMung6DLoIbaQimfOUwvQtnAko/edit)
+In this stage, setups are created and latest OEP release is installed & tested. As part of teardown all these clusters are destroyed. [Link to Actual Image](https://docs.google.com/drawings/d/16e98Ty_LV0UwGJLIyiMung6DLoIbaQimfOUwvQtnAko/edit)
 
 ![Install Pipeline Image](https://docs.google.com/drawings/d/e/2PACX-1vS-SVez5ufcMTQTuvZAYrL4cFYaw7E0t57QB4Ega-OZjY1UTs0v2QPRaJZB4sdbHauBTEvvgWlviGzP/pub?w=788&h=245)
 
-The Install Test Stage will have the following Gitlab Stages
+This stage is further divided into following _GitLab stages_:
 
-- Cluster Create - 3 K8S clusters would be created namely C1, C2, C3 as configuration mentioned in [Testbed](testbed.md)
-- Install Stage -- In this stage  OEP components would be installed
-  - C1 would be installed with DOP. 
-  - C2 and C3 would be connected to C1 using DOP APIs.
-  - OpenEBS Enterprise would be installed on C2 using DOP
-  - OpenEBS Enterprise would be installed on C3 using Helm
-- Functional Test -Actual Functionality tests, would be created as per the Test Straegy in the [e2e paln](https://e2e.mayadata.io)
-  - Functional Tests
-  - Chaos Tests
-  - Scalability Tests
-- Cluster Cleanup  - Cluster C1, C2, C3 would be destroyed.
+- **Cluster Create**
+    - Three kubernetes clusters are created namely **C1**, **C2**, & **C3**.
+    - Details of these clusters are found in [Testbed](testbed.md)
+- **Install Stage**
+    - In this stage OEP components are installed
+    - C1 would be installed with latest version of DOP
+    - C2 and C3 are connected to C1 using DOP APIs
+    - OpenEBS Enterprise is installed on C2 using DOP
+    - OpenEBS Enterprise is installed on C3 using Helm
+- **Execute Tests**
+    - Functional Tests
+    - Chaos Tests
+    - Scalability Tests
+    - _Above are defined as test strategies in [e2e plan](https://e2e.mayadata.io)_
+- **Cluster Cleanup**
+    - All clusters i.e. C1, C2, C3 are destroyed
 
 ### Upgrade Test Stage
 
-This stage would be run only if the Install stage is successful. Setups are created, the prior version of OEP components are installed and then upgraded and deleted as part of the stage. [Link to Actual Image](https://docs.google.com/drawings/d/1oaYLnNQXHIfBn7Jwr5K1N5PDdEhi2yE2jd4gFjbrC8o/edit)
+_NOTE: This stage is run only if **install test stage** is completed successfully_
+
+This stage involves creation of clusters & installation of previous stable OEP version. Actual testing involves upgrade of OEP to its latest release. This stage is marked as complete upon successful teardown of the clusters. [Link to Actual Image](https://docs.google.com/drawings/d/1oaYLnNQXHIfBn7Jwr5K1N5PDdEhi2yE2jd4gFjbrC8o/edit)
 
 ![Upgrade Pipeline](https://docs.google.com/drawings/d/e/2PACX-1vSVDOO2JapUeVuoiSufGaISwuZufvB-F6X8x1Xsns3EUN0piW_b14cKHlYNZzJn3YvI7zc1jvR302Dv/pub?w=955&h=283)
 
-The Upgrade Test Stage will have the following Gitlab Stages
+This stage is further divided into following _Gitlab Stages_:
 
-- Cluster Create - 3 K8S clusters would be created namely C4, C5, C6 as configuration mentioned in [Testbed](testbed.md)
-- Install Stage - In this setup of OEP components would be installed and setup. 
-  - C4 would be installed with DOP version mentioned in [Ugrade Test Stage](#upgrade-stage-test-setup)
-  - C5 and C6 would be connected to C1 using DOP APIs.
-  - OpenEBS Enterprise would be installed on C5 using DOP
-  - OpenEBS Enterprise would be installed on C6 using Helm
-- Upgrade Stage
-  - C4 would be upgrade with DOP helm chart
-  - C5 would be upgrade using DOP APIs
-  - C6 would be upgrade using helm chart.
-- Functional Tests -Actual Functionality tests, would be created as per the Test Straegy in the [e2e paln](https://e2e.mayadata.io)
-  - Functional Test cases
-  - Chaos Testss
+- **Cluster Create**
+    - Three kubernetes clusters are created namely **C4**, **C5**, **C6**
+    - Details of these clusters are found in [Testbed](testbed.md)
+- **Install Stage**
+  - C4 is installed with last stable version of DOP using DOP's helm chart
+  - C5 and C6 would be connected to C1 using DOP APIs
+  - Last stable version of OpenEBS Enterprise is installed on C5 using DOP
+  - Last stable version of OpenEBS Enterprise is installed on C6 using Helm
+- **Upgrade Stage**
+  - DOP in C4 is upgraded using DOP's helm chart
+  - OpenEBS Enterprise in C5 is upgraded using DOP APIs
+  - OpenEBS Enterprise in C6 is upgraded using OpenEBS Enterprise helm chart
+- **Execute Tests** 
+    - Functional Tests
+    - Chaos Tests
+    - Scalability Tests
+    - _Above are defined as test strategies in [e2e plan](https://e2e.mayadata.io)_
+- **Cluster Cleanup**
+    - All clusters i.e. C4, C5, C6 are destroyed
 
 ### Soak Test Stage
 
-This stage would be run only if the upgrade pipeline is successful. Setups are already present with some load running. This is to create a customer environment. [Link to Actual Image](https://docs.google.com/drawings/d/1oqMYd80X4Vf2hIpkXhNNPGTBBsr8JYQGGi06UHbr0pY/edit)
+This stage is run only if upgrade test stage is completed successfully. It makes use of long running setups with some running applications & loads running against these applications. This setup tries to be as close as possible to any customer's environment. [Link to Actual Image](https://docs.google.com/drawings/d/1oqMYd80X4Vf2hIpkXhNNPGTBBsr8JYQGGi06UHbr0pY/edit)
 
 ![Soak Test Pipeline](https://docs.google.com/drawings/d/e/2PACX-1vS56imUpkbH74X0f3Ty46dyAMQw_2EEm0eLjq1wp5K38GuR4db-QL7zdlSLsp5xqaeX4Po2Ig2n6w1Z/pub?w=741&h=232)
 
-The Soak Test Stage will have the following Gitlab Stages
+The stage is further divided into following _Gitlab stages_:
 
-- C7 working healthywork load cluster would be imported to DOP. This setup would be continuously running with pre-defined load.  The load/workload will be running on this setup pre, during and post test stages. This cluster would not be brought down and would be continuously upgraded with each release builds to mimic production work load scenarios. 
-- Upgraded to latest version using DOP APIs
-- Following tests would be performed
-  - Functional Tests like provisioning
-  - Chaos Tests
-  - Day2 Operation.
-
+- **Import Stage**
+    - **C7** workload cluster is connected to DOP running in **C4**
+    - _NOTE: C7 cluster is never brought down_
+    - _NOTE: C7 cluster is upgraded with latest release_
+- **Upgrade Stage**
+    - OpenEBS Enterprise is upgraded to latest version using DOP APIs
+- **Execute Tests**
+    - Functional Tests
+    - Chaos Tests
+    - Scalability Tests
+    - _Above are defined as test strategies in [e2e plan](https://e2e.mayadata.io)_
 
 
 ### Test Setups
 
 #### Install Stage Test Setup
 
-The following test setups are created on each platform and cleaned-up at the end of the stage. Cluster2 and Cluster3 would be connected to Cluster1 DOP for provisioning and monitoring. 
+- Test setups are created on each platform
+- These setups are destroyed at the end of the stage
+- Cluster **1** is installed with DOP
+- Cluster **2** and cluster **3** are connected to cluster **1** via DOP
 
 
-
-| Platform    | Cluster | Installation         | Remarks                                                      |
-| ----------- | ------- | -------------------- | ------------------------------------------------------------ |
-| AWS         | AWS-C1  | Onprem Director      |                                                              |
-|             | AWS-C2  | OpenEBS via Director | Cluster 2 will be connected to Cluster1.  Director Specific Tests |
-|             | AWS-C3  | OpenEBS via Helm     | Cluster 3 will be connected to Cluster2.  OpenEBS specific Tests including OpenEBS CE pipeline |
-| Rancher LAB | Ran-C1  | Onprem Director      |                                                              |
-|             | Ran-C2  | OpenEBS via Director | Cluster 2 will be connected to Cluster1. Director Specific Tests |
-|             | Ran-C3  | OpenEBS via Helm     | Cluster 3 will be connected to Cluster2. OpenEBS specific Tests including OpenEBS CE pipeline |
-| Konvoy Lab  | Kon-C1  | Onprem Director      |                                                              |
-|             | Kon-C2  | OpenEBS via Director | Cluster 2 will be connected to Cluster1. Director Specific Tests |
-|             | Kon-C3  | OpenEBS via Helm     | Cluster 3 will be connected to Cluster2. OpenEBS specific Tests including OpenEBS CE pipeline |
-
+| Platform | Cluster | Installation    | Remarks                                        |
+| -------- | ------- | --------------  | ---------------------------------------------- |
+| AWS      | AWS-C1  | DOP             |                                                |
+| AWS      | AWS-C2  | OpenEBS via DOP | AWS-C2 connected to AWS-C1. Run Director tests |
+| AWS      | AWS-C3  | OpenEBS via Helm| AWS-C3 connected to AWS-C1. Run OpenEBS tests  |
+| Rancher  | Ran-C1  | DOP             |                                                |
+| Rancher  | Ran-C2  | OpenEBS via DOP | Ran-C2 connected to Ran-C1. Run Director tests |
+| Rancher  | Ran-C3  | OpenEBS via Helm| Ran-C3 connected to Ran-C1. Run OpenEBS tests  |
+| Konvoy   | Kon-C1  | DOP             |                                                |
+| Konvoy   | Kon-C2  | OpenEBS via DOP | Kon-C2 connected to Kon-C1. Run Director tests |
+| Konvoy   | Kon-C3  | OpenEBS via Helm| Kon-C3 connected to Kon-C1. Run OpenEBS tests  |
 
 
 #### Upgrade Stage Test Setup
 
-The following test setups are created with prior versions on each platform and cleaned-up at the end of the stage. Cluster5 and Cluster6 would be connected to Cluster4 DOP for provisioning and monitoring. 
+The following test setups are created with previous versions on each platform and destroyed at the end of the stage. Cluster **5** and Cluster **6** would be connected to Cluster **4** via Director OnPrem _(DOP)_.
 
-**Note** - Cluster4, Cluster5, Cluster6 should have predefined configuration. One of implementation way would be for Rancher and Konvoy, We will be using Install stage automation with older version GA build and take a snapshot.
+_**Note** - Cluster 4, Cluster 5, Cluster 6 will be brought up from the last snapshots of Cluster 1, Cluster 2 & Cluster 3._
+_**Note** - Last snapshot implies the state of cluster that was used to run previous version of OEP_
+_**Note** - New snapshots are taken after running install test setup successfully_
 
-For Example, say the current version of OEP is  version **V**
+Upgrades will be tested for previous two releases. In other words, while testing OEP of version **V**, upgrade stage will execute following strategies:
+- Rancher would be brought up with OEP version V-1 _(i.e. latest but one)_ & upgraded to latest
+- Konvoy would be brought up with OEP version V-2 _(i.e. latest but two)_ & upgraded to latest
 
-- Rancher would be running with v-1 version of product and upgraded to latest
-- Konvoy would be running with v-2 version of product and upgraded to latest.
-
-| Platform    | Cluster | Installation               | Installed version | Remarks                                                      |
-| ----------- | ------- | -------------------------- | ----------------- | ------------------------------------------------------------ |
-| Rancher LAB | Ran-C4  | Onprem Director	Version | v-1               |                                                              |
-|             | Ran-C5  | OpenEBS via Director       | v-1               | Cluster 2 will be connected to Cluster1. Director Specific Tests |
-|             | Ran-C6  | OpenEBS via Helm           | v-1               | Cluster 3 will be connected to Cluster2. OpenEBS specific Tests including OpenEBS CE pipeline |
-| Konvoy Lab  | Kon-C4  | Onprem Director            | v-2               |                                                              |
-|             | Kon-C5  | OpenEBS via Director       | v-2               | Cluster 2 will be connected to Cluster1. Director Specific Tests |
-|             | Kon-C6  | OpenEBS via Helm           | v-2               | Cluster 3 will be connected to Cluster2. OpenEBS specific Tests including OpenEBS CE pipeline |
-
+| Platform| Cluster| Installation    | Ver | Remarks                                        |
+| --------| ------ | --------------- | --- | ---------------------------------------------  |
+| Rancher | Ran-C4 | DOP             | V-1 |                                                |
+| Rancher | Ran-C5 | OpenEBS via DOP | V-1 | Ran-C2 connected to Ran-C4. Run Director tests |
+| Rancher | Ran-C6 | OpenEBS via Helm| V-1 | Ran-C3 connected to Ran-C4. Run OpenEBS tests  |
+| Konvoy  | Kon-C4 | DOP             | V-2 |                                                |
+| Konvoy  | Kon-C5 | OpenEBS via DOP | V-2 | Kon-C5 connected to Kon-C4. Run Director tests |
+| Konvoy  | Kon-C6 | OpenEBS via Helm| V-2 | Kon-C6 connected to Kon-C4. Run OpenEBS tests  |
 
 
-#### Soak Testing Stage Test Setup
-The workload cluster will be used for Soak Testing. This would be always running. Any new builds will be upgraded to this and continue testing on the same.
+#### Soak Stage Test Setup
+Kubernetes workload cluster will be used for soak testing. A workload cluster is the one that is never shutdown. Cluster is upgraded to new OEP releases.
 
-| Platform                     | K8S                  | Installation     | Remarks                                                      |
-| ---------------------------- | -------------------- | ---------------- | ------------------------------------------------------------ |
-| Rancher                      | Rancher              | Onprem Director  |                                                              |
-| Ubuntu-16.4 K8s-Version 1.16 | Generic version 1.16 | OpenEBS Via Helm | Workload Clusters. This Cluster will be connected to above Onprem Cluster |
+| Platform  | Cluster | Installation     | Remarks                    |
+| --------- | ------- | -----------      | -------------------------- |
+| Rancher   | Ran-C1  | DOP              |                            |
+| Rancher   | Ran-C7  | OpenEBS via HELM | Ran-C7 connected to Ran-C1 |
 
 ## GitLab Stages
 
