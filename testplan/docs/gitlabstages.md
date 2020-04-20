@@ -99,12 +99,12 @@ For Example, say **The current version is 1.11**
 
 | Platform    | Cluster  | K8S Version | Installation                   | Installed version | Remarks                                                      |
 | ----------- | -------- | ----------- | ------------------------------ | ----------------- | ------------------------------------------------------------ |
-| Rancher LAB | Cluster1 | V 1.14      | Onprem Director	Version 1.9 |                   |                                                              |
-|             | Cluster2 | V 1.14      | OpenEBS via Director           | Version 1.9       | Cluster 2 will be connected to Cluster1. Director Specific Tests |
-|             | Cluster3 | V 1.16      | OpenEBS via Helm               | Version 1.9       | Cluster 3 will be connected to Cluster2. OpenEBS specific Tests including OpenEBS CE pipeline |
-| Konvoy Lab  | Cluster1 | V 1.14      | Onprem Director                | Version 1.10      |                                                              |
-|             | Cluster2 | V 1.14      | OpenEBS via Director           | Version 1.10      | Cluster 2 will be connected to Cluster1. Director Specific Tests |
-|             | Cluster3 | V 1.16      | OpenEBS via Helm               | Version 1.10      | Cluster 3 will be connected to Cluster2. OpenEBS specific Tests including OpenEBS CE pipeline |
+| Rancher LAB | Cluster4 | V 1.14      | Onprem Director	Version 1.9 |                   |                                                              |
+|             | Cluster5 | V 1.14      | OpenEBS via Director           | Version 1.9       | Cluster 2 will be connected to Cluster1. Director Specific Tests |
+|             | Cluster6 | V 1.16      | OpenEBS via Helm               | Version 1.9       | Cluster 3 will be connected to Cluster2. OpenEBS specific Tests including OpenEBS CE pipeline |
+| Konvoy Lab  | Cluster4 | V 1.14      | Onprem Director                | Version 1.10      |                                                              |
+|             | Cluster5 | V 1.14      | OpenEBS via Director           | Version 1.10      | Cluster 2 will be connected to Cluster1. Director Specific Tests |
+|             | Cluster6 | V 1.16      | OpenEBS via Helm               | Version 1.10      | Cluster 3 will be connected to Cluster2. OpenEBS specific Tests including OpenEBS CE pipeline |
 
 
 
