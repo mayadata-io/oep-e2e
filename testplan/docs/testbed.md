@@ -32,15 +32,15 @@ Different clusters are used on different platforms. Hence the clusters are descr
 
 ### OnPrem-Rancher
 
-| K8S      | Master              | Worker Nodes                                  | Resources                     |
+| K8S      | Master              | Worker Nodes                                  | Notes - Cluster Used           |
 | -------- | ------------------- | --------------------------------------------- | ----------------------------- |
-| Cluster1 | 1 Node 16GB 2  vCPU | 3 Node - Each node 16GB 4 vCPU                | Director Onprem Install       |
-| Cluster2 | 1 Node 16GB 2  vCPU | 5 Nodes - Each node  32GB 8CPU, 6x100GB Disks | OpenEBS Install Director      |
-| Cluster3 | 1 Node 16GB 2  vCPU | 3 Nodes - Each node  16GB 8CPU, 3x100GB Disks | OpenEBS Install Helm          |
-| Cluster4 | 1 Node 16GB 2  vCPU | 1 Node - Each node 16GB 2 vCPU,               | Director Onprem Upgrade       |
-| Cluster5 | 1 Node 16GB 2  vCPU | 3 Nodes - Each node  32GB 2CPU, 3x100GB Disks | OpenEBS Install Upgrade       |
-| Cluster6 | 1 Node 16GB 2  vCPU | 3 Nodes - Each node  16GB 2CPU, 3x100GB Disks | OpenEBS Install Upgrade       |
-| Cluster7 | 1 Node 32GB, 42vCPU | 10Nodes, Each Node 32GB 6vCPU,  6x100GB SSDs  | **Workload Cluster  OpenEBS** |
+| Cluster1 | 1 Node, 16GB, 2 vCPU | 3 Node - Each node 16GB 4 vCPU                | Director Onprem Install       |
+| Cluster2 | 1 Node, 16GB, 2 vCPU | 5 Nodes - Each node  32GB 8CPU, 6x100GB Disks | OpenEBS Install Director      |
+| Cluster3 | 1 Node, 16GB, 2 vCPU | 3 Nodes - Each node  16GB 8CPU, 3x100GB Disks | OpenEBS Install Helm          |
+| Cluster4 | 1 Node, 16GB, 2 vCPU | 1 Node - Each node 16GB 2 vCPU,               | Director Onprem Upgrade       |
+| Cluster5 | 1 Node, 16GB, 2 vCPU | 3 Nodes - Each node  32GB 2CPU, 3x100GB Disks | OpenEBS Install Upgrade       |
+| Cluster6 | 1 Node, 16GB, 2 vCPU | 3 Nodes - Each node  16GB 2CPU, 3x100GB Disks | OpenEBS Install Upgrade       |
+| Cluster7 | 1 Node, 32GB, 4 vCPU | 10Nodes, Each Node 32GB 6vCPU,  6x100GB SSDs  | **Workload Cluster  OpenEBS** |
 
 **Note** -- Cluster1,2,3 or Cluster4,5,6 will be at a point of time. It can be same machines with cleanup
 
@@ -52,7 +52,7 @@ Cluster7 will be running always with certain load  and continuously upgraded wit
 
 AWS platform will be deployed on managed K8S, 
 
-| K8S      | Master  | Worker Nodes                                     | Resources                |
+| K8S      | Master  | Worker Nodes                                     | Notes - Cluster Used     |
 | -------- | ------- | ------------------------------------------------ | ------------------------ |
 | Cluster1 | Managed | 1 Node - Each node 16GB 2 vCPU                   | Director Onprem Install  |
 | Cluster2 | Managed | 3 Nodes - Each node  16GB 2CPU, 3x100GB EBS SSDs | OpenEBS Install Director |
@@ -61,3 +61,13 @@ AWS platform will be deployed on managed K8S,
 
 **Note --** Cluster1,2 or Cluster3,4 will be powered on at a point of time.
 
+## Implementation Phase
+
+Pipelines would be implemented in the following way
+#### Phase 1 (AWS, Rancher) (OEP 1.9)
+- Install Stage : Cluster1 would be installed with DOP, Cluster2 would be connected to Director and OpeneEBS would be installed using Director and Functional Tests of Both Director and OpenEBS would be run in seperate Gitlab stage.
+#### Phase 2 (AWS, Rancher) (OEP 1.10)
+- Install Stage: Cluster 3 OpenEBS installed with Helm. 
+- Upgrade stage would be incorporated.
+#### Phase 3 (AWS, Rancher) (OEP 1.10)
+- Workload Stage : This would be added into pipeline.
