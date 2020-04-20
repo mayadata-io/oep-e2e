@@ -75,7 +75,6 @@ module.exports = {
 		        label: 'DMaaS',
 		        items: [
 				'director/dmaas/dmaas',
-				'director/dmaas/test1'
 			],
 		},
 		{
@@ -99,16 +98,15 @@ module.exports = {
 		        label: 'Alerts',
 		        items: [
 				'director/alerts/alerts',
-				'director/alerts/test1'
 			],
 		},
     ],
-    "MayaData OpenEBS Enterprise": [
+    "OpenEBS Enterprise": [
 		{
 		        type: 'category',
 		        label: 'OpenEBS Enterprise',
 		        items: [
-				    'openebs-enterprise/openebs/OpenEBS-Enterprise'
+				    'openebs-enterprise/openebs/openebs'
 			    ],
 		},
 		{

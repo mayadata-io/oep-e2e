@@ -5,41 +5,39 @@ sidebar_label: Introduction
 ---
 ------
 
-MayaData delivers it's vision of delivering data agility for DevOps by converting Kubernetes into a data layer. MayaData's product is called OpenEBS Enterprise Platform or OEP. OEP is a combination of multiple tools and projects and it currently comprises of OpenEBS Enterprise Edition, Director and Litmus. OEP, as the enterprise edition of the product, requires highest level of testing interms of covering areas of testing such as scalability, security, interoperability, functional and chaos engineering. This test plan covers all these areas and serves as the top level guide for those who are contributing to the quality of the product.
+MayaData delivers it's vision of delivering data agility for DevOps by transforming Kubernetes into a data layer. MayaData's product is called OpenEBS Enterprise Platform or OEP. OEP is a combination of multiple tools and projects and it currently comprises of OpenEBS Enterprise Edition, Director and Litmus. OEP being an enterprise grade product, requires highest levels of testing such as scalability, security, interoperability, functional and chaos engineering. This site covers all these areas and serves as the top level guide for those who are contributing to the quality of the product.
 
 
 
-## Test artifacts:
+## Test Plan Artifacts:
 
-**Master Test Plan** - This is the master plan for planning the testing.
+**Master Test Plan Site** - This site
 
-**Master-test-yaml** - [A coded version of this plan](https://github.com/mayadata-io/oep-e2e/blob/master/.master-plan.yml), which will allocate unique test IDs for each test case so that they are checked against the test runs in pipelines to calculate the coverage.
+**Master Test Plan YAML** - [A coded version of this site](https://github.com/mayadata-io/oep-e2e/blob/master/.master-plan.yml), that has unique test cases IDs corresponding to each test case. This helps in determining the overall coverage.
 
-**Test case** - Each test case will have two parts.
+**Test Case** - Each test case will have two parts:
+- Detailed description of the test case _(somewhere in this site)_, &
+- Actual implementation of the test case _(code)_
 
-- Detailed description of the test case and
-- Actual implementation of the test case
-
-**GitLab issues** - [Issues or backlogs](https://github.com/mayadata-io/oep-e2e/issues) are the entry points to the quality feedback process. These issues also serve as the tracking aids for maintaining the test plan and implementing the test cases.
-
+**GitHub issues** - [Issues or backlogs](https://github.com/mayadata-io/oep-e2e/issues) are the entry points to the quality feedback process. These issues track the test plan completion including and implemention of actual test cases.
 
 
 ## Test repository structure:
 
-`oep-e2e` is the main repository that hosts the test plan and test cases and some elements of test cases implementations such as litmus wrappers. 
+**oep-e2e** is the main repository that hosts the test plans and test cases. This is also the repository that hosts the source code of this site. 
 
-`oep-e2e-gcp` is the repository containing implementation of test cases specific to GCP platform.
+**oep-e2e-gcp** repository contains scripts to run test cases against GCP platform.
 
-`oep-e2e-rancher` is the repository containing implementation of test cases specific to Rancher platform.
+**oep-e2e-rancher** repository contains scripts to run test cases against Rancher platform.
 
-`oep-e2e-konvoy` is the repository containing implementation of test cases specific to D2IQ Konvoy platform.
+**oep-e2e-konvoy** repository contains scripts to run test cases against D2IQ Konvoy platform.
 
 
 
 ## Contributing guidelines:
 
 - You can [create a GitHub issue](https://github.com/mayadata-io/oep-e2e/issues/new/choose) if you are having an idea for improvement or to notify a missing test area/case.
-- If you want to suggest new changes to this page or any other page in the test plan, use the `Edit` button on the top right corner of the specific page. 
+- If you want to suggest changes to any page in the test plan, use 'Edit this page' link found towards the bottom left corner of the specific page. This will enable you to raise a pull request with your suggested changes.
 
 
 
