@@ -7,7 +7,7 @@ sidebar_label: Testbed
 
 
 
-Pipelines are run sequentially on different platforms. The results are aggregated at  <a href="https://ci.mayadata.io/" target="_blank">ci.mayadata.io</a> .
+Pipelines are run sequentially on different platforms. The results are aggregated at  <a href="https://oep-pipelines.mayadata.io/" target="_blank">oep-pipelines.mayadata.io</a> .
 
 
 
