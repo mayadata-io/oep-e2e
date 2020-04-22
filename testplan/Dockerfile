@@ -7,19 +7,30 @@ WORKDIR /app/
 
 EXPOSE 3000 35729
 
-COPY . /app
-#Docusauraus v2 has changed the directory structure. Contents inside website directory have been brought to the root folder. Check the following line
-#COPY ./website /app/website
+COPY blog/ /app/blog/
+COPY docs/ /app/docs/
+COPY src/ /app/src/
+COPY static/ /app/static/
+COPY docusaurus.config.js /app/
+COPY nginx-custom.conf /app/
+COPY package.json /app/
+COPY sidebars.js /app/
+COPY tag.py /app/
 
+# remove shared cache files
+RUN yarn cache clean
+
+# install project dependencies
 RUN yarn install
 RUN yarn build
-
 
 #---------------------------------
 # sample usage
 # docker run -it -p 3000:3000 mayadata/plan:latest npm start --host 0.0.0.0
 # open your browser & type localhost:3000
 #---------------------------------
+
+# Second stage build to deploy above built site into nginx
 FROM nginx:1.13
 COPY --from=build-env ./app/build /usr/share/nginx/html
 COPY ./nginx-custom.conf /etc/nginx/conf.d/default.conf

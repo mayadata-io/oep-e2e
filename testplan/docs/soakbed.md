@@ -5,6 +5,4 @@ sidebar_label: In Soak Test Bed
 ---
 ------
 
-## Page Title
-
-- Sample text
+## TODO

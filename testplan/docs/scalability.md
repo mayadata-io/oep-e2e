@@ -5,6 +5,4 @@ sidebar_label: Scalability
 ---
 ------
 
-## Page Title
-
-- Sample text
+## TODO
