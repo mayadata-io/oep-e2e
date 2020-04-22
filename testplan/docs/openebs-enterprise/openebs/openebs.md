@@ -81,28 +81,38 @@ As a DevOps admin, I would like to run scalability tests against openebs on my k
 
 - Tests to be performed on kubernetes cluster with enough resources
 - Tests will involve ramping up of stateful applications consuming openebs volumes
-    - Applications will be ramped up from 0 till 100
+    - Applications will be ramped up from **0** till **200**
     - Ramp count can be 10 i.e. 10 applications will be created simultaneously
     - Application specific loads will be run against each for 60 minutes
-    - Creation & other valid metrics will be captured
+    - Creation metrics will be captured
+    - Application metrics will be captured
+    - Volume metrics will be captured
     - Deviation of metrics will be reported as warnings or errors
 - Tests will involve ramping down of these stateful applications
-    - Number of applications will be ramped down from 100 to 0
+    - Number of applications will be ramped down from 200 to 0
     - Ramp down count can be 10 i.e. 10 applications will be deleted simultaneously
-    - Deletion & other valid metrics will be captured
+    - Deletion metrics will be captured
+    - Application metrics will be captured
+    - Volume metrics will be captured
     - Deviation of metrics will be reported as warnings or errors
 
 #### Tabular representation
 
 | Workload          | Storage Engine    | Type | Replicas | Min  | Max |
 | ----------------- | ----------------- | ---- | -------- | ---- | --- |
-| Kafka             | Local PV Hostpath | RWO  | 3        | 0    | 100 |
-| Cassandra         | Local PV Device   | RWO  | 3        | 0    | 100 |
-| MySQL             | cStor             | RWO  | 3        | 0    | 100 |
-| Percona           | Jiva              | RWO  | 3        | 0    | 100 |
-| Wordpress (NFS)   | cStor             | RWX  | 3        | 0    | 100 |
-| Wordpress (NFS)   | Jiva              | RWX  | 3        | 0    | 100 |
-| NGNIX (Webserver) | cStor             | ROX  | 3        | 0    | 100 |
+| Kafka             | Local PV Hostpath | RWO  | 3        | 0    | 200 |
+| Kafka             | Local ZFS         | RWO  | 3        | 0    | 200 |
+| Cassandra         | Local PV Device   | RWO  | 3        | 0    | 200 |
+| Cassandra         | Local ZFS         | RWO  | 3        | 0    | 200 |
+| MySQL             | cStor             | RWO  | 3        | 0    | 200 |
+| Percona           | Jiva              | RWO  | 3        | 0    | 200 |
+| Wordpress (NFS)   | cStor             | RWX  | 3        | 0    | 200 |
+| Wordpress (NFS)   | Jiva              | RWX  | 3        | 0    | 200 |
+| NGNIX (Webserver) | cStor             | ROX  | 3        | 0    | 200 |
+
+#### References
+
+- https://github.com/openebs/zfs-localpv/labels/scalability
 
 #### Test Case IDs
 

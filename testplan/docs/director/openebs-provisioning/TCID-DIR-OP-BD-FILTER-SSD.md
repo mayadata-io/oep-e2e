@@ -1,7 +1,7 @@
 ---
-id: TCID-OP-BD-VIEW-TOGGLE
-title: View or ignore specific devices in a kubernetes cluster
-sidebar_label: TCID-OP-BD-VIEW-TOGGLE
+id: TCID-DIR-OP-BD-FILTER-SSD
+title: Filter devices in a kubernetes cluster
+sidebar_label: TCID-DIR-OP-BD-FILTER-SSD
 ---
 ------
 
@@ -14,9 +14,9 @@ sidebar_label: TCID-OP-BD-VIEW-TOGGLE
     <th> Description </th>
   </tr>
   <tr>
-    <td> TCID-OP-BD-VIEW-TOGGLE </td>
+    <td> TCID-DIR-OP-BD-FILTER-SSD </td>
     <td> BlockDevice </td>
-    <td> View or ignore specific devices in a kubernetes cluster </td>
+    <td> Filter devices in a kubernetes cluster </td>
   </tr>
 </table>
 
@@ -26,12 +26,10 @@ sidebar_label: TCID-OP-BD-VIEW-TOGGLE
 ### Steps
 - Install DirectorOnPrem _(DOP)_ on this K8s cluster
 - Install OpenEBS using DOP
-- OpenEBS should be installed on nodes meant for storage
-- OpenEBS should be updated to make use of new nodes for storage
 
 ### Expectations
-- Users should not be able to view devices that are not meant to be consumed for storage
-- Users should be able to view devices from nodes that are included as part of OpenEBS
+- Users should be able to list devices attached to this K8s cluster
+- Users should be able to filter SSD based devices
 
 ### Notes to the Reviewer
 - This is a positive test case

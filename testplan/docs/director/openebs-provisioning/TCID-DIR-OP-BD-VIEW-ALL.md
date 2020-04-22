@@ -1,7 +1,7 @@
 ---
-id: TCID-OP-BD-FILTER-SSD
-title: Filter devices in a kubernetes cluster
-sidebar_label: TCID-OP-BD-FILTER-SSD
+id: TCID-DIR-OP-BD-VIEW-ALL
+title: View devices across the kubernetes cluster
+sidebar_label: TCID-DIR-OP-BD-VIEW-ALL
 ---
 ------
 
@@ -14,9 +14,9 @@ sidebar_label: TCID-OP-BD-FILTER-SSD
     <th> Description </th>
   </tr>
   <tr>
-    <td> TCID-OP-BD-FILTER-SSD </td>
+    <td> TCID-DIR-OP-BD-VIEW-ALL </td>
     <td> BlockDevice </td>
-    <td> Filter devices in a kubernetes cluster </td>
+    <td> View all available devices across the kubernetes cluster </td>
   </tr>
 </table>
 
@@ -29,10 +29,10 @@ sidebar_label: TCID-OP-BD-FILTER-SSD
 
 ### Expectations
 - Users should be able to list devices attached to this K8s cluster
-- Users should be able to filter SSD based devices
+- Users should be able to categorize device types e.g. HDD, SSD, etc
 
 ### Notes to the Reviewer
-- This is a positive test case
+- This is a postive test case
 - Recent versions of K8s & DOP needs to be used
 
 ### Test Results

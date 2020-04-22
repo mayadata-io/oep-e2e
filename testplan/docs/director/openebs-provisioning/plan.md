@@ -14,29 +14,29 @@ This page captures the test scenarios for OpenEBS operations
 
 ###  OpenEBS Install
 
-- [ ] TCID-OP-BD-VIEW-ALL - View devices of a kubernetes cluster
-- [ ] TCID-OP-BD-VIEW-SCALE - View devices on a scaled kubernetes cluster
-- [ ] TCID-OP-BD-VIEW-SCALE-RESTART - View devices on a scaled kubernetes cluster even after multiple restarts of this cluster is observed
-- [ ] TCID-OP-BD-FILTER-SSD - View SSD based devices of a kubernetes cluster
-- [ ] TCID-OP-BD-FILTER-PATH - View devices with specific path across the kubernetes cluster
-- [ ] TCID-OP-BD-IGNORE - Avoid devices from specific nodes of a kubernetes cluster
-- [ ] TCID-OP-BD-VIEW-TOGGLE - Toggle viewing devices from specific nodes of a kubernetes cluster
+- [ ] TCID-DIR-OP-BD-VIEW-ALL - View devices of a kubernetes cluster
+- [ ] TCID-DIR-OP-BD-VIEW-SCALE - View devices on a scaled kubernetes cluster
+- [ ] TCID-DIR-OP-BD-VIEW-SCALE-RESTART - View devices on a scaled kubernetes cluster even after multiple restarts of this cluster is observed
+- [ ] TCID-DIR-OP-BD-FILTER-SSD - View SSD based devices of a kubernetes cluster
+- [ ] TCID-DIR-OP-BD-FILTER-PATH - View devices with specific path across the kubernetes cluster
+- [ ] TCID-DIR-OP-BD-IGNORE - Avoid devices from specific nodes of a kubernetes cluster
+- [ ] TCID-DIR-OP-BD-VIEW-TOGGLE - Toggle viewing devices from specific nodes of a kubernetes cluster
 
 
 
-| TCID                                                                   | Konvoy | GKE  |
+| TCID                                                                   | Konvoy | AWS  |
 | ---------------------------------------------------------------------- | ------ | ---- |
-| [TCID-OP-BD-VIEW-ALL](TCID-OP-BD-VIEW-ALL)                             | N      | N    |
-| [TCID-OP-BD-VIEW-SCALE](TCID-OP-BD-VIEW-SCALE)                         | N      | N    |
-| [TCID-OP-BD-VIEW-SCALE-RESTART](TCID-OP-BD-VIEW-SCALE-RESTART)         | N      | N    |
-| [TCID-OP-BD-FILTER-SSD](TCID-OP-BD-FILTER-SSD)                         | N      | N    |
-| [TCID-OP-BD-FILTER-PATH](TCID-OP-BD-FILTER-PATH)                       | N      | N    |
-| [TCID-OP-BD-IGNORE](TCID-OP-BD-IGNORE)                                 | N      | N    |
-| [TCID-OP-BD-VIEW-TOGGLE](TCID-OP-BD-VIEW-TOGGLE)                       | N      | N    |
+| [TCID-DIR-OP-BD-VIEW-ALL](TCID-OP-DIR-BD-VIEW-ALL)                     | N      | N    |
+| [TCID-DIR-OP-BD-VIEW-SCALE](TCID-OP-DIR-BD-VIEW-SCALE)                 | N      | N    |
+| [TCID-DIR-OP-BD-VIEW-SCALE-RESTART](TCID-DIR-OP-BD-VIEW-SCALE-RESTART) | N      | N    |
+| [TCID-DIR-OP-BD-FILTER-SSD](TCID-OP-DIR-BD-FILTER-SSD)                 | N      | N    |
+| [TCID-DIR-OP-BD-FILTER-PATH](TCID-DIR-OP-BD-FILTER-PATH)               | N      | N    |
+| [TCID-DIR-OP-BD-IGNORE](TCID-DIR-OP-BD-IGNORE)                         | N      | N    |
+| [TCID-DIR-OP-BD-VIEW-TOGGLE](TCID-DIR-OP-BD-VIEW-TOGGLE)               | N      | N    |
 
 
 #### Test Results
-- Provide the link per TCID
+- TODO - Provide the links
 
 
 ###  OpenEBS Control Plane Upgrade
@@ -59,26 +59,26 @@ This page captures the test scenarios for OpenEBS operations
 
 
 ### CStor Pool Recommendations 
-- [ ] TCID-OP-CSP-REC-LIST - List all cstor pool recommendations
-- [ ] TCID-OP-CSP-REC-LIST-NO-NDM - List all cstor pool recommendations with NDM not running
-- [ ] TCID-OP-CSP-REC-LIST-STRIPE - List all stripe cstor pool recommendations
-- [ ] TCID-OP-CSP-REC-LIST-MIRROR - List all mirror cstor pool recommendations
-- [ ] TCID-OP-CSP-REC-CREATE-MIRROR - Create mirror cstor pool cluster
-- [ ] TCID-OP-CSP-REC-CREATE-STRIPE - Create stripe cstor pool cluster
+- [ ] TCID-DIR-OP-CSP-REC-LIST - List all cstor pool recommendations
+- [ ] TCID-DIR-OP-CSP-REC-LIST-NO-NDM - List all cstor pool recommendations with NDM not running
+- [ ] TCID-DIR-OP-CSP-REC-LIST-STRIPE - List all stripe cstor pool recommendations
+- [ ] TCID-DIR-OP-CSP-REC-LIST-MIRROR - List all mirror cstor pool recommendations
+- [ ] TCID-DIR-OP-CSP-REC-CREATE-MIRROR - Create mirror cstor pool cluster
+- [ ] TCID-DIR-OP-CSP-REC-CREATE-STRIPE - Create stripe cstor pool cluster
 
-| TCID                                                            | Konvoy | GKE  |
-| --------------------------------------------------------------- | ------ | ---- |
-| [TCID-OP-CSP-REC-LIST](TCID-OP-CSP-REC-LIST)                    | N      | N    |
-| [TCID-OP-CSP-REC-LIST-NO-NDM](TCID-OP-CSP-REC-LIST-NO-NDM)      | N      | N    |
-| [TCID-OP-CSP-REC-LIST-STRIPE](TCID-OP-CSP-REC-LIST-STRIPE)      | N      | N    |
-| [TCID-OP-CSP-REC-LIST-MIRROR](TCID-OP-CSP-REC-LIST-MIRROR)      | N      | N    |
-| [TCID-OP-CSP-REC-CREATE-MIRROR](TCID-OP-CSP-REC-CREATE-MIRROR)  | N      | N    |
-| [TCID-OP-CSP-REC-CREATE-STRIPE](TCID-OP-CSP-REC-CREATE-STRIPE)  | N      | N    |
+| TCID                                                                    | Konvoy | AWS  |
+| ----------------------------------------------------------------------- | ------ | ---- |
+| [TCID-DIR-OP-CSP-REC-LIST](TCID-DIR-OP-CSP-REC-LIST)                    | N      | N    |
+| [TCID-DIR-OP-CSP-REC-LIST-NO-NDM](TCID-DIR-OP-CSP-REC-LIST-NO-NDM)      | N      | N    |
+| [TCID-DIR-OP-CSP-REC-LIST-STRIPE](TCID-DIR-OP-CSP-REC-LIST-STRIPE)      | N      | N    |
+| [TCID-DIR-OP-CSP-REC-LIST-MIRROR](TCID-DIR-OP-CSP-REC-LIST-MIRROR)      | N      | N    |
+| [TCID-DIR-OP-CSP-REC-CREATE-MIRROR](TCID-DIR-OP-CSP-REC-CREATE-MIRROR)  | N      | N    |
+| [TCID-DIR-OP-CSP-REC-CREATE-STRIPE](TCID-DIR-OP-CSP-REC-CREATE-STRIPE)  | N      | N    |
 
 
 - #### Jiva Pool Provisioning 
 
-- [ ] TCID-OP-JIVA-OK-RESTART - Jiva volumes should run even after multiple restarts of my kubernetes cluster is observed
+- [ ] TCID-DIR-OP-JIVA-OK-RESTART - Jiva volumes should run even after multiple restarts of my kubernetes cluster is observed
 
 | TCID | Brief Description | #Issue |
 | ---- | ----------------- | ------ |
@@ -124,6 +124,7 @@ This page captures the test scenarios for OpenEBS operations
 | Abbreviation     | Details                           |
 | ---------------- | --------------------------------- |
 | TCID             | TestCase ID                       |
+| DIR              | Director                          |
 | DAO              | Data Agility Operator             |
 | CPA              | CstorPool Auto                    |
 | OP               | OpenEBS Provisioning              |
