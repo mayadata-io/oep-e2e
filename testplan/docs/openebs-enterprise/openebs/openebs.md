@@ -56,7 +56,9 @@ As a DevOps admin, I would like to run soak tests against openebs on my kubernet
 | Workload          | Storage Engine    | Type | Replicas | Replication  | Instances |
 | ----------------- | ----------------- | ---- | -------- | -------------|---------- |
 | Kafka             | Local PV Hostpath | RWO  | 3        | Application  |  10       |
+| Kafka             | Local ZFS         | RWO  | 3        | Application  |  10       |
 | Cassandra         | Local PV Device   | RWO  | 3        | Application  |  10       |
+| Cassandra         | Local ZFS         | RWO  | 3        | Application  |  10       |
 | MySQL             | cStor             | RWO  | 3        | Storage      |  10       |
 | Percona           | Jiva              | RWO  | 3        | Storage      |  10       |
 | Wordpress (NFS)   | cStor             | RWX  | 3        | Storage      |  10       |
@@ -67,8 +69,10 @@ As a DevOps admin, I would like to run soak tests against openebs on my kubernet
 
 | TCID                                                               | GCP    | KONVOY |
 | ------------------------------------------------------------------ | ------ | ------ |
-| [TC-OEE-SOAK-KAFKA](TC-OEE-SOAK-KAFKA)                             |        |        |
-| [TC-OEE-SOAK-CASSANDRA](TC-OEE-SOAK-CASSANDRA)                     |        |        |
+| [TC-OEE-SOAK-KAFKA-LOCAL-HP](TC-OEE-SOAK-KAFKA-LOCAL-HP)           |        |        |
+| [TC-OEE-SOAK-KAFKA-LOCAL-ZFS](TC-OEE-SOAK-KAFKA-LOCAL-ZFS)         |        |        |
+| [TC-OEE-SOAK-CASSANDRA-LOCAL-DEV](TC-OEE-SOAK-CASSANDRA-LOCAL-DEV) |        |        |
+| [TC-OEE-SOAK-CASSANDRA-LOCAL-ZFS](TC-OEE-SOAK-CASSANDRA-LOCAL-ZFS) |        |        |
 | [TC-OEE-SOAK-MYSQL](TC-OEE-SOAK-MYSQL)                             |        |        |
 | [TC-OEE-SOAK-PERCONA](TC-OEE-SOAK-PERCONA)                         |        |        |
 | [TC-OEE-SOAK-WORDPRESS-CSTOR](TC-OEE-SOAK-WORDPRESS-CSTOR)         |        |        |
@@ -116,15 +120,17 @@ As a DevOps admin, I would like to run scalability tests against openebs on my k
 
 #### Test Case IDs
 
-| TCID                                                               | GCP    | KONVOY |
-| ------------------------------------------------------------------ | ------ | ------ |
-| [TC-OEE-SCALE-KAFKA](TC-OEE-SCALE-KAFKA)                           |        |        |
-| [TC-OEE-SCALE-CASSANDRA](TC-OEE-SCALE-CASSANDRA)                   |        |        |
-| [TC-OEE-SCALE-MYSQL](TC-OEE-SCALE-MYSQL)                           |        |        |
-| [TC-OEE-SCALE-PERCONA](TC-OEE-SCALE-PERCONA)                       |        |        |
-| [TC-OEE-SCALE-WORDPRESS-CSTOR](TC-OEE-SCALE-WORDPRESS-CSTOR)       |        |        |
-| [TC-OEE-SCALE-WORDPRESS-JIVA](TC-OEE-SCALE-WORDPRESS-JIVA)         |        |        |
-| [TC-OEE-SCALE-WORDPRESS-NGINX](TC-OEE-SCALE-WORDPRESS-NGINX)       |        |        |
+| TCID                                                                | AWS | KONVOY |
+| ------------------------------------------------------------------  | --- | ------ |
+| [TC-OEE-SCALE-KAFKA-LOCAL-HP](TC-OEE-SCALE-KAFKA-LOCAL-HP)          |     |        |
+| [TC-OEE-SCALE-KAFKA-LOCAL-ZFS](TC-OEE-SCALE-KAFKA-LOCAL-ZFS)        |     |        |
+| [TC-OEE-SCALE-CASSANDRA-LOCAL-DEV](TC-OEE-SCALE-CASSANDRA-LOCAL-DEV)|     |        |
+| [TC-OEE-SCALE-CASSANDRA-LOCAL-ZFS](TC-OEE-SCALE-CASSANDRA-LOCAL-ZFS)|     |        |
+| [TC-OEE-SCALE-MYSQL](TC-OEE-SCALE-MYSQL)                            |     |        |
+| [TC-OEE-SCALE-PERCONA](TC-OEE-SCALE-PERCONA)                        |     |        |
+| [TC-OEE-SCALE-WORDPRESS-CSTOR](TC-OEE-SCALE-WORDPRESS-CSTOR)        |     |        |
+| [TC-OEE-SCALE-WORDPRESS-JIVA](TC-OEE-SCALE-WORDPRESS-JIVA)          |     |        |
+| [TC-OEE-SCALE-WORDPRESS-NGINX](TC-OEE-SCALE-WORDPRESS-NGINX)        |     |        |
 
 
 ### Security Test Plans
@@ -144,7 +150,9 @@ As a DevOps admin, I would like to run scalability tests against openebs on my k
 | Abbreviation     | Details                                                        |
 | ---------------- | -------------------------------------------------------------- |
 | TC               | TestCase                                                       |
-| WORKLOAD         | A kubernetes cluster that runs continuously                    |
+| WORKLOAD CLUSTER | A kubernetes cluster that runs continuously                    |
 | OEE              | OpenEBS Enterprise Edition                                     |
 | OO               | OpenEBS Operator                                               |
+| LOCAL-DEV        | Local Device based Operator                                    |
+| LOCAL-HP         | Local HostPath based Operator                                  |
 
