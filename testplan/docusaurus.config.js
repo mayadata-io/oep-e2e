@@ -1,7 +1,7 @@
 module.exports = {
   title: 'OEP E2E',
   tagline: 'E2E testing for OEP',
-  url: 'https://ci.mayadata.io',
+  url: 'https://oep-pipelines.mayadata.io',
   baseUrl: '/',
   favicon: 'img/favicon.ico',
   organizationName: 'MayaData', // Usually your GitHub org/user name.
@@ -21,7 +21,7 @@ module.exports = {
           position: 'left',
         },
         {
-          href: 'https://ci.mayadata.io',
+          href: 'https://oep-pipelines.mayadata.io',
           label: 'E2E Pipelines',
           position: 'left',
         },
