@@ -93,7 +93,7 @@ class Cluster():
             os.system(yamlApply)
             print(f"Cluster {self.nameInit} is connecting...")
             # wait for cluster to be Active
-            timer = 3
+            timer = 5
             total_time = 0
             while not self.isActive():
                 if total_time >= 60:
