@@ -1,7 +1,7 @@
 ---
-id: TCID-OP-BD-IGNORE
-title: Ignore specific devices in a kubernetes cluster
-sidebar_label: TCID-OP-BD-IGNORE
+id: TCID-DIR-OP-BD-VIEW-TOGGLE
+title: View or ignore specific devices in a kubernetes cluster
+sidebar_label: TCID-DIR-OP-BD-VIEW-TOGGLE
 ---
 ------
 
@@ -14,9 +14,9 @@ sidebar_label: TCID-OP-BD-IGNORE
     <th> Description </th>
   </tr>
   <tr>
-    <td> TCID-OP-BD-IGNORE </td>
+    <td> TCID-DIR-OP-BD-VIEW-TOGGLE </td>
     <td> BlockDevice </td>
-    <td> Ignore specific devices in a kubernetes cluster </td>
+    <td> View or ignore specific devices in a kubernetes cluster </td>
   </tr>
 </table>
 
@@ -26,10 +26,12 @@ sidebar_label: TCID-OP-BD-IGNORE
 ### Steps
 - Install DirectorOnPrem _(DOP)_ on this K8s cluster
 - Install OpenEBS using DOP
-- Install OpenEBS on nodes meant for storage
+- OpenEBS should be installed on nodes meant for storage
+- OpenEBS should be updated to make use of new nodes for storage
 
 ### Expectations
 - Users should not be able to view devices that are not meant to be consumed for storage
+- Users should be able to view devices from nodes that are included as part of OpenEBS
 
 ### Notes to the Reviewer
 - This is a positive test case
