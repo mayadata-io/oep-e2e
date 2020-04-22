@@ -68,7 +68,7 @@ function Home() {
                 'button button--outline button--secondary button--lg',
                 styles.getStarted,
               )}
-                href="https://ci.mayadata.io"
+                href="https://oep-pipelines.mayadata.io"
               >
               E2E Pipelines
             </Link>
