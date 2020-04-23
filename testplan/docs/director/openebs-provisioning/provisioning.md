@@ -1,5 +1,5 @@
 ---
-id: plan
+id: provisioning
 title: OpenEBS Install, Upgrade & Provisioning
 sidebar_label: Test Strategy
 ---

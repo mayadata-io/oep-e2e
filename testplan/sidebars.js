@@ -6,7 +6,7 @@ module.exports = {
 		        type: 'category',
 		        label: 'Install and Upgrade',
 		        items: [
-				'director/installation/directorInstall',
+				'director/installation/installation',
 				'director/installation/tc-install-gpd-std',
 				'director/installation/tc-install-ssd-lpv',
 				'director/installation/tc-install-gpd-lpv',
@@ -54,7 +54,7 @@ module.exports = {
 		        type: 'category',
 		        label: 'OpenEBS Provisioning',
 		        items: [
-                		'director/openebs-provisioning/plan',
+                		'director/openebs-provisioning/provisioning',
 		                'director/openebs-provisioning/TCID-DIR-OP-BD-VIEW-ALL',
                 		'director/openebs-provisioning/TCID-DIR-OP-BD-VIEW-SCALE',
 		                'director/openebs-provisioning/TCID-DIR-OP-BD-VIEW-SCALE-RESTART',
