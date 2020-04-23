@@ -22,7 +22,7 @@
           shell: cat /etc/secret-volume/username
           register: username
 
-        ## Getting the password.stdout     
+        ## Getting the password   
         - name: Get password
           shell: cat /etc/secret-volume/password
           register: password
@@ -128,7 +128,7 @@
             status_code: 201
           register: device_recommendation
 
-        ## Create cstorPoolOperation
+        ## Create new cstor-pool operation by using device_recommendation
         - name: create cstorpooloperation
           uri: 
             url: '{{ director_url }}/v3/groups/{{ group_id }}/cstorpooloperations'
@@ -147,7 +147,7 @@
           set_fact:
             cstorpooloperation_id: "{{ cstorpooloperation.json.id }}"
 
-        ## Execute CStorPoolOpetation
+        ## Execute CStorPoolOpetation action to create cstor pool
         - name: Execute CStorPoolOpetation
           uri: 
             url: '{{ director_url }}/v3/groups/{{ group_id }}/cstorpooloperations/{{ cstorpooloperation_id }}/?action=execute'
