@@ -67,18 +67,13 @@
             node_id: "{{ node_id  + [item.id] }}"
           loop: "{{ node_details.json.data }}"
 
-        ## Removing the labels from the cluster nodes
-        - include_tasks: /utils/openebs-label-cleanup.yml
-
-        ## Removing application ns
-        - include_tasks: /utils/app-cleanup.yml
-
-        ## Deleting openebs from the cluster
-        - include_tasks: /utils/openebs-cleanup.yml
+        - name: Openebs cleanup and label cleanup
+          include_tasks: /utils/openebs-label-cleanup.yml
+          include_tasks: /utils/openebs-cleanup.yml
           vars:
             namespace: "{{ openebs_namespace.stdout }}"
-                  
-          
+          when: "count_maya_api.stdout == '1'"
+                    
         ## Fetch Project deatils
         - name: Fetch the project details
           uri:
