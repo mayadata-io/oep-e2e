@@ -1,21 +1,19 @@
 ---
-id: directorInstall
+id: installation
 title: Install and Upgrade of Director
 sidebar_label: Test Strategy
 ---
 ------
 
-This page captures the test scenarios for installation of Director OnPrem, upgrading Director OnPrem. 
+This page captures the test scenarios for installation of DirectorOnPrem _(DOP)_ & upgrading the same. 
 
-## Installation of Director OnPrem
+## DOP Install
 
-Testing does not cover the usability aspects of Director OnPrem. It covers the installation scenarios under various combinations storage classes, different platforms, different network plugins and different resource constraints.
-
-
+This test strategy covers installation scenarios using various storage classes, different platforms, different network plugins and different resource constraints.
 
 ### Installation test strategy or scenarios
 
-Director has three databases : mysql for user data, Cassandra for monitoring and alert metrics and ElasticsearchDB for logs. Director needs to be tested with various combinations of storage and resources for these databases
+Director uses three different databases. It uses `MySQL` for user data, `Cassandra` for monitoring and alerts and `ElasticsearchDB` for logs. Director needs to be tested with various combinations of storages for these databases.
 
 - Install Director with all three databases as LocalPV with GPD/EBS underneath.
 - Install Director with all three databases as OpenEBS LocalPV with local SSDs underneath.
