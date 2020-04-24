@@ -80,7 +80,7 @@
             force_basic_auth: yes
             body_format: json
             body: '{"clusterId":"{{ cluster_id }}", "deviceGroupName": null,"poolCapacity":"1G","poolName":null, "raidGroupConfig":{"groupDeviceCount":1, "raidType":"stripe"}}'
-            status_code: 201
+            status_code: 200
           register: device_recommendation
 
         ## Create cstorPoolOperation
@@ -94,7 +94,7 @@
             force_basic_auth: yes
             body_format: json
             body: '{"clusterId":"{{ cluster_id }}", "input":"{{ device_recommendation.json.data[0] }}", "kind":"CreateCStorPoolCluster"}'
-            status_code: 201
+            status_code: 200
           register: cstorpooloperation
 
         ## Fetching cstorpooloperation id
@@ -113,7 +113,7 @@
             force_basic_auth: yes
             body_format: json
             body: '{}'
-            status_code: 201
+            status_code: 200
           register: cstorpooloperation
         
         ## Wait for cstorpooloperation to get completed
