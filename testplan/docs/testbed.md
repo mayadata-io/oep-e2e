@@ -23,15 +23,15 @@ There are dedicated clusters for various kubernetes platforms.
 
 ### OnPrem-Rancher
 
-| Cluster| Master               | Worker Nodes                       | Notes                   |
-| -------| -------------------  | -------------------------          | ----------------------  |
-| Ran-C1 | 1 Node, 16GB, 2 vCPU | 3 nodes x 16GB 4 vCPU              | DOP                     |
-| Ran-C2 | 1 Node, 16GB, 2 vCPU | 5 nodes x 32GB 8CPU, 6x100GB Disks | OpenEBS via DOP         |
-| Ran-C3 | 1 Node, 16GB, 2 vCPU | 3 nodes x 16GB 8CPU, 3x100GB Disks | OpenEBS via Helm        |
-| Ran-C4 | 1 Node, 16GB, 2 vCPU | 1 node 16GB 2 vCPU                 | DOP Upgrade             |
-| Ran-C5 | 1 Node, 16GB, 2 vCPU | 3 nodes x 32GB 2CPU, 3x100GB Disks | OpenEBS Upgrade via DOP |
-| Ran-C6 | 1 Node, 16GB, 2 vCPU | 3 nodes x 16GB 2CPU, 3x100GB Disks | OpenEBS Upgrade via Helm|
-| Ran-C7 | 1 Node, 32GB, 4 vCPU | 10 nodes x 32GB 6vCPU, 6x100GB SSDs| SOAK cluster via Helm   |
+| Cluster | Master               | Worker Nodes                                                 | Notes                    |
+| ------- | -------------------- | ------------------------------------------------------------ | ------------------------ |
+| Ran-C1  | 1 Node, 16GB, 2 vCPU | 3 nodes x 16GB 4 vCPU                                        | DOP                      |
+| Ran-C2  | 1 Node, 16GB, 2 vCPU | 5 nodes x 32GB 8CPU, 1x100GB Disks for OS.                        Node1, Node2 and Node3 each of them will have additional disks 13*20GB Disks | OpenEBS via DOP          |
+| Ran-C3  | 1 Node, 16GB, 2 vCPU | 5 nodes x 32GB 8CPU, 1x100GB Disks for OS.                        Node1, Node2 and Node3 each of them will have additional disks 13*20GB Disks | OpenEBS via Helm         |
+| Ran-C4  | 1 Node, 16GB, 2 vCPU | 1 node 16GB 2 vCPU                                           | DOP Upgrade              |
+| Ran-C5  | 1 Node, 16GB, 2 vCPU | 5 nodes x 32GB 8CPU, 1x100GB Disks for OS.                        Node1, Node2 and Node3 each of them will have additional disks 13*20GB Disks | OpenEBS Upgrade via DOP  |
+| Ran-C6  | 1 Node, 16GB, 2 vCPU | 5 nodes x 32GB 8CPU, 1x100GB Disks for OS.                        Node1, Node2 and Node3 each of them will have additional disks 13*20GB Disks | OpenEBS Upgrade via Helm |
+| Ran-C7  | 1 Node, 32GB, 4 vCPU | 10 nodes x 32GB 6vCPU, 6x100GB SSDs                          | SOAK cluster via Helm    |
 
 **NOTE**: Either _C1, C2, & C3_ clusters  or _C4,C5, & C6_ clusters will be running at any point of time. 
 **NOTE**: SOAK cluster is also known as WORKLOAD cluster
@@ -41,16 +41,16 @@ There are dedicated clusters for various kubernetes platforms.
 
 AWS platform will be deployed on managed kubernetes
 
-| Cluster| Master  | Worker Nodes                                  | Notes                    |
-| ------ | ------- | --------------------------------------------- | --------------------     |
-| AWS-C1 | Managed | 1 Node 16GB 2 vCPU                            | DOP                      |
-| AWS-C2 | Managed | 3 Nodes x 16GB 2CPU, 3x100GB EBS SSDs         | OpenEBS via DOP          |
-| AWS-C3 | Managed | 1 Node 16GB 2 vCPU                            | DOP Upgrade              |
-| AWS-C4 | Managed | 3 Nodes x 16GB 2CPU, 3x100GB EBS SSDs         | OpenEBS Upgrade via Helm |
+| Cluster | Nodes                                                        | Notes                    |
+| ------- | ------------------------------------------------------------ | ------------------------ |
+| AWS-C1  | 3 Nodes, 16GB  4vCPU each node                               | DOP                      |
+| AWS-C2  | 3 Nodes,  16GB 4CPU, 3x100GB EBS SSDs,  6x20GB EBS Disks  in each node | OpenEBS via DOP          |
+| AWS-C3  | 3 Node, 16GB  4vCPU each node                                | DOP Upgrade              |
+| AWS-C4  | 3 Nodes, 16GB 4CPU, 3x100GB EBS SSDs,  6x20GB EBS Disks in each node | OpenEBS Upgrade via Helm |
 
 **Note** Either _C1 & C2_ clusters  or _C4 & C5_ clusters will be running at any point of time. 
 
 ## Implementation Phase
 
-As mentioned in [Pipeline](/docs/gitlabstages#implementation-phase)
+As mentioned in [Pipeline](/docs/pipelines#implementation-phase)
 
