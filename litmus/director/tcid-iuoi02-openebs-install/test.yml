@@ -236,7 +236,23 @@
             retries: 30
 
           when: openebses_active.json.data == []
-    
+
+        ## Fetch openebs install details
+        - name: Fetch openebs install details
+            uri:
+              url: "{{ director_url }}/v3/groups/{{ group_id}}/openebs?clusterId={{ cluster_id }}"
+              method: GET
+              url_username: "{{ username.stdout }}"
+              url_password: "{{ password.stdout }}"
+              force_basic_auth: yes
+              return_content: yes
+              body_format: json
+              status_code: 200
+            register: openebs_job_info
+            until: "openebs_job_info.json.data != []"
+            delay: 5
+            retries: 30
+   
         ## Setting flag as Pass
         - set_fact:
             flag: "Pass"
