@@ -135,7 +135,7 @@
           register: cstorpooloperation_state
           until: "cstorpooloperation_state.json.state == 'Success'"
           delay: 10
-          retries: 30
+          retries: 40
 
         ## Setting flag as Pass
         - set_fact:
