@@ -101,7 +101,7 @@
             return_content: yes
             force_basic_auth: yes
             body_format: json
-            body: '{"clusterId":"{{ cluster_id }}", "input":"{{ device_recommendation.json.data[0] }}", "kind":"CreateCStorPoolCluster"}'
+            body: '{"clusterId":"{{ cluster_id }}", "input":"{{ device_recommendation.json.data[0] | from_json }}", "kind":"CreateCStorPoolCluster"}'
             status_code: 200,201,202
           register: cstorpooloperation
 
