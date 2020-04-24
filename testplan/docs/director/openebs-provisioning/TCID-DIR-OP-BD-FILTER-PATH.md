@@ -1,7 +1,7 @@
 ---
-id: TCID-OP-BD-VIEW-ALL
-title: View devices across the kubernetes cluster
-sidebar_label: TCID-OP-BD-VIEW-ALL
+id: TCID-DIR-OP-BD-FILTER-PATH
+title: View devices at specific paths in a kubernetes cluster
+sidebar_label: TCID-DIR-OP-BD-FILTER-PATH
 ---
 ------
 
@@ -14,9 +14,9 @@ sidebar_label: TCID-OP-BD-VIEW-ALL
     <th> Description </th>
   </tr>
   <tr>
-    <td> TCID-OP-BD-VIEW-ALL </td>
+    <td> TCID-DIR-OP-BD-FILTER-PATH </td>
     <td> BlockDevice </td>
-    <td> View all available devices across the kubernetes cluster </td>
+    <td> View devices at specific path in a kubernetes cluster </td>
   </tr>
 </table>
 
@@ -26,13 +26,14 @@ sidebar_label: TCID-OP-BD-VIEW-ALL
 ### Steps
 - Install DirectorOnPrem _(DOP)_ on this K8s cluster
 - Install OpenEBS using DOP
+- Install OpenEBS on nodes meant for storage
+- Set OpenEBS to discover devices at specific paths
 
 ### Expectations
-- Users should be able to list devices attached to this K8s cluster
-- Users should be able to categorize device types e.g. HDD, SSD, etc
+- Users should be able to view devices at specific paths
 
 ### Notes to the Reviewer
-- This is a postive test case
+- This is a positive test case
 - Recent versions of K8s & DOP needs to be used
 
 ### Test Results

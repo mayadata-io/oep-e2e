@@ -56,7 +56,9 @@ As a DevOps admin, I would like to run soak tests against openebs on my kubernet
 | Workload          | Storage Engine    | Type | Replicas | Replication  | Instances |
 | ----------------- | ----------------- | ---- | -------- | -------------|---------- |
 | Kafka             | Local PV Hostpath | RWO  | 3        | Application  |  10       |
+| Kafka             | Local ZFS         | RWO  | 3        | Application  |  10       |
 | Cassandra         | Local PV Device   | RWO  | 3        | Application  |  10       |
+| Cassandra         | Local ZFS         | RWO  | 3        | Application  |  10       |
 | MySQL             | cStor             | RWO  | 3        | Storage      |  10       |
 | Percona           | Jiva              | RWO  | 3        | Storage      |  10       |
 | Wordpress (NFS)   | cStor             | RWX  | 3        | Storage      |  10       |
@@ -67,8 +69,10 @@ As a DevOps admin, I would like to run soak tests against openebs on my kubernet
 
 | TCID                                                               | GCP    | KONVOY |
 | ------------------------------------------------------------------ | ------ | ------ |
-| [TC-OEE-SOAK-KAFKA](TC-OEE-SOAK-KAFKA)                             |        |        |
-| [TC-OEE-SOAK-CASSANDRA](TC-OEE-SOAK-CASSANDRA)                     |        |        |
+| [TC-OEE-SOAK-KAFKA-LOCAL-HP](TC-OEE-SOAK-KAFKA-LOCAL-HP)           |        |        |
+| [TC-OEE-SOAK-KAFKA-LOCAL-ZFS](TC-OEE-SOAK-KAFKA-LOCAL-ZFS)         |        |        |
+| [TC-OEE-SOAK-CASSANDRA-LOCAL-DEV](TC-OEE-SOAK-CASSANDRA-LOCAL-DEV) |        |        |
+| [TC-OEE-SOAK-CASSANDRA-LOCAL-ZFS](TC-OEE-SOAK-CASSANDRA-LOCAL-ZFS) |        |        |
 | [TC-OEE-SOAK-MYSQL](TC-OEE-SOAK-MYSQL)                             |        |        |
 | [TC-OEE-SOAK-PERCONA](TC-OEE-SOAK-PERCONA)                         |        |        |
 | [TC-OEE-SOAK-WORDPRESS-CSTOR](TC-OEE-SOAK-WORDPRESS-CSTOR)         |        |        |
@@ -81,40 +85,52 @@ As a DevOps admin, I would like to run scalability tests against openebs on my k
 
 - Tests to be performed on kubernetes cluster with enough resources
 - Tests will involve ramping up of stateful applications consuming openebs volumes
-    - Applications will be ramped up from 0 till 100
+    - Applications will be ramped up from **0** till **200**
     - Ramp count can be 10 i.e. 10 applications will be created simultaneously
     - Application specific loads will be run against each for 60 minutes
-    - Creation & other valid metrics will be captured
+    - Creation metrics will be captured
+    - Application metrics will be captured
+    - Volume metrics will be captured
     - Deviation of metrics will be reported as warnings or errors
 - Tests will involve ramping down of these stateful applications
-    - Number of applications will be ramped down from 100 to 0
+    - Number of applications will be ramped down from 200 to 0
     - Ramp down count can be 10 i.e. 10 applications will be deleted simultaneously
-    - Deletion & other valid metrics will be captured
+    - Deletion metrics will be captured
+    - Application metrics will be captured
+    - Volume metrics will be captured
     - Deviation of metrics will be reported as warnings or errors
 
 #### Tabular representation
 
 | Workload          | Storage Engine    | Type | Replicas | Min  | Max |
 | ----------------- | ----------------- | ---- | -------- | ---- | --- |
-| Kafka             | Local PV Hostpath | RWO  | 3        | 0    | 100 |
-| Cassandra         | Local PV Device   | RWO  | 3        | 0    | 100 |
-| MySQL             | cStor             | RWO  | 3        | 0    | 100 |
-| Percona           | Jiva              | RWO  | 3        | 0    | 100 |
-| Wordpress (NFS)   | cStor             | RWX  | 3        | 0    | 100 |
-| Wordpress (NFS)   | Jiva              | RWX  | 3        | 0    | 100 |
-| NGNIX (Webserver) | cStor             | ROX  | 3        | 0    | 100 |
+| Kafka             | Local PV Hostpath | RWO  | 3        | 0    | 200 |
+| Kafka             | Local ZFS         | RWO  | 3        | 0    | 200 |
+| Cassandra         | Local PV Device   | RWO  | 3        | 0    | 200 |
+| Cassandra         | Local ZFS         | RWO  | 3        | 0    | 200 |
+| MySQL             | cStor             | RWO  | 3        | 0    | 200 |
+| Percona           | Jiva              | RWO  | 3        | 0    | 200 |
+| Wordpress (NFS)   | cStor             | RWX  | 3        | 0    | 200 |
+| Wordpress (NFS)   | Jiva              | RWX  | 3        | 0    | 200 |
+| NGNIX (Webserver) | cStor             | ROX  | 3        | 0    | 200 |
+
+#### References
+
+- https://github.com/openebs/zfs-localpv/labels/scalability
 
 #### Test Case IDs
 
-| TCID                                                               | GCP    | KONVOY |
-| ------------------------------------------------------------------ | ------ | ------ |
-| [TC-OEE-SCALE-KAFKA](TC-OEE-SCALE-KAFKA)                           |        |        |
-| [TC-OEE-SCALE-CASSANDRA](TC-OEE-SCALE-CASSANDRA)                   |        |        |
-| [TC-OEE-SCALE-MYSQL](TC-OEE-SCALE-MYSQL)                           |        |        |
-| [TC-OEE-SCALE-PERCONA](TC-OEE-SCALE-PERCONA)                       |        |        |
-| [TC-OEE-SCALE-WORDPRESS-CSTOR](TC-OEE-SCALE-WORDPRESS-CSTOR)       |        |        |
-| [TC-OEE-SCALE-WORDPRESS-JIVA](TC-OEE-SCALE-WORDPRESS-JIVA)         |        |        |
-| [TC-OEE-SCALE-WORDPRESS-NGINX](TC-OEE-SCALE-WORDPRESS-NGINX)       |        |        |
+| TCID                                                                | AWS | KONVOY |
+| ------------------------------------------------------------------  | --- | ------ |
+| [TC-OEE-SCALE-KAFKA-LOCAL-HP](TC-OEE-SCALE-KAFKA-LOCAL-HP)          |     |        |
+| [TC-OEE-SCALE-KAFKA-LOCAL-ZFS](TC-OEE-SCALE-KAFKA-LOCAL-ZFS)        |     |        |
+| [TC-OEE-SCALE-CASSANDRA-LOCAL-DEV](TC-OEE-SCALE-CASSANDRA-LOCAL-DEV)|     |        |
+| [TC-OEE-SCALE-CASSANDRA-LOCAL-ZFS](TC-OEE-SCALE-CASSANDRA-LOCAL-ZFS)|     |        |
+| [TC-OEE-SCALE-MYSQL](TC-OEE-SCALE-MYSQL)                            |     |        |
+| [TC-OEE-SCALE-PERCONA](TC-OEE-SCALE-PERCONA)                        |     |        |
+| [TC-OEE-SCALE-WORDPRESS-CSTOR](TC-OEE-SCALE-WORDPRESS-CSTOR)        |     |        |
+| [TC-OEE-SCALE-WORDPRESS-JIVA](TC-OEE-SCALE-WORDPRESS-JIVA)          |     |        |
+| [TC-OEE-SCALE-WORDPRESS-NGINX](TC-OEE-SCALE-WORDPRESS-NGINX)        |     |        |
 
 
 ### Security Test Plans
@@ -134,7 +150,9 @@ As a DevOps admin, I would like to run scalability tests against openebs on my k
 | Abbreviation     | Details                                                        |
 | ---------------- | -------------------------------------------------------------- |
 | TC               | TestCase                                                       |
-| WORKLOAD         | A kubernetes cluster that runs continuously                    |
+| WORKLOAD CLUSTER | A kubernetes cluster that runs continuously                    |
 | OEE              | OpenEBS Enterprise Edition                                     |
 | OO               | OpenEBS Operator                                               |
+| LOCAL-DEV        | Local Device based Operator                                    |
+| LOCAL-HP         | Local HostPath based Operator                                  |
 

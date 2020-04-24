@@ -1,7 +1,7 @@
 ---
-id: TCID-OP-CSP-REC-LIST
-title: List cstor pool recommendations
-sidebar_label: TCID-OP-CSP-REC-LIST
+id: TCID-DIR-OP-CSP-REC-LIST-STRIPE
+title: List stripe based cstor pool recommendations
+sidebar_label: TCID-DIR-OP-CSP-REC-LIST-STRIPE
 ---
 ------
 
@@ -14,9 +14,9 @@ sidebar_label: TCID-OP-CSP-REC-LIST
     <th> Description </th>
   </tr>
   <tr>
-    <td> TCID-OP-CSP-REC-LIST </td>
+    <td> TCID-DIR-OP-CSP-REC-LIST-STRIPE </td>
     <td> CStorPool Recommendation </td>
-    <td> List Verification </td>
+    <td> Verify List of Stripe Recommendations </td>
   </tr>
 </table>
 
@@ -34,9 +34,8 @@ sidebar_label: TCID-OP-CSP-REC-LIST
 - Invoke API to list recommendations
 - Invoke API to get capacity based recommendations
 - Invoke API to get device based recommendations
+- Invoke API to get stripe based cstor pool recommendations
 
 ### Expected output
 
-- Director should list the supported recommendations
-- Director should list the capacity based recommendations
-- Director should list the device based recommendations
+- Director should list stripe based cstor pool recommendations

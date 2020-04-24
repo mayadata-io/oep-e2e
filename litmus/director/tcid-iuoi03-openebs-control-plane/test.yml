@@ -44,6 +44,29 @@
           set_fact:
             project_id: "{{ project_details.json.data[0].id }}"
 
+        ## Checking if openebs is already installed in the cluster
+        - name: Check if openebs is already installed
+          shell: kubectl get deploy --all-namespaces -l name=maya-apiserver --no-headers | awk '{print $1}' | wc -l
+          args:
+            executable: /bin/bash
+          register: count_maya_api
+
+        ## If openebs is installed in the cluster then get the namespace
+        - name: Getting the namespace where openebs is installed 
+          shell: kubectl get deploy --all-namespaces -l name=maya-apiserver --no-headers | awk '{print $1}'
+          args:
+            executable: /bin/bash
+          register: openebs_namespace
+          when: "count_maya_api.stdout == '1'"
+
+        ## Removing the labels from the cluster nodes
+        - include_tasks: /utils/openebs-label-cleanup.yml
+
+        ## Deleting openebs from the cluster
+        - include_tasks: /utils/openebs-cleanup.yml
+          vars:
+            namespace: "{{ openebs_namespace.stdout }}"
+
         ## Getting node details of the cluster
         ## Selecting the node which is in active state in the cluster
         - name: Getting the node details of the cluster which is in active state
