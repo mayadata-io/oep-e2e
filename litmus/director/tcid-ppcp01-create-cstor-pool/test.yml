@@ -69,6 +69,11 @@
             status_code: 201
           register: recommendation_list
 
+        ## Fetch the deviceGroupName
+        - name: Fetch the deviceGroupName
+          set_fact:
+            device_groupName: "{{ recommendation_list.json.data[0].deviceGroupName }}"
+
         ## List Recommendations
         - name: List Recommendations
           uri:
@@ -79,7 +84,7 @@
             return_content: yes
             force_basic_auth: yes
             body_format: json
-            body: '{"clusterId":"{{ cluster_id }}", "deviceGroupName": null,"poolCapacity":"1G","poolName":null, "raidGroupConfig":{"groupDeviceCount":1, "raidType":"stripe"}}'
+            body: '{"clusterId":"{{ cluster_id }}", "deviceGroupName":"{{ device_groupName }}","poolCapacity":"1G","poolName":"rec-create-test", "raidGroupConfig":{"groupDeviceCount":1, "raidType":"stripe"}}'
             status_code: 201
           register: device_recommendation
 
