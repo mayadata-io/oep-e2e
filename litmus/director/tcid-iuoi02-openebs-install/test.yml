@@ -252,6 +252,9 @@
           until: "openebs_job_info.json.data != []"
           delay: 5
           retries: 30
+
+        - pause:
+            minutes: 2
    
         ## Setting flag as Pass
         - set_fact:
