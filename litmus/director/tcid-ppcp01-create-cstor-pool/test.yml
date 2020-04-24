@@ -36,51 +36,6 @@
             - "{{ openebs_components }}"
           retries: 20
           delay: 5
-
-        ## Get application pool health status for replica-1
-        - name: Get application pool health status for replica-1
-          uri:
-            url: '{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayastoragepools'
-            method: GET
-            url_username: '{{ username.stdout }}'
-            url_password: '{{ password.stdout }}'
-            return_content: yes
-            force_basic_auth: yes
-            body_format: json
-          register: pool_health
-          until: "pool_health.json.data[0].data.pods[0].state=='Running'"
-          retries: 20
-          delay: 2
-        
-        ## Get application pool health status for replica-2
-        - name: Get application pool health status for replica-2
-          uri:
-            url: '{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayastoragepools'
-            method: GET
-            url_username: '{{ username.stdout }}'
-            url_password: '{{ password.stdout }}'
-            return_content: yes
-            force_basic_auth: yes
-            body_format: json
-          register: pool_health
-          until: "pool_health.json.data[1].data.pods[0].state=='Running'"
-          retries: 20
-          delay: 2
-
-        ## Get application pool health status for replica-3
-        - name: Get application pool health status for replica-3
-          uri:
-            url: '{{ director_url }}/v3/groups/{{ group_id }}/clusters/{{ cluster_id }}/mayastoragepools'
-            method: GET
-            url_username: '{{ username.stdout }}'
-            url_password: '{{ password.stdout }}'
-            return_content: yes
-            force_basic_auth: yes
-            body_format: json
-          register: pool_health
-          until: "pool_health.json.data[2].data.pods[0].state=='Running'"
-          retries: 20
-          delay: 2
         
         ## Fetch the recommendation details
         - name: Fetch recommendations details
@@ -103,7 +58,7 @@
         ## List Recommendations
         - name: List Recommendations
           uri:
-            url: '{{ director_url }}/v3/groups/{{ group_id }}/{{ recommendation_id }}/?action=getcapacityrecommendation'
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/recommendations/{{ recommendation_id }}/?action=getcapacityrecommendation'
             method: POST
             url_username: '{{ username.stdout }}'
             url_password: '{{ password.stdout }}'
@@ -117,7 +72,7 @@
         ## List Recommendations
         - name: List Recommendations
           uri:
-            url: '{{ director_url }}/v3/groups/{{ group_id }}/{{ recommendation_id }}/?action=getdevicerecommendation'
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/recommendations/{{ recommendation_id }}/?action=getdevicerecommendation'
             method: POST
             url_username: '{{ username.stdout }}'
             url_password: '{{ password.stdout }}'

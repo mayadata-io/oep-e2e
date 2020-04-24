@@ -9,7 +9,7 @@ spec:
     metadata:
       name: litmus
       labels:
-        app: create-cstor-pool-
+        app: create-cstor-pool
     spec:
       serviceAccountName: litmus
       restartPolicy: Never
