@@ -65,7 +65,7 @@
             return_content: yes
             force_basic_auth: yes
             body_format: json
-            body: '{"clusterId":"{{ cluster_id }}", "raidGroupConfig":{"groupDeviceCount":1, "type":"stripe"}}'
+            body: '{"clusterId":"{{ cluster_id }}", "raidGroupConfig":{"groupDeviceCount":1, "raidType":"stripe"}}'
             status_code: 201
           register: recommendation_list
 
@@ -79,7 +79,7 @@
             return_content: yes
             force_basic_auth: yes
             body_format: json
-            body: '{"clusterId":"{{ cluster_id }}", "deviceGroupName": null,"poolCapacity":"1G","poolName":null, "raidGroupConfig":{"groupDeviceCount":1, "type":"stripe"}}'
+            body: '{"clusterId":"{{ cluster_id }}", "deviceGroupName": null,"poolCapacity":"1G","poolName":null, "raidGroupConfig":{"groupDeviceCount":1, "raidType":"stripe"}}'
             status_code: 201
           register: device_recommendation
 
