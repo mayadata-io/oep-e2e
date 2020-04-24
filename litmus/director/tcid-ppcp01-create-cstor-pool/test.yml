@@ -47,7 +47,7 @@
             force_basic_auth: yes
             return_content: yes
             body_format: json
-            status_code: 200
+            status_code: 200,201,202
           register: recommendations
         
         ## Fetch the recommendation id 
@@ -66,7 +66,7 @@
             force_basic_auth: yes
             body_format: json
             body: '{"clusterId":"{{ cluster_id }}", "raidGroupConfig":{"groupDeviceCount":1, "raidType":"stripe"}}'
-            status_code: 200
+            status_code: 200,201,202
           register: recommendation_list
 
         ## Fetch the deviceGroupName
@@ -85,7 +85,7 @@
             force_basic_auth: yes
             body_format: json
             body: '{"clusterId":"{{ cluster_id }}", "deviceGroupName":"{{ device_groupName }}","poolCapacity":"1G","poolName":"rec-create-test", "raidGroupConfig":{"groupDeviceCount":1, "raidType":"stripe"}}'
-            status_code: 200
+            status_code: 200,201,202
           register: device_recommendation
 
         ## Create cstorPoolOperation
@@ -99,7 +99,7 @@
             force_basic_auth: yes
             body_format: json
             body: '{"clusterId":"{{ cluster_id }}", "input":"{{ device_recommendation.json.data[0] }}", "kind":"CreateCStorPoolCluster"}'
-            status_code: 200
+            status_code: 200,201,202
           register: cstorpooloperation
 
         ## Fetching cstorpooloperation id
@@ -118,7 +118,7 @@
             force_basic_auth: yes
             body_format: json
             body: '{}'
-            status_code: 200
+            status_code: 200,201,202
           register: cstorpooloperation
         
         ## Wait for cstorpooloperation to get completed
@@ -131,7 +131,7 @@
             return_content: yes
             force_basic_auth: yes
             body_format: json
-            status_code: 200
+            status_code: 200,201,202
           register: cstorpooloperation_state
           until: "cstorpooloperation_state.json.state == 'Success'"
           delay: 10
