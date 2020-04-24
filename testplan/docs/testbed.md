@@ -51,8 +51,3 @@ AWS platform will be deployed on managed kubernetes
 | AWS-C6  | 4 Nodes,  16GB 4CPU, 9x20GB EBS Disks  in each node | OpenEBS Upgrade via Helm |
 
 **Note** Either _C1 ,C2,C3_ clusters  or _C4 ,C5,C6_ clusters will be running at any point of time. 
-
-## Implementation Phase
-
-As mentioned in [Pipeline](/docs/pipelines#implementation-phase)
-
