@@ -9,6 +9,30 @@ sidebar_label: Test Strategy
 
 Data Management as a Service provides backup & restore options to stateful applications.
 
+### DMAAS -- TCID-DIR-DMAAS-MYSQL
+As a DevOps admin, I manage MYSQL statefulset applications. These applications have a dependency on configmap. Both application as well as configmap reside in their specific namespace. I would like to have continuity plans for these applications. I want to take backup on a periodic basis & restore them optionally to verify if these backups are valid. I would like to maintain the count of backups so that these backups donot fill up the storage. I would like to store these backups at my desired S3 location.
+
+| TCID                                             |  GCP  |  KONVOY | AWS |
+| ------------------------------------------------ |  ---- |  ------ | --- |
+| [TCID-DIR-DMAAS-MYSQL](TCID-DIR-DMAAS-MYSQL)     |       |         |     |
+
+
+### DMASS -- TCID-DIR-DMAAS-CORTEX
+As a DevOps admin, I manage cortex application. Cortex has a dependency on cassandra. I would like to have continuity plans for this application. I want to take on demand backup(s) of cortex & cassandra including their configuration & volumes. I want to restore the backup to verify before uploading the same to S3. I would like to be notified if my S3 location has enough space to accomodate new backups.
+
+| TCID                                             |  GCP  |  KONVOY | AWS |
+| ------------------------------------------------ |  ---- |  ------ | --- |
+| [TCID-DIR-DMAAS-CORTEX](TCID-DIR-DMAAS-CORTEX)   |       |         |     |
+
+
+### DMASS -- TCID-DIR-DMAAS-PORTAL
+As a DevOps admin, I manage a portal which in turn is a suite of applications that includes multiple kubernetes deployments, statefulsets, configurations, serviceaccounts, secrets, custom resources & volumes. I would like to take periodic backups of this portal except a few resources namely nginx-controller deployment & ingress resources. I want these backups to be uploaded to multiple S3 locations. As part of the business continuity plan, I want to verify particular backups on an on-demand basis by restoring this portal on a different cluster & verifying its state.
+
+| TCID                                             |  GCP  |  KONVOY | AWS |
+| ------------------------------------------------ |  ---- |  ------ | --- |
+| [TCID-DIR-DMAAS-PORTAL](TCID-DIR-DMAAS-PORTAL)   |       |         |     |
+
+
 ### DMAAS Scheduling -- TCID-DIR-DMAAS-SCHD
 As a DevOps admin, I want Director to provide a backup & restore option for my teams to self manage their k8s application continuity plans. I would expect my teams to have the ability to configure backup & restore similar to the following steps:
 
@@ -56,6 +80,9 @@ This strategy is a continuation of above TCID-DMAAS-SCHD test strategy. As a Dev
 - view the S3 usage on a per team basis
 - view connectivity to backup as well as restore cluster
 
+| TCID                                                          |  GCP  | KONVOY  | AWS |
+| ------------------------------------------------------------- |  ---- | ------- | ----|
+| [TCID-DIR-DMAAS-SCHD-MONITOR](TCID-DIR-DMAAS-SCHD-MONITOR)    |       |         |     |
 
 ### Glossary
 
