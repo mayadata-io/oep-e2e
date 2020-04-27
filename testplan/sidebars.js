@@ -28,7 +28,7 @@ module.exports = {
 		        type: 'category',
 		        label: 'Authentication',
 		        items: [
-				'director/authentication/directorAuth',
+				'director/authentication/authentication',
 				'director/authentication/tc-auth-la-admin',
 				'director/authentication/tc-auth-la-user',
 				'director/authentication/tc-auth-la-signup',
