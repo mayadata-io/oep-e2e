@@ -33,6 +33,21 @@ As a DevOps admin, I manage a portal which in turn is a suite of applications th
 | [TCID-DIR-DMAAS-PORTAL](TCID-DIR-DMAAS-PORTAL)   |       |         |     |
 
 
+### DMASS -- TCID-DIR-DMAAS-PSP
+As a DevOps admin, I manage multiple kubernetes applications. I have an extensive set of PodSecurityPolicies that govern the infrastructure policies in the cluster. I would like to take periodic backups these pod security policies and upload them to S3. As part of the my need to let all kubernetes clusters follow the same governance rules, I want to restore these pod security policies across other clusters.
+
+| TCID                                             |  GCP  |  KONVOY | AWS |
+| ------------------------------------------------ |  ---- |  ------ | --- |
+| [TCID-DIR-DMAAS-PSP](TCID-DIR-DMAAS-PSP)         |       |         |     |
+
+### DMASS -- TCID-DIR-DMAAS-EXCLUDE-SECRET
+As a DevOps admin, I manage multiple kubernetes clusters. Each of these clusters cater to different lines of businesses. Any particular team's role vary depending on the cluster. As part of business continuity plans that adhere to above security need, I want to exclude backing up secrets. In other words, **no** secrets should get uploaded to S3.
+
+| TCID                                                            |  GCP  |  KONVOY | AWS |
+| --------------------------------------------------------------- |  ---- |  ------ | --- |
+| [TCID-DIR-DMAAS-EXCLUDE-SECRET](TCID-DIR-DMAAS-EXCLUDE-SECRET)  |       |         |     |
+
+
 ### DMAAS Scheduling -- TCID-DIR-DMAAS-SCHD
 As a DevOps admin, I want Director to provide a backup & restore option for my teams to self manage their k8s application continuity plans. I would expect my teams to have the ability to configure backup & restore similar to the following steps:
 
