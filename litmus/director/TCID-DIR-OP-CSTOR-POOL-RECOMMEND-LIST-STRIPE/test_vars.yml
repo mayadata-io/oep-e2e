@@ -1,4 +1,4 @@
-test_name: device-recommendations
+test_name: list-recommendations-stripe
 openebs_components:
   [
     'openebs-provisioner',

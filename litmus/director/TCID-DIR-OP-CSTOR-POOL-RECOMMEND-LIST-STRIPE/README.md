@@ -1,7 +1,7 @@
-# List cstor pool recommendations without NDM
+# List the device recommendations
 
-<b>tcid:</b> TCID-DIR-OP-CSP-REC-LIST-NO-NDM <br>
-<b>name:</b> "List cstor pool recommendations without NDM"<br>
+<b>tcid:</b> TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-STRIPE <br>
+<b>name:</b> "List stripe based cstor pool recommendations"<br>
 
 
 ## Experiment Metadata
@@ -14,33 +14,33 @@
   </tr>
   <tr>
     <td> Cstor Pool Recommendation </td>
-    <td> List cstor pool recommendations without NDM </td>
+    <td> List stripe based cstor pool recommendations </td>
     <td> GKE </td>
   </tr>
 </table>
 
 ## Prerequisites
 
-- Cluster create setup should be done
-- DOP should be installed
-- NDM should not be running
+- Along with k8s, Litmus should be installed in the cluster.
+- Every component of DOP cluster should be healthy and running.
+- Ensure that the `openebs data plane and control plane components` are available in the cluster.
 
 ## Details
 
+- This test case is to list stripe based recommendations of cstorpools.
 - Director version 1.9 onwards
-- Negative test case
+- Positive test case
 
 ## Steps Performed in the test
 
 - Invoke API to list recommendations
 - Invoke API to get capacity based recommendations
 - Invoke API to get device based recommendations
+- Invoke API to get stripe based cstor pool recommendations
 
 ### Expected output
 
-- Director should list the supported recommendations without error
-- Director should list the capacity based recommendations without error
-- Director should list the device based recommendations without error
+- Director should list stripe based cstor pool recommendations
 
 ## Integrations
 

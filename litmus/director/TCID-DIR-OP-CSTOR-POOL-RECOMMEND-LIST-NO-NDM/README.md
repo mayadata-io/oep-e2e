@@ -1,7 +1,7 @@
-# Verify List of Mirror Recommendations
+# List cstor pool recommendations without NDM
 
-<b>tcid:</b> TCID-DIR-OP-CSP-REC-LIST-MIRROR <br>
-<b>name:</b> "Verify List of Mirror Recommendations"<br>
+<b>tcid:</b> TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-NO-NDM <br>
+<b>name:</b> "List cstor pool recommendations without NDM"<br>
 
 
 ## Experiment Metadata
@@ -14,7 +14,7 @@
   </tr>
   <tr>
     <td> Cstor Pool Recommendation </td>
-    <td> Verify List of Mirror Recommendations </td>
+    <td> List cstor pool recommendations without NDM </td>
     <td> GKE </td>
   </tr>
 </table>
@@ -23,23 +23,24 @@
 
 - Cluster create setup should be done
 - DOP should be installed
-- BlockDevices should be detected by NDM
+- NDM should not be running
 
 ## Details
 
 - Director version 1.9 onwards
-- Positive test case
+- Negative test case
 
 ## Steps Performed in the test
 
 - Invoke API to list recommendations
 - Invoke API to get capacity based recommendations
 - Invoke API to get device based recommendations
-- Invoke API to get mirror based cstor pool recommendations
 
 ### Expected output
 
-- Director should list mirror based cstor pool recommendations
+- Director should list the supported recommendations without error
+- Director should list the capacity based recommendations without error
+- Director should list the device based recommendations without error
 
 ## Integrations
 

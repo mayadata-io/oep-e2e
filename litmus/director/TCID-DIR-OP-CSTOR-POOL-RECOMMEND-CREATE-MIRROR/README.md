@@ -1,6 +1,6 @@
 # Verify creation of mirror cstor pool cluster
 
-<b>tcid:</b> TCID-DIR-OP-CSP-REC-CREATE-MIRROR <br>
+<b>tcid:</b> TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-MIRROR <br>
 <b>name:</b> "Verify creation of mirror cstor pool cluster"<br>
 
 
