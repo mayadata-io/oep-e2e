@@ -17,7 +17,7 @@ As a DevOps admin, I manage MYSQL statefulset applications. These applications h
 | [TCID-DIR-DMAAS-MYSQL](TCID-DIR-DMAAS-MYSQL)     |       |         |     |
 
 
-### DMASS -- TCID-DIR-DMAAS-CORTEX
+### DMAAS -- TCID-DIR-DMAAS-CORTEX
 As a DevOps admin, I manage cortex application. Cortex has a dependency on cassandra. I would like to have continuity plans for this application. I want to take on demand backup(s) of cortex & cassandra including their configuration & volumes. I want to restore the backup to verify before uploading the same to S3. I would like to be notified if my S3 location has enough space to accomodate new backups.
 
 | TCID                                             |  GCP  |  KONVOY | AWS |
@@ -25,7 +25,7 @@ As a DevOps admin, I manage cortex application. Cortex has a dependency on cassa
 | [TCID-DIR-DMAAS-CORTEX](TCID-DIR-DMAAS-CORTEX)   |       |         |     |
 
 
-### DMASS -- TCID-DIR-DMAAS-PORTAL
+### DMAAS -- TCID-DIR-DMAAS-PORTAL
 As a DevOps admin, I manage a portal which in turn is a suite of applications that includes multiple kubernetes deployments, statefulsets, configurations, serviceaccounts, secrets, custom resources & volumes. I would like to take periodic backups of this portal except a few resources namely nginx-controller deployment & ingress resources. I want these backups to be uploaded to multiple S3 locations. As part of the business continuity plan, I want to verify particular backups on an on-demand basis by restoring this portal on a different cluster & verifying its state.
 
 | TCID                                             |  GCP  |  KONVOY | AWS |
@@ -33,14 +33,14 @@ As a DevOps admin, I manage a portal which in turn is a suite of applications th
 | [TCID-DIR-DMAAS-PORTAL](TCID-DIR-DMAAS-PORTAL)   |       |         |     |
 
 
-### DMASS -- TCID-DIR-DMAAS-PSP
+### DMAAS -- TCID-DIR-DMAAS-PSP
 As a DevOps admin, I manage multiple kubernetes applications. I have an extensive set of PodSecurityPolicies that govern the infrastructure policies in the cluster. I would like to take periodic backups these pod security policies and upload them to S3. As part of the my need to let all kubernetes clusters follow the same governance rules, I want to restore these pod security policies across other clusters.
 
 | TCID                                             |  GCP  |  KONVOY | AWS |
 | ------------------------------------------------ |  ---- |  ------ | --- |
 | [TCID-DIR-DMAAS-PSP](TCID-DIR-DMAAS-PSP)         |       |         |     |
 
-### DMASS -- TCID-DIR-DMAAS-EXCLUDE-SECRET
+### DMAAS -- TCID-DIR-DMAAS-EXCLUDE-SECRET
 As a DevOps admin, I manage multiple kubernetes clusters. Each of these clusters cater to different lines of businesses. Any particular team's role vary depending on the cluster. As part of business continuity plans that adhere to above security need, I want to exclude backing up secrets. In other words, **no** secrets should get uploaded to S3.
 
 | TCID                                                            |  GCP  |  KONVOY | AWS |
