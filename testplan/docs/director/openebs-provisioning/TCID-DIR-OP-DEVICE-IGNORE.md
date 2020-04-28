@@ -1,7 +1,7 @@
 ---
-id: TCID-DIR-OP-BD-FILTER-PATH
-title: View devices at specific paths in a kubernetes cluster
-sidebar_label: TCID-DIR-OP-BD-FILTER-PATH
+id: TCID-DIR-OP-DEVICE-IGNORE
+title: Ignore specific devices in a kubernetes cluster
+sidebar_label: TCID-DIR-OP-DEVICE-IGNORE
 ---
 ------
 
@@ -14,9 +14,9 @@ sidebar_label: TCID-DIR-OP-BD-FILTER-PATH
     <th> Description </th>
   </tr>
   <tr>
-    <td> TCID-DIR-OP-BD-FILTER-PATH </td>
+    <td> TCID-DIR-OP-DEVICE-IGNORE </td>
     <td> BlockDevice </td>
-    <td> View devices at specific path in a kubernetes cluster </td>
+    <td> Ignore specific devices in a kubernetes cluster </td>
   </tr>
 </table>
 
@@ -27,10 +27,9 @@ sidebar_label: TCID-DIR-OP-BD-FILTER-PATH
 - Install DirectorOnPrem _(DOP)_ on this K8s cluster
 - Install OpenEBS using DOP
 - Install OpenEBS on nodes meant for storage
-- Set OpenEBS to discover devices at specific paths
 
 ### Expectations
-- Users should be able to view devices at specific paths
+- Users should not be able to view devices that are not meant to be consumed for storage
 
 ### Notes to the Reviewer
 - This is a positive test case

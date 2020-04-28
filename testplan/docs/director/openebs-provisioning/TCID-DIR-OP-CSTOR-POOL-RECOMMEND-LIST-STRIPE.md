@@ -1,7 +1,7 @@
 ---
-id: TCID-DIR-OP-CSP-REC-LIST-MIRROR
-title: List mirror based cstor pool recommendations
-sidebar_label: TCID-DIR-OP-CSP-REC-LIST-MIRROR
+id: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-STRIPE
+title: List stripe based cstor pool recommendations
+sidebar_label: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-STRIPE
 ---
 ------
 
@@ -14,9 +14,9 @@ sidebar_label: TCID-DIR-OP-CSP-REC-LIST-MIRROR
     <th> Description </th>
   </tr>
   <tr>
-    <td> TCID-DIR-OP-CSP-REC-LIST-MIRROR </td>
+    <td> TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-STRIPE </td>
     <td> CStorPool Recommendation </td>
-    <td> Verify List of Mirror Recommendations </td>
+    <td> Verify List of Stripe Recommendations </td>
   </tr>
 </table>
 
@@ -34,8 +34,8 @@ sidebar_label: TCID-DIR-OP-CSP-REC-LIST-MIRROR
 - Invoke API to list recommendations
 - Invoke API to get capacity based recommendations
 - Invoke API to get device based recommendations
-- Invoke API to get mirror based cstor pool recommendations
+- Invoke API to get stripe based cstor pool recommendations
 
 ### Expected output
 
-- Director should list mirror based cstor pool recommendations
+- Director should list stripe based cstor pool recommendations
