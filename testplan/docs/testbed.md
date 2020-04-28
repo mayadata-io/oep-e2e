@@ -19,7 +19,10 @@ There are dedicated clusters for various kubernetes platforms.
 
 ### OnPrem-Konvoy
 
-**TODO**
+| Cluster | Master               | Worker Nodes                                                 | Notes                    |
+| ------- | -------------------- | ------------------------------------------------------------ | ------------------------ |
+| Kon-C1  | 1 Node, 16GB, 4vCPU  | 5 nodes, 16GB 4 vCPU, 1x100GB for OS Disks                   | DOP                      |
+| Kon-C2  | 1 Node, 32GB, 6vCPU  | 5 nodes x 64GB 12CPU, 1x100GB for OS Disks                         Node1, Node2 and Node3 each of them will have additional disks of total 600GB | OpenEBS via DOP
 
 ### OnPrem-Rancher
 
@@ -51,3 +54,4 @@ AWS platform will be deployed on managed kubernetes
 | AWS-C6  | 4 Nodes,  16GB 4CPU, 9x20GB EBS Disks  in each node | OpenEBS Upgrade via Helm |
 
 **Note** Either _C1 ,C2,C3_ clusters  or _C4 ,C5,C6_ clusters will be running at any point of time. 
+
