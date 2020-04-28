@@ -1,7 +1,7 @@
 ---
-id: TCID-DIR-OP-CSP-REC-CREATE-MIRROR
-title: Create mirror cstor pool cluster
-sidebar_label: TCID-DIR-OP-CSP-REC-CREATE-MIRROR
+id: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-MIRROR
+title: List mirror based cstor pool recommendations
+sidebar_label: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-MIRROR
 ---
 ------
 
@@ -14,9 +14,9 @@ sidebar_label: TCID-DIR-OP-CSP-REC-CREATE-MIRROR
     <th> Description </th>
   </tr>
   <tr>
-    <td> TCID-DIR-OP-CSP-REC-CREATE-MIRROR </td>
+    <td> TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-MIRROR </td>
     <td> CStorPool Recommendation </td>
-    <td> Verify creation of mirror cstor pool cluster </td>
+    <td> Verify List of Mirror Recommendations </td>
   </tr>
 </table>
 
@@ -35,8 +35,7 @@ sidebar_label: TCID-DIR-OP-CSP-REC-CREATE-MIRROR
 - Invoke API to get capacity based recommendations
 - Invoke API to get device based recommendations
 - Invoke API to get mirror based cstor pool recommendations
-- Invoke API to create mirror cstor pool cluster
 
 ### Expected output
 
-- Director should be able to create mirror cstor pool cluster
+- Director should list mirror based cstor pool recommendations

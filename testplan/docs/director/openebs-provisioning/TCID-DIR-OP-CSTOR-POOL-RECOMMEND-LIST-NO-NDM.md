@@ -1,7 +1,7 @@
 ---
-id: TCID-DIR-OP-CSP-REC-LIST-NO-NDM
+id: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-NO-NDM
 title: List cstor pool recommendations without NDM
-sidebar_label: TCID-DIR-OP-CSP-REC-LIST-NO-NDM
+sidebar_label: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-NO-NDM
 ---
 ------
 
@@ -14,7 +14,7 @@ sidebar_label: TCID-DIR-OP-CSP-REC-LIST-NO-NDM
     <th> Description </th>
   </tr>
   <tr>
-    <td> TCID-DIR-OP-CSP-REC-LIST-NO-NDM </td>
+    <td> TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-NO-NDM </td>
     <td> CStorPool Recommendation </td>
     <td> List Verification Without NDM </td>
   </tr>

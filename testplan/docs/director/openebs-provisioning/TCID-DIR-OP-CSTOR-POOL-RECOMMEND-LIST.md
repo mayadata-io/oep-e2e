@@ -1,7 +1,7 @@
 ---
-id: TCID-DIR-OP-CSP-REC-LIST
+id: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST
 title: List cstor pool recommendations
-sidebar_label: TCID-DIR-OP-CSP-REC-LIST
+sidebar_label: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST
 ---
 ------
 
@@ -14,7 +14,7 @@ sidebar_label: TCID-DIR-OP-CSP-REC-LIST
     <th> Description </th>
   </tr>
   <tr>
-    <td> TCID-DIR-OP-CSP-REC-LIST </td>
+    <td> TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST </td>
     <td> CStorPool Recommendation </td>
     <td> List Verification </td>
   </tr>

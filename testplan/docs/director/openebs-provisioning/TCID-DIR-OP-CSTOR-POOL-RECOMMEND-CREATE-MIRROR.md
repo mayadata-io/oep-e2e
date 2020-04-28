@@ -1,7 +1,7 @@
 ---
-id: TCID-DIR-OP-CSP-REC-CREATE-STRIPE
-title: Create stripe cstor pool cluster
-sidebar_label: TCID-DIR-OP-CSP-REC-CREATE-STRIPE
+id: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-MIRROR
+title: Create mirror cstor pool cluster
+sidebar_label: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-MIRROR
 ---
 ------
 
@@ -14,9 +14,9 @@ sidebar_label: TCID-DIR-OP-CSP-REC-CREATE-STRIPE
     <th> Description </th>
   </tr>
   <tr>
-    <td> TCID-DIR-OP-CSP-REC-CREATE-STRIPE </td>
+    <td> TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-MIRROR </td>
     <td> CStorPool Recommendation </td>
-    <td> Verify creation of stripe cstor pool cluster </td>
+    <td> Verify creation of mirror cstor pool cluster </td>
   </tr>
 </table>
 
@@ -34,9 +34,9 @@ sidebar_label: TCID-DIR-OP-CSP-REC-CREATE-STRIPE
 - Invoke API to list recommendations
 - Invoke API to get capacity based recommendations
 - Invoke API to get device based recommendations
-- Invoke API to get stripe based cstor pool recommendations
-- Invoke API to create stripe cstor pool cluster
+- Invoke API to get mirror based cstor pool recommendations
+- Invoke API to create mirror cstor pool cluster
 
 ### Expected output
 
-- Director should be able to create stripe cstor pool cluster
+- Director should be able to create mirror cstor pool cluster

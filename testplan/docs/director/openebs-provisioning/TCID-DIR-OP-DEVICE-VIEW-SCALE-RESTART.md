@@ -1,7 +1,7 @@
 ---
-id: TCID-DIR-OP-BD-VIEW-SCALE-RESTART
+id: TCID-DIR-OP-DEVICE-VIEW-SCALE-RESTART
 title: View devices in a scaled kubernetes cluster
-sidebar_label: TCID-DIR-OP-BD-VIEW-SCALE-RESTART
+sidebar_label: TCID-DIR-OP-DEVICE-VIEW-SCALE-RESTART
 ---
 ------
 
@@ -14,7 +14,7 @@ sidebar_label: TCID-DIR-OP-BD-VIEW-SCALE-RESTART
     <th> Description </th>
   </tr>
   <tr>
-    <td> TCID-DIR-OP-BD-VIEW-SCALE-RESTART </td>
+    <td> TCID-DIR-OP-DEVICE-VIEW-SCALE-RESTART </td>
     <td> BlockDevice </td>
     <td> View devices across a scaled kubernetes cluster </td>
   </tr>

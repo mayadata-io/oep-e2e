@@ -15,51 +15,64 @@ This page captures the test strategies for OpenEBS operations related to:
 - Volume Provisioning 
 
 
-###  OpenEBS Install
+###  TCID-DIR-OP-DEVICE-VIEW
+As a DevOps admin, I want OpenEBS to provide me all the storage disks that are eligible to be consumed by applications. OpenEBS should provide the list of disks that spans across nodes within the cluster. It is expected that during the lifetime of this cluster, few node restarts, upgrading this cluster to newer versions will be observed / performed. OpenEBS should continue to provide me storage information like the Day 0 days.
 
-- [TCID-DIR-OP-BD-VIEW-ALL](TCID-DIR-OP-BD-VIEW-ALL) - View all devices of a kubernetes cluster
-- [TCID-DIR-OP-BD-VIEW-SCALE](TCID-DIR-OP-BD-VIEW-SCALE) - View all devices on a scaled kubernetes cluster
-- [TCID-DIR-OP-BD-VIEW-SCALE-RESTART](TCID-DIR-OP-BD-VIEW-SCALE-RESTART) - View all devices on a scaled kubernetes cluster even after multiple restarts of this cluster is observed
-- [TCID-DIR-OP-BD-FILTER-SSD](TCID-DIR-OP-BD-FILTER-SSD) - View all SSD based devices of a kubernetes cluster
-- [TCID-DIR-OP-BD-FILTER-PATH](TCID-DIR-OP-BD-FILTER-PATH) - View devices with specific path across the kubernetes cluster
-- [TCID-DIR-OP-BD-IGNORE](TCID-DIR-OP-BD-IGNORE) - Avoid devices from specific nodes of a kubernetes cluster
-- [TCID-DIR-OP-BD-VIEW-TOGGLE](TCID-DIR-OP-BD-VIEW-TOGGLE) - Toggle viewing devices from specific nodes of a kubernetes cluster
+| TCID                                                                   |Rancher|Konvoy|AWS|
+| -------------------------------------------------------                |-------|------|---|
+| [TCID-DIR-OP-DEVICE-VIEW-ALL](TCID-DIR-OP-DEVICE-VIEW-ALL)             |       |      |   |
+| [TCID-DIR-OP-DEVICE-VIEW-SCALE](TCID-DIR-OP-DEVICE-VIEW-SCALE)                |       |   |
+| [TCID-DIR-OP-DEVICE-VIEW-SCALE-RESTART](TCID-DIR-OP-DEVICE-VIEW-SCALE-RESTART)|       |   |
 
+### TCID-DIR-OP-DEVICE-FILTER
+As a DevOps admin, I want to mark certain devices for consumption by OpenEBS. I want OpenEBS to avoid using devices that are not meant for the former. This should help me & my teams to use storage by avoiding the noisy neighbour problem. In some of the cases, I want OpenEBS to avoid using specific nodes during initial days. However, I should have the flexibility to add & remove these nodes for OpenEBS consumption based on load experienced by the cluster.
 
-###  OpenEBS Control Plane Upgrade
-
-
-### OpenEBS Data Plane Upgrade
-
-
-### CStor Pool Recommendations 
-- [TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST](TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST) List all cstor pool recommendations
-- [TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-NO-NDM](TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-NO-NDM)  List all cstor pool recommendations with NDM not running
-- [TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-STRIPE](TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-STRIPE) List all stripe cstor pool recommendations
-- [TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-MIRROR](TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-MIRROR) List all mirror cstor pool recommendations
-- [TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-MIRROR](TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-MIRROR) Create mirror cstor pool cluster
-- [TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-STRIPE](TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-STRIPE) Create stripe cstor pool cluster
+| TCID                                                                   |Rancher|Konvoy|AWS|
+| ---------------------------------------------------------------------- |-------|------|---|
+| [TCID-DIR-OP-DEVICE-FILTER-SSD](TCID-DIR-OP-DEVICE-FILTER-SSD)         |       |      |   |
+| [TCID-DIR-OP-DEVICE-FILTER-PATH](TCID-DIR-OP-DEVICE-FILTER-PATH)       |       |      |   |
+| [TCID-DIR-OP-DEVICE-IGNORE-NODE](TCID-DIR-OP-DEVICE-IGNORE-NODE)       |       |      |   |
+| [TCID-DIR-OP-DEVICE-TOGGLE-NODE](TCID-DIR-OP-DEVICE-TOGGLE-NODE)       |       |      |   |
 
 
-### Jiva Pool Provisioning 
+### TCID-DIR-OP-CONTROL-PLANE-UPGRADE
 
 
-###  Storage Class Provisioning
-
-- cStor
-- Jiva
-- Local PV Hostpath
-- Local PV Device
-
-###  Volume  Provisioning
-
-- cStor
-- Jiva
-- Local PV Hostpath
-- Local PV Device
+### TCID-DIR-OP-DATA-PLANE-UPGRADE
 
 
-- [TCID-DIR-OP-JIVA-HEALTH-RESTART](TCID-DIR-OP-JIVA-HEALTH-RESTART) Jiva volumes should run even after multiple restarts of the kubernetes cluster is observed
+### TCID-DIR-OP-CSTOR-POOL
+As a DevOps admin, I want to run applications on a storage that supports replication & snapshots. I want to get recommendations on storage pool plans that can help the applications recover from disk as well as node failures. Since openebs cstor supports my use cases, I would like to get cstor pool related recommendations that helps design pools that are resilient to node & disk failures.
+
+| TCID                                                                                       |
+| ------------------------------------------------------------------------------------------ |
+|[TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST](TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST)              |
+|[TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-STRIPE](TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-STRIPE)|
+|[TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-MIRROR](TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-MIRROR)|
+|[TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-MIRROR](TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-MIRROR)|
+|[TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-STRIPE](TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-STRIPE)|
+
+### TCID-DIR-OP-CSTOR-POOL-RESTARTS 
+As a DevOps admin, I want to run applications on a storage that supports replication & snapshots. I want to get recommendations on storage pool plans that can help the applications recover from disk as well as node failures. Since openebs cstor supports my use cases, I would like to verify cstor pools with node restarts, node upgrades, openebs pod evictions, node replacements scenarios.
+
+
+| TCID                                                                                       |
+| ------------------------------------------------------------------------------------------ |
+|[TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-NO-NDM](TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-NO-NDM)|
+|[TCID-DIR-OP-CSTOR-POOL-MIRROR-UPGRADE-NODE](TCID-DIR-OP-CSTOR-POOL-MIRROR-UPGRADE-NODE)    |
+|[TCID-DIR-OP-CSTOR-POOL-MIRROR-REBOOT-NODE](TCID-DIR-OP-CSTOR-POOL-MIRROR-REBOOT-NODE)      |
+|[TCID-DIR-OP-CSTOR-POOL-RAIDZ-UPGRADE-NODE](TCID-DIR-OP-CSTOR-POOL-RAIDZ-UPGRADE-NODE)      |
+|[TCID-DIR-OP-CSTOR-POOL-RAIDZ-REBOOT-NODE](TCID-DIR-OP-CSTOR-POOL-RAIDZ-REBOOT-NODE)        |
+
+
+### TCID-DIR-OP-CSTOR-VOLUME
+
+### TCID-DIR-OP-JIVA-VOLUME
+
+### TCID-DIR-OP-LOCAL-HOSTPATH-VOLUME
+
+### TCID-DIR-OP-LOCAL-DEVICE-VOLUME
+
 
 
 ## Glossary
@@ -68,3 +81,4 @@ This page captures the test strategies for OpenEBS operations related to:
 | ---------------- | --------------------------------- |
 | TCID             | TestCase ID                       |
 | DIR              | Director                          |
+| OP               | OPENEBS PROVISIONER               |
