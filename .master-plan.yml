@@ -1,927 +1,415 @@
 kind: MasterPlan
 apiVersion: e2e.mayadata.io/v1alpha1
 metadata:
-  name: masterTestplan
+  name: oep-e2e-master-testplan
 spec:
   tests:
-  ### Installation of OpenEBS
-  - tcid: iuoi01
-    name: "Install OpenEBS on a Director Onprem Cluster"
-    description: "Test the components are installed properly using both backend and Director apis. Check from the status from status agent response for the OpenEBS components."
+  # --------------------------------------------------
+  # https://e2e.mayadata.io/docs/director/dmaas/dmaas
+  #---------------------------------------------------
+  - tcid: TCID-DIR-DMAAS-MYSQL
+    name: "TCID-DIR-DMAAS-MYSQL"
+    description: "Test DMAAS for MYSQL"
     labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Install OpenEBS ControlPlane"
+      test/feature: "DMAAS"
+      test/tags: "DIRECTOR, DMAAS, MYSQL"
       test/priority: "P0"
-      git/location: ""
-      test/status: "Automated"
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-MYSQL"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
 
-  - tcid: iuoi02
-    name: "Install OpenEBS on a K8S Cluster connected to Director Onprem Cluster"
-    description: "Optional skipping here"
+  - tcid: TCID-DIR-DMAAS-CORTEX
+    name: "TCID-DIR-DMAAS-CORTEX"
+    description: "Test DMAAS for CORTEX"
     labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Install OpenEBS ControlPlane"
+      test/feature: "DMAAS"
+      test/tags: "DIRECTOR, DMAAS, CORTEX"
       test/priority: "P0"
-      git/location: ""
-      test/status: "Automated"
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-CORTEX"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
 
-  - tcid: iuoi03
-    name: "Install OpenEBS Controlplane components on specific set of nodes"
-    description: "Optional skipping here"
+  - tcid: TCID-DIR-DMAAS-PORTAL
+    name: "TCID-DIR-DMAAS-PORTAL"
+    description: "Test DMAAS for custom PORTAL"
     labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Install OpenEBS ControlPlane"
+      test/feature: "DMAAS"
+      test/tags: "DIRECTOR, DMAAS, PORTAL"
       test/priority: "P0"
-      git/location: ""
-      test/status: "Automated"
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-PORTAL"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
 
-  - tcid: iuoi04
-    name: "Install OpenEBS Dataplane{NDM DS} components on specific set of nodes"
-    description: "Optional skipping here"
+  - tcid: TCID-DIR-DMAAS-SCHD-CSTOR
+    name: "TCID-DIR-DMAAS-SCHD-CSTOR"
+    description: "Test DMAAS schedule for cstor engine"
     labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Install OpenEBS Controllane"
+      test/feature: "DMAAS"
+      test/tags: "DIRECTOR, DMAAS, SCHEDULE, CSTOR"
       test/priority: "P0"
-      git/location: ""
-      test/status: "Automated"
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-CSTOR"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
 
-  - tcid: iuoi05
-    name: "Install OpenEBS on a low resource machine"
-    description: "Optional skipping here"
+  - tcid: TCID-DIR-DMAAS-SCHD-JIVA
+    name: "TCID-DIR-DMAAS-SCHD-JIVA"
+    description: "Test DMAAS schedule for jiva engine"
     labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Install OpenEBS ControlPlane"
-      test/priority: "P2"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuoi06
-    name: "Install OpenEBS on a machine already OpenEBS is installed with same version using operator.yaml"
-    description: "Optional skipping here"
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Install OpenEBS ControlPlane"
-      test/priority: "P1"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuoi07
-    name: "Install OpenEBS on a machine already OpenEBS is installed with same version using Helm"
-    description: "Optional skipping here"
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Install OpenEBS ControlPlane"
-      test/priority: "P2"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuoi08
-    name: "Install OpenEBS on a machine already OpenEBS is installed with higher version using Helm"
-    description: "Optional skipping here"
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Install OpenEBS ControlPlane"
-      test/priority: "P2"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuoi09
-    name: "Install OpenEBS on a machine already OpenEBS is installed with lower version of OpenEBS using operator.yaml"
-    description: "Optional skipping here"
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Install OpenEBS ControlPlane"
-      test/priority: "P2"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuoi10
-    name: "Uninstall of OpenEBS"
-    description: "Optional skipping here"
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Install OpenEBS ControlPlane"
-      test/priority: "P3"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuoi11
-    name: "Install OpenEBS from valid custom docker registry"
-    description: "Optional skipping here"
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Install OpenEBS ControlPlane"
-      test/priority: "P1"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuoi12
-    name: "Install OpenEBS from invalid custom docker registry"
-    description: "Optional skipping here"
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Install OpenEBS ControlPlane"
-      test/priority: "P2"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuoi13
-    name: "Install using custom input"
-    description: " -- NDM Path filters -- NDM Vendor -- OS Disks"
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Install OpenEBS ControlPlane"
-      test/priority: "P1"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuoi14
-    name: "Install using custom resource limits"
-    description: "-- Set with CPU and RAM for all control plane"
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Install OpenEBS ControlPlane"
-      test/priority: "P1"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuoc01
-    name: "Upgrade OpenEBS ControlPlane installed by Director"
-    description: "Test the components are upgraded properly using both backend and Director apis. Check from the status from status agent response for the OpenEBS components."
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Upgrade OpenEBS ControlPlane Components"
-      test/priority: "P1"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuoc02
-    name: "Upgrade OpenEBS installed using operator.yaml(Not using Director)"
-    description: "Upgrade should not proceed"
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Upgrade OpenEBS ControlPlane Components"
-      test/priority: "P1"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuoc03
-    name: "Upgrade of control plane(1.6) which is lower version of Data plane (1.7)"
-    description: "Upgrade should not proceed"
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Upgrade OpenEBS ControlPlane Components"
-      test/priority: "P2"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuoc04
-    name: "Upgrade of control plane(1.7) which is higher version of Data plane(1.6)"
-    description: "Upgrade should proceed"
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Upgrade OpenEBS ControlPlane Components"
-      test/priority: "P1"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuod12
-    name: "Upgrade one application consuming cStor volume cStor"
-    description: "Test the components are upgraded properly using both backend and Director apis. Check from the status from status agent response for the OpenEBS components."
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Upgrade OpenEBS DataPlane Components"
+      test/feature: "DMAAS"
+      test/tags: "DIRECTOR, DMAAS, SCHEDULE, JIVA"
       test/priority: "P0"
-      test/storageEgnine: "cStor"
-      git/location: ""
-      test/status: "Automated"
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-JIVA"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
 
-  - tcid: iuod02
-    name: "Upgrade OpenEBS Pool and Volume installed using operator.yaml(Not using Director)"
-    description: "Test the components are upgraded properly using both backend and Director apis. Check from the status from status agent response for the OpenEBS components."
+  - tcid: TCID-DIR-DMAAS-SCHD-LOCAL-DEV
+    name: "TCID-DIR-DMAAS-SCHD-LOCAL-DEV"
+    description: "Test DMAAS schedule for local pv device engine"
     labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Upgrade OpenEBS DataPlane Components"
-      test/priority: "P1"
-      test/storageEgnine: "cStor"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuod03
-    name: "Upgrade OpenEBS Pool and Volume installed using Helm(Not using Director)"
-    description: "Test the components are upgraded properly using both backend and Director apis. Check from the status from status agent response for the OpenEBS components."
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Upgrade OpenEBS DataPlane Components"
-      test/priority: "P2"
-      test/storageEgnine: "cStor"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuod04
-    name: "Upgrade of data plane with higher version of control plane --  Dataplane 1.7 Control plane 1.6"
-    description: "For Eg Start with 1.5 for both control and data plane, Control plane will be upgraded to 1.6, Try Data plane will be upgraded to 1.7"
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Upgrade OpenEBS DataPlane Components"
-      test/storageEgnine: "cStor"
-      test/priority: "P2"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuod05
-    name: "Upgrade of data plane with lower version of control plan -- Dataplane 1.6 Control plane 1.7"
-    description: "For Eg Start with 1.5 for both control and data plane, Control plane will be upgraded to 1.6 then to 1.7, Data plane will be upgraded to 1.6"
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Upgrade OpenEBS DataPlane Components"
-      test/priority: "P2"
-      test/storageEgnine: "cStor"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuod06
-    name: "Upgrade of data plane with same version of control plane -- Dataplane 1.7 Control plane 1.7"
-    description: "For Eg Start with 1.5 for both control and data plane, Control plane will be upgraded to 1.7, Data plane will be upgraded to 1.6"
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Upgrade OpenEBS DataPlane Components"
-      test/priority: "P2"
-      test/storageEgnine: "cStor"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuod07
-    name: "Upgrade cStor Pools (CSPC)  select one CSPC"
-    description: ""
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Upgrade OpenEBS DataPlane Components"
+      test/feature: "DMAAS"
+      test/tags: "DIRECTOR, DMAAS, SCHEDULE, LOCAL PV DEVICE"
       test/priority: "P0"
-      test/storageEgnine: "cStor"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-LOCAL-DEV"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
 
-  - tcid: iuod08
-    name: "Upgrade cStor Pools (CSPC)  select multiple CSPC"
-    description: ""
+  - tcid: TCID-DIR-DMAAS-SCHD-LOCAL-HP
+    name: "TCID-DIR-DMAAS-SCHD-LOCAL-HP"
+    description: "Test DMAAS schedule for local pv hostpath engine"
     labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Upgrade OpenEBS DataPlane Components"
-      test/priority: "P1"
-      test/storageEgnine: "cStor"
-      git/location: ""
-      test/status: "Automated"
-
-  - tcid: iuod09
-    name: "Upgrade a single pool with in a CSPC"
-    description: ""
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Upgrade OpenEBS DataPlane Components"
-      test/priority: "P1"
-      test/storageEgnine: "cStor"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuod10
-    name: "Upgrade multiple pools with in a CSPC"
-    description: ""
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Upgrade OpenEBS DataPlane Components"
+      test/feature: "DMAAS"
+      test/tags: "DIRECTOR, DMAAS, SCHEDULE, LOCAL PV HOSTPATH"
       test/priority: "P0"
-      test/storageEgnine: "cStor"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-LOCAL-HP"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
 
-  - tcid: iuod11
-    name: "Upgrade multiple pools across two CSPC"
-    description: ""
+  - tcid: TCID-DIR-DMAAS-SCHD-CASSANDRA
+    name: "TCID-DIR-DMAAS-SCHD-CASSANDRA"
+    description: "Test DMAAS schedule for cassandra stateful application"
     labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Upgrade OpenEBS DataPlane Components"
-      test/priority: "P1"
-      test/storageEgnine: "cStor"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuod13
-    name: "Upgrade one application consuming multiple cStor volumes"
-    description: ""
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Upgrade OpenEBS DataPlane Components"
-      test/priority: "P1"
-      test/storageEgnine: "cStor"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuod14
-    name: "Upgrade one application consuming multiple storage engines cstor and Jiva"
-    description: ""
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Upgrade OpenEBS DataPlane Components"
-      test/priority: "P1"
-      test/storageEgnine: "cStor/Jiva"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuod15
-    name: "Upgrade mulitple application from same CSPC"
-    description: ""
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Upgrade OpenEBS DataPlane Components"
-      test/priority: "P1"
-      test/storageEgnine: "cStor"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuod16
-    name: "Upgrade multiple applications across CSPC"
-    description: ""
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Upgrade OpenEBS DataPlane Components"
-      test/priority: "P1"
-      test/storageEgnine: "cStor"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuod17
-    name: "Upgrade application Volumes to higher version(1.7) than cStor Pool of lower version (1.6)"
-    description: ""
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Upgrade OpenEBS DataPlane Components"
-      test/priority: "P2"
-      test/storageEgnine: "cStor"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuod18
-    name: "Select upgrade of same pool while upgrade is in progress"
-    description: ""
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Upgrade OpenEBS DataPlane Components"
-      test/priority: "P2"
-      test/storageEgnine: "cStor"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuod19
-    name: "Select upgrade of different pool while upgrade is in progress"
-    description: ""
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Upgrade OpenEBS DataPlane Components"
-      test/priority: "P1"
-      test/storageEgnine: "cStor"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuod20
-    name: "Upgrade a pool when the pool pod is in not running"
-    description: ""
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Upgrade OpenEBS DataPlane Components"
-      test/priority: "P1"
-      test/storageEgnine: "cStor"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuod21
-    name: "Upgrade a CSPC when one of the pool pod is in not running"
-    description: ""
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Upgrade OpenEBS DataPlane Components"
-      test/priority: "P1"
-      test/storageEgnine: "cStor"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuod22
-    name: "Upgrade a CSPC when all the pool pod is in not running"
-    description: ""
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Upgrade OpenEBS DataPlane Components"
-      test/priority: "P2"
-      test/storageEgnine: "cStor"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuod23
-    name: "Upgrade the application with 3 replicas when all pool pods are running"
-    description: ""
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Upgrade OpenEBS DataPlane Components"
-      test/priority: "P1"
-      test/storageEgnine: "cStor"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuod24
-    name: "Upgrade the application with 3 replicas when one pool pods is not running"
-    description: ""
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Upgrade OpenEBS DataPlane Components"
-      test/priority: "P1"
-      test/storageEgnine: "cStor"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuod25
-    name: "Upgrade the application with 3 replicas when two pool pods is not running"
-    description: ""
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Upgrade OpenEBS DataPlane Components"
-      test/priority: "P2"
-      test/storageEgnine: "cStor"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuod26
-    name: "Upgrade the application with 3 replicas when three(all) pool pods is not running"
-    description: ""
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Upgrade OpenEBS DataPlane Components"
-      test/priority: "P2"
-      test/storageEgnine: "cStor"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuod27
-    name: "Upgrade the application with 3 replicas when all replica pods are running"
-    description: ""
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Upgrade OpenEBS DataPlane Components"
+      test/feature: "DMAAS"
+      test/tags: "DIRECTOR, DMAAS, SCHEDULE, CASSANDRA"
       test/priority: "P0"
-      test/storageEgnine: "Jiva"
-      git/location: ""
-      test/status: "Automated"
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-CASSANDRA"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
 
-  - tcid: iuod28
-    name: "Upgrade the application with 3 replicas when one replica pods is not running"
-    description: ""
+  - tcid: TCID-DIR-DMAAS-SCHD-KAFKA
+    name: "TCID-DIR-DMAAS-SCHD-KAFKA"
+    description: "Test DMAAS schedule for kafka stateful application"
     labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Upgrade OpenEBS DataPlane Components"
-      test/priority: "P1"
-      test/storageEgnine: "Jiva"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuod29
-    name: "Upgrade the application with 3 replicas when two replica pods is not running"
-    description: ""
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Upgrade OpenEBS DataPlane Components"
-      test/priority: "P2"
-      test/storageEgnine: "Jiva"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuod30
-    name: "Upgrade the application with 3 replicas when all replica pods is not running"
-    description: ""
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Upgrade OpenEBS DataPlane Components"
-      test/priority: "P1"
-      test/storageEgnine: "Jiva"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: iuod31
-    name: "Upgrade one application consuming multiple jiva volumes"
-    description: ""
-    labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Upgrade OpenEBS DataPlane Components"
+      test/feature: "DMAAS"
+      test/tags: "DIRECTOR, DMAAS, SCHEDULE, KAFKA"
       test/priority: "P0"
-      test/storageEgnine: "Jiva"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-KAFKA"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
 
-  - tcid: iuod32
-    name: "Upgrade one application having single replica jiva volume"
-    description: ""
+  - tcid: TCID-DIR-DMAAS-SCHD-MYSQL
+    name: "TCID-DIR-DMAAS-SCHD-MYSQL"
+    description: "Test DMAAS schedule for mysql stateful application"
     labels:
-      test/feature: "Install and Upgrade of OpenEBS"
-      test/subFeature: "Upgrade OpenEBS DataPlane Components"
-      test/priority: "P1"
-      test/storageEgnine: "Jiva"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: triv01
-    name: "Invite a user as Project Admin, Project member and Project Read Only Admin"
-    description: "Invited users should be able to manage the cluster and add other cluster with the permission"
-    labels:
-      test/feature: "Teaming and RBAC"
-      test/subFeature: "Invite"
-      test/priority: "P1"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Automated"
-
- 
-  - tcid: trrc01
-    name: "Check the user can connect cluster using the roles Project Admin, Project Member, Project Read Only Admin"
-    description: "Except read only can do the operation."
-    labels:
-      test/feature: "Teaming and RBAC"
-      test/subFeature: "Role Change"
-      test/priority: "P1"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: trrc02
-    name: "Positive Change role"
-    description: "PM to PA or PRO, PA to PRO or PM, PRO to PM or PA and verify the functionality"
-    labels:
-      test/feature: "Teaming and RBAC"
-      test/subFeature: "Role Change"
-      test/priority: "P1"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Automated"
-
-  - tcid: trrc03
-    name: "Negative change role"
-    description: "Change role of PM, PRO, PA to PO this should fail"
-    labels:
-      test/feature: "Teaming and RBAC"
-      test/subFeature: "Role Change"
-      test/priority: "P1"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Automated"
- 
-  - tcid: ppcp01
-    name: "Create a CSPC with Striped pool lowest possible list"
-    description: "Have 4 disks of 100GB, 100GB, 200GB, 300GB on each nodes (3 cluster), Select pool of 50 GB, Post recommendation create the pool"
-    labels:
-      test/feature: "Pool Provisioning"
-      test/subFeature: "cStor Pool"
+      test/feature: "DMAAS"
+      test/tags: "DIRECTOR, DMAAS, SCHEDULE, MYSQL"
       test/priority: "P0"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-MYSQL"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
 
-  - tcid: ppcp02
-    name: "Create a CSPC with Mirror pool lowest possible list"
-    description: "Have 4 disks of 100GB, 100GB, 200GB, 300GB on each nodes (3 cluster), Select pool of 50 GB, Post recommendation create the pool"
+  - tcid: TCID-DIR-DMAAS-SCHD-WORDPRESS
+    name: "TCID-DIR-DMAAS-SCHD-WORDPRESS"
+    description: "Test DMAAS schedule for wordpress application"
     labels:
-      test/feature: "Pool Provisioning"
-      test/subFeature: "cStor Pool"
-      test/priority: "P1"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: ppcp03
-    name: "Create a CSPC with RAIDZ1 pool lowest possible list"
-    description: "Have 4 disks of 100GB, 100GB, 100GB, 300GB on each nodes (3 cluster), Select pool of 50 GB, Post recommendation create the pool"
-    labels:
-      test/feature: "Pool Provisioning"
-      test/subFeature: "cStor Pool"
-      test/priority: "P2"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: ppcp04
-    name: "Create a CSPC with RAIDZ2  pool lowest possible list"
-    description: "Have 4 disks of 100GB, 100GB, 100GB, 300GB on each nodes (3 cluster), Select pool of 50 GB, Post recommendation create the pool"
-    labels:
-      test/feature: "Pool Provisioning"
-      test/subFeature: "cStor Pool"
-      test/priority: "P3"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: ppcp05
-    name: "Create a CSPC with Striped pool highest possible list"
-    description: "Have 4 disks of 100GB, 100GB, 200GB, 300GB on each nodes (3 cluster), Select pool of 250 GB, Post recommendation create the pool"
-    labels:
-      test/feature: "Pool Provisioning"
-      test/subFeature: "cStor Pool"
-      test/priority: "P1"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: ppcp06
-    name: "Create a CSPC with Striped pool upper bound"
-    description: "Have 4 disks of 100GB, 100GB, 200GB, 300GB on each nodes (3 cluster), Select pool of 350 GB, Recommendation fails"
-    labels:
-      test/feature: "Pool Provisioning"
-      test/subFeature: "cStor Pool"
-      test/priority: "P1"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: ppcp07
-    name: "Create a CSPC with Striped pool with different size of disks across nodes"
-    description: "Have 3 node cluster;  - Node1 - 100GB, 200GB, 400GB; - Node2 - 100GB, 200GB; - Node3 - 400GB; Select pool 300GB"
-    labels:
-      test/feature: "Pool Provisioning"
-      test/subFeature: "cStor Pool"
-      test/priority: "P2"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: ppcp08
-    name: "Create a CSPC with Striped pool with different size and different type of disks across nodes"
-    description: "Have 3 node cluster; - Node1 - 100GBSAS, 100GB SSD, 200GBSSD, 400GBSAS; - Node2 - 100GB, 200GB; - Node3 - 400GB SSD;  Select pool 300GB"
-    labels:
-      test/feature: "Pool Provisioning"
-      test/subFeature: "cStor Pool"
-      test/priority: "P2"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: ppcp09
-    name: "Over ride recommendation (mirror)"
-    description: "Have 4 disks of 100GB, 100GB, 200GB, 300GB on each nodes (3 cluster), Select pool of 50 GB, Post recommendation, create the pool with different recoomendation"
-    labels:
-      test/feature: "Pool Provisioning"
-      test/subFeature: "cStor Pool"
-      test/priority: "P2"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: ppcp10
-    name: "Already used disks should not be part of recommendation"
-    description: "Have 4 disks of 100GB, 100GB, 200GB, 300GB on each nodes (3 cluster), Select pool of 50 GB, Recommendation should not include disk of other pools (Already claimed)"
-    labels:
-      test/feature: "Pool Provisioning"
-      test/subFeature: "cStor Pool"
-      test/priority: "P2"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: ppcp11
-    name: "Nodes not labelled for OpenEBS should not be part of recommendation"
-    description: ""
-    labels:
-      test/feature: "Pool Provisioning"
-      test/subFeature: "cStor Pool"
-      test/priority: "P2"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: ppcp12
-    name: "Invalid raid configuration"
-    description: "Try passing the arguement for RAIDZ8; it should fail"
-    labels:
-      test/feature: "Pool Provisioning"
-      test/subFeature: "cStor Pool"
-      test/priority: "P2"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: gaau01
-    name: "Local Authentication Testcase using Browser"
-    description: "Gui Auth Check"
-    labels:
-      test/feature: "GUI Automation"
-      test/subFeature: "Authentication"
+      test/feature: "DMAAS"
+      test/tags: "DIRECTOR, DMAAS, SCHEDULE, WORDPRESS"
       test/priority: "P0"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-WORDPRESS"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
 
-  - tcid: gaau02
-    name: "Github Authentication Testcase using Browser"
-    description: "Gui Auth Check"
+  - tcid: TCID-DIR-DMAAS-SCHD-NGINX
+    name: "TCID-DIR-DMAAS-SCHD-NGINX"
+    description: "Test DMAAS schedule for nginx application"
     labels:
-      test/feature: "GUI Automation"
-      test/subFeature: "Authentication"
-      test/priority: "P1"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: gaau03
-    name: "GMail Authentication Testcase using Browser"
-    description: "Gui Auth Check"
-    labels:
-      test/feature: "GUI Automation"
-      test/subFeature: "Authentication"
-      test/priority: "P1"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: gaau04
-    name: "AD Authentication Testcase using Browser"
-    description: "Gui Auth Check"
-    labels:
-      test/feature: "GUI Automation"
-      test/subFeature: "Authentication"
-      test/priority: "P2"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
-
-  - tcid: gacc01
-    name: "DOP self connected cluster Check"
-    description: "Self connected cluster"
-    labels:
-      test/feature: "GUI Automation"
-      test/subFeature: "Cluster Connect"
+      test/feature: "DMAAS"
+      test/tags: "DIRECTOR, DMAAS, SCHEDULE, NGINX"
       test/priority: "P0"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
+      testplan: ""
+      git/pullrequest: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-NGINX"
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
 
-  - tcid: gacc02
-    name: "External cluster connect to DOP"
-    description: "External cluster connect to DOP"
+  - tcid: TCID-DIR-DMAAS-SCHD-PERCONA
+    name: "TCID-DIR-DMAAS-SCHD-PERCONA"
+    description: "Test DMAAS schedule for percona stateful application"
     labels:
-      test/feature: "GUI Automation"
-      test/subFeature: "Cluster Connect"
+      test/feature: "DMAAS"
+      test/tags: "DIRECTOR, DMAAS, SCHEDULE, PERCONA"
       test/priority: "P0"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
+      testplan: ""
+      git/pullrequest: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-PERCONA"
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
 
-  - tcid: gada01
-    name: "Project Dashboard"
-    description: ""
+  - tcid: TCID-DIR-DMAAS-SCHD-MONITOR
+    name: "TCID-DIR-DMAAS-SCHD-MONITOR"
+    description: "Test ability to monitor DMAAS schedule"
     labels:
-      test/feature: "GUI Automation"
-      test/subFeature: "Dashboard"
+      test/feature: "DMAAS"
+      test/tags: "DIRECTOR, DMAAS, SCHEDULE, MONITOR"
       test/priority: "P0"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
+      testplan: ""
+      git/pullrequest: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-MONITOR"
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
 
-  - tcid: gada02
-    name: "Cluster Dashboard"
-    description: ""
+
+  # --------------------------------------------------
+  # https://e2e.mayadata.io/docs/director/openebs-provisioning/provisioning
+  #---------------------------------------------------
+  - tcid: TCID-DIR-OP-DEVICE-VIEW-ALL
+    name: "TCID-DIR-OP-DEVICE-VIEW-ALL"
+    description: "Test listing of storage device(s)"
     labels:
-      test/feature: "GUI Automation"
-      test/subFeature: "Dashboard"
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, DEVICE"
       test/priority: "P0"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-DEVICE-VIEW-ALL"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
 
-  - tcid: gato01
-    name: "Topology Check for Volumes, PODs, Hosts"
-    description: ""
+  - tcid: TCID-DIR-OP-DEVICE-VIEW-SCALE
+    name: "TCID-DIR-OP-DEVICE-VIEW-SCALE"
+    description: "Test listing of storage device(s) on a scaled setup"
     labels:
-      test/feature: "GUI Automation"
-      test/subFeature: "Topology"
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, DEVICE"
       test/priority: "P0"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-DEVICE-VIEW-SCALE"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
 
-  - tcid: galo01
-    name: "Logging Check"
-    description: "Basic Logs should be visible"
+  - tcid: TCID-DIR-OP-DEVICE-VIEW-SCALE-RESTART
+    name: "TCID-DIR-OP-DEVICE-VIEW-SCALE-RESTART"
+    description: "Test listing of storage device(s) on a scaled setup that has restarts"
     labels:
-      test/feature: "GUI Automation"
-      test/subFeature: "Logging"
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, DEVICE, RESTART"
       test/priority: "P0"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-DEVICE-VIEW-SCALE-RESTART"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
 
-  - tcid: gaal01
-    name: "Alerts Check"
-    description: "Default alerts like cluster connect, volume create should be available"
+  - tcid: TCID-DIR-OP-DEVICE-FILTER-SSD
+    name: "TCID-DIR-OP-DEVICE-FILTER-SSD"
+    description: "Test listing of ssd storage device(s)"
     labels:
-      test/feature: "GUI Automation"
-      test/subFeature: "Alerts"
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, DEVICE, SSD"
       test/priority: "P0"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-DEVICE-FILTER-SSD"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
 
-  - tcid: cpre01 
-    name: "List the capacity recommendation"
-    description: ""
+  - tcid: TCID-DIR-OP-DEVICE-FILTER-PATH
+    name: "TCID-DIR-OP-DEVICE-FILTER-PATH"
+    description: "Test filtering storage device(s) by path"
     labels:
-      test/feature: "cStor Pool"
-      test/subFeature: "Recommendation"
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, DEVICE, PATH"
       test/priority: "P0"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-DEVICE-FILTER-PATH"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
 
-  - tcid: cpre02
-    name: "List device recommendation"
-    description: ""
+  - tcid: TCID-DIR-OP-DEVICE-IGNORE-NODE
+    name: "TCID-DIR-OP-DEVICE-IGNORE-NODE"
+    description: "Test filtering storage device(s) by nodes"
     labels:
-      test/feature: "cStor Pool"
-      test/subFeature: "Recommendation"
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, DEVICE, NODE"
       test/priority: "P0"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-DEVICE-IGNORE-NODE"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
 
-  - tcid: cpre03
-    name: "Create a CSPC with Striped pool lowest possible list"
-    description: ""
+  - tcid: TCID-DIR-OP-DEVICE-TOGGLE-NODE
+    name: "TCID-DIR-OP-DEVICE-TOGGLE-NODE"
+    description: "Test filtering storage device(s) by nodes"
     labels:
-      test/feature: "cStor Pool"
-      test/subFeature: "Recommendation"
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, DEVICE, NODE"
       test/priority: "P0"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-DEVICE-TOGGLE-NODE"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
 
-  - tcid: cpre04
-    name: "Create a CSPC with Striped pool highest possible list"
-    description: ""
+  - tcid: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST
+    name: "TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST"
+    description: "Test listing of cstor pool recommendations"
     labels:
-      test/feature: "cStor Pool"
-      test/subFeature: "Recommendation"
-      test/priority: "P1"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, RECOMMENDATIONS"
+      test/priority: "P0"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
 
-  - tcid: cpre05
-    name: "Create a CSPC with Striped pool upper bound"
-    description: ""
+  - tcid: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-STRIPE
+    name: "TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-STRIPE"
+    description: "Test listing of stripe based cstor pool recommendations"
     labels:
-      test/feature: "cStor Pool"
-      test/subFeature: "Recommendation"
-      test/priority: "P1"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, STRIPE, RECOMMENDATIONS"
+      test/priority: "P0"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-STRIPE"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
 
-  - tcid: cpre06
-    name: "Create a CSPC with Striped pool with different size of disks across nodes"
-    description: ""
+  - tcid: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-MIRROR
+    name: "TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-MIRROR"
+    description: "Test listing of mirror based cstor pool recommendations"
     labels:
-      test/feature: "cStor Pool"
-      test/subFeature: "Recommendation"
-      test/priority: "P1"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, MIRROR, RECOMMENDATIONS"
+      test/priority: "P0"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-MIRROR"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
 
-  - tcid: cpre07
-    name: "Over ride recommendation (mirror) "
-    description: ""
+  - tcid: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-MIRROR
+    name: "TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-MIRROR"
+    description: "Test creation of mirror based cstor pool recommendations"
     labels:
-      test/feature: "cStor Pool"
-      test/subFeature: "Recommendation"
-      test/priority: "P1"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, MIRROR, RECOMMENDATIONS"
+      test/priority: "P0"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-MIRROR"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
 
-  - tcid: cpre08 
-    name: "Create a CSPC with Striped pool with different size and different type of disks across nodes"
-    description: ""
+  - tcid: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-STRIPE
+    name: "TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-STRIPE"
+    description: "Test creation of stripe based cstor pool recommendations"
     labels:
-      test/feature: "cStor Pool"
-      test/subFeature: "Recommendation"
-      test/priority: "P2"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, STRIPE, RECOMMENDATIONS"
+      test/priority: "P0"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-STRIPE"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
 
-  - tcid: cpre09
-    name: "Already used disks should not be part of recommendation"
-    description: ""
+  - tcid: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-NO-NDM
+    name: "TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-NO-NDM"
+    description: "Test list of cstor pool recommendations when NDM is not running"
     labels:
-      test/feature: "cStor Pool"
-      test/subFeature: "Recommendation"
-      test/priority: "P1"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, RECOMMENDATIONS, NDM"
+      test/priority: "P0"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-NO-NDM"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
 
-  - tcid: cpre10
-    name: "Nodes not labelled for OpenEBS should not be part of recommendation"
-    description: ""
+  - tcid: TCID-DIR-OP-CSTOR-POOL-MIRROR-UPGRADE-NODE
+    name: "TCID-DIR-OP-CSTOR-POOL-MIRROR-UPGRADE-NODE"
+    description: "Test mirror based cstor pool when node is upgraded"
     labels:
-      test/feature: "cStor Pool"
-      test/subFeature: "Recommendation"
-      test/priority: "P2"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, MIRROR, NODE, UPGRADE"
+      test/priority: "P0"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-MIRROR-UPGRADE-NODE"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
 
-  - tcid: cpre11
-    name: "Invalid raid configuration"
-    description: ""
+  - tcid: TCID-DIR-OP-CSTOR-POOL-RAIDZ-UPGRADE-NODE
+    name: "TCID-DIR-OP-CSTOR-POOL-RAIDZ-UPGRADE-NODE"
+    description: "Test raidz based cstor pool when node is upgraded"
     labels:
-      test/feature: "cStor Pool"
-      test/subFeature: "Recommendation"
-      test/priority: "P2"
-      git/location: "Add the actual link to TC readme"
-      test/status: "Not Automated"
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, RAIDZ, NODE, UPGRADE"
+      test/priority: "P0"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RAIDZ-UPGRADE-NODE"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
 
-###### Abbreviations
-#Details of abbreviation in readme file master-plan.md , One of the example as below
-# iu  -- Install and Upgrade of OpenEBS"
-# tr  -- Teaming and RBAC
-### iuoiXX iuocXX iuodXX 
- ## oi -- OpenEBS Install 
- ## oc -- OpenEBS ControlPlane
- ## od -- OpenEBS DataPlane
+  - tcid: TCID-DIR-OP-CSTOR-POOL-MIRROR-REBOOT-NODE
+    name: "TCID-DIR-OP-CSTOR-POOL-MIRROR-REBOOT-NODE"
+    description: "Test mirror based cstor pool when node is rebooted"
+    labels:
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, MIRROR, NODE, REBOOT"
+      test/priority: "P0"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-MIRROR-REBOOT-NODE"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
 
-###### Abbreviations
-#Details of abbreviation in readme file master-plan.md , One of the example as below
-# iu  -- Install and Upgrade of OpenEBS"
-# tr  -- Teaming and RBAC
-### iuoiXX iuocXX iuodXX
- ## oi -- OpenEBS Install
- ## oc -- OpenEBS ControlPlane
- ## od -- OpenEBS DataPlane
-
+  - tcid: TCID-DIR-OP-CSTOR-POOL-RAIDZ-REBOOT-NODE
+    name: "TCID-DIR-OP-CSTOR-POOL-RAIDZ-REBOOT-NODE"
+    description: "Test raidz based cstor pool when node is rebooted"
+    labels:
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, RAIDZ, NODE, REBOOT"
+      test/priority: "P0"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RAIDZ-REBOOT-NODE"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
