@@ -1,6 +1,6 @@
 ---
 id: compatibility
-title: OEP Test Compatbility Matrix
+title: OEP Test Compatibility Matrix
 sidebar_label: Compatibility Matrix
 ---
 
