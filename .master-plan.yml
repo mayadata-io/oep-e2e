@@ -5,6 +5,139 @@ metadata:
 spec:
   tests:
   # --------------------------------------------------
+  # https://e2e.mayadata.io/docs/director/installation/installation
+  # --------------------------------------------------
+  - tcid: TCID-DIR-INSTALL-ON-LOCAL-DEV
+    name: "TCID-DIR-INSTALL-ON-LOCAL-DEV"
+    description: "Test Director Install on local device"
+    labels:
+      test/feature: "DIRECTOR"
+      test/tags: "DIRECTOR, INSTALL, LOCAL DEVICE"
+      test/priority: "P0"
+      testplan: "https://e2e.mayadata.io/docs/director/installation/TCID-DIR-INSTALL-ON-LOCAL-DEV"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
+
+  - tcid: TCID-DIR-INSTALL-ON-LOCAL-DEV-ON-PD
+    name: "TCID-DIR-INSTALL-ON-LOCAL-DEV-ON-PD"
+    description: "Test Director Install on local device using persistent disks"
+    labels:
+      test/feature: "DIRECTOR"
+      test/tags: "DIRECTOR, INSTALL, LOCAL DEVICE, PD"
+      test/priority: "P0"
+      testplan: "https://e2e.mayadata.io/docs/director/installation/TCID-DIR-INSTALL-ON-LOCAL-DEV-ON-PD"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
+
+  - tcid: TCID-DIR-INSTALL-ON-LOCAL-HP
+    name: "TCID-DIR-INSTALL-ON-LOCAL-HP"
+    description: "Test Director Install on host path"
+    labels:
+      test/feature: "DIRECTOR"
+      test/tags: "DIRECTOR, INSTALL, LOCAL HOSTPATH"
+      test/priority: "P0"
+      testplan: "https://e2e.mayadata.io/docs/director/installation/TCID-DIR-INSTALL-ON-LOCAL-HP"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
+
+  - tcid: TCID-DIR-INSTALL-ON-LOCAL-HP-ON-PD
+    name: "TCID-DIR-INSTALL-ON-LOCAL-HP-ON-PD"
+    description: "Test Director Install on host path using persistent disks"
+    labels:
+      test/feature: "DIRECTOR"
+      test/tags: "DIRECTOR, INSTALL, LOCAL HOSTPATH, PD"
+      test/priority: "P0"
+      testplan: "https://e2e.mayadata.io/docs/director/installation/TCID-DIR-INSTALL-ON-LOCAL-HP-ON-PD"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
+
+  - tcid: TCID-DIR-INSTALL-ON-CSTOR
+    name: "TCID-DIR-INSTALL-ON-CSTOR"
+    description: "Test Director Install on cstor"
+    labels:
+      test/feature: "DIRECTOR"
+      test/tags: "DIRECTOR, INSTALL, CSTOR"
+      test/priority: "P0"
+      testplan: "https://e2e.mayadata.io/docs/director/installation/TCID-DIR-INSTALL-ON-CSTOR"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
+
+  - tcid: TCID-DIR-UPGRADE-ON-LOCAL-DEV
+    name: "TCID-DIR-UPGRADE-ON-LOCAL-DEV"
+    description: "Test Director Upgrade on local device"
+    labels:
+      test/feature: "DIRECTOR"
+      test/tags: "DIRECTOR, UPGRADE, LOCAL DEVICE"
+      test/priority: "P0"
+      testplan: "https://e2e.mayadata.io/docs/director/installation/TCID-DIR-UPGRADE-ON-LOCAL-DEV"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
+
+  - tcid: TCID-DIR-UPGRADE-ON-LOCAL-DEV-ON-PD
+    name: "TCID-DIR-UPGRADE-ON-LOCAL-DEV-ON-PD"
+    description: "Test Director Upgrade on local device that uses persistent disks"
+    labels:
+      test/feature: "DIRECTOR"
+      test/tags: "DIRECTOR, UPGRADE, LOCAL DEVICE, PD"
+      test/priority: "P0"
+      testplan: "https://e2e.mayadata.io/docs/director/installation/TCID-DIR-UPGRADE-ON-LOCAL-DEV-ON-PD"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
+
+  - tcid: TCID-DIR-UPGRADE-ON-LOCAL-HP
+    name: "TCID-DIR-UPGRADE-ON-LOCAL-HP"
+    description: "Test Director Upgrade on host path"
+    labels:
+      test/feature: "DIRECTOR"
+      test/tags: "DIRECTOR, UPGRADE, LOCAL HOSTPATH"
+      test/priority: "P0"
+      testplan: "https://e2e.mayadata.io/docs/director/installation/TCID-DIR-UPGRADE-ON-LOCAL-HP"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
+
+  - tcid: TCID-DIR-UPGRADE-ON-LOCAL-HP-ON-PD
+    name: "TCID-DIR-UPGRADE-ON-LOCAL-HP-ON-PD"
+    description: "Test Director Upgrade on host path that uses persistent disks"
+    labels:
+      test/feature: "DIRECTOR"
+      test/tags: "DIRECTOR, UPGRADE, LOCAL HOSTPATH, PD"
+      test/priority: "P0"
+      testplan: "https://e2e.mayadata.io/docs/director/installation/TCID-DIR-UPGRADE-ON-LOCAL-HP-ON-PD"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
+
+  - tcid: TCID-DIR-UPGRADE-ON-CSTOR
+    name: "TCID-DIR-UPGRADE-ON-CSTOR"
+    description: "Test Director Upgrade on cstor"
+    labels:
+      test/feature: "DIRECTOR"
+      test/tags: "DIRECTOR, UPGRADE, CSTOR"
+      test/priority: "P0"
+      testplan: "https://e2e.mayadata.io/docs/director/installation/TCID-DIR-UPGRADE-ON-CSTOR"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
+
+  # --------------------------------------------------
   # https://e2e.mayadata.io/docs/director/dmaas/dmaas
   #---------------------------------------------------
   - tcid: TCID-DIR-DMAAS-MYSQL

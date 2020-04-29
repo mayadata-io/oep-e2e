@@ -1,65 +1,45 @@
 ---
 id: installation
-title: Install and Upgrade of Director
+title: Director Install and Upgrade
 sidebar_label: Test Strategy
 ---
 ------
 
-This page captures the test scenarios for installation of DirectorOnPrem _(DOP)_ & upgrading the same. 
+This page captures the test scenarios for following:
+1/ installation of DirectorOnPrem _(DOP)_ &
+2/ upgrade of DOP
 
-## DOP Install
+Director uses three different databases namely:
+- `MySQL` for user data,
+- `Cassandra` for monitoring and alerts, &
+- `ElasticsearchDB` for logs
 
-This test strategy covers installation scenarios using various storage classes, different platforms, different network plugins and different resource constraints.
+As a DevOps admin, I want to test compatibility of Director in consuming storage from different openebs engines. This helps me in planning my infrastructure for my cluster. I want to know the install & upgrade behaviour of Director based on following combinations:
 
-### Installation test strategy or scenarios
-
-Director uses three different databases. It uses `MySQL` for user data, `Cassandra` for monitoring and alerts and `ElasticsearchDB` for logs. Director needs to be tested with various combinations of storages for these databases.
-
-- Install Director with all three databases as LocalPV with GPD/EBS underneath.
-- Install Director with all three databases as OpenEBS LocalPV with local SSDs underneath.
-- Install Director with all three databases as OpenEBS LocalPV with GPD/EBS underneath.
-- Install Director with all three databases as OpenEBS cStor with local SSDs underneath.
-
-### Supported method will be 
-
-- standard sc
-- OpenEBS localPV (Recommended)
-- OpenEBS cStor
-- OpenEBS Jiva (Not Recommended)
-
-### List of uncovered scenarios 
-
-- DOP installation using 3 different storage class such as cstor-storage-class,openebs-jiva-default and openebs-hostpath.
-- Install Director using only openebs-jiva-default storage class.
-
-### Dop installation
-
-| TCID                                   | TC Name                   | GCP             | Rancher | Konvoy | AWS  |
-| -------------------------------------- | ------------------------- | --------------- | ------- | ------ | ---- |
-| [tcid-iudi01](tc-install-gpd-std)      | TC-Install-GPD-Std        | Y               | W       | W      | W    |
-| [tcid-iudi02](tc-install-ssd-lpv)      | TC-Install-SSD-Lpv        | W               | Y       | Y      | W    |
-| [tcid-iudi03](tc-install-gpd-lpv)      | TC-Install-GPD-Lpv        | W               | W       | W      | W    |
-| [tcid-iudi04](tc-install-ssd-cstor)    | TC-Install-SSD-Cstor	     | W               | W       | W      | W    |
+- Director with all its databases consuming openebs device based local pv. The devices in turn would be using GPD/EBS disks.
+- Director with all its databases consuming openebs device based local pv. The devices would be using local SSDs underneath.
+- Director with all its databases consuming openebs hostpath based local pv. The devices would be using local SSDs underneath.
+- Director with all its databases consuming openebs hostpath based local pv. The devices would be using GPD/EBS disks underneath.
+- Director with all its databases consuming openebs cstor engine with local SSDs underneath.
 
 
+### TCID-DIR-INSTALL-ON
+
+| TCID                                                                     |
+|------------------------------------------------------------------------- |
+|[TCID-DIR-INSTALL-ON-LOCAL-DEV](TCID-DIR-INSTALL-ON-LOCAL-DEV)            |
+|[TCID-DIR-INSTALL-ON-LOCAL-DEV-ON-PD](TCID-DIR-INSTALL-ON-LOCAL-DEV-ON-PD)|
+|[TCID-DIR-INSTALL-ON-LOCAL-HP](TCID-DIR-INSTALL-ON-LOCAL-HP)              |
+|[TCID-DIR-INSTALL-ON-LOCAL-HP-ON-PD](TCID-DIR-INSTALL-ON-LOCAL-HP-ON-PD)  |
+|[TCID-DIR-INSTALL-ON-CSTOR](TCID-DIR-INSTALL-ON-CSTOR)                    |
 
 
-## Upgrade of Director OnPrem
+### TCID-DIR-UPGRADE-ON
 
-Upgrade of Director consists of upgrading the Director micro services and upgrading underlying databases when needed.
-
-### Upgrade scenarios
-
-- Upgrade using helm chart when sc is standard.
-- Upgrade using helm chart when sc is localPV.
-- Upgrade using helm chart when sc is cstor.
-- Upgrade the underlying databases manually using database operators or otherwise.
-
-
-### Dop upgrade
-
-| TCID                                   | TC Name                   | GCP             | Rancher | Konvoy | AWS  |
-| -------------------------------------- | ------------------------- | --------------- | ------- | ------ | ---- |
-| [tcid-iudu01](tc-upgrade-gpd-std)      | TC-Upgrade-GPD-Std        | W               | W       | W      | W    |
-| [tcid-iudu02](tc-upgrade-ssd-lpv)      | TC-Upgrade-SSD-Lpv        | W               | W       | W      | W    |
-| [tcid-iudu03](tc-upgrade-ssd-cstor)    | TC-Upgrade-SSD-Cstor      | W               | W       | W      | W    |
+| TCID                                                                     |
+|------------------------------------------------------------------------- |
+|[TCID-DIR-UPGRADE-ON-LOCAL-DEV](TCID-DIR-UPGRADE-ON-LOCAL-DEV)            |
+|[TCID-DIR-UPGRADE-ON-LOCAL-DEV-ON-PD](TCID-DIR-UPGRADE-ON-LOCAL-DEV-ON-PD)|
+|[TCID-DIR-UPGRADE-ON-LOCAL-HP](TCID-DIR-UPGRADE-ON-LOCAL-HP)              |
+|[TCID-DIR-UPGRADE-ON-LOCAL-HP-ON-PD](TCID-DIR-UPGRADE-ON-LOCAL-HP-ON-PD)  |
+|[TCID-DIR-UPGRADE-ON-CSTOR](TCID-DIR-UPGRADE-ON-CSTOR)                    |
