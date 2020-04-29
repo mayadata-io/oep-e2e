@@ -2,14 +2,14 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: create-cstor-pool-
+  generateName: list-recommendations-stripe-
   namespace: litmus
 spec:
   template:
     metadata:
       name: litmus
       labels:
-        app: create-cstor-pool
+        app: list-recommendations-stripe
     spec:
       serviceAccountName: litmus
       restartPolicy: Never
@@ -55,7 +55,7 @@ spec:
             value: default  
 
         command: ["/bin/bash"]
-        args: ["-c", "ansible-playbook ./litmus/director/tcid-ppcp01-create-cstor-pool/test.yml -i /etc/ansible/hosts -v; exit 0"]
+        args: ["-c", "ansible-playbook ./litmus/director/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-STRIPE/test.yml -i /etc/ansible/hosts -v; exit 0"]
 
       imagePullSecrets:
       - name: oep-secret   

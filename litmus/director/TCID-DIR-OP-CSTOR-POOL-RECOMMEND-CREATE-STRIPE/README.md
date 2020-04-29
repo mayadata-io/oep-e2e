@@ -1,7 +1,7 @@
-# List the capacity recommendations
+# Create cstor pool using recommendations
 
-<b>tcid:</b> cpre01 <br>
-<b>name:</b> "List the capacity recommendations"<br>
+<b>tcid:</b> TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-STRIPE <br>
+<b>name:</b> "Create cstor pool using recommendations"<br>
 
 
 ## Experiment Metadata
@@ -14,7 +14,7 @@
   </tr>
   <tr>
     <td> Cstor Pool Recommendation </td>
-    <td> List the capacity recommendations </td>
+    <td> Create cstor pool using recommendations </td>
     <td> GKE </td>
   </tr>
 </table>
@@ -27,13 +27,11 @@
 
 ## Details
 
-- This test case is to list the capacity recommendations of cstorpools.
-- Test case will list the capacity with `maxCapacity` and `minCapacity`
+- This test cases is to create cstor pool using recommendations.
 
 ### Expected output
 
-- The output of this test case will be the list of capacity recommendations including min and max 
-capacity of cstor pools.
+- List of Device recommendation and using the device recommendation to create cstor pool.
 
 ## Steps Performed in the test
 
@@ -45,11 +43,18 @@ capacity of cstor pools.
 
 - Now you will get the `recommendation_id `
 
-- After this, by the help of this recommendation_id POST request on  `url :'{{ director_url }}/v3/groups/{{ group_id }}/{{ recommendation_id }}/?action=getcapacityrecommendation'`  by this POST request you will get list of capacity recommendations
+- After this, by the help of this recommendation_id POST request on  `url :'{{ director_url }}/v3/groups/{{ group_id }}/{{ recommendation_id }}/?action=getdevicerecommendation'`  by this POST request you will get list of device recommendations
 
 - BODY OF REQUEST
 
-    `'{"clusterId":"{{ cluster_id }}", "raidGroupConfig":{"groupDeviceCount":1, "type":"stripe"}}'`
+    `'{"clusterId":"{{ cluster_id }}", "deviceGroupName": null,"poolCapacity":"1G","poolName":null, "raidGroupConfig":{"groupDeviceCount":1, "type":"stripe"}}'`
+
+- After getting device recommendation fetch the json data and POST request on ` {director-url}/v3/groups/1a{group-id}/recommendations/cstorpooloperations`
+
+- At last give POST request on `{director-url}/v3/groups/1a{group-id}/cstorpooloperations/1cpo{cstorpooloperation-id}/?action=execute` to execute CStorPoolOpetation
+
+- Now wait until CStorPoolOpetation's state become success.
+
 
 ## Integrations
 

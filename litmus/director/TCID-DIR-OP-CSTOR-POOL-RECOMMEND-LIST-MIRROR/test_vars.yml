@@ -1,4 +1,4 @@
-test_name: recommendations-mirror
+test_name: list-recommendation-mirror
 openebs_components:
   [
     'openebs-provisioner',
