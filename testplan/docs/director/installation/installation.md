@@ -18,22 +18,28 @@ As a DevOps admin, I want to test compatibility of Director in consuming storage
 
 - Director with all its databases consuming openebs device based local pv. The devices in turn would be using GPD/EBS disks.
 - Director with all its databases consuming openebs device based local pv. The devices would be using local SSDs underneath.
+- Director with all its databases consuming openebs hostpath based local pv. The devices would be using local SSDs underneath.
+- Director with all its databases consuming openebs hostpath based local pv. The devices would be using GPD/EBS disks underneath.
 - Director with all its databases consuming openebs cstor engine with local SSDs underneath.
 
 
 ### TCID-DIR-INSTALL-ON
 
-| TCID                                                         | RANCHER | AWS | KONVOY|
-|------------------------------------------------------------- |-------- |-----|-------|
-|[TCID-DIR-INSTALL-ON-LOCAL-DEV](TCID-DIR-INSTALL-ON-LOCAL-DEV)|         |     |       |
-|[TCID-DIR-INSTALL-ON-LOCAL-HP](TCID-DIR-INSTALL-ON-LOCAL-HP)  |         |     |       |
-|[TCID-DIR-INSTALL-ON-CSTOR](TCID-DIR-INSTALL-ON-CSTOR)        |         |     |       |
+| TCID                                                                     |
+|------------------------------------------------------------------------- |
+|[TCID-DIR-INSTALL-ON-LOCAL-DEV](TCID-DIR-INSTALL-ON-LOCAL-DEV)            |
+|[TCID-DIR-INSTALL-ON-LOCAL-DEV-ON-PD](TCID-DIR-INSTALL-ON-LOCAL-DEV-ON-PD)|
+|[TCID-DIR-INSTALL-ON-LOCAL-HP](TCID-DIR-INSTALL-ON-LOCAL-HP)              |
+|[TCID-DIR-INSTALL-ON-LOCAL-HP-ON-PD](TCID-DIR-INSTALL-ON-LOCAL-HP-ON-PD)  |
+|[TCID-DIR-INSTALL-ON-CSTOR](TCID-DIR-INSTALL-ON-CSTOR)                    |
 
 
 ### TCID-DIR-UPGRADE-ON
 
-| TCID                                                         | RANCHER | AWS | KONVOY|
-|------------------------------------------------------------- |-------- |-----|-------|
-|[TCID-DIR-UPGRADE-ON-LOCAL-DEV](TCID-DIR-UPGRADE-ON-LOCAL-DEV)|         |     |       |
-|[TCID-DIR-UPGRADE-ON-LOCAL-HP](TCID-DIR-UPGRADE-ON-LOCAL-HP)  |         |     |       |
-|[TCID-DIR-UPGRADE-ON-CSTOR](TCID-DIR-UPGRADE-ON-CSTOR)        |         |     |       |
+| TCID                                                                     |
+|------------------------------------------------------------------------- |
+|[TCID-DIR-UPGRADE-ON-LOCAL-DEV](TCID-DIR-UPGRADE-ON-LOCAL-DEV)            |
+|[TCID-DIR-UPGRADE-ON-LOCAL-DEV-ON-PD](TCID-DIR-UPGRADE-ON-LOCAL-DEV-ON-PD)|
+|[TCID-DIR-UPGRADE-ON-LOCAL-HP](TCID-DIR-UPGRADE-ON-LOCAL-HP)              |
+|[TCID-DIR-UPGRADE-ON-LOCAL-HP-ON-PD](TCID-DIR-UPGRADE-ON-LOCAL-HP-ON-PD)  |
+|[TCID-DIR-UPGRADE-ON-CSTOR](TCID-DIR-UPGRADE-ON-CSTOR)                    |
