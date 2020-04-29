@@ -4,7 +4,7 @@ title: OEP Test Compatbility Matrix
 sidebar_label: Compatibility Matrix
 ---
 
-OEP Versions tested against different platform combination are listed here.
+This page captures platforms and components used while testing each version of OEP Version. It can be used to derive the platform compatibility chart. 
 
 **OEP Version 1.9**
 
