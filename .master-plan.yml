@@ -140,6 +140,45 @@ spec:
   # --------------------------------------------------
   # https://e2e.mayadata.io/docs/director/dmaas/dmaas
   #---------------------------------------------------
+  - tcid: TCID-DIR-DMAAS-SOURCE-CLUSTER-GONE
+    name: "TCID-DIR-DMAAS-SOURCE-CLUSTER-GONE"
+    description: "Test DMAAS when source cluster is no longer available"
+    labels:
+      test/feature: "DMAAS"
+      test/tags: "DIRECTOR, DMAAS, MYSQL, SOURCE, UNAVAILABLE"
+      test/priority: "P0"
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-TCID-DIR-DMAAS-SOURCE-CLUSTER-GONE"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
+
+  - tcid: TCID-DIR-DMAAS-VERSION-COMPATIBILITY-ML
+    name: "TCID-DIR-DMAAS-VERSION-COMPATIBILITY-ML"
+    description: "Test DMAAS for Machine Learning usecases on different Director versions"
+    labels:
+      test/feature: "DMAAS"
+      test/tags: "DIRECTOR, DMAAS, MYSQL, VERSION, COMPATIBILITY, MACHINE LEARNING"
+      test/priority: "P0"
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-VERSION-COMPATIBILITY-ML"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
+
+  - tcid: TCID-DIR-DMAAS-DATA-MOVEMENT-ACROSS-SETUPS
+    name: "TCID-DIR-DMAAS-DATA-MOVEMENT-ACROSS-SETUPS"
+    description: "Test DMAAS for data movement across setups"
+    labels:
+      test/feature: "DMAAS"
+      test/tags: "DIRECTOR, DMAAS, MYSQL, DATA MOVEMENT, MULTI SETUP"
+      test/priority: "P0"
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-DATA-MOVEMENT-ACROSS-SETUPS"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
+
   - tcid: TCID-DIR-DMAAS-MYSQL
     name: "TCID-DIR-DMAAS-MYSQL"
     description: "Test DMAAS for MYSQL"
@@ -179,149 +218,226 @@ spec:
       konvoy/results: ""
       aws/results: ""
 
-  - tcid: TCID-DIR-DMAAS-SCHD-CSTOR
-    name: "TCID-DIR-DMAAS-SCHD-CSTOR"
+  - tcid: TCID-DIR-DMAAS-PSP
+    name: "TCID-DIR-DMAAS-PSP"
+    description: "Test DMAAS for Pod Security Policy"
+    labels:
+      test/feature: "DMAAS"
+      test/tags: "DIRECTOR, DMAAS, PSP"
+      test/priority: "P0"
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-PSP"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
+
+  - tcid: TCID-DIR-DMAAS-EXCLUDE-SECRET
+    name: "TCID-DIR-DMAAS-EXCLUDE-SECRET"
+    description: "Test DMAAS that excludes backing up kubernetes secrets"
+    labels:
+      test/feature: "DMAAS"
+      test/tags: "DIRECTOR, DMAAS, PSP"
+      test/priority: "P0"
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-EXCLUDE-SECRET"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
+
+  - tcid: TCID-DIR-DMAAS-SCHD-CSTOR-MINIO-BUCKET
+    name: "TCID-DIR-DMAAS-SCHD-CSTOR-MINIO-BUCKET"
     description: "Test DMAAS schedule for cstor engine"
     labels:
       test/feature: "DMAAS"
-      test/tags: "DIRECTOR, DMAAS, SCHEDULE, CSTOR"
+      test/tags: "DIRECTOR, DMAAS, SCHEDULE, CSTOR, MINIO"
       test/priority: "P0"
-      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-CSTOR"
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-CSTOR-MINIO-BUCKET"
       git/pullrequest: ""
       rancher/results: ""
       konvoy/results: ""
       aws/results: ""
 
-  - tcid: TCID-DIR-DMAAS-SCHD-JIVA
-    name: "TCID-DIR-DMAAS-SCHD-JIVA"
+  - tcid: TCID-DIR-DMAAS-SCHD-CSTOR-AWS-BUCKET
+    name: "TCID-DIR-DMAAS-SCHD-CSTOR-AWS-BUCKET"
+    description: "Test DMAAS schedule for cstor engine"
+    labels:
+      test/feature: "DMAAS"
+      test/tags: "DIRECTOR, DMAAS, SCHEDULE, CSTOR, AWS"
+      test/priority: "P0"
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-CSTOR-AWS-BUCKET"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
+
+  - tcid: TCID-DIR-DMAAS-SCHD-JIVA-MINIO-BUCKET
+    name: "TCID-DIR-DMAAS-SCHD-JIVA-MINIO-BUCKET"
     description: "Test DMAAS schedule for jiva engine"
     labels:
       test/feature: "DMAAS"
-      test/tags: "DIRECTOR, DMAAS, SCHEDULE, JIVA"
+      test/tags: "DIRECTOR, DMAAS, SCHEDULE, JIVA, MINIO"
       test/priority: "P0"
-      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-JIVA"
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-JIVA-MINIO-BUCKET"
       git/pullrequest: ""
       rancher/results: ""
       konvoy/results: ""
       aws/results: ""
 
-  - tcid: TCID-DIR-DMAAS-SCHD-LOCAL-DEV
-    name: "TCID-DIR-DMAAS-SCHD-LOCAL-DEV"
+  - tcid: TCID-DIR-DMAAS-SCHD-JIVA-AWS-BUCKET
+    name: "TCID-DIR-DMAAS-SCHD-JIVA-AWS-BUCKET"
+    description: "Test DMAAS schedule for jiva engine"
+    labels:
+      test/feature: "DMAAS"
+      test/tags: "DIRECTOR, DMAAS, SCHEDULE, JIVA, AWS"
+      test/priority: "P0"
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-JIVA-AWS-BUCKET"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
+
+  - tcid: TCID-DIR-DMAAS-SCHD-LOCAL-DEV-MINIO-BUCKET
+    name: "TCID-DIR-DMAAS-SCHD-LOCAL-DEV-MINIO-BUCKET"
     description: "Test DMAAS schedule for local pv device engine"
     labels:
       test/feature: "DMAAS"
-      test/tags: "DIRECTOR, DMAAS, SCHEDULE, LOCAL PV DEVICE"
+      test/tags: "DIRECTOR, DMAAS, SCHEDULE, LOCAL PV DEVICE, MINIO"
       test/priority: "P0"
-      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-LOCAL-DEV"
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-LOCAL-DEV-MINIO-BUCKET"
       git/pullrequest: ""
       rancher/results: ""
       konvoy/results: ""
       aws/results: ""
 
-  - tcid: TCID-DIR-DMAAS-SCHD-LOCAL-HP
-    name: "TCID-DIR-DMAAS-SCHD-LOCAL-HP"
+  - tcid: TCID-DIR-DMAAS-SCHD-LOCAL-DEV-AWS-BUCKET
+    name: "TCID-DIR-DMAAS-SCHD-LOCAL-DEV-AWS-BUCKET"
+    description: "Test DMAAS schedule for local pv device engine"
+    labels:
+      test/feature: "DMAAS"
+      test/tags: "DIRECTOR, DMAAS, SCHEDULE, LOCAL PV DEVICE, AWS"
+      test/priority: "P0"
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-LOCAL-DEV-AWS-BUCKET"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
+
+  - tcid: TCID-DIR-DMAAS-SCHD-LOCAL-HP-MINIO-BUCKET
+    name: "TCID-DIR-DMAAS-SCHD-LOCAL-HP-MINIO-BUCKET"
     description: "Test DMAAS schedule for local pv hostpath engine"
     labels:
       test/feature: "DMAAS"
-      test/tags: "DIRECTOR, DMAAS, SCHEDULE, LOCAL PV HOSTPATH"
+      test/tags: "DIRECTOR, DMAAS, SCHEDULE, LOCAL PV HOSTPATH, MINIO"
       test/priority: "P0"
-      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-LOCAL-HP"
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-LOCAL-HP-MINIO-BUCKET"
       git/pullrequest: ""
       rancher/results: ""
       konvoy/results: ""
       aws/results: ""
 
-  - tcid: TCID-DIR-DMAAS-SCHD-CASSANDRA
-    name: "TCID-DIR-DMAAS-SCHD-CASSANDRA"
+  - tcid: TCID-DIR-DMAAS-SCHD-LOCAL-HP-AWS-BUCKET
+    name: "TCID-DIR-DMAAS-SCHD-LOCAL-HP-AWS-BUCKET"
+    description: "Test DMAAS schedule for local pv hostpath engine"
+    labels:
+      test/feature: "DMAAS"
+      test/tags: "DIRECTOR, DMAAS, SCHEDULE, LOCAL PV HOSTPATH, AWS"
+      test/priority: "P0"
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-LOCAL-HP-AWS-BUCKET"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
+
+  - tcid: TCID-DIR-DMAAS-SCHD-SOAK-CASSANDRA
+    name: "TCID-DIR-DMAAS-SCHD-SOAK-CASSANDRA"
     description: "Test DMAAS schedule for cassandra stateful application"
     labels:
       test/feature: "DMAAS"
-      test/tags: "DIRECTOR, DMAAS, SCHEDULE, CASSANDRA"
+      test/tags: "DIRECTOR, DMAAS, SCHEDULE, CASSANDRA, SOAK"
       test/priority: "P0"
-      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-CASSANDRA"
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-SOAK-CASSANDRA"
       git/pullrequest: ""
       rancher/results: ""
       konvoy/results: ""
       aws/results: ""
 
-  - tcid: TCID-DIR-DMAAS-SCHD-KAFKA
-    name: "TCID-DIR-DMAAS-SCHD-KAFKA"
+  - tcid: TCID-DIR-DMAAS-SCHD-SOAK-KAFKA
+    name: "TCID-DIR-DMAAS-SCHD-SOAK-KAFKA"
     description: "Test DMAAS schedule for kafka stateful application"
     labels:
       test/feature: "DMAAS"
-      test/tags: "DIRECTOR, DMAAS, SCHEDULE, KAFKA"
+      test/tags: "DIRECTOR, DMAAS, SCHEDULE, KAFKA, SOAK"
       test/priority: "P0"
-      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-KAFKA"
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-SOAK-KAFKA"
       git/pullrequest: ""
       rancher/results: ""
       konvoy/results: ""
       aws/results: ""
 
-  - tcid: TCID-DIR-DMAAS-SCHD-MYSQL
-    name: "TCID-DIR-DMAAS-SCHD-MYSQL"
+  - tcid: TCID-DIR-DMAAS-SCHD-SOAK-MYSQL
+    name: "TCID-DIR-DMAAS-SCHD-SOAK-MYSQL"
     description: "Test DMAAS schedule for mysql stateful application"
     labels:
       test/feature: "DMAAS"
-      test/tags: "DIRECTOR, DMAAS, SCHEDULE, MYSQL"
+      test/tags: "DIRECTOR, DMAAS, SCHEDULE, MYSQL, SOAK"
       test/priority: "P0"
-      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-MYSQL"
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-SOAK-MYSQL"
       git/pullrequest: ""
       rancher/results: ""
       konvoy/results: ""
       aws/results: ""
 
-  - tcid: TCID-DIR-DMAAS-SCHD-WORDPRESS
-    name: "TCID-DIR-DMAAS-SCHD-WORDPRESS"
+  - tcid: TCID-DIR-DMAAS-SCHD-SOAK-WORDPRESS
+    name: "TCID-DIR-DMAAS-SCHD-SOAK-WORDPRESS"
     description: "Test DMAAS schedule for wordpress application"
     labels:
       test/feature: "DMAAS"
-      test/tags: "DIRECTOR, DMAAS, SCHEDULE, WORDPRESS"
+      test/tags: "DIRECTOR, DMAAS, SCHEDULE, WORDPRESS, SOAK"
       test/priority: "P0"
-      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-WORDPRESS"
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-SOAK-WORDPRESS"
       git/pullrequest: ""
       rancher/results: ""
       konvoy/results: ""
       aws/results: ""
 
-  - tcid: TCID-DIR-DMAAS-SCHD-NGINX
-    name: "TCID-DIR-DMAAS-SCHD-NGINX"
+  - tcid: TCID-DIR-DMAAS-SCHD-SOAK-NGINX
+    name: "TCID-DIR-DMAAS-SCHD-SOAK-NGINX"
     description: "Test DMAAS schedule for nginx application"
     labels:
       test/feature: "DMAAS"
-      test/tags: "DIRECTOR, DMAAS, SCHEDULE, NGINX"
+      test/tags: "DIRECTOR, DMAAS, SCHEDULE, NGINX, SOAK"
       test/priority: "P0"
       testplan: ""
-      git/pullrequest: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-NGINX"
+      git/pullrequest: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-SOAK-NGINX"
       rancher/results: ""
       konvoy/results: ""
       aws/results: ""
 
-  - tcid: TCID-DIR-DMAAS-SCHD-PERCONA
-    name: "TCID-DIR-DMAAS-SCHD-PERCONA"
+  - tcid: TCID-DIR-DMAAS-SCHD-SOAK-PERCONA
+    name: "TCID-DIR-DMAAS-SCHD-SOAK-PERCONA"
     description: "Test DMAAS schedule for percona stateful application"
     labels:
       test/feature: "DMAAS"
-      test/tags: "DIRECTOR, DMAAS, SCHEDULE, PERCONA"
+      test/tags: "DIRECTOR, DMAAS, SCHEDULE, PERCONA, SOAK"
       test/priority: "P0"
       testplan: ""
-      git/pullrequest: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-PERCONA"
+      git/pullrequest: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-SOAK-PERCONA"
       rancher/results: ""
       konvoy/results: ""
       aws/results: ""
 
-  - tcid: TCID-DIR-DMAAS-SCHD-MONITOR
-    name: "TCID-DIR-DMAAS-SCHD-MONITOR"
+  - tcid: TCID-DIR-DMAAS-SCHD-SOAK-MONITOR
+    name: "TCID-DIR-DMAAS-SCHD-SOAK-MONITOR"
     description: "Test ability to monitor DMAAS schedule"
     labels:
       test/feature: "DMAAS"
-      test/tags: "DIRECTOR, DMAAS, SCHEDULE, MONITOR"
+      test/tags: "DIRECTOR, DMAAS, SCHEDULE, MONITOR, SOAK"
       test/priority: "P0"
       testplan: ""
-      git/pullrequest: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-MONITOR"
+      git/pullrequest: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-SOAK-MONITOR"
       rancher/results: ""
       konvoy/results: ""
       aws/results: ""
-
 
   # --------------------------------------------------
   # https://e2e.mayadata.io/docs/director/openebs-provisioning/provisioning
