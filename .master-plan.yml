@@ -662,3 +662,81 @@ spec:
       rancher/results: ""
       konvoy/results: ""
       aws/results: ""
+
+  - tcid: TCID-DIR-OP-CSTOR-POOL-DAY2-REPLACE-BAD-DISK
+    name: "TCID-DIR-OP-CSTOR-POOL-DAY2-REPLACE-BAD-DISK"
+    description: "Test bad disk replacement in cstor pool"
+    labels:
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, BAD, DISK, REPLACEMENT"
+      test/priority: "P0"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-DAY2-REPLACE-BAD-DISK"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
+
+  - tcid: TCID-DIR-OP-CSTOR-POOL-DAY2-ADD-DISK
+    name: "TCID-DIR-OP-CSTOR-POOL-DAY2-ADD-DISK"
+    description: "Test add disk in cstor pool"
+    labels:
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, ADD, DISK"
+      test/priority: "P0"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-DAY2-ADD-DISK"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
+
+  - tcid: TCID-DIR-OP-CSTOR-POOL-DAY2-NOTIFY-BAD-DISK
+    name: "TCID-DIR-OP-CSTOR-POOL-DAY2-NOTIFY-BAD-DISK"
+    description: "Test bad disk notification in cstor pool"
+    labels:
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, NOTIFY, BAD, DISK"
+      test/priority: "P0"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-DAY2-NOTIFY-BAD-DISK"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
+
+  - tcid: TCID-DIR-OP-CSTOR-POOL-DAY2-NOTIFY-POOL-CAP
+    name: "TCID-DIR-OP-CSTOR-POOL-DAY2-NOTIFY-POOL-CAP"
+    description: "Test pool capacity notification in cstor pool"
+    labels:
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, POOL, CAPACITY, NOTIFY"
+      test/priority: "P0"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-DAY2-NOTIFY-POOL-CAP"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
+
+  - tcid: TCID-DIR-OP-CSTOR-POOL-DAY2-NOTIFY-POOL-PERF
+    name: "TCID-DIR-OP-CSTOR-POOL-DAY2-NOTIFY-POOL-PERF"
+    description: "Test cstor pool performance notification"
+    labels:
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, POOL, PERFORMANCE, NOTIFY"
+      test/priority: "P0"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-DAY2-NOTIFY-POOL-PERF"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
+
+  - tcid: TCID-DIR-OP-CSTOR-POOL-DAY2-VOL-RE-BALANCE
+    name: "TCID-DIR-OP-CSTOR-POOL-DAY2-VOL-RE-BALANCE"
+    description: "Test volume rebalancing in cstor pool"
+    labels:
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, POOL, VOLUME, RE-BALANCE"
+      test/priority: "P0"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-DAY2-VOL-RE-BALANCE"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
