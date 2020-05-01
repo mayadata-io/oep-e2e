@@ -1,7 +1,7 @@
 ---
-id: TCID-DIR-OP-CSTOR-POOL-MIRROR-RECOMMEND-REBOOT-NODE
+id: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-MIRROR-UPGRADE-NODE
 title: Verify mirror cstor pool cluster after node reboot
-sidebar_label: TCID-DIR-OP-CSTOR-POOL-MIRROR-RECOMMEND-REBOOT-NODE
+sidebar_label: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-MIRROR-UPGRADE-NODE
 ---
 ------
 
@@ -14,7 +14,7 @@ sidebar_label: TCID-DIR-OP-CSTOR-POOL-MIRROR-RECOMMEND-REBOOT-NODE
     <th> Description </th>
   </tr>
   <tr>
-    <td> TCID-DIR-OP-CSTOR-POOL-MIRROR-RECOMMEND-REBOOT-NODE </td>
+    <td> TCID-DIR-OP-CSTOR-POOL-RECOMMEND-MIRROR-UPGRADE-NODE </td>
     <td> Verify mirror cstor pool cluster after node reboot </td>
     <td> Verify creation of mirror cstor pool cluster </td>
   </tr>
