@@ -611,53 +611,53 @@ spec:
       konvoy/results: ""
       aws/results: ""
 
-  - tcid: TCID-DIR-OP-CSTOR-POOL-MIRROR-UPGRADE-NODE
-    name: "TCID-DIR-OP-CSTOR-POOL-MIRROR-UPGRADE-NODE"
+  - tcid: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-MIRROR-UPGRADE-NODE
+    name: "TCID-DIR-OP-CSTOR-POOL-RECOMMEND-MIRROR-UPGRADE-NODE"
     description: "Test mirror based cstor pool when node is upgraded"
     labels:
       test/feature: "OPENEBS PROVISIONING"
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, MIRROR, NODE, UPGRADE"
       test/priority: "P0"
-      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-MIRROR-UPGRADE-NODE"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-MIRROR-UPGRADE-NODE"
       git/pullrequest: ""
       rancher/results: ""
       konvoy/results: ""
       aws/results: ""
 
-  - tcid: TCID-DIR-OP-CSTOR-POOL-RAIDZ-UPGRADE-NODE
-    name: "TCID-DIR-OP-CSTOR-POOL-RAIDZ-UPGRADE-NODE"
+  - tcid: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-RAIDZ-UPGRADE-NODE
+    name: "TCID-DIR-OP-CSTOR-POOL-RECOMMEND-RAIDZ-UPGRADE-NODE"
     description: "Test raidz based cstor pool when node is upgraded"
     labels:
       test/feature: "OPENEBS PROVISIONING"
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, RAIDZ, NODE, UPGRADE"
       test/priority: "P0"
-      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RAIDZ-UPGRADE-NODE"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-RAIDZ-UPGRADE-NODE"
       git/pullrequest: ""
       rancher/results: ""
       konvoy/results: ""
       aws/results: ""
 
-  - tcid: TCID-DIR-OP-CSTOR-POOL-MIRROR-REBOOT-NODE
-    name: "TCID-DIR-OP-CSTOR-POOL-MIRROR-REBOOT-NODE"
+  - tcid: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-MIRROR-REBOOT-NODE
+    name: "TCID-DIR-OP-CSTOR-POOL-RECOMMEND-MIRROR-REBOOT-NODE"
     description: "Test mirror based cstor pool when node is rebooted"
     labels:
       test/feature: "OPENEBS PROVISIONING"
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, MIRROR, NODE, REBOOT"
       test/priority: "P0"
-      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-MIRROR-REBOOT-NODE"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-MIRROR-REBOOT-NODE"
       git/pullrequest: ""
       rancher/results: ""
       konvoy/results: ""
       aws/results: ""
 
-  - tcid: TCID-DIR-OP-CSTOR-POOL-RAIDZ-REBOOT-NODE
-    name: "TCID-DIR-OP-CSTOR-POOL-RAIDZ-REBOOT-NODE"
+  - tcid: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-RAIDZ-REBOOT-NODE
+    name: "TCID-DIR-OP-CSTOR-POOL-RECOMMEND-RAIDZ-REBOOT-NODE"
     description: "Test raidz based cstor pool when node is rebooted"
     labels:
       test/feature: "OPENEBS PROVISIONING"
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, RAIDZ, NODE, REBOOT"
       test/priority: "P0"
-      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RAIDZ-REBOOT-NODE"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-RAIDZ-REBOOT-NODE"
       git/pullrequest: ""
       rancher/results: ""
       konvoy/results: ""
