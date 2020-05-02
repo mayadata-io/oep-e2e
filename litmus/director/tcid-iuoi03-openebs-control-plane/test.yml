@@ -73,7 +73,7 @@
             status_code: 200
           register: node_details
 
-         ## Define variable node_id
+        ## Define variable node_id
         - set_fact:
             node_id: []
 
