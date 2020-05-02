@@ -59,14 +59,6 @@
           register: openebs_namespace
           when: "count_maya_api.stdout == '1'"
 
-        ## Removing the labels from the cluster nodes
-        - include_tasks: /utils/openebs-label-cleanup.yml
-
-        ## Deleting openebs from the cluster
-        - include_tasks: /utils/openebs-cleanup.yml
-          vars:
-            namespace: "{{ openebs_namespace.stdout }}"
-
         ## Getting node details of the cluster
         ## Selecting the node which is in active state in the cluster
         - name: Getting the node details of the cluster which is in active state
@@ -91,6 +83,13 @@
             node_id: "{{ node_id  + [item.id] }}"
           loop: "{{ node_details.json.data }}"
 
+        ## Openebs cleanup and label cleanup
+        - name: Openebs cleanup and label cleanup
+          include_tasks: /utils/openebs-label-cleanup.yml
+          include_tasks: /utils/openebs-cleanup.yml
+          vars:
+            namespace: "{{ openebs_namespace.stdout }}"
+          when: "count_maya_api.stdout == '1'"
 
         ## Labeling node-1 of the Cluster with controlPlaneNode=true and dataPlaneNode=false
         ## With the first element in the node_id list
