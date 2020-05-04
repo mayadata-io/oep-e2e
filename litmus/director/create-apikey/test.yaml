@@ -30,6 +30,30 @@
             jwt: "{{ signup.json.jwt }}"
             accountId: "{{ signup.json.accountId }}"
 
+        - name: Fetch email of user
+          uri:
+            url: "{{ director_url }}/v3/accounts/{{ accountId }}"
+            url_username: "{{username}}"
+            url_password: "{{password}}"
+            method: GET
+            status_code: 200
+          register: user_details
+
+        - set_fact: 
+            user_email: "{{user_details.json.email}}"
+
+        - name : Change value for onboardingStatus
+          uri:
+            url: "{{ director_url }}/v3/accounts/{{ accountId }}"
+            url_username: "{{username}}"
+            url_password: "{{password}}"
+            method: PUT
+            body_format: json
+            body:
+              {"firstName":"{{ firstname }}", "lastName":"{{ surname }}","email":"{{ user_email }}", "onboardingStatus":3}
+            status_code: 200
+          register: onboarding_status
+
         #- set_fact:
         #    token_template: "token={{ jwt }}; authProvider=localAuthConfig;"
         
