@@ -22,15 +22,6 @@ module.exports = {
 		        label: 'Authentication',
 		        items: [
 				'director/authentication/authentication',
-				'director/authentication/tc-auth-la-admin',
-				'director/authentication/tc-auth-la-user',
-				'director/authentication/tc-auth-la-signup',
-				'director/authentication/tc-auth-github-user',
-				'director/authentication/tc-auth-github-signup',
-				'director/authentication/tc-auth-gmail-user',
-				'director/authentication/tc-auth-gmail-signup',
-				'director/authentication/tc-auth-ad-user',
-				'director/authentication/tc-auth-ad-signup'
 			],
 		},
 		{
