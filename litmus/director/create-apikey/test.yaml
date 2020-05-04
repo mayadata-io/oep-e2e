@@ -30,7 +30,7 @@
             jwt: "{{ signup.json.jwt }}"
             accountId: "{{ signup.json.accountId }}"
 
-        - name: Fetch email of user
+        - name: Fetch user details
           uri:
             url: "{{ director_url }}/v3/accounts/{{ accountId }}"
             url_username: "{{username}}"
@@ -42,7 +42,7 @@
         - set_fact: 
             user_email: "{{user_details.json.email}}"
 
-        - name : Change value for onboardingStatus
+        - name : Change value of onboardingStatus
           uri:
             url: "{{ director_url }}/v3/accounts/{{ accountId }}"
             url_username: "{{username}}"
