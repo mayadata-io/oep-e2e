@@ -49,11 +49,11 @@ module.exports = {
                 		'director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST',
 		                'director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-NO-NDM',
 						'director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-STRIPE',
-						'director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-MIRROR',
 						'director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-RAIDZ',
+						'director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-RAIDZ',
 		                'director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-STRIPE',
-						'director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-MIRROR',
-						'director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-RAIDZ'
+                		'director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-MIRROR',
+		                'director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-MIRROR'
 			],
 		},
 		{
