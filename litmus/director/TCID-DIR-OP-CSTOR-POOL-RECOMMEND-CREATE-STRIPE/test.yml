@@ -37,7 +37,7 @@
           retries: 20
           delay: 5
         
-        - pause:
+        - pause:	
             minutes: 2
 
         ## Fetch the recommendation details

@@ -37,6 +37,9 @@
           retries: 20
           delay: 5
 
+        - pause:	
+            minutes: 2
+
         ## Fetch the recommendation details
         - name: Fetch recommendations details
           uri:
