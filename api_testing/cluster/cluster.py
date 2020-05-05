@@ -96,7 +96,7 @@ class Cluster():
             timer = 3
             total_time = 0
             while not self.isActive():
-                if total_time >= 180:
+                if total_time >= 300:
                     print("Cluster is not getting Active. Something is wrong")
                     sys.exit(1)
                 time.sleep(timer)
