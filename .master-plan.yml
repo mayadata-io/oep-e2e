@@ -587,7 +587,7 @@ spec:
 
 - tcid: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-RAIDZ
     name: "TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-RAIDZ"
-    description: "Test creation of mirror based cstor pool recommendations"
+    description: "Test creation of raidz based cstor pool recommendations"
     labels:
       test/feature: "OPENEBS PROVISIONING"
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, RAIDZ, RECOMMENDATIONS"
