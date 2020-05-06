@@ -61,14 +61,14 @@ module.exports = {
 		        label: 'DMaaS',
 		        items: [
 				'director/dmaas/dmaas',
-				'director/dmaas/dmaas/TCID-DIR-DMAAS-SCHD-CSTOR-AWS-BUCKET',
-				'director/dmaas/dmaas/TCID-DIR-DMAAS-SCHD-CSTOR-MINIO-BUCKET',
-				'director/dmaas/dmaas/TCID-DIR-DMAAS-SCHD-JIVA-AWS-BUCKET',
-				'director/dmaas/dmaas/TCID-DIR-DMAAS-SCHD-JIVA-MINIO-BUCKET',
-				'director/dmaas/dmaas/TCID-DIR-DMAAS-SCHD-LOCAL-DEV-AWS-BUCKET',
-				'director/dmaas/dmaas/TCID-DIR-DMAAS-SCHD-LOCAL-DEV-MINIO-BUCKET',
-				'director/dmaas/dmaas/TCID-DIR-DMAAS-SCHD-LOCAL-HP-AWS-BUCKET',
-				'director/dmaas/dmaas/TCID-DIR-DMAAS-SCHD-LOCAL-HP-MINIO-BUCKET'
+				'director/dmaas/TCID-DIR-DMAAS-SCHD-CSTOR-AWS-BUCKET',
+				'director/dmaas/TCID-DIR-DMAAS-SCHD-CSTOR-MINIO-BUCKET',
+				'director/dmaas/TCID-DIR-DMAAS-SCHD-JIVA-AWS-BUCKET',
+				'director/dmaas/TCID-DIR-DMAAS-SCHD-JIVA-MINIO-BUCKET',
+				'director/dmaas/TCID-DIR-DMAAS-SCHD-LOCAL-DEV-AWS-BUCKET',
+				'director/dmaas/TCID-DIR-DMAAS-SCHD-LOCAL-DEV-MINIO-BUCKET',
+				'director/dmaas/TCID-DIR-DMAAS-SCHD-LOCAL-HP-AWS-BUCKET',
+				'director/dmaas/TCID-DIR-DMAAS-SCHD-LOCAL-HP-MINIO-BUCKET'
 			],
 		},
 		{
