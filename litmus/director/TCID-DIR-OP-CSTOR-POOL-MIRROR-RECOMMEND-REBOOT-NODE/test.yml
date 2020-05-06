@@ -161,7 +161,7 @@
         - block:
           
           - name: Rebooting node
-            shell: sshpass -p {{VM_PASS}} ssh {{VM_USER}}@{{VM1_IP}} 'reboot'
+            shell: sshpass -p {{vm_pass}} ssh {{vm_user}}@{{vm1_ip}} 'reboot'
 
           - pause:
               minutes: 3
