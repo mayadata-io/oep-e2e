@@ -42,3 +42,7 @@ sidebar_label: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-NO-NDM
 - Director should list the device based recommendations without error
 
 NOTE: Director may show nil list if there are no BlockDevices
+
+### Test Result Link
+
+- https://github.com/mayadata-io/oep-e2e-results/tree/master/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-NO-NDM
