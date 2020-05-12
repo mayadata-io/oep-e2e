@@ -1,7 +1,7 @@
 # openebs-self-installation-check
 
 ---
-tcid: TCID-DIR-INSTALL-OPENEBS
+tcid: TCID-DIR-OP-INSTALL-OPENEBS
 name: "Install OpenEBS on user Cluster"
 
 ---

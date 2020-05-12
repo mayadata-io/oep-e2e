@@ -546,6 +546,19 @@ spec:
       konvoy/results: ""
       aws/results: ""
 
+  - tcid: TCID-DIR-OP-INSTALL-OPENEBS
+    name: "TCID-DIR-OP-INSTALL-OPENEBS"
+    description: "Install OpenEBS on user Cluster using director"
+    labels:
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, RECOMMENDATIONS"
+      test/priority: "P0"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-INSTALL-OPENEBS"
+      git/pullrequest: ""
+      rancher/results: ""
+      konvoy/results: ""
+      aws/results: ""
+
   - tcid: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-STRIPE
     name: "TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-STRIPE"
     description: "Test listing of stripe based cstor pool recommendations"

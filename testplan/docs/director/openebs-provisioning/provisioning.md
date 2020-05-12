@@ -35,6 +35,12 @@ As a DevOps admin, I want to mark certain devices for consumption by OpenEBS. I 
 | [TCID-DIR-OP-DEVICE-TOGGLE-NODE](TCID-DIR-OP-DEVICE-TOGGLE-NODE)       |
 
 
+### TCID-DIR-OP-INSTALL-OPENEBS
+
+| TCID                                                                          |
+| ------------------------------------------------------------------------------|
+| [TCID-DIR-OP-INSTALL-OPENEBS](TCID-DIR-OP-INSTALL-OPENEBS)                    |
+
 ### TCID-DIR-OP-CONTROL-PLANE-UPGRADE
 
 
