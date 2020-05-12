@@ -5,7 +5,7 @@ sidebar_label: Pipelines
 ---
 ## OEP E2E Pipeline
 
-OEP E2E pipeline is a GitLab based pipeline. This pipeline is triggered for each OEP release. OEP pipeline is divided into following groups:
+OEP E2E pipeline is a GitLab based pipeline. This pipeline is triggered for each OEP release. The images are taken from [director-charts-internal](https://github.com/mayadata-io/director-charts-internal) repo. OEP pipeline is divided into following groups:
 
 - Group 1
 - Group 2
