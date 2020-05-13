@@ -47,13 +47,7 @@ As a DevOps admin, I want to mark certain devices for consumption by OpenEBS. I 
 | [TCID-DIR-OP-DEVICE-TOGGLE-NODE](TCID-DIR-OP-DEVICE-TOGGLE-NODE)       |
 
 
-### TCID-DIR-OP-CONTROL-PLANE-UPGRADE
-
-
-### TCID-DIR-OP-DATA-PLANE-UPGRADE
-
-
-### TCID-DIR-OP-CSTOR-POOL
+### Test cases w.r.t CStorPool recommendations
 As a DevOps admin, I want to run applications on a storage that supports replication & snapshots. I want to get recommendations on storage pool plans that can help the applications recover from disk as well as node failures. Since openebs cstor supports my use cases, I would like to get cstor pool related recommendations that helps design pools that are resilient to node & disk failures.
 
 | TCID                                                                                       |
@@ -103,13 +97,25 @@ As a DevOps admin, I want to run applications on a storage that supports replica
 |[TCID-DIR-OP-CSTOR-POOL-RECOMMEND-RAIDZ-REBOOT-NODE](TCID-DIR-OP-CSTOR-POOL-RECOMMEND-RAIDZ-REBOOT-NODE)        |
 
 
-### TCID-DIR-OP-CSTOR-VOLUME
+### Upgrade test cases w.r.t CStor
 
-### TCID-DIR-OP-JIVA-VOLUME
+| TCID                                                                                       |
+| ------------------------------------------------------------------------------------------ |
+| [TCID-DIR-OP-UPGRADE-CSTOR-POOL](TCID-DIR-OP-UPGRADE-CSTOR-POOL)                           |
+| [TCID-DIR-OP-UPGRADE-CSTOR-VOLUME](TCID-DIR-OP-UPGRADE-CSTOR-VOLUME)                       |
+| [TCID-DIR-OP-UPGRADE-CSTOR-POOL-ALL-PODS-RUNNING](TCID-DIR-OP-UPGRADE-CSTOR-POOL-ALL-PODS-RUNNING)|
+| [TCID-DIR-OP-UPGRADE-CSTOR-POOL-ONE-POD-PENDING](TCID-DIR-OP-UPGRADE-CSTOR-POOL-ONE-POD-PENDING)|
+| [TCID-DIR-OP-UPGRADE-CSTOR-POOL-ALL-PODS-PENDING](TCID-DIR-OP-UPGRADE-CSTOR-POOL-ALL-PODS-PENDING)|
 
-### TCID-DIR-OP-LOCAL-HOSTPATH-VOLUME
 
-### TCID-DIR-OP-LOCAL-DEVICE-VOLUME
+### Upgrade test cases w.r.t Jiva
+
+| TCID                                                                                       |
+| ------------------------------------------------------------------------------------------ |
+| [TCID-DIR-OP-UPGRADE-JIVA-VOLUME](TCID-DIR-OP-UPGRADE-JIVA-VOLUME)                         |
+| [TCID-DIR-OP-UPGRADE-JIVA-VOLUME-ONE-REPLICA-PENDING](TCID-DIR-OP-UPGRADE-JIVA-VOLUME-ONE-REPLICA-PENDING)|
+| [TCID-DIR-OP-UPGRADE-JIVA-VOLUME-ALL-REPLICAS-PENDING](TCID-DIR-OP-UPGRADE-JIVA-VOLUME-ALL-REPLICAS-PENDING)|
+| [TCID-DIR-OP-UPGRADE-JIVA-VOLUME-TWO-REPLICAS-PENDING](TCID-DIR-OP-UPGRADE-JIVA-VOLUME-TWO-REPLICAS-PENDING)|
 
 
 ## Glossary
