@@ -1,0 +1,19 @@
+test_name: cstor-pool-mirror-recommend-reboot-node
+openebs_components:
+  [
+    'openebs-provisioner',
+    'openebs-ndm-operator',
+    'openebs-ndm',
+    'openebs-snapshot-operator',
+    'openebs-admission-server',
+    'openebs-localpv-provisioner',
+    'maya-apiserver',
+  ]
+group_id: "{{ lookup('env','GROUP_ID') }}"
+cluster_id: "{{ lookup('env','CLUSTER_ID') }}"
+director_url: "{{ lookup('env','DIRECTOR_IP') }}"
+namespace: "{{ lookup('env','NAMESPACE') }}"
+vm_user: "{{ lookup('env','VM_USER') }}"
+vm_pass: "{{ lookup('env','VM_PASS') }}"
+vm1_ip: "{{ lookup('env','VM1_IP') }}"
+platform: "{{ lookup('env','PLATFORM')}}"
