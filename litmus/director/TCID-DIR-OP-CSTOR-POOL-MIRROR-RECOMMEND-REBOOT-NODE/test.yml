@@ -168,7 +168,7 @@
 
           when: platform == "RANCHER"
         
-        - name: fun begins
+        - name: Check for the pool status after rebooting
           uri: 
             url: '{{ director_url }}/v3/groups/{{ group_id }}/cstorpoolinstances'
             method: GET
