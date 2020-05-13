@@ -15,6 +15,18 @@ This page captures the test strategies for OpenEBS operations related to:
 - Volume Provisioning 
 
 
+### OpenEBS install related test case IDs
+
+| TCID                                                                                      |
+| ----------------------------------------------------------------------------------------  |
+| [TCID-DIR-OP-INSTALL-OPENEBS](TCID-DIR-OP-INSTALL-OPENEBS)                                |
+| [TCID-DIR-OP-INSTALL-OPENEBS-LIMIT-RESOURCE](TCID-DIR-OP-INSTALL-OPENEBS-LIMIT-RESOURCE)  |
+| [TCID-DIR-OP-RE-INSTALL-OPENEBS](TCID-DIR-OP-RE-INSTALL-OPENEBS)                          |
+| [TCID-DIR-OP-INSTALL-OPENEBS-DP-ON-SPECIFIC-NODE](TCID-DIR-OP-INSTALL-OPENEBS-DP-ON-SPECIFIC-NODE)|
+| [TCID-DIR-OP-INSTALL-OPENEBS-CP-ON-SPECIFIC-NODE](TCID-DIR-OP-INSTALL-OPENEBS-CP-ON-SPECIFIC-NODE)|
+| [TCID-DIR-OP-INSTALL-OPENEBS-ON-DOP-CLUSTER](TCID-DIR-OP-INSTALL-OPENEBS-ON-DOP-CLUSTER)  |
+
+
 ###  TCID-DIR-OP-DEVICE-VIEW
 As a DevOps admin, I want OpenEBS to provide me all the storage disks that are eligible to be consumed by applications. OpenEBS should provide the list of disks that spans across nodes within the cluster. It is expected that during the lifetime of this cluster, few node restarts, upgrading this cluster to newer versions will be observed / performed. OpenEBS should continue to provide me storage information like the Day 0 days.
 
@@ -34,12 +46,6 @@ As a DevOps admin, I want to mark certain devices for consumption by OpenEBS. I 
 | [TCID-DIR-OP-DEVICE-IGNORE-NODE](TCID-DIR-OP-DEVICE-IGNORE-NODE)       |
 | [TCID-DIR-OP-DEVICE-TOGGLE-NODE](TCID-DIR-OP-DEVICE-TOGGLE-NODE)       |
 
-
-### TCID-DIR-OP-INSTALL-OPENEBS
-
-| TCID                                                                          |
-| ------------------------------------------------------------------------------|
-| [TCID-DIR-OP-INSTALL-OPENEBS](TCID-DIR-OP-INSTALL-OPENEBS)                    |
 
 ### TCID-DIR-OP-CONTROL-PLANE-UPGRADE
 
@@ -106,7 +112,6 @@ As a DevOps admin, I want to run applications on a storage that supports replica
 ### TCID-DIR-OP-LOCAL-DEVICE-VOLUME
 
 
-
 ## Glossary
 
 | Abbreviation     | Details                           |
@@ -114,3 +119,5 @@ As a DevOps admin, I want to run applications on a storage that supports replica
 | TCID             | TestCase ID                       |
 | DIR              | Director                          |
 | OP               | OPENEBS PROVISIONER               |
+| DP               | DATA PLANE                        |
+| CP               | CONTROL PLANE                     |
