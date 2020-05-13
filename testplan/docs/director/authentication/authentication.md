@@ -24,23 +24,31 @@ As a DevOps admin, I want Director to authenticate users within 5 seconds with 1
 ### Security
 As a DevOps admin, I want none of my teams to access Director, if these teams do not have access in organization's identity provider. This also implies teams that have access to Director do not inadvertently have access to resources that these teams do not have access to. 
 
-### TestCase IDs
+### Auth provider based test case IDs
 
-| TCID                                                    | Staus |
-| ------------------------------------------------------- | ----- |
-| [TCID-DIR-AUTH-LOCAL-ADMIN](TCID-DIR-AUTH-LOCAL-ADMIN)  |       |
-| [TCID-DIR-AUTH-LOCAL-USER](TCID-DIR-AUTH-LOCAL-USER)    |       |
-| [TCID-DIR-AUTH-LOCAL-PERF](TCID-DIR-AUTH-LOCAL-PERF)    |       |
-| [TCID-DIR-AUTH-LOCAL-SCALE](TCID-DIR-AUTH-LOCAL-SCALE)  |       |
-| [TCID-DIR-AUTH-GH-ADMIN](TCID-DIR-AUTH-GH-ADMIN)        |       |
-| [TCID-DIR-AUTH-GH-USER](TCID-DIR-AUTH-GH-USER)          |       |
-| [TCID-DIR-AUTH-GH-PERF](TCID-DIR-AUTH-GH-PERF)          |       |
-| [TCID-DIR-AUTH-GH-SCALE](TCID-DIR-AUTH-GH-SCALE)        |       |
-| [TCID-DIR-AUTH-GOOGLE-ADMIN](TCID-DIR-AUTH-GOOGLE-ADMIN)|       |
-| [TCID-DIR-AUTH-GOOGLE-USER](TCID-DIR-AUTH-GOOGLE-USER)  |       |
-| [TCID-DIR-AUTH-GOOGLE-PERF](TCID-DIR-AUTH-GOOGLE-PERF)  |       |
-| [TCID-DIR-AUTH-GOOGLE-SCALE](TCID-DIR-AUTH-GOOGLE-SCALE)|       |
-| [TCID-DIR-AUTH-AD-ADMIN](TCID-DIR-AUTH-AD-ADMIN)        |       |
-| [TCID-DIR-AUTH-AD-USER](TCID-DIR-AUTH-AD-USER)          |       |
-| [TCID-DIR-AUTH-AD-PERF](TCID-DIR-AUTH-AD-PERF)          |       |
-| [TCID-DIR-AUTH-AD-SCALE](TCID-DIR-AUTH-AD-SCALE)        |       |
+| TCID                                                    |
+| ------------------------------------------------------- |
+| [TCID-DIR-AUTH-LOCAL-ADMIN](TCID-DIR-AUTH-LOCAL-ADMIN)  |
+| [TCID-DIR-AUTH-LOCAL-USER](TCID-DIR-AUTH-LOCAL-USER)    |
+| [TCID-DIR-AUTH-LOCAL-PERF](TCID-DIR-AUTH-LOCAL-PERF)    |
+| [TCID-DIR-AUTH-LOCAL-SCALE](TCID-DIR-AUTH-LOCAL-SCALE)  |
+| [TCID-DIR-AUTH-GH-ADMIN](TCID-DIR-AUTH-GH-ADMIN)        |
+| [TCID-DIR-AUTH-GH-USER](TCID-DIR-AUTH-GH-USER)          |
+| [TCID-DIR-AUTH-GH-PERF](TCID-DIR-AUTH-GH-PERF)          |
+| [TCID-DIR-AUTH-GH-SCALE](TCID-DIR-AUTH-GH-SCALE)        |
+| [TCID-DIR-AUTH-GOOGLE-ADMIN](TCID-DIR-AUTH-GOOGLE-ADMIN)|
+| [TCID-DIR-AUTH-GOOGLE-USER](TCID-DIR-AUTH-GOOGLE-USER)  |
+| [TCID-DIR-AUTH-GOOGLE-PERF](TCID-DIR-AUTH-GOOGLE-PERF)  |
+| [TCID-DIR-AUTH-GOOGLE-SCALE](TCID-DIR-AUTH-GOOGLE-SCALE)|
+| [TCID-DIR-AUTH-AD-ADMIN](TCID-DIR-AUTH-AD-ADMIN)        |
+| [TCID-DIR-AUTH-AD-USER](TCID-DIR-AUTH-AD-USER)          |
+| [TCID-DIR-AUTH-AD-PERF](TCID-DIR-AUTH-AD-PERF)          |
+| [TCID-DIR-AUTH-AD-SCALE](TCID-DIR-AUTH-AD-SCALE)        |
+
+### Director portal based test case IDs
+
+| TCID                                                      |
+| --------------------------------------------------------- |
+| [TCID-GUI-AUTH](TCID-GUI-AUTH)                            |
+| [TCID-GUI-CLUSTER](TCID-GUI-CLUSTER)                      |
+| [TCID-GUI-DASHBOARD](TCID-GUI-DASHBOARD)                  |

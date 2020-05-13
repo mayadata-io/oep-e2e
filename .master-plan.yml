@@ -13,12 +13,7 @@ spec:
     labels:
       test/feature: "DIRECTOR"
       test/tags: "DIRECTOR, INSTALL, LOCAL DEVICE"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/installation/TCID-DIR-INSTALL-ON-LOCAL-DEV"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-INSTALL-ON-LOCAL-DEV-ON-PD
     name: "TCID-DIR-INSTALL-ON-LOCAL-DEV-ON-PD"
@@ -26,12 +21,7 @@ spec:
     labels:
       test/feature: "DIRECTOR"
       test/tags: "DIRECTOR, INSTALL, LOCAL DEVICE, PD"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/installation/TCID-DIR-INSTALL-ON-LOCAL-DEV-ON-PD"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-INSTALL-ON-LOCAL-HP
     name: "TCID-DIR-INSTALL-ON-LOCAL-HP"
@@ -39,12 +29,7 @@ spec:
     labels:
       test/feature: "DIRECTOR"
       test/tags: "DIRECTOR, INSTALL, LOCAL HOSTPATH"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/installation/TCID-DIR-INSTALL-ON-LOCAL-HP"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-INSTALL-ON-LOCAL-HP-ON-PD
     name: "TCID-DIR-INSTALL-ON-LOCAL-HP-ON-PD"
@@ -52,12 +37,7 @@ spec:
     labels:
       test/feature: "DIRECTOR"
       test/tags: "DIRECTOR, INSTALL, LOCAL HOSTPATH, PD"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/installation/TCID-DIR-INSTALL-ON-LOCAL-HP-ON-PD"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-INSTALL-ON-CSTOR
     name: "TCID-DIR-INSTALL-ON-CSTOR"
@@ -65,12 +45,7 @@ spec:
     labels:
       test/feature: "DIRECTOR"
       test/tags: "DIRECTOR, INSTALL, CSTOR"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/installation/TCID-DIR-INSTALL-ON-CSTOR"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-UPGRADE-ON-LOCAL-DEV
     name: "TCID-DIR-UPGRADE-ON-LOCAL-DEV"
@@ -78,12 +53,7 @@ spec:
     labels:
       test/feature: "DIRECTOR"
       test/tags: "DIRECTOR, UPGRADE, LOCAL DEVICE"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/installation/TCID-DIR-UPGRADE-ON-LOCAL-DEV"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-UPGRADE-ON-LOCAL-DEV-ON-PD
     name: "TCID-DIR-UPGRADE-ON-LOCAL-DEV-ON-PD"
@@ -91,12 +61,7 @@ spec:
     labels:
       test/feature: "DIRECTOR"
       test/tags: "DIRECTOR, UPGRADE, LOCAL DEVICE, PD"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/installation/TCID-DIR-UPGRADE-ON-LOCAL-DEV-ON-PD"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-UPGRADE-ON-LOCAL-HP
     name: "TCID-DIR-UPGRADE-ON-LOCAL-HP"
@@ -104,12 +69,7 @@ spec:
     labels:
       test/feature: "DIRECTOR"
       test/tags: "DIRECTOR, UPGRADE, LOCAL HOSTPATH"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/installation/TCID-DIR-UPGRADE-ON-LOCAL-HP"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-UPGRADE-ON-LOCAL-HP-ON-PD
     name: "TCID-DIR-UPGRADE-ON-LOCAL-HP-ON-PD"
@@ -117,12 +77,7 @@ spec:
     labels:
       test/feature: "DIRECTOR"
       test/tags: "DIRECTOR, UPGRADE, LOCAL HOSTPATH, PD"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/installation/TCID-DIR-UPGRADE-ON-LOCAL-HP-ON-PD"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-UPGRADE-ON-CSTOR
     name: "TCID-DIR-UPGRADE-ON-CSTOR"
@@ -130,28 +85,58 @@ spec:
     labels:
       test/feature: "DIRECTOR"
       test/tags: "DIRECTOR, UPGRADE, CSTOR"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/installation/TCID-DIR-UPGRADE-ON-CSTOR"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   # --------------------------------------------------
   # https://e2e.mayadata.io/docs/director/dmaas/dmaas
   #---------------------------------------------------
+  - tcid: TCID-DIR-DMAAS-RESTORE-ENTIRE-CLUSTER
+    name: "TCID-DIR-DMAAS-RESTORE-ENTIRE-CLUSTER"
+    description: "Test DMAAS restore of the entire cluster"
+    labels:
+      test/feature: "DMAAS"
+      test/tags: "DIRECTOR, DMAAS, RESTORE, CLUSTER"
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-RESTORE-ENTIRE-CLUSTER"
+
+  - tcid: TCID-DIR-DMAAS-RESTORE-APP-WITH-LARGE-FILES
+    name: "TCID-DIR-DMAAS-RESTORE-APP-WITH-LARGE-FILES"
+    description: "Test DMAAS restore application with large files"
+    labels:
+      test/feature: "DMAAS"
+      test/tags: "DIRECTOR, DMAAS, RESTORE, APPLICATION, LARGE FILES"
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-RESTORE-APP-WITH-LARGE-FILES"
+
+  - tcid: TCID-DIR-DMAAS-RESTORE-APP-WITH-SMALL-FILES
+    name: "TCID-DIR-DMAAS-RESTORE-APP-WITH-SMALL-FILES"
+    description: "Test DMAAS restore application with small files"
+    labels:
+      test/feature: "DMAAS"
+      test/tags: "DIRECTOR, DMAAS, RESTORE, APPLICATION, SMALL FILES"
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-RESTORE-APP-WITH-SMALL-FILES"
+
+  - tcid: TCID-DIR-DMAAS-BACKUP-APP-WITH-RESTARTS
+    name: "TCID-DIR-DMAAS-BACKUP-APP-WITH-RESTARTS"
+    description: "Test DMAAS backup of application with restarts"
+    labels:
+      test/feature: "DMAAS"
+      test/tags: "DIRECTOR, DMAAS, BACKUP, APPLICATION, RESTART"
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-BACKUP-APP-WITH-RESTARTS"
+
+  - tcid: TCID-DIR-DMAAS-BACKUP-APP-WITH-EVICTION
+    name: "TCID-DIR-DMAAS-BACKUP-APP-WITH-EVICTION"
+    description: "Test DMAAS backup of application with eviction to new node(s)"
+    labels:
+      test/feature: "DMAAS"
+      test/tags: "DIRECTOR, DMAAS, BACKUP, APPLICATION, EVICTION"
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-BACKUP-APP-WITH-EVICTION"
+
   - tcid: TCID-DIR-DMAAS-SOURCE-CLUSTER-GONE
     name: "TCID-DIR-DMAAS-SOURCE-CLUSTER-GONE"
     description: "Test DMAAS when source cluster is no longer available"
     labels:
       test/feature: "DMAAS"
       test/tags: "DIRECTOR, DMAAS, MYSQL, SOURCE, UNAVAILABLE"
-      test/priority: "P0"
-      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-TCID-DIR-DMAAS-SOURCE-CLUSTER-GONE"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SOURCE-CLUSTER-GONE"
 
   - tcid: TCID-DIR-DMAAS-VERSION-COMPATIBILITY-ML
     name: "TCID-DIR-DMAAS-VERSION-COMPATIBILITY-ML"
@@ -159,12 +144,7 @@ spec:
     labels:
       test/feature: "DMAAS"
       test/tags: "DIRECTOR, DMAAS, MYSQL, VERSION, COMPATIBILITY, MACHINE LEARNING"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-VERSION-COMPATIBILITY-ML"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-DMAAS-DATA-MOVEMENT-ACROSS-SETUPS
     name: "TCID-DIR-DMAAS-DATA-MOVEMENT-ACROSS-SETUPS"
@@ -172,12 +152,7 @@ spec:
     labels:
       test/feature: "DMAAS"
       test/tags: "DIRECTOR, DMAAS, MYSQL, DATA MOVEMENT, MULTI SETUP"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-DATA-MOVEMENT-ACROSS-SETUPS"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-DMAAS-MYSQL
     name: "TCID-DIR-DMAAS-MYSQL"
@@ -185,12 +160,7 @@ spec:
     labels:
       test/feature: "DMAAS"
       test/tags: "DIRECTOR, DMAAS, MYSQL"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-MYSQL"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-DMAAS-CORTEX
     name: "TCID-DIR-DMAAS-CORTEX"
@@ -198,12 +168,7 @@ spec:
     labels:
       test/feature: "DMAAS"
       test/tags: "DIRECTOR, DMAAS, CORTEX"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-CORTEX"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-DMAAS-PORTAL
     name: "TCID-DIR-DMAAS-PORTAL"
@@ -211,12 +176,7 @@ spec:
     labels:
       test/feature: "DMAAS"
       test/tags: "DIRECTOR, DMAAS, PORTAL"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-PORTAL"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-DMAAS-PSP
     name: "TCID-DIR-DMAAS-PSP"
@@ -224,12 +184,7 @@ spec:
     labels:
       test/feature: "DMAAS"
       test/tags: "DIRECTOR, DMAAS, PSP"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-PSP"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-DMAAS-EXCLUDE-SECRET
     name: "TCID-DIR-DMAAS-EXCLUDE-SECRET"
@@ -237,12 +192,7 @@ spec:
     labels:
       test/feature: "DMAAS"
       test/tags: "DIRECTOR, DMAAS, PSP"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-EXCLUDE-SECRET"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-DMAAS-SCHD-CSTOR-MINIO-BUCKET
     name: "TCID-DIR-DMAAS-SCHD-CSTOR-MINIO-BUCKET"
@@ -250,12 +200,7 @@ spec:
     labels:
       test/feature: "DMAAS"
       test/tags: "DIRECTOR, DMAAS, SCHEDULE, CSTOR, MINIO"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-CSTOR-MINIO-BUCKET"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-DMAAS-SCHD-CSTOR-AWS-BUCKET
     name: "TCID-DIR-DMAAS-SCHD-CSTOR-AWS-BUCKET"
@@ -263,12 +208,7 @@ spec:
     labels:
       test/feature: "DMAAS"
       test/tags: "DIRECTOR, DMAAS, SCHEDULE, CSTOR, AWS"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-CSTOR-AWS-BUCKET"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-DMAAS-SCHD-JIVA-MINIO-BUCKET
     name: "TCID-DIR-DMAAS-SCHD-JIVA-MINIO-BUCKET"
@@ -276,12 +216,7 @@ spec:
     labels:
       test/feature: "DMAAS"
       test/tags: "DIRECTOR, DMAAS, SCHEDULE, JIVA, MINIO"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-JIVA-MINIO-BUCKET"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-DMAAS-SCHD-JIVA-AWS-BUCKET
     name: "TCID-DIR-DMAAS-SCHD-JIVA-AWS-BUCKET"
@@ -289,12 +224,7 @@ spec:
     labels:
       test/feature: "DMAAS"
       test/tags: "DIRECTOR, DMAAS, SCHEDULE, JIVA, AWS"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-JIVA-AWS-BUCKET"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-DMAAS-SCHD-LOCAL-DEV-MINIO-BUCKET
     name: "TCID-DIR-DMAAS-SCHD-LOCAL-DEV-MINIO-BUCKET"
@@ -302,12 +232,7 @@ spec:
     labels:
       test/feature: "DMAAS"
       test/tags: "DIRECTOR, DMAAS, SCHEDULE, LOCAL PV DEVICE, MINIO"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-LOCAL-DEV-MINIO-BUCKET"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-DMAAS-SCHD-LOCAL-DEV-AWS-BUCKET
     name: "TCID-DIR-DMAAS-SCHD-LOCAL-DEV-AWS-BUCKET"
@@ -315,12 +240,7 @@ spec:
     labels:
       test/feature: "DMAAS"
       test/tags: "DIRECTOR, DMAAS, SCHEDULE, LOCAL PV DEVICE, AWS"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-LOCAL-DEV-AWS-BUCKET"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-DMAAS-SCHD-LOCAL-HP-MINIO-BUCKET
     name: "TCID-DIR-DMAAS-SCHD-LOCAL-HP-MINIO-BUCKET"
@@ -328,12 +248,7 @@ spec:
     labels:
       test/feature: "DMAAS"
       test/tags: "DIRECTOR, DMAAS, SCHEDULE, LOCAL PV HOSTPATH, MINIO"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-LOCAL-HP-MINIO-BUCKET"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-DMAAS-SCHD-LOCAL-HP-AWS-BUCKET
     name: "TCID-DIR-DMAAS-SCHD-LOCAL-HP-AWS-BUCKET"
@@ -341,12 +256,7 @@ spec:
     labels:
       test/feature: "DMAAS"
       test/tags: "DIRECTOR, DMAAS, SCHEDULE, LOCAL PV HOSTPATH, AWS"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-LOCAL-HP-AWS-BUCKET"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-DMAAS-SCHD-SOAK-CASSANDRA
     name: "TCID-DIR-DMAAS-SCHD-SOAK-CASSANDRA"
@@ -354,12 +264,7 @@ spec:
     labels:
       test/feature: "DMAAS"
       test/tags: "DIRECTOR, DMAAS, SCHEDULE, CASSANDRA, SOAK"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-SOAK-CASSANDRA"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-DMAAS-SCHD-SOAK-KAFKA
     name: "TCID-DIR-DMAAS-SCHD-SOAK-KAFKA"
@@ -367,12 +272,7 @@ spec:
     labels:
       test/feature: "DMAAS"
       test/tags: "DIRECTOR, DMAAS, SCHEDULE, KAFKA, SOAK"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-SOAK-KAFKA"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-DMAAS-SCHD-SOAK-MYSQL
     name: "TCID-DIR-DMAAS-SCHD-SOAK-MYSQL"
@@ -380,12 +280,7 @@ spec:
     labels:
       test/feature: "DMAAS"
       test/tags: "DIRECTOR, DMAAS, SCHEDULE, MYSQL, SOAK"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-SOAK-MYSQL"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-DMAAS-SCHD-SOAK-WORDPRESS
     name: "TCID-DIR-DMAAS-SCHD-SOAK-WORDPRESS"
@@ -393,51 +288,31 @@ spec:
     labels:
       test/feature: "DMAAS"
       test/tags: "DIRECTOR, DMAAS, SCHEDULE, WORDPRESS, SOAK"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-SOAK-WORDPRESS"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-DMAAS-SCHD-SOAK-NGINX
     name: "TCID-DIR-DMAAS-SCHD-SOAK-NGINX"
-    description: "Test DMAAS schedule for nginx application"
+    description: "Test DMAAS schedule for nginx application on a soak setup"
     labels:
       test/feature: "DMAAS"
       test/tags: "DIRECTOR, DMAAS, SCHEDULE, NGINX, SOAK"
-      test/priority: "P0"
-      testplan: ""
-      git/pullrequest: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-SOAK-NGINX"
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-SOAK-NGINX"
 
   - tcid: TCID-DIR-DMAAS-SCHD-SOAK-PERCONA
     name: "TCID-DIR-DMAAS-SCHD-SOAK-PERCONA"
-    description: "Test DMAAS schedule for percona stateful application"
+    description: "Test DMAAS schedule for percona stateful application on a soak setup"
     labels:
       test/feature: "DMAAS"
       test/tags: "DIRECTOR, DMAAS, SCHEDULE, PERCONA, SOAK"
-      test/priority: "P0"
-      testplan: ""
-      git/pullrequest: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-SOAK-PERCONA"
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-SOAK-PERCONA"
 
   - tcid: TCID-DIR-DMAAS-SCHD-SOAK-MONITOR
     name: "TCID-DIR-DMAAS-SCHD-SOAK-MONITOR"
-    description: "Test ability to monitor DMAAS schedule"
+    description: "Test ability to monitor DMAAS schedule on a soak setup"
     labels:
       test/feature: "DMAAS"
       test/tags: "DIRECTOR, DMAAS, SCHEDULE, MONITOR, SOAK"
-      test/priority: "P0"
-      testplan: ""
-      git/pullrequest: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-SOAK-MONITOR"
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-SOAK-MONITOR"
 
   # --------------------------------------------------
   # https://e2e.mayadata.io/docs/director/openebs-provisioning/provisioning
@@ -448,12 +323,7 @@ spec:
     labels:
       test/feature: "OPENEBS PROVISIONING"
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, DEVICE"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-DEVICE-VIEW-ALL"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-OP-DEVICE-VIEW-SCALE
     name: "TCID-DIR-OP-DEVICE-VIEW-SCALE"
@@ -461,12 +331,7 @@ spec:
     labels:
       test/feature: "OPENEBS PROVISIONING"
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, DEVICE"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-DEVICE-VIEW-SCALE"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-OP-DEVICE-VIEW-SCALE-RESTART
     name: "TCID-DIR-OP-DEVICE-VIEW-SCALE-RESTART"
@@ -474,12 +339,7 @@ spec:
     labels:
       test/feature: "OPENEBS PROVISIONING"
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, DEVICE, RESTART"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-DEVICE-VIEW-SCALE-RESTART"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-OP-DEVICE-FILTER-SSD
     name: "TCID-DIR-OP-DEVICE-FILTER-SSD"
@@ -487,12 +347,7 @@ spec:
     labels:
       test/feature: "OPENEBS PROVISIONING"
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, DEVICE, SSD"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-DEVICE-FILTER-SSD"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-OP-DEVICE-FILTER-PATH
     name: "TCID-DIR-OP-DEVICE-FILTER-PATH"
@@ -500,12 +355,7 @@ spec:
     labels:
       test/feature: "OPENEBS PROVISIONING"
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, DEVICE, PATH"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-DEVICE-FILTER-PATH"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-OP-DEVICE-IGNORE-NODE
     name: "TCID-DIR-OP-DEVICE-IGNORE-NODE"
@@ -513,12 +363,7 @@ spec:
     labels:
       test/feature: "OPENEBS PROVISIONING"
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, DEVICE, NODE"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-DEVICE-IGNORE-NODE"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-OP-DEVICE-TOGGLE-NODE
     name: "TCID-DIR-OP-DEVICE-TOGGLE-NODE"
@@ -526,12 +371,7 @@ spec:
     labels:
       test/feature: "OPENEBS PROVISIONING"
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, DEVICE, NODE"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-DEVICE-TOGGLE-NODE"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST
     name: "TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST"
@@ -539,12 +379,7 @@ spec:
     labels:
       test/feature: "OPENEBS PROVISIONING"
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, RECOMMENDATIONS"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-OP-INSTALL-OPENEBS
     name: "TCID-DIR-OP-INSTALL-OPENEBS"
@@ -552,12 +387,7 @@ spec:
     labels:
       test/feature: "OPENEBS PROVISIONING"
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, INSTALL"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-INSTALL-OPENEBS"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-STRIPE
     name: "TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-STRIPE"
@@ -565,12 +395,7 @@ spec:
     labels:
       test/feature: "OPENEBS PROVISIONING"
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, STRIPE, RECOMMENDATIONS"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-STRIPE"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-MIRROR
     name: "TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-MIRROR"
@@ -578,12 +403,7 @@ spec:
     labels:
       test/feature: "OPENEBS PROVISIONING"
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, MIRROR, RECOMMENDATIONS"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-MIRROR"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-RAIDZ
     name: "TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-RAIDZ"
@@ -591,25 +411,15 @@ spec:
     labels:
       test/feature: "OPENEBS PROVISIONING"
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, RAIDZ, RECOMMENDATIONS"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-RAIDZ"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
-- tcid: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-RAIDZ
+  - tcid: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-RAIDZ
     name: "TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-RAIDZ"
     description: "Test creation of raidz based cstor pool recommendations"
     labels:
       test/feature: "OPENEBS PROVISIONING"
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, RAIDZ, RECOMMENDATIONS"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-RAIDZ"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-MIRROR
     name: "TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-MIRROR"
@@ -617,12 +427,7 @@ spec:
     labels:
       test/feature: "OPENEBS PROVISIONING"
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, MIRROR, RECOMMENDATIONS"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-MIRROR"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-STRIPE
     name: "TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-STRIPE"
@@ -630,12 +435,7 @@ spec:
     labels:
       test/feature: "OPENEBS PROVISIONING"
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, STRIPE, RECOMMENDATIONS"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-STRIPE"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-NO-NDM
     name: "TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-NO-NDM"
@@ -643,12 +443,7 @@ spec:
     labels:
       test/feature: "OPENEBS PROVISIONING"
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, RECOMMENDATIONS, NDM"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-NO-NDM"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-MIRROR-UPGRADE-NODE
     name: "TCID-DIR-OP-CSTOR-POOL-RECOMMEND-MIRROR-UPGRADE-NODE"
@@ -656,12 +451,7 @@ spec:
     labels:
       test/feature: "OPENEBS PROVISIONING"
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, MIRROR, NODE, UPGRADE"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-MIRROR-UPGRADE-NODE"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-RAIDZ-UPGRADE-NODE
     name: "TCID-DIR-OP-CSTOR-POOL-RECOMMEND-RAIDZ-UPGRADE-NODE"
@@ -669,12 +459,7 @@ spec:
     labels:
       test/feature: "OPENEBS PROVISIONING"
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, RAIDZ, NODE, UPGRADE"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-RAIDZ-UPGRADE-NODE"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-MIRROR-REBOOT-NODE
     name: "TCID-DIR-OP-CSTOR-POOL-RECOMMEND-MIRROR-REBOOT-NODE"
@@ -682,12 +467,7 @@ spec:
     labels:
       test/feature: "OPENEBS PROVISIONING"
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, MIRROR, NODE, REBOOT"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-MIRROR-REBOOT-NODE"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-RAIDZ-REBOOT-NODE
     name: "TCID-DIR-OP-CSTOR-POOL-RECOMMEND-RAIDZ-REBOOT-NODE"
@@ -695,12 +475,7 @@ spec:
     labels:
       test/feature: "OPENEBS PROVISIONING"
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, RAIDZ, NODE, REBOOT"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-RAIDZ-REBOOT-NODE"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-OP-CSTOR-POOL-DAY2-REPLACE-BAD-DISK
     name: "TCID-DIR-OP-CSTOR-POOL-DAY2-REPLACE-BAD-DISK"
@@ -708,12 +483,7 @@ spec:
     labels:
       test/feature: "OPENEBS PROVISIONING"
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, BAD, DISK, REPLACEMENT"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-DAY2-REPLACE-BAD-DISK"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-OP-CSTOR-POOL-DAY2-ADD-DISK
     name: "TCID-DIR-OP-CSTOR-POOL-DAY2-ADD-DISK"
@@ -721,12 +491,7 @@ spec:
     labels:
       test/feature: "OPENEBS PROVISIONING"
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, ADD, DISK"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-DAY2-ADD-DISK"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-OP-CSTOR-POOL-DAY2-NOTIFY-BAD-DISK
     name: "TCID-DIR-OP-CSTOR-POOL-DAY2-NOTIFY-BAD-DISK"
@@ -734,12 +499,7 @@ spec:
     labels:
       test/feature: "OPENEBS PROVISIONING"
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, NOTIFY, BAD, DISK"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-DAY2-NOTIFY-BAD-DISK"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-OP-CSTOR-POOL-DAY2-NOTIFY-POOL-CAP
     name: "TCID-DIR-OP-CSTOR-POOL-DAY2-NOTIFY-POOL-CAP"
@@ -747,12 +507,7 @@ spec:
     labels:
       test/feature: "OPENEBS PROVISIONING"
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, POOL, CAPACITY, NOTIFY"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-DAY2-NOTIFY-POOL-CAP"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-OP-CSTOR-POOL-DAY2-NOTIFY-POOL-PERF
     name: "TCID-DIR-OP-CSTOR-POOL-DAY2-NOTIFY-POOL-PERF"
@@ -760,12 +515,7 @@ spec:
     labels:
       test/feature: "OPENEBS PROVISIONING"
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, POOL, PERFORMANCE, NOTIFY"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-DAY2-NOTIFY-POOL-PERF"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
 
   - tcid: TCID-DIR-OP-CSTOR-POOL-DAY2-VOL-RE-BALANCE
     name: "TCID-DIR-OP-CSTOR-POOL-DAY2-VOL-RE-BALANCE"
@@ -773,9 +523,159 @@ spec:
     labels:
       test/feature: "OPENEBS PROVISIONING"
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, POOL, VOLUME, RE-BALANCE"
-      test/priority: "P0"
       testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-DAY2-VOL-RE-BALANCE"
-      git/pullrequest: ""
-      rancher/results: ""
-      konvoy/results: ""
-      aws/results: ""
+
+  # --------------------------------------------------
+  # https://e2e.mayadata.io/docs/director/authentication/authentication
+  #---------------------------------------------------
+  - tcid: TCID-DIR-AUTH-LOCAL-ADMIN
+    name: "TCID-DIR-AUTH-LOCAL-ADMIN"
+    description: "Test director authentication with local admin"
+    labels:
+      test/feature: "DIRECTOR AUTHENTICATION"
+      test/tags: "DIRECTOR, AUTHENTICATION, LOCAL, ADMIN"      
+      testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-DIR-AUTH-LOCAL-ADMIN"
+
+  - tcid: TCID-DIR-AUTH-LOCAL-USER
+    name: "TCID-DIR-AUTH-LOCAL-USER"
+    description: "Test director authentication with local user"
+    labels:
+      test/feature: "DIRECTOR AUTHENTICATION"
+      test/tags: "DIRECTOR, AUTHENTICATION, LOCAL, USER"
+      testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-DIR-AUTH-LOCAL-USER"
+
+  - tcid: TCID-DIR-AUTH-LOCAL-PERF
+    name: "TCID-DIR-AUTH-LOCAL-PERF"
+    description: "Test director local authentication performance"
+    labels:
+      test/feature: "DIRECTOR AUTHENTICATION"
+      test/tags: "DIRECTOR, AUTHENTICATION, LOCAL, PERFORMANCE"
+      testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-DIR-AUTH-LOCAL-PERF"
+
+  - tcid: TCID-DIR-AUTH-LOCAL-SCALE
+    name: "TCID-DIR-AUTH-LOCAL-SCALE"
+    description: "Test director local authentication with several hundreds of users"
+    labels:
+      test/feature: "DIRECTOR AUTHENTICATION"
+      test/tags: "DIRECTOR, AUTHENTICATION, LOCAL, SCALE"
+      testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-DIR-AUTH-LOCAL-SCALE"
+
+  - tcid: TCID-DIR-AUTH-GH-ADMIN
+    name: "TCID-DIR-AUTH-GH-ADMIN"
+    description: "Test director authentication via GitHub admin"
+    labels:
+      test/feature: "DIRECTOR AUTHENTICATION"
+      test/tags: "DIRECTOR, AUTHENTICATION, LOCAL, GITHUB ADMIN"
+      testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-DIR-AUTH-GH-ADMIN"
+
+  - tcid: TCID-DIR-AUTH-GH-USER
+    name: "TCID-DIR-AUTH-GH-USER"
+    description: "Test director authentication via GitHub user"
+    labels:
+      test/feature: "DIRECTOR AUTHENTICATION"
+      test/tags: "DIRECTOR, AUTHENTICATION, LOCAL, GITHUB USER"
+      testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-DIR-AUTH-GH-USER"
+
+  - tcid: TCID-DIR-AUTH-GH-PERF
+    name: "TCID-DIR-AUTH-GH-PERF"
+    description: "Test director authentication performance with GitHub as auth provider"
+    labels:
+      test/feature: "DIRECTOR AUTHENTICATION"
+      test/tags: "DIRECTOR, AUTHENTICATION, LOCAL, GITHUB, PERFORMANCE"
+      testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-DIR-AUTH-GH-PERF"
+
+  - tcid: TCID-DIR-AUTH-GH-SCALE
+    name: "TCID-DIR-AUTH-GH-SCALE"
+    description: "Test director authentication with GitHub as auth provider & lots of users"
+    labels:
+      test/feature: "DIRECTOR AUTHENTICATION"
+      test/tags: "DIRECTOR, AUTHENTICATION, LOCAL, GITHUB, SCALE"
+      testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-DIR-AUTH-GH-SCALE"
+
+  - tcid: TCID-DIR-AUTH-GOOGLE-ADMIN
+    name: "TCID-DIR-AUTH-GOOGLE-ADMIN"
+    description: "Test director authentication via GOOGLE admin"
+    labels:
+      test/feature: "DIRECTOR AUTHENTICATION"
+      test/tags: "DIRECTOR, AUTHENTICATION, LOCAL, GOOGLE ADMIN"
+      testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-DIR-AUTH-GOOGLE-ADMIN"
+
+  - tcid: TCID-DIR-AUTH-GOOGLE-USER
+    name: "TCID-DIR-AUTH-GOOGLE-USER"
+    description: "Test director authentication via GOOGLE user"
+    labels:
+      test/feature: "DIRECTOR AUTHENTICATION"
+      test/tags: "DIRECTOR, AUTHENTICATION, LOCAL, GOOGLE USER"
+      testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-DIR-AUTH-GOOGLE-USER"
+
+  - tcid: TCID-DIR-AUTH-GOOGLE-PERF
+    name: "TCID-DIR-AUTH-GOOGLE-PERF"
+    description: "Test director authentication performance with GOOGLE as auth provider"
+    labels:
+      test/feature: "DIRECTOR AUTHENTICATION"
+      test/tags: "DIRECTOR, AUTHENTICATION, LOCAL, GOOGLE, PERFORMANCE"
+      testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-DIR-AUTH-GOOGLE-PERF"
+
+  - tcid: TCID-DIR-AUTH-GOOGLE-SCALE
+    name: "TCID-DIR-AUTH-GOOGLE-SCALE"
+    description: "Test director authentication with GOOGLE as auth provider & lots of users"
+    labels:
+      test/feature: "DIRECTOR AUTHENTICATION"
+      test/tags: "DIRECTOR, AUTHENTICATION, LOCAL, GOOGLE, SCALE"
+      testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-DIR-AUTH-GOOGLE-SCALE"
+
+  - tcid: TCID-DIR-AUTH-AD-ADMIN
+    name: "TCID-DIR-AUTH-AD-ADMIN"
+    description: "Test director authentication via AD admin"
+    labels:
+      test/feature: "DIRECTOR AUTHENTICATION"
+      test/tags: "DIRECTOR, AUTHENTICATION, LOCAL, AD ADMIN"
+      testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-DIR-AUTH-AD-ADMIN"
+
+  - tcid: TCID-DIR-AUTH-AD-USER
+    name: "TCID-DIR-AUTH-AD-USER"
+    description: "Test director authentication via AD user"
+    labels:
+      test/feature: "DIRECTOR AUTHENTICATION"
+      test/tags: "DIRECTOR, AUTHENTICATION, LOCAL, AD USER"
+      testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-DIR-AUTH-AD-USER"
+
+  - tcid: TCID-DIR-AUTH-AD-PERF
+    name: "TCID-DIR-AUTH-AD-PERF"
+    description: "Test director authentication performance with AD as auth provider"
+    labels:
+      test/feature: "DIRECTOR AUTHENTICATION"
+      test/tags: "DIRECTOR, AUTHENTICATION, LOCAL, AD, PERFORMANCE"
+      testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-DIR-AUTH-AD-PERF"
+
+  - tcid: TCID-DIR-AUTH-AD-SCALE
+    name: "TCID-DIR-AUTH-AD-SCALE"
+    description: "Test director authentication with AD as auth provider & lots of users"
+    labels:
+      test/feature: "DIRECTOR AUTHENTICATION"
+      test/tags: "DIRECTOR, AUTHENTICATION, LOCAL, AD, SCALE"
+      testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-DIR-AUTH-AD-SCALE"
+
+  - tcid: TCID-GUI-AUTH
+    name: "TCID-GUI-AUTH"
+    description: "Test director GUI authentication"
+    labels:
+      test/feature: "DIRECTOR AUTHENTICATION"
+      test/tags: "DIRECTOR, AUTHENTICATION"
+      testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-GUI-AUTH"
+
+  - tcid: TCID-GUI-CLUSTER
+    name: "TCID-GUI-CLUSTER"
+    description: "Test director cluster"
+    labels:
+      test/feature: "DIRECTOR CLUSTER"
+      test/tags: "DIRECTOR, CLUSTER"
+      testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-GUI-CLUSTER"
+
+  - tcid: TCID-GUI-DASHBOARD
+    name: "TCID-GUI-DASHBOARD"
+    description: "Test director dashboard"
+    labels:
+      test/feature: "DIRECTOR DASHBOARD"
+      test/tags: "DIRECTOR, DASHBOARD"
+      testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-GUI-DASHBOARD"
