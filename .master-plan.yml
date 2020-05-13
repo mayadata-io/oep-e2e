@@ -317,6 +317,79 @@ spec:
   # --------------------------------------------------
   # https://e2e.mayadata.io/docs/director/openebs-provisioning/provisioning
   #---------------------------------------------------
+
+  - tcid: TCID-DIR-OP-UPGRADE-CSTOR-POOL
+    name: "TCID-DIR-OP-UPGRADE-CSTOR-POOL"
+    description: "Test upgrade of cstor pool"
+    labels:
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR POOL, UPGRADE"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-UPGRADE-CSTOR-POOL"
+
+  - tcid: TCID-DIR-OP-UPGRADE-CSTOR-VOLUME
+    name: "TCID-DIR-OP-UPGRADE-CSTOR-VOLUME"
+    description: "Test upgrade of cstor volume"
+    labels:
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR VOLUME, UPGRADE"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-UPGRADE-CSTOR-VOLUME"
+
+  - tcid: TCID-DIR-OP-UPGRADE-CSTOR-POOL-ALL-PODS-RUNNING
+    name: "TCID-DIR-OP-UPGRADE-CSTOR-POOL-ALL-PODS-RUNNING"
+    description: "Test upgrade of cstor pool when all pool pods are running"
+    labels:
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR POOL, UPGRADE"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-UPGRADE-CSTOR-POOL-ALL-PODS-RUNNING"
+
+  - tcid: TCID-DIR-OP-UPGRADE-CSTOR-POOL-ONE-POD-PENDING
+    name: "TCID-DIR-OP-UPGRADE-CSTOR-POOL-ONE-POD-PENDING"
+    description: "Test upgrade of cstor pool when one pool pod is in pending state"
+    labels:
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR POOL, UPGRADE"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-UPGRADE-CSTOR-POOL-ONE-POD-PENDING"
+
+  - tcid: TCID-DIR-OP-UPGRADE-CSTOR-POOL-ALL-PODS-PENDING
+    name: "TCID-DIR-OP-UPGRADE-CSTOR-POOL-ALL-PODS-PENDING"
+    description: "Test upgrade of cstor pool when all pool pods are in pending state"
+    labels:
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR POOL, UPGRADE"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-UPGRADE-CSTOR-POOL-ALL-PODS-PENDING"
+
+  - tcid: TCID-DIR-OP-UPGRADE-JIVA-VOLUME
+    name: "TCID-DIR-OP-UPGRADE-JIVA-VOLUME"
+    description: "Test upgrade of jiva volume"
+    labels:
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, JIVA, VOLUME, UPGRADE"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-UPGRADE-JIVA-VOLUME"
+
+  - tcid: TCID-DIR-OP-UPGRADE-JIVA-VOLUME-ONE-REPLICA-PENDING
+    name: "TCID-DIR-OP-UPGRADE-JIVA-VOLUME-ONE-REPLICA-PENDING"
+    description: "Test upgrade of jiva volume with one replica in pending state"
+    labels:
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, JIVA, VOLUME, UPGRADE"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-UPGRADE-JIVA-VOLUME-ONE-REPLICA-PENDING"
+
+  - tcid: TCID-DIR-OP-UPGRADE-JIVA-VOLUME-ALL-REPLICAS-PENDING
+    name: "TCID-DIR-OP-UPGRADE-JIVA-VOLUME-ALL-REPLICAS-PENDING"
+    description: "Test upgrade of jiva volume with all replicas in pending state"
+    labels:
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, JIVA, VOLUME, UPGRADE"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-UPGRADE-JIVA-VOLUME-ALL-REPLICAS-PENDING"
+
+  - tcid: TCID-DIR-OP-UPGRADE-JIVA-VOLUME-TWO-REPLICAS-PENDING
+    name: "TCID-DIR-OP-UPGRADE-JIVA-VOLUME-TWO-REPLICAS-PENDING"
+    description: "Test upgrade of jiva volume with two replicas in pending state"
+    labels:
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, JIVA, VOLUME, UPGRADE"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-UPGRADE-JIVA-VOLUME-TWO-REPLICAS-PENDING"
+
   - tcid: TCID-DIR-OP-DEVICE-VIEW-ALL
     name: "TCID-DIR-OP-DEVICE-VIEW-ALL"
     description: "Test listing of storage device(s)"
