@@ -4,18 +4,18 @@
 
 ## Details
 
-- Install DOP using helm with SSD underheath
+- Install DOP using helm with SSD underneath
 
 ## Prerequisites
 
 - K8s should be installed in the cluster.
-- Every component of DOP cluster should be healthy and running.
+- Openebs should be installed on the cluster.
 
 ## Steps Performed in the test
 
-- Clone director-charts-internal Repository 
-- Get into latest release directory of helm chart
-- Create secret having maya-init repo access
+- Clone director-charts-internal repository .
+- Get into latest release directory of helm chart .
+- Create secret having maya-init repo access .
 `kubectl create secret docker-registry directoronprem-registry-secret --docker-server=registry.mayadata.io --docker-username=<docker-user>--docker-password=<docker-password>
 `
 - Create clusterrolebinding
@@ -44,4 +44,8 @@ kubectl apply -f oep-e2e/litmus/prerequisite/docker-secret.yml
 
 <b>Running basic sanity checks</b> <br>
 
-Using Basic-sanity-check script to check the DOP components , If any of the Component fails job will fail 
+Using Basic-sanity-check script to check the DOP components , If any of the component fails job will fail .
+
+## Expected Result 
+
+- Every component of DOP cluster should be healthy and running.
