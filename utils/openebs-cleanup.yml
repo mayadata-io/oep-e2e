@@ -53,31 +53,15 @@
   retries: 30
   delay: 5
 
-- name: Check openebs is removed or not from cluster
+- name: Checking for openebses status after removing openebs
   uri:
-    url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses"
-    method: GET
-    url_username: "{{ username.stdout }}"
-    url_password: "{{ password.stdout }}" 
-    return_content: yes
-    force_basic_auth: yes
-    body_format: json
-  register: openebs_details
-  until: "openebs_details.json.data[0].state == 'removed'"
-  retries: 30
-  delay: 10
-
-- name: Verify openebs is removed or not
-  uri:
-    url: "{{ director_url }}/v3/clusters/{{ cluster_id }}"
-    method: GET
+    url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses?state=active&clusterId={{ cluster_id }}"
     url_username: "{{ username.stdout }}"
     url_password: "{{ password.stdout }}"
-    return_content: yes
-    force_basic_auth: yes
-    body_format: json
-  register: openebs_components_details
-     
-- name: Fetching specific component details to verify
-  set_fact:
-    component_details: "{{ openebs_components_details.json }}"
+    method: GET
+    status_code: 200
+  register: openebses_active
+  until: "openebses_active.json.data == []"
+  delay: 10
+  retries: 30
+
