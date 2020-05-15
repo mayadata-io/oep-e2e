@@ -462,6 +462,39 @@ spec:
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, INSTALL"
       testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-INSTALL-OPENEBS"
 
+  - tcid: TCID-DIR-OP-INSTALL-OPENEBS-CP-ON-SPECIFIC-NODE
+    name: "TCID-DIR-OP-INSTALL-OPENEBS"
+    description: "Install OpenEBS Control plane components on a specific set of nodes"
+    labels:
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, INSTALL"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-INSTALL-OPENEBS-CP-ON-SPECIFIC-NODE"
+
+  - tcid: TCID-DIR-OP-INSTALL-OPENEBS-DP-ON-SPECIFIC-NODE
+    name: "TCID-DIR-OP-INSTALL-OPENEBS-DP-ON-SPECIFIC-NODE"
+    description: "Install OpenEBS Data plane components on a specific set of nodes"
+    labels:
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, INSTALL"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-INSTALL-OPENEBS-DP-ON-SPECIFIC-NODE"
+
+  - tcid: TCID-DIR-OP-RE-INSTALL-OPENEBS
+    name: "TCID-DIR-OP-RE-INSTALL-OPENEBS"
+    description: "Install OpenEBS on a machine already OpenEBS is installed with same version using operator."
+    labels:
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, INSTALL"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-RE-INSTALL-OPENEBS" 
+
+  - tcid: TCID-DIR-OP-INSTALL-OPENEBS-LIMIT-RESOURCE
+    name: "TCID-DIR-OP-INSTALL-OPENEBS-LIMIT-RESOURCE"
+    description: "Install OpenEBS using custom resource limits"
+    labels:
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, INSTALL"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-INSTALL-OPENEBS-LIMIT-RESOURCE" 
+  
+
   - tcid: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-STRIPE
     name: "TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-STRIPE"
     description: "Test listing of stripe based cstor pool recommendations"
