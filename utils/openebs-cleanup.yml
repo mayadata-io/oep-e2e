@@ -53,7 +53,7 @@
   retries: 30
   delay: 5
 
-- name: Checking for openebses status after removing openebs
+- name: Checking that openebses should not have openebs active entry
   uri:
     url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses?state=active&clusterId={{ cluster_id }}"
     url_username: "{{ username.stdout }}"
