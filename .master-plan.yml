@@ -463,7 +463,7 @@ spec:
       testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-INSTALL-OPENEBS"
 
   - tcid: TCID-DIR-OP-INSTALL-OPENEBS-CP-ON-SPECIFIC-NODE
-    name: "TCID-DIR-OP-INSTALL-OPENEBS"
+    name: "TCID-DIR-OP-INSTALL-OPENEBS-CP-ON-SPECIFIC-NODE"
     description: "Install OpenEBS Control plane components on a specific set of nodes"
     labels:
       test/feature: "OPENEBS PROVISIONING"
