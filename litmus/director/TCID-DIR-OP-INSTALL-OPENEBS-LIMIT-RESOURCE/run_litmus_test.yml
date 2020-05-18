@@ -2,14 +2,14 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: openebs-data-plane-test-
+  generateName: openebs-resource-limit-installation-
   namespace: litmus
 spec:
   template:
     metadata:
       name: litmus
       labels:
-        app: openebs-data-plane-test-litmus
+        app: openebs-resource-litmit-installation
     spec:
       serviceAccountName: litmus
       restartPolicy: Never
@@ -55,7 +55,7 @@ spec:
           ## Namespace where openebs is installed
           ## By default in basic mode it is openebs
           - name: NAMESPACE
-            value: ''
+            value: 'openebs'
 
           ## Enter the default directory - It can be /var/openebs
           - name: DEFAULT_DIRECTORY
@@ -73,25 +73,25 @@ spec:
           - name: EXCLUDE_DEVICE_FILTER
             value: ''
 
-          ## Enter CPU resource limit
+          ## CPU resource limit is provided
           - name: CPU_RESOURCE_LIMIT
-            value: ''
+            value: '150m'
 
-          ## Enter Memory resource limit
+          ## Memory resource limit provided
           - name: MEMORY_RESOURCE_LIMIT
-            value: ''
+            value: '250Mi'
           
           ## It will have values basic/advance
-          ## Note: For basic installation only template value slould be provided
-          ## For adding any additional value - change the installation mode to advance
+          ## Note: For this test we will be using advance mode as basic mode is used
+          ## For default values of above fields
           - name: INSTALLATION_MODE
-            value: 'basic'
+            value: 'advance'
 
           - name: ANSIBLE_STDOUT_CALLBACK
             value: 'default'  
 
         command: ["/bin/bash"]
-        args: ["-c", "ansible-playbook ./litmus/director/tcid-iuoi04-openebs-data-plane/test.yml -i /etc/ansible/hosts -v; exit 0"]
+        args: ["-c", "ansible-playbook ./litmus/director/TCID-DIR-OP-INSTALL-OPENEBS-LIMIT-RESOURCE/test.yml -i /etc/ansible/hosts -v; exit 0"]
 
       imagePullSecrets:
-      - name: oep-secret
+      - name: oep-secret        

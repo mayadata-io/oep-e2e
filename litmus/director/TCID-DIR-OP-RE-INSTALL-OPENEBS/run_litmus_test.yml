@@ -95,7 +95,7 @@ spec:
             value: 'default'  
 
         command: ["/bin/bash"]
-        args: ["-c", "ansible-playbook ./litmus/director/tcid-iuoi06-openebs-reinstallation/test.yml -i /etc/ansible/hosts -v; exit 0"]
+        args: ["-c", "ansible-playbook ./litmus/director/TCID-DIR-OP-RE-INSTALL-OPENEBS/test.yml -i /etc/ansible/hosts -v; exit 0"]
         
       imagePullSecrets:
       - name: oep-secret  
