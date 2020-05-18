@@ -2,14 +2,14 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: openebs-resource-limit-installation-
+  generateName: openebs-data-plane-test-
   namespace: litmus
 spec:
   template:
     metadata:
       name: litmus
       labels:
-        app: openebs-resource-litmit-installation
+        app: openebs-data-plane-test-litmus
     spec:
       serviceAccountName: litmus
       restartPolicy: Never
@@ -55,7 +55,7 @@ spec:
           ## Namespace where openebs is installed
           ## By default in basic mode it is openebs
           - name: NAMESPACE
-            value: 'openebs'
+            value: ''
 
           ## Enter the default directory - It can be /var/openebs
           - name: DEFAULT_DIRECTORY
@@ -73,25 +73,25 @@ spec:
           - name: EXCLUDE_DEVICE_FILTER
             value: ''
 
-          ## CPU resource limit is provided
+          ## Enter CPU resource limit
           - name: CPU_RESOURCE_LIMIT
-            value: '150m'
+            value: ''
 
-          ## Memory resource limit provided
+          ## Enter Memory resource limit
           - name: MEMORY_RESOURCE_LIMIT
-            value: '250Mi'
+            value: ''
           
           ## It will have values basic/advance
-          ## Note: For this test we will be using advance mode as basic mode is used
-          ## For default values of above fields
+          ## Note: For basic installation only template value slould be provided
+          ## For adding any additional value - change the installation mode to advance
           - name: INSTALLATION_MODE
-            value: 'advance'
+            value: 'basic'
 
           - name: ANSIBLE_STDOUT_CALLBACK
             value: 'default'  
 
         command: ["/bin/bash"]
-        args: ["-c", "ansible-playbook ./litmus/director/tcid-iuoi14-openebs-resource-limit-installation/test.yml -i /etc/ansible/hosts -v; exit 0"]
+        args: ["-c", "ansible-playbook ./litmus/director/TCID-DIR-OP-INSTALL-OPENEBS-DP-ON-SPECIFIC-NODE/test.yml -i /etc/ansible/hosts -v; exit 0"]
 
       imagePullSecrets:
-      - name: oep-secret        
+      - name: oep-secret

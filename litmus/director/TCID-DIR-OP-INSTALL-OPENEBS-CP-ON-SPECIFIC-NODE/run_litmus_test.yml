@@ -91,7 +91,7 @@ spec:
             value: 'default'  
 
         command: ["/bin/bash"]
-        args: ["-c", "ansible-playbook ./litmus/director/tcid-iuoi03-openebs-control-plane/test.yml -i /etc/ansible/hosts -v; exit 0"]
+        args: ["-c", "ansible-playbook ./litmus/director/TCID-DIR-OP-INSTALL-OPENEBS-CP-ON-SPECIFIC-NODE/test.yml -i /etc/ansible/hosts -v; exit 0"]
 
       imagePullSecrets:
       - name: oep-secret
