@@ -785,3 +785,11 @@ spec:
       test/feature: "DIRECTOR DASHBOARD"
       test/tags: "DIRECTOR, DASHBOARD"
       testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-GUI-DASHBOARD"
+
+  - tcid: TCID-GUI-PROFILE
+    name: "TCID-GUI-PROFILE"
+    description: "Test director profile"
+    labels:
+      test/feature: "DIRECTOR PROFILE"
+      test/tags: "DIRECTOR, PROFILE"
+      testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-GUI-PROFILE"
