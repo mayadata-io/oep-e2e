@@ -30,7 +30,7 @@ sidebar_label: TCID-DIR-OP-INSTALL-OPENEBS-LIMIT-RESOURCE
 
 ### Steps Performed in the test
 
-- Invoke API to list openbses entry.
+- Invoke API to list openebses entry.
 - Invoke API to install openebs .
 - Invoke API to check job status .
 
