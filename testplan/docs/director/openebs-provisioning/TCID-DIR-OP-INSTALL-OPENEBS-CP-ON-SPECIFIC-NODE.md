@@ -1,7 +1,7 @@
 ---
-id: TCID-DIR-OP-INSTALL-OPENEBS
-title: Install openebs using director
-sidebar_label: TCID-DIR-OP-INSTALL-OPENEBS
+id: TCID-DIR-OP-INSTALL-OPENEBS-CP-ON-SPECIFIC-NODE
+title: Install openebs control plane on specific node using director
+sidebar_label: TCID-DIR-OP-INSTALL-OPENEBS-CP-ON-SPECIFIC-NODE
 ---
 ------
 
@@ -14,9 +14,9 @@ sidebar_label: TCID-DIR-OP-INSTALL-OPENEBS
     <th> Description </th>
   </tr>
   <tr>
-    <td> TCID-DIR-OP-INSTALL-OPENEBS </td>
+    <td> TCID-DIR-OP-INSTALL-OPENEBS-CP-ON-SPECIFIC-NODE </td>
     <td> Install openebs </td>
-    <td> Install openebs using director </td>
+    <td> Install openebs control plane on specific node using director </td>
   </tr>
 </table>
 
@@ -36,4 +36,4 @@ sidebar_label: TCID-DIR-OP-INSTALL-OPENEBS
 
 ### Expected output
 
-- Director should be able to install openebs .
+- Director should be able to install openebs control plane components in particular node.

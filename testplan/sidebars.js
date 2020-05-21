@@ -53,8 +53,12 @@ module.exports = {
 		                'director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-RAIDZ',
 		                'director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-STRIPE',
                 		'director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-MIRROR',
-						'director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-MIRROR',
-						'director/openebs-provisioning/TCID-DIR-OP-INSTALL-OPENEBS'
+				'director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-MIRROR',
+				'director/openebs-provisioning/TCID-DIR-OP-INSTALL-OPENEBS',
+				'director/openebs-provisioning/TCID-DIR-OP-INSTALL-OPENEBS-CP-ON-SPECIFIC-NODE',
+				'director/openebs-provisioning/TCID-DIR-OP-INSTALL-OPENEBS-DP-ON-SPECIFIC-NODE',
+				'director/openebs-provisioning/TCID-DIR-OP-INSTALL-OPENEBS-LIMIT-RESOURCE',
+				'director/openebs-provisioning/TCID-DIR-OP-RE-INSTALL-OPENEBS'
 			],
 		},
 		{

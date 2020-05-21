@@ -1,7 +1,7 @@
 ---
-id: TCID-DIR-OP-INSTALL-OPENEBS
-title: Install openebs using director
-sidebar_label: TCID-DIR-OP-INSTALL-OPENEBS
+id: TCID-DIR-OP-INSTALL-OPENEBS-LIMIT-RESOURCE
+title: Install OpenEBS using custom resource limits
+sidebar_label: TCID-DIR-OP-INSTALL-OPENEBS-LIMIT-RESOURCE
 ---
 ------
 
@@ -14,9 +14,9 @@ sidebar_label: TCID-DIR-OP-INSTALL-OPENEBS
     <th> Description </th>
   </tr>
   <tr>
-    <td> TCID-DIR-OP-INSTALL-OPENEBS </td>
+    <td> TCID-DIR-OP-INSTALL-OPENEBS-LIMIT-RESOURCE </td>
     <td> Install openebs </td>
-    <td> Install openebs using director </td>
+    <td> Install OpenEBS using custom resource limits </td>
   </tr>
 </table>
 
@@ -36,4 +36,4 @@ sidebar_label: TCID-DIR-OP-INSTALL-OPENEBS
 
 ### Expected output
 
-- Director should be able to install openebs .
+- Install OpenEBS using custom resource limits.

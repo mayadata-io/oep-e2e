@@ -1,7 +1,7 @@
 ---
-id: TCID-DIR-OP-INSTALL-OPENEBS
-title: Install openebs using director
-sidebar_label: TCID-DIR-OP-INSTALL-OPENEBS
+id: TCID-DIR-OP-RE-INSTALL-OPENEBS
+title: Install OpenEBS on a machine already OpenEBS is installed with same version using operator
+sidebar_label: TCID-DIR-OP-RE-INSTALL-OPENEBS
 ---
 ------
 
@@ -14,9 +14,9 @@ sidebar_label: TCID-DIR-OP-INSTALL-OPENEBS
     <th> Description </th>
   </tr>
   <tr>
-    <td> TCID-DIR-OP-INSTALL-OPENEBS </td>
+    <td> TCID-DIR-OP-RE-INSTALL-OPENEBS </td>
     <td> Install openebs </td>
-    <td> Install openebs using director </td>
+    <td> Install OpenEBS on a machine already OpenEBS is installed with same version using operator </td>
   </tr>
 </table>
 
@@ -26,7 +26,7 @@ sidebar_label: TCID-DIR-OP-INSTALL-OPENEBS
 
 ### Details
 - Director version 1.9 onwards
-- Positive test case
+- Negative test case
 
 ### Steps Performed in the test
 
@@ -36,4 +36,4 @@ sidebar_label: TCID-DIR-OP-INSTALL-OPENEBS
 
 ### Expected output
 
-- Director should be able to install openebs .
+- At the time of reinstalling openebs using director it should give error.
