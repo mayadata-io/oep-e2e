@@ -26,7 +26,7 @@ sidebar_label: TCID-DIR-OP-RE-INSTALL-OPENEBS
 
 ### Details
 - Director version 1.9 onwards
-- Positive test case
+- Negative test case
 
 ### Steps Performed in the test
 
