@@ -583,6 +583,54 @@ spec:
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, RAIDZ, NODE, REBOOT"
       testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-RAIDZ-REBOOT-NODE"
 
+  - tcid: TCID-DIR-OP-DELETE-SPC-WITH-NO-VOLUME
+    name: "TCID-DIR-OP-DELETE-SPC-WITH-NO-VOLUME"
+    description: "Delete SPC created via director which has no volume"
+    labels:
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, DELETE"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-DELETE-SPC-WITH-NO-VOLUME"
+
+  - tcid: TCID-DIR-OP-DELETE-SPC-WITH-VOLUME
+    name: "TCID-DIR-OP-DELETE-SPC-WITH-VOLUME"
+    description: "Delete SPC created via director which has volume"
+    labels:
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, DELETE"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-DELETE-SPC-WITH-VOLUME"
+
+  - tcid: TCID-DIR-OP-DELETE-EXTERNAL-CSPC-WITH-VOLUME
+    name: "TCID-DIR-OP-DELETE-EXTERNAL-CSPC-WITH-VOLUME"
+    description: "Delete CSPC not created via director which has volume"
+    labels:
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, DELETE"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-DELETE-EXTERNAL-CSPC-WITH-VOLUME"
+
+  - tcid: TCID-DIR-OP-DELETE-EXTERNAL-CSPC-WITH-NO-VOLUME
+    name: "TCID-DIR-OP-DELETE-EXTERNAL-CSPC-WITH-NO-VOLUME"
+    description: "Delete CSPC not created via director which has no volume"
+    labels:
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, DELETE"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-DELETE-EXTERNAL-CSPC-WITH-NO-VOLUME"
+
+  - tcid: TCID-DIR-OP-DELETE-CSPC-WITH-NO-VOLUME
+    name: "TCID-DIR-OP-DELETE-CSPC-WITH-NO-VOLUME"
+    description: "Delete SPC created via director which has no volume"
+    labels:
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, DELETE"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-DELETE-CSPC-WITH-NO-VOLUME"
+
+  - tcid: TCID-DIR-OP-DELETE-CSPC-WITH-VOLUME
+    name: "TCID-DIR-OP-DELETE-CSPC-WITH-VOLUME"
+    description: "Delete SPC created via director which has volume"
+    labels:
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, DELETE"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-DELETE-CSPC-WITH-VOLUME"
+
   - tcid: TCID-DIR-OP-CSTOR-POOL-DAY2-REPLACE-BAD-DISK
     name: "TCID-DIR-OP-CSTOR-POOL-DAY2-REPLACE-BAD-DISK"
     description: "Test bad disk replacement in cstor pool"
