@@ -258,6 +258,30 @@ spec:
       test/tags: "DIRECTOR, DMAAS, SCHEDULE, LOCAL PV HOSTPATH, AWS"
       testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-LOCAL-HP-AWS-BUCKET"
 
+  - tcid: TCID-DIR-TEAMING-USER-INVITE
+    name: "TCID-DIR-TEAMING-USER-INVITE"
+    description: "Test Teaming user invite functionality"
+    labels:
+      test/feature: "Teaming"
+      test/tags: "DIRECTOR, Teaming, Invite"
+      testplan: "https://e2e.mayadata.io/docs/director/teaming/directorTeaming"
+
+  - tcid: TCID-DIR-TEAMING-USER-ROLE-UPDATE
+    name: "TCID-DIR-TEAMING-USER-ROLE-UPDATE"
+    description: "Test Teaming user role update functionality"
+    labels:
+      test/feature: "Teaming"
+      test/tags: "DIRECTOR, Teaming, Role update"
+      testplan: "https://e2e.mayadata.io/docs/director/teaming/directorTeaming"
+
+  - tcid: TCID-DIR-TEAMING-USER-ROLE-UPDATE-NEGATIVE
+    name: "TCID-DIR-TEAMING-USER-ROLE-UPDATE-NEGATIVE"
+    description: "Negative test Teaming user role update functionality"
+    labels:
+      test/feature: "Teaming"
+      test/tags: "DIRECTOR, Teaming, Role update, Negative"
+      testplan: "https://e2e.mayadata.io/docs/director/teaming/directorTeaming"
+
   - tcid: TCID-DIR-DMAAS-SCHD-SOAK-CASSANDRA
     name: "TCID-DIR-DMAAS-SCHD-SOAK-CASSANDRA"
     description: "Test DMAAS schedule for cassandra stateful application"
