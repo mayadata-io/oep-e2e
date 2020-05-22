@@ -1,8 +1,16 @@
-## Cleaning SPC from the cluster
-- name: Removing SPC from the cluster
-  shell: kubectl delete spc --all
+## Get SPC details
+- name: Get SPC from the cluster
+  shell: kubectl get crd --no-headers | grep cstorpools.openebs.io | awk '{print $1}' | wc -l
   args:
     executable: /bin/bash
+  register: spc
+
+## Cleaning SPC from the cluster
+- name: Cleaning SPC from the cluster    
+  shell: kubectl delete spc --all                                                            
+  args:                                            
+    executable: /bin/bash                          
+  when: "spc.stdout == '1'"
       
 ## Cleaning PV form the cluster
 - name: Removing PV from the cluster
