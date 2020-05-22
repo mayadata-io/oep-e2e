@@ -1,3 +1,7 @@
+## Wait for resources
+- pause:	
+    seconds: 20
+    
 ## Get SPC details
 - name: Get SPC from the cluster
   shell: kubectl get crd --no-headers | grep cstorpools.openebs.io | awk '{print $1}' | wc -l
