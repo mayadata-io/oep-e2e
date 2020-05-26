@@ -306,8 +306,8 @@
           until: app_status.stdout == 'Running'
           with_items:
             - "{{ openebs_components }}"
-          retries: 30
-          delay: 10
+          retries: 50
+          delay: 5
 
         ## Get the container Status of the openebs pods
         - name: Get the container status of the openebs pods.
@@ -318,8 +318,8 @@
             executable: /bin/bash
           register: containerStatus
           until: "containerStatus.stdout == 'true'"
-          retries: 30
-          delay: 10
+          retries: 50
+          delay: 5
       
         ## Checking if openebs is installed or not.
         - name: Check if openebs is already installed
