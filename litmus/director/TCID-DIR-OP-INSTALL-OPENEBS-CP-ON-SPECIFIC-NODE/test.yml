@@ -299,7 +299,28 @@
           register: node3
           failed_when: "node3.json.nodeType['mayadata.io/data-plane'] != 'true'"
 
-        
+        ## Checking the openebs Installation    
+        - name: Fetch OpenEBS control plane pods state
+          shell: kubectl get pods -n {{ namespace }}  | grep {{ item }} | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
+          register: app_status
+          until: app_status.stdout == 'Running'
+          with_items:
+            - "{{ openebs_components }}"
+          retries: 50
+          delay: 5
+
+        ## Get the container Status of the openebs pods
+        - name: Get the container status of the openebs pods.
+          shell: >
+            kubectl get pod -n {{ namespace }} --no-headers
+            -o jsonpath='{.items[*].status.containerStatuses[*].ready}' | tr ' ' '\n' | uniq
+          args:
+            executable: /bin/bash
+          register: containerStatus
+          until: "containerStatus.stdout == 'true'"
+          retries: 50
+          delay: 5
+      
         ## Checking if openebs is installed or not.
         - name: Check if openebs is already installed
           shell: kubectl get deploy --all-namespaces -l name=maya-apiserver --no-headers | awk '{print $1}' | wc -l

@@ -55,7 +55,7 @@ spec:
           ## Namespace where openebs is installed
           ## By default in basic mode it is openebs
           - name: NAMESPACE
-            value: ''
+            value: 'openebs'
 
           ## Enter the default directory - It can be /var/openebs
           - name: DEFAULT_DIRECTORY
