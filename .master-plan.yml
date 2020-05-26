@@ -609,7 +609,7 @@ spec:
 
   - tcid: TCID-DIR-OP-DELETE-SPC-WITH-NO-VOLUME
     name: "TCID-DIR-OP-DELETE-SPC-WITH-NO-VOLUME"
-    description: "Delete SPC created via director which has no volume"
+    description: "Delete SPC via director which has no volume"
     labels:
       test/feature: "OPENEBS PROVISIONING"
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, DELETE"
@@ -617,7 +617,7 @@ spec:
 
   - tcid: TCID-DIR-OP-DELETE-SPC-WITH-VOLUME
     name: "TCID-DIR-OP-DELETE-SPC-WITH-VOLUME"
-    description: "Delete SPC created via director which has volume"
+    description: "Delete SPC via director which has volume"
     labels:
       test/feature: "OPENEBS PROVISIONING"
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, DELETE"
@@ -641,7 +641,7 @@ spec:
 
   - tcid: TCID-DIR-OP-DELETE-CSPC-WITH-NO-VOLUME
     name: "TCID-DIR-OP-DELETE-CSPC-WITH-NO-VOLUME"
-    description: "Delete SPC created via director which has no volume"
+    description: "Delete CSPC created via director which has no volume"
     labels:
       test/feature: "OPENEBS PROVISIONING"
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, DELETE"
@@ -649,7 +649,7 @@ spec:
 
   - tcid: TCID-DIR-OP-DELETE-CSPC-WITH-VOLUME
     name: "TCID-DIR-OP-DELETE-CSPC-WITH-VOLUME"
-    description: "Delete SPC created via director which has volume"
+    description: "Delete CSPC created via director which has volume"
     labels:
       test/feature: "OPENEBS PROVISIONING"
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, DELETE"
