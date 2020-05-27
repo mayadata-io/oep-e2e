@@ -27,6 +27,10 @@
           shell: cat /etc/secret-volume/password
           register: password
 
+        - name: Get BD
+          shell: | 
+            kubectl get bd -n {{ namespace }}
+
         ## Fetch the recommendation details
         - name: Fetch recommendations details
           uri:
