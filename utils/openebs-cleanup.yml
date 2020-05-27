@@ -1,28 +1,44 @@
-## Get SPC details
-- name: Get SPC from the cluster
-  shell: kubectl get crd --no-headers | grep cstorpools.openebs.io | awk '{print $1}' | wc -l
+## Check if SPC is present in the cluster
+- name: Checking if SPC is present in the cluster
+  shell: kubectl get spc --no-headers | wc -l
   args:
     executable: /bin/bash
   register: spc
 
-## Cleaning SPC from the cluster
-- name: Cleaning SPC from the cluster    
+## Clean up SPC (if any present) from the cluster
+- name: Cleaning up SPC from the cluster
   shell: kubectl delete spc --all                                                            
   args:                                            
     executable: /bin/bash                          
-  when: "spc.stdout == '1'"
-      
-## Cleaning PV form the cluster
+  when: "spc.stdout > '0'"
+
+## Check if PV is present in the cluster
+- name: Checking if PV is present in the cluster
+  shell: kubectl get pv -n openebs --no-headers | wc -l
+  args:
+    executable: /bin/bash
+  register: pv
+
+## Clean up PV (if any present) from the cluster
 - name: Removing PV from the cluster
   shell: kubectl delete pv -n {{ namespace }} --all
   args:
     executable: /bin/bash
+  when: "pv.stdout > '0'"
 
-## Cleaning up Blockdevices
-- name: Removing Blockdevices
+## Check if BD is present in the cluster
+- name: Checking if BD is present in the cluster
+  shell: kubectl get bd -n openebs --no-headers | wc -l
+  args:
+    executable: /bin/bash
+  register: bd
+
+## Clean up BD (if any present) from the cluster
+- name: Removing Blockdevices from the cluster
   shell: kubectl delete bd -n {{ namespace }} --all
   args:
     executable: /bin/bash
+  when: "bd.stdout > '0'"
       
 ## Cleaning up deployment
 - name: Removing deployment from openebs namespace
