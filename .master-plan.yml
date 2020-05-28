@@ -218,6 +218,14 @@ spec:
       test/tags: "DIRECTOR, DMAAS, SCHEDULE, JIVA, MINIO"
       testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-JIVA-MINIO-BUCKET"
 
+  - tcid: TCID-DIR-DMAAS-MINIO-DELETE
+    name: "TCID-DIR-DMAAS-MINIO-DELETE"
+    description: "Test DMAAS schedule deletion"
+    labels:
+      test/feature: "DMAAS"
+      test/tags: "DIRECTOR, DMAAS, SCHEDULE, DELETE, MINIO"
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-MINIO-DELETE"
+
   - tcid: TCID-DIR-DMAAS-SCHD-JIVA-AWS-BUCKET
     name: "TCID-DIR-DMAAS-SCHD-JIVA-AWS-BUCKET"
     description: "Test DMAAS schedule for jiva engine"
@@ -264,7 +272,7 @@ spec:
     labels:
       test/feature: "Teaming"
       test/tags: "DIRECTOR, Teaming, Invite"
-      testplan: "https://e2e.mayadata.io/docs/director/teaming/directorTeaming"
+      testplan: "https://e2e.mayadata.io/docs/director/teaming/TCID-DIR-TEAMING-USER-INVITE"
 
   - tcid: TCID-DIR-TEAMING-USER-ROLE-UPDATE
     name: "TCID-DIR-TEAMING-USER-ROLE-UPDATE"
@@ -272,7 +280,7 @@ spec:
     labels:
       test/feature: "Teaming"
       test/tags: "DIRECTOR, Teaming, Role update"
-      testplan: "https://e2e.mayadata.io/docs/director/teaming/directorTeaming"
+      testplan: "https://e2e.mayadata.io/docs/director/teaming/TCID-DIR-TEAMING-USER-ROLE-UPDATE"
 
   - tcid: TCID-DIR-TEAMING-USER-ROLE-UPDATE-NEGATIVE
     name: "TCID-DIR-TEAMING-USER-ROLE-UPDATE-NEGATIVE"
@@ -280,7 +288,7 @@ spec:
     labels:
       test/feature: "Teaming"
       test/tags: "DIRECTOR, Teaming, Role update, Negative"
-      testplan: "https://e2e.mayadata.io/docs/director/teaming/directorTeaming"
+      testplan: "https://e2e.mayadata.io/docs/director/teaming/TCID-DIR-TEAMING-USER-ROLE-UPDATE-NEGATIVE"
 
   - tcid: TCID-DIR-DMAAS-SCHD-SOAK-CASSANDRA
     name: "TCID-DIR-DMAAS-SCHD-SOAK-CASSANDRA"
@@ -865,3 +873,11 @@ spec:
       test/feature: "DIRECTOR PROFILE"
       test/tags: "DIRECTOR, PROFILE"
       testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-GUI-PROFILE"
+
+  - tcid: TCID-DIR-GUI-OPENEBS-COMPONENTS-VERSION
+    name: "TCID-DIR-GUI-OPENEBS-COMPONENTS-VERSION"
+    description: "Test director OpenEBS components version"
+    labels:
+      test/feature: "DIRECTOR OPENEBS COMPONENTS VERSION"
+      test/tags: "DIRECTOR, OPENEBS, VERSION"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-GUI-OPENEBS-COMPONENTS-VERSION"

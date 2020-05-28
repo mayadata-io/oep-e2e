@@ -1,7 +1,7 @@
 ---
-id: TC-Team-InviteUser
+id: TCID-DIR-TEAMING-USER-INVITE
 title: Teaming Invite User
-sidebar_label: TC-Team-InviteUser
+sidebar_label: TCID-DIR-TEAMING-USER-INVITE
 ---
 ------
 
@@ -16,8 +16,8 @@ sidebar_label: TC-Team-InviteUser
     <th> Description </th>
   </tr>
   <tr>
-    <td> TCID-TRIV01 </td>
-    <td> TC-Team-InviteUser </td>
+    <td> TCID-DIR-TEAMING-USER-INVITE </td>
+    <td> TCID-DIR-TEAMING-USER-INVITE </td>
     <td> Teaming </td>
     <td> Invite User Functionality </td>
   </tr>
@@ -38,7 +38,7 @@ sidebar_label: TC-Team-InviteUser
 - Invite pauser1 as project Admin
 - Invite pruser1 as project Read Only
 - Invite pmuser1 as project Member
-- Login as the above user and verify the functionality
+- Login as the above user and accept the received invitation
 
 
 ### Expected Results
@@ -46,4 +46,4 @@ sidebar_label: TC-Team-InviteUser
 - Invitation should be sent to all users
 - pauser1 should be joined as project Admin, user should have all project access
 - pruser1 should be joined as Readonly, no write operation can be performed
-- pmuser1 should be joined as project member, user will be part of the project but no access to resources.w
+- pmuser1 should be joined as project member, user will be part of the project but no access to resources.
