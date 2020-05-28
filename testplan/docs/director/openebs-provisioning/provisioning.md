@@ -118,6 +118,12 @@ As a DevOps admin, I want to run applications on a storage that supports replica
 | [TCID-DIR-OP-UPGRADE-JIVA-VOLUME-TWO-REPLICAS-PENDING](TCID-DIR-OP-UPGRADE-JIVA-VOLUME-TWO-REPLICAS-PENDING)|
 
 
+### Verify OpenEBS components version
+
+| TCID                                                                                       |
+| ------------------------------------------------------------------------------------------ |
+| [TCID-DIR-GUI-OPENEBS-COMPONENTS-VERSION](TCID-DIR-GUI-OPENEBS-COMPONENTS-VERSION)         |                |
+
 ## Glossary
 
 | Abbreviation     | Details                           |
