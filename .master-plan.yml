@@ -865,3 +865,11 @@ spec:
       test/feature: "DIRECTOR PROFILE"
       test/tags: "DIRECTOR, PROFILE"
       testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-GUI-PROFILE"
+
+  - tcid: TCID-DIR-GUI-OPENEBS-COMPONENTS-VERSION
+    name: "TCID-DIR-GUI-OPENEBS-COMPONENTS-VERSION"
+    description: "Test director OpenEBS components version"
+    labels:
+      test/feature: "DIRECTOR OPENEBS COMPONENTS VERSION"
+      test/tags: "DIRECTOR, OPENEBS, VERSION"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/provisioning"
