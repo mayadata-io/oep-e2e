@@ -39,7 +39,7 @@
 
 - Also check the status of all the `Data-Plane` and `Control-Plane` components they should be in `running` state.
 
-- Create SPC using yaml
+- Create SPC using yaml.
 
 - Invoke API to delete SPC using director
 
