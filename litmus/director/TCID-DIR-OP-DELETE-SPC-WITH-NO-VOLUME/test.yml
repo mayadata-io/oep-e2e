@@ -34,11 +34,11 @@
         ## Create cstorPoolOperation
         - name: Get blockdevice 
           shell: kubectl get bd -n openebs --no-headers | grep Unclaimed | awk '{print $1}' | tail -n 1
-          register: blockdevce_name
+          register: blockdevice_name
         
         ## Add bd name in spc yml
         - name: Add bd name in spc yml
-          shell: sed -i "s/dummyvalue/{{blockdevce_name.stdout}}/g" ./utils/spc.yml
+          shell: sed -i "s/dummyvalue/{{blockdevice_name.stdout}}/g" ./utils/spc.yml
         
         ## Create SPC
         - name: Create SPC 
