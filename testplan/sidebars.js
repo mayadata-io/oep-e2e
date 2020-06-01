@@ -29,9 +29,9 @@ module.exports = {
 		        label: 'Teaming',
 		        items: [
 				'director/teaming/directorTeaming',
-				'director/teaming/TC-Team-InviteUser',
-				'director/teaming/TC-Team-RoleChange',
-				'director/teaming/TC-Team-RoleChange-Negative'
+				'director/teaming/TCID-DIR-TEAMING-USER-INVITE',
+				'director/teaming/TCID-DIR-TEAMING-USER-ROLE-UPDATE',
+				'director/teaming/TCID-DIR-TEAMING-USER-ROLE-UPDATE'
 			],
 		},
 		{

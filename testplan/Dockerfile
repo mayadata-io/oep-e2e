@@ -1,7 +1,7 @@
 #-----------------------------
 # build testplan site
 #-----------------------------
-FROM node:10.9.0 AS build-env
+FROM node:10.16.0 AS build-env
 
 WORKDIR /app/
 
