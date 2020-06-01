@@ -1,0 +1,100 @@
+---
+- hosts: localhost
+  connection: local
+
+  vars_files:
+    - test_vars.yml
+
+  tasks:
+
+    - block:
+
+        ## Generating the testname for deployment
+        - include_tasks: /ansible-utils/create_testname.yml
+
+        ## RECORD START-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'SOT'
+          
+        ## Getting the username
+        - name: Get username
+          shell: cat /etc/secret-volume/username
+          register: username
+
+        ## Getting the password.stdout     
+        - name: Get password
+          shell: cat /etc/secret-volume/password
+          register: password
+
+        - name: Get BD
+          shell: | 
+            kubectl get bd -n {{ namespace }}
+
+        ## Create cstorPoolOperation
+        - name: Get blockdevice 
+          shell: kubectl get bd -n openebs --no-headers | grep Unclaimed | awk '{print $1}' | tail -n 1
+          register: blockdevice_name
+        
+        ## Add bd name in spc yml
+        - name: Add bd name in spc yml
+          shell: sed -i "s/dummyvalue/{{blockdevice_name.stdout}}/g" ./utils/spc.yml
+        
+        ## Create SPC
+        - name: Create SPC 
+          shell: kubectl apply -f /utils/spc.yml
+
+        - pause: 
+            seconds: 20
+
+        ## Delete SPC using director
+        - name: Delete SPC using director
+          uri: 
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/cstorpooloperations'
+            method: POST
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+            headers:
+                Content-Type: "application/json"
+            body: '{"clusterId":"{{ cluster_id }}", "input":{"name":"cstor-disk-pools","kind":"StoragePoolClaim","version":"v1alpha1"}, "kind":"DeleteCStorPoolCluster"}'
+            status_code: 200,201,202
+          register: spc_deletion
+
+        ## Fetching cstorpooloperation id
+        - name: Fetching cstorpooloperation id
+          set_fact:
+            cstorpooloperation_id: "{{ spc_deletion.json.id }}"
+        
+        ## Wait for cstorpooloperation to get completed
+        - name: Wait for cstorpooloperation to get completed
+          uri: 
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/cstorpooloperations/{{ cstorpooloperation_id }}'
+            method: GET
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+            status_code: 200,201,202
+          register: cstorpooloperation_state
+          until: "cstorpooloperation_state.json.state == 'success'"
+          delay: 10
+          retries: 40
+
+        ## Setting flag as Pass
+        - set_fact:
+            flag: "Pass"
+        
+      rescue:
+        - name: Setting fail flag
+          set_fact:
+            flag: "Fail"
+
+      always:
+        ## RECORD END-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'EOT'
