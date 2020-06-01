@@ -31,7 +31,7 @@ module.exports = {
 				'director/teaming/directorTeaming',
 				'director/teaming/TCID-DIR-TEAMING-USER-INVITE',
 				'director/teaming/TCID-DIR-TEAMING-USER-ROLE-UPDATE',
-				'director/teaming/TCID-DIR-TEAMING-USER-ROLE-UPDATE'
+				'director/teaming/TCID-DIR-TEAMING-USER-ROLE-UPDATE-NEGATIVE'
 			],
 		},
 		{
