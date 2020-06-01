@@ -58,7 +58,8 @@ module.exports = {
 				'director/openebs-provisioning/TCID-DIR-OP-INSTALL-OPENEBS-CP-ON-SPECIFIC-NODE',
 				'director/openebs-provisioning/TCID-DIR-OP-INSTALL-OPENEBS-DP-ON-SPECIFIC-NODE',
 				'director/openebs-provisioning/TCID-DIR-OP-INSTALL-OPENEBS-LIMIT-RESOURCE',
-				'director/openebs-provisioning/TCID-DIR-OP-RE-INSTALL-OPENEBS'
+				'director/openebs-provisioning/TCID-DIR-OP-RE-INSTALL-OPENEBS',
+				'director/openebs-provisioning/TCID-DIR-GUI-OPENEBS-COMPONENTS-VERSION'
 			],
 		},
 		{
@@ -73,7 +74,8 @@ module.exports = {
 				'director/dmaas/TCID-DIR-DMAAS-SCHD-LOCAL-DEV-AWS-BUCKET',
 				'director/dmaas/TCID-DIR-DMAAS-SCHD-LOCAL-DEV-MINIO-BUCKET',
 				'director/dmaas/TCID-DIR-DMAAS-SCHD-LOCAL-HP-AWS-BUCKET',
-				'director/dmaas/TCID-DIR-DMAAS-SCHD-LOCAL-HP-MINIO-BUCKET'
+				'director/dmaas/TCID-DIR-DMAAS-SCHD-LOCAL-HP-MINIO-BUCKET',
+				'director/dmaas/TCID-DIR-DMAAS-MINIO-DELETE'
 			],
 		},
 		{
