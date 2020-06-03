@@ -103,7 +103,7 @@
             set_fact:
               openebs_id: "{{ openebses_active.json.data[0].id }}"
 
-          - name: Labeling the nodes of the cluster
+          - name: Labeling first node of the cluster as data plane node
             uri:
               url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses/{{ openebs_id }}/?action=selectopenebsnodes"
               method: POST
@@ -114,9 +114,9 @@
               body_format: json
               body: '{"dataPlaneNodes":["{{node1_id}}"]}'
               status_code: 200
-            register: labelnodes
+            register: labelnode1
 
-          - name: Labeling the nodes of the cluster
+          - name: Labeling second node of the cluster as control plane node
             uri:
               url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses/{{ openebs_id }}/?action=selectopenebsnodes"
               method: POST
@@ -127,9 +127,9 @@
               body_format: json
               body: '{"controlPlaneNodes":["{{node2_id}}"]}'
               status_code: 200
-            register: labelnodes    
+            register: labelnode2  
 
-          - name: Labeling the nodes of the cluster
+          - name: Labeling third node of the cluster as control plane node
             uri:
               url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses/{{ openebs_id }}/?action=selectopenebsnodes"
               method: POST
@@ -140,7 +140,7 @@
               body_format: json
               body: '{"controlPlaneNodes":["{{node3_id}}"]}'
               status_code: 200
-            register: labelnodes   
+            register: labelnode3  
 
           - name: Installing openebs on the cluster
             uri:
@@ -203,7 +203,7 @@
             set_fact:
               openebs_id: "{{ install_openebs.json.id }}"
 
-          - name: Labeling the nodes of the cluster
+          - name: Labeling first node of the cluster as data plane node
             uri:
               url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses/{{ openebs_id }}/?action=selectopenebsnodes"
               method: POST
@@ -214,9 +214,9 @@
               body_format: json
               body: '{"dataPlaneNodes":["{{node1_id}}"]}'
               status_code: 200
-            register: labelnodes
+            register: labelnode1
 
-          - name: Labeling the nodes of the cluster
+          - name: Labeling second node of the cluster as control plane node
             uri:
               url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses/{{ openebs_id }}/?action=selectopenebsnodes"
               method: POST
@@ -227,9 +227,9 @@
               body_format: json
               body: '{"controlPlaneNodes":["{{node2_id}}"]}'
               status_code: 200
-            register: labelnodes    
+            register: labelnode2   
 
-          - name: Labeling the nodes of the cluster
+          - name: Labeling third node of the cluster as control plane node
             uri:
               url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses/{{ openebs_id }}/?action=selectopenebsnodes"
               method: POST
@@ -240,7 +240,7 @@
               body_format: json
               body: '{"controlPlaneNodes":["{{node3_id}}"]}'
               status_code: 200
-            register: labelnodes
+            register: labelnode3
 
           ## Installing openebs
           - name: Installing openebs on the cluster
