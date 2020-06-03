@@ -85,7 +85,7 @@ spec:
           ## Note: For basic installation only template value slould be provided
           ## For adding any additional value - change the installation mode to advance
           - name: INSTALLATION_MODE
-            value: 'basic'
+            value: 'advance'
 
           - name: ANSIBLE_STDOUT_CALLBACK
             value: 'default'  

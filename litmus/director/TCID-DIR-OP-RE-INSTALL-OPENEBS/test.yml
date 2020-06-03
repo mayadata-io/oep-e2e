@@ -83,7 +83,7 @@
             body_format: json
             status_code: 200
           register: node_details
-
+        
         ## Define variable node_id
         - set_fact:
             node_id: []
@@ -93,36 +93,6 @@
           set_fact:
             node_id: "{{ node_id  + [item.id] }}"
           loop: "{{ node_details.json.data }}"
-
-        ## Labeling node-1 of the Cluster with controlPlaneNode=true and dataPlaneNode=flase
-        ## With the first element in the node_id list
-        - name: Labeling node-1 of the cluster
-          uri:
-            url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes/{{ node_id[0] }}/?action=labelnodes"
-            method: POST
-            url_username: "{{ username.stdout }}"
-            url_password: "{{ password.stdout }}"
-            force_basic_auth: yes
-            return_content: yes
-            status_code: 202
-            body_format: json
-            body: '{"controlPlaneNode": true, "dataPlaneNode": false }'
-          register: labelnode1
-
-        ## Labeling node-2 of the Cluster with controlPlaneNode=false and dataPlaneNode=true
-        ## With the second element in the node_id list
-        - name: Labeling node-2 of the cluster
-          uri:
-            url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes/{{ node_id[1] }}/?action=labelnodes"
-            method: POST
-            url_username: "{{ username.stdout }}"
-            url_password: "{{ password.stdout }}"
-            force_basic_auth: yes
-            return_content: yes
-            body_format: json
-            status_code: 202
-            body: '{"controlPlaneNode": false, "dataPlaneNode": true }'
-          register: labelnode2
 
         ## Installing openebs
         ## Also accepted error code is 405 which means openebs is already installed
@@ -154,7 +124,7 @@
             executable: /bin/bash
           register: openebs_namespace
           when: "count_maya_api.stdout == '1'"
-
+        
         ## Removing the labels from the cluster nodes
         - include_tasks: /utils/openebs-label-cleanup.yml
 
