@@ -7,6 +7,7 @@ module.exports = {
 				label: 'Install and Upgrade',
 				items: [
 					'director/installation/installation',
+					'director/installation/TCID-DIR-INSTALL-ON-LOCAL-HP'
 				],
 			},
 			{
@@ -22,6 +23,10 @@ module.exports = {
 				label: 'Authentication',
 				items: [
 					'director/authentication/authentication',
+					'director/authentication/TCID-GUI-AUTH',
+					'director/authentication/TCID-GUI-CLUSTER',
+					'director/authentication/TCID-GUI-DASHBOARD',
+					'director/authentication/TCID-GUI-PROFILE'
 				],
 			},
 			{
