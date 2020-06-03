@@ -91,32 +91,6 @@
           set_fact:
             project_id: "{{ project_details.json.data[0].id }}"
 
-        ## Labeling the node-1 of connected Cluster with controlPlaneNode=true and dataPlaneNode=true
-        - name: Giving POST request on labelnodes
-          uri:
-            url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes/{{ node_id[0] }}/?action=labelnodes"
-            method: POST
-            url_username: "{{ username.stdout }}"
-            url_password: "{{ password.stdout }}"
-            force_basic_auth: yes
-            return_content: yes
-            body_format: json
-            body: '{"controlPlaneNode": true, "dataPlaneNode": true}'
-            status_code: 202
-
-        ## Labeling the node-2 of connected Cluster with controlPlaneNode=true and dataPlaneNode=flase
-        - name: Giving POST request on labelnodes
-          uri:
-            url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes/{{ node_id[1] }}/?action=labelnodes"
-            method: POST
-            url_username: "{{ username.stdout }}"
-            url_password: "{{ password.stdout }}"
-            force_basic_auth: yes
-            return_content: yes
-            body_format: json
-            body: '{"controlPlaneNode": true, "dataPlaneNode": false}'
-            status_code: 202
-        
         ## Get active openebses
         - name: Get active openebses
           uri:

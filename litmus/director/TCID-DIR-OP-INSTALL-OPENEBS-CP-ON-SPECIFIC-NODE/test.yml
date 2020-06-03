@@ -91,51 +91,17 @@
             namespace: "{{ openebs_namespace.stdout }}"
           when: "count_maya_api.stdout == '1'"
 
-        ## Labeling node-1 of the Cluster with controlPlaneNode=true and dataPlaneNode=false
-        ## With the first element in the node_id list
-        - name: Labeling node-1 of the cluster
-          uri:
-            url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes/{{ node_id[0] }}/?action=labelnodes"
-            method: POST
-            url_username: "{{ username.stdout}}"
-            url_password: "{{ password.stdout}}"
-            force_basic_auth: yes
-            return_content: yes
-            status_code: 202
-            body_format: json
-            body: '{"controlPlaneNode": true, "dataPlaneNode": false }'
-          register: labelnode1
+        - name: Get the node1_id
+          set_fact:
+            node1_id: "{{ node_id[0].split('n')[1] }}"
 
-        ## Labeling node-2 of the Cluster with controlPlaneNode=false and dataPlaneNode=true
-        ## With the second element in the node_id list
-        - name: Labeling node-2 of the cluster
-          uri:
-            url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes/{{ node_id[1] }}/?action=labelnodes"
-            method: POST
-            url_username: "{{ username.stdout}}"
-            url_password: "{{ password.stdout}}"
-            force_basic_auth: yes
-            return_content: yes
-            body_format: json
-            status_code: 202
-            body: '{"controlPlaneNode": false, "dataPlaneNode": true }'
-          register: labelnode2
+        - name: Get the node2_id
+          set_fact:
+            node2_id: "{{ node_id[1].split('n')[1] }}"
 
-
-        ## Labeling node-3 of the Cluster with controlPlaneNode=false and dataPlaneNode=true
-        ## With the third element in the node_id list
-        - name: Labeling node-3 of the cluster
-          uri:
-            url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes/{{ node_id[2] }}/?action=labelnodes"
-            method: POST
-            url_username: "{{ username.stdout}}"
-            url_password: "{{ password.stdout}}"
-            force_basic_auth: yes
-            return_content: yes
-            body_format: json
-            body: '{"controlPlaneNode": false, "dataPlaneNode": true }'
-            status_code: 202
-          register: labelnode3       
+        - name: Get the node2_id
+          set_fact:
+            node3_id: "{{ node_id[2].split('n')[1] }}"  
 
         ## Get active openebses
         - name: Get active openebses
@@ -159,6 +125,45 @@
           - name: Getting the openebses id
             set_fact:
               openebs_id: "{{ openebses_active.json.data[0].id }}"
+ 
+          - name: Labeling first node of the cluster as control plane node
+            uri:
+              url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses/{{ openebs_id }}/?action=selectopenebsnodes"
+              method: POST
+              url_username: "{{ username.stdout }}"
+              url_password: "{{ password.stdout }}"
+              force_basic_auth: yes
+              return_content: yes
+              body_format: json
+              body: '{"controlPlaneNodes":["{{node1_id}}"]}'
+              status_code: 200
+            register: labelnode1
+
+          - name: Labeling second node of the cluster as data plane node
+            uri:
+              url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses/{{ openebs_id }}/?action=selectopenebsnodes"
+              method: POST
+              url_username: "{{ username.stdout }}"
+              url_password: "{{ password.stdout }}"
+              force_basic_auth: yes
+              return_content: yes
+              body_format: json
+              body: '{"dataPlaneNodes":["{{node2_id}}"]}'
+              status_code: 200
+            register: labelnode2    
+
+          - name: Labeling third node of the cluster as data plane node
+            uri:
+              url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses/{{ openebs_id }}/?action=selectopenebsnodes"
+              method: POST
+              url_username: "{{ username.stdout }}"
+              url_password: "{{ password.stdout }}"
+              force_basic_auth: yes
+              return_content: yes
+              body_format: json
+              body: '{"dataPlaneNodes":["{{node3_id}}"]}'
+              status_code: 200
+            register: labelnode3       
 
           - name: Installing openebs on the cluster
             uri:
@@ -220,6 +225,45 @@
           - name: Getting the id
             set_fact:
               openebs_id: "{{ install_openebs.json.id }}"
+
+          - name: Labeling first node of the cluster as control plane node
+            uri:
+              url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses/{{ openebs_id }}/?action=selectopenebsnodes"
+              method: POST
+              url_username: "{{ username.stdout }}"
+              url_password: "{{ password.stdout }}"
+              force_basic_auth: yes
+              return_content: yes
+              body_format: json
+              body: '{"controlPlaneNodes":["{{node1_id}}"]}'
+              status_code: 200
+            register: labelnode1
+
+          - name: Labeling second node of the cluster as data plane node
+            uri:
+              url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses/{{ openebs_id }}/?action=selectopenebsnodes"
+              method: POST
+              url_username: "{{ username.stdout }}"
+              url_password: "{{ password.stdout }}"
+              force_basic_auth: yes
+              return_content: yes
+              body_format: json
+              body: '{"dataPlaneNodes":["{{node2_id}}"]}'
+              status_code: 200
+            register: labelnode2    
+
+          - name: Labeling third node of the cluster as data plane node
+            uri:
+              url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses/{{ openebs_id }}/?action=selectopenebsnodes"
+              method: POST
+              url_username: "{{ username.stdout }}"
+              url_password: "{{ password.stdout }}"
+              force_basic_auth: yes
+              return_content: yes
+              body_format: json
+              body: '{"dataPlaneNodes":["{{node3_id}}"]}'
+              status_code: 200
+            register: labelnodes
 
           ## Installing openebs
           - name: Installing openebs on the cluster
