@@ -127,8 +127,6 @@ module.exports = {
 				label: 'OpenEBS Functional',
 				items: [
 					'openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-CSTOR-CLONE-CREATE',
-					'openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-LOCALPV-HOSTPATH-CREATE',
-					'openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-CSTOR-CLONE-CREATE',
 					'openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-CSTOR-SNAPSHOT-CREATE',
 					'openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-CSTOR-VOLUME-EXT4-RESIZE',
 					'openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-CSTOR-VOLUME-XFS-RESIZE',
