@@ -249,8 +249,8 @@
 
           when: openebses_active.json.data == []
 
-        ## Checking the control plane label on the first node                                                                                                                                                          
-        - name: Checking the label on the first node of the cluster                                                                                                                                                    
+        ## Checking control plane label on the first node of the cluster                                                                                                                                                          
+        - name: Checking control plane label on the first node of the cluster                                                                                                                                                  
           uri:                                                                                                                                                                                                          
             url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes/{{ node_id[0] }}"                                                                                                                                   
             method: GET                                                                                                                                                                                                 
@@ -261,12 +261,12 @@
             body_format: json                                                                                                                                                                                           
             status_code: 200                                                                                                                                                                                            
           register: node1                                                                                                                                                                                               
-          until: "'mayadata.io/control-plane' in {{node1.json.labels | to_json | string }}"                                                                                                                                
+          until: "'mayadata.io/control-plane' in {{node1.json.labels}}"                                                                                                                                
           delay: 2                                                                                                                                                                                                      
           retries: 60
 
-        ## Checking the data plane label on the second node                                                                                                                                                          
-        - name: Checking the label on the second node of the cluster                                                                                                                                                    
+        ## Checking data plane label on the second node of the cluster                                                                                                                                                      
+        - name: Checking data plane label on the second node of the cluster                                                                                                                                                 
           uri:                                                                                                                                                                                                          
             url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes/{{ node_id[1] }}"                                                                                                                                   
             method: GET                                                                                                                                                                                                 
@@ -277,12 +277,12 @@
             body_format: json                                                                                                                                                                                           
             status_code: 200                                                                                                                                                                                            
           register: node2                                                                                                                                                                                               
-          until: "'mayadata.io/data-plane' in {{node2.json.labels | to_json | string }}"                                                                                                                                
+          until: "'mayadata.io/data-plane' in {{node2.json.labels}}"                                                                                                                                
           delay: 2                                                                                                                                                                                                      
           retries: 60             
 
-        ## Checking the data plane label on the third node                                                                                                                                                           
-        - name: Checking the label on the third node of the cluster                                                                                                                                                     
+        ## Checking data plane label on the third node of the cluster                                                                                                                                                         
+        - name: Checking data plane label on the third node of the cluster                                                                                                                                                  
           uri:                                                                                                                                                                                                          
             url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes/{{ node_id[2] }}"                                                                                                                                   
             method: GET                                                                                                                                                                                                 
@@ -293,7 +293,7 @@
             body_format: json                                                                                                                                                                                           
             status_code: 200                                                                                                                                                                                            
           register: node3                                                                                                                                                                                               
-          until: "'mayadata.io/data-plane' in {{node3.json.labels | to_json | string }}"                                                                                                                                
+          until: "'mayadata.io/data-plane' in {{node3.json.labels}}"                                                                                                                                
           delay: 2                                                                                                                                                                                                      
           retries: 60  
 
