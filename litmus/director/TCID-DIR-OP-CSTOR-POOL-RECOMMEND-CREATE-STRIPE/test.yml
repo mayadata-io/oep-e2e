@@ -141,8 +141,8 @@
             status_code: 200,201,202
           register: cstorpooloperation_state
           until: "cstorpooloperation_state.json.state == 'success'"
-          delay: 10
-          retries: 60
+          delay: 20
+          retries: 50
 
         ## Setting flag as Pass
         - set_fact:
