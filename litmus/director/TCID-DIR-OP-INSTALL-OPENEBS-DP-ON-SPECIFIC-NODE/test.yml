@@ -274,48 +274,6 @@
           delay: 2                                                                                                                                                                                                      
           retries: 60
 
-        ## Checking the data plane label on the first node
-        - name: Checking the label on first node of the cluster
-          uri:
-            url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes/{{ node_id[0] }}"
-            method: GET
-            url_username: "{{ username.stdout}}"
-            url_password: "{{ password.stdout}}"
-            force_basic_auth: yes
-            return_content: yes
-            body_format: json
-            status_code: 200
-          register: node1
-          failed_when: "node1.json.nodeType['mayadata.io/data-plane'] != 'true'"
-
-        ## Checking the data plane label on the second node
-        - name: Checking the label on the second node of the cluster
-          uri:
-            url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes/{{ node_id[1] }}"
-            method: GET
-            url_username: "{{ username.stdout}}"
-            url_password: "{{ password.stdout}}"
-            force_basic_auth: yes
-            return_content: yes
-            body_format: json
-            status_code: 200
-          register: node2
-          failed_when: "node2.json.nodeType['mayadata.io/control-plane'] != 'true'"        
-
-        ## Checking the data plane label on the third node
-        - name: Checking the label on the third node of the cluster
-          uri:
-            url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes/{{ node_id[2] }}"
-            method: GET
-            url_username: "{{ username.stdout}}"
-            url_password: "{{ password.stdout}}"
-            force_basic_auth: yes
-            return_content: yes
-            body_format: json
-            status_code: 200
-          register: node3
-          failed_when: "node3.json.nodeType['mayadata.io/control-plane'] != 'true'"
-
         ## Checking the openebs Installation    
         - name: Fetch OpenEBS control plane pods state
           shell: kubectl get pods -n {{ namespace }}  | grep {{ item }} | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
