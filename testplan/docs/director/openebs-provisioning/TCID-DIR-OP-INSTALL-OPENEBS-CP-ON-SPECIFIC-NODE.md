@@ -37,3 +37,7 @@ sidebar_label: TCID-DIR-OP-INSTALL-OPENEBS-CP-ON-SPECIFIC-NODE
 ### Expected output
 
 - Director should be able to install openebs control plane components in particular node.
+
+### Test Result Link
+
+- https://github.com/mayadata-io/oep-e2e-results/tree/master/TCID-DIR-OP-INSTALL-OPENEBS-CP-ON-SPECIFIC-NODE

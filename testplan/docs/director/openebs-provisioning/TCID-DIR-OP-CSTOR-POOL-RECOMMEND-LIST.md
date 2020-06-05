@@ -40,3 +40,7 @@ sidebar_label: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST
 - Director should list the supported recommendations
 - Director should list the capacity based recommendations
 - Director should list the device based recommendations
+
+### Test Result Link
+
+- https://github.com/mayadata-io/oep-e2e-results/tree/master/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST
