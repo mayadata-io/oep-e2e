@@ -37,3 +37,7 @@ sidebar_label: TCID-DIR-OP-RE-INSTALL-OPENEBS
 ### Expected output
 
 - At the time of reinstalling openebs using director it should give error.
+
+### Test Result Link
+
+- https://github.com/mayadata-io/oep-e2e-results/tree/master/TCID-DIR-OP-RE-INSTALL-OPENEBS

@@ -37,3 +37,7 @@ sidebar_label: TCID-DIR-OP-INSTALL-OPENEBS-LIMIT-RESOURCE
 ### Expected output
 
 - Install OpenEBS using custom resource limits.
+
+### Test Result Link
+
+- https://github.com/mayadata-io/oep-e2e-results/tree/master/TCID-DIR-OP-INSTALL-OPENEBS-LIMIT-RESOURCE

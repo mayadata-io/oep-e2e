@@ -40,3 +40,7 @@ sidebar_label: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-RAIDZ
 ### Expected output
 
 - Director should be able to create raidz cstor pool cluster
+
+### Test Result Link
+
+- https://github.com/mayadata-io/oep-e2e-results/tree/master/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-RAIDZ
