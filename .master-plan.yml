@@ -881,3 +881,156 @@ spec:
       test/feature: "DIRECTOR OPENEBS COMPONENTS VERSION"
       test/tags: "DIRECTOR, OPENEBS, VERSION"
       testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-GUI-OPENEBS-COMPONENTS-VERSION"
+
+###############################################################################################################################
+####################################### OpenEBS Functional Scenarios ##########################################################
+###############################################################################################################################
+
+  - tcid: TCID-JIVA-APP-TARGET-AFFINITY
+    name: "TCID-JIVA-APP-TARGET-AFFINITY"
+    description: "Test OpenEBS Jiva target and application pod stickiness on a node"
+    labels:
+      test/feature: "OPENEBS JIVA"
+      test/tags: "OPENEBS, JIVA"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-JIVA-APP-TARGET-AFFINITY"
+
+  - tcid: TCID-JIVA-SNAPSHOT-CREATE
+    name: "TCID-JIVA-SNAPSHOT-CREATE"
+    description: "Test creation of snapshot on Jiva Volume"
+    labels:
+      test/feature: "OPENEBS JIVA"
+      test/tags: "OPENEBS, JIVA"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-JIVA-SNAPSHOT-CREATE"
+
+  - tcid: TCID-JIVA-VOLUME-SCALEUP
+    name: "TCID-JIVA-VOLUME-SCALEUP"
+    description: "Test Jiva volume scaleup"
+    labels:
+      test/feature: "OPENEBS JIVA"
+      test/tags: "OPENEBS, JIVA"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-JIVA-VOLUME-SCALEUP"
+
+  - tcid: TCID-CSTOR-SNAPSHOT-CREATE
+    name: "TCID-CSTOR-SNAPSHOT-CREATE"
+    description: "Test creation of snapshot on cStor Volume"
+    labels:
+      test/feature: "OPENEBS CSTOR"
+      test/tags: "OPENEBS, CSTOR"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-CSTOR-SNAPSHOT-CREATE"
+
+  - tcid: TCID-CSTOR-CLONE-CREATE
+    name: "TCID-CSTOR-CLONE-CREATE"
+    description: "Test creation of clone of cStor Volume using snapshot"
+    labels:
+      test/feature: "OPENEBS CSTOR"
+      test/tags: "OPENEBS, CSTOR"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-CSTOR-CLONE-CREATE"
+
+  - tcid: TCID-CSTOR-VOLUME-EXT4-RESIZE
+    name: "TCID-CSTOR-VOLUME-EXT4-RESIZE"
+    description: "Test cStor volume expansion based on ext4 file system"
+    labels:
+      test/feature: "OPENEBS CSTOR"
+      test/tags: "OPENEBS, CSTOR"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-CSTOR-VOLUME-EXT4-RESIZE"
+
+  - tcid: TCID-CSTOR-VOLUME-XFS-RESIZE
+    name: "TCID-CSTOR-VOLUME-XFS-RESIZE"
+    description: "Test cStor volume expansion based on XFS file system"
+    labels:
+      test/feature: "OPENEBS CSTOR"
+      test/tags: "OPENEBS, CSTOR"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-CSTOR-VOLUME-XFS-RESIZE"
+
+  - tcid: TCID-LOCALPV-HOSTPATH-CREATE
+    name: "TCID-LOCALPV-HOSTPATH-CREATE"
+    description: "Test creation of OpenEBS LocalPV using hostpath"
+    labels:
+      test/feature: "OPENEBS LOCALPV"
+      test/tags: "OPENEBS, LOCALPV"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-LOCALPV-HOSTPATH-CREATE"
+
+  - tcid: TCID-LOCALPV-RANDOM-DEVICE-CREATE
+    name: "TCID-LOCALPV-RANDOM-DEVICE-CREATE"
+    description: "Test creation of OpenEBS LocalPV using randomly selected block device detected by NDM"
+    labels:
+      test/feature: "OPENEBS LOCALPV"
+      test/tags: "OPENEBS, LOCALPV"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-LOCALPV-RANDOM-DEVICE-CREATE"
+
+  - tcid: TCID-LOCALPV-SELECTED-DEVICE-CREATE
+    name: "TCID-LOCALPV-SELECTED-DEVICE-CREATE"
+    description: "Test creation of OpenEBS LocalPV using selected block device"
+    labels:
+      test/feature: "OPENEBS LOCALPV"
+      test/tags: "OPENEBS, LOCALPV"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-LOCALPV-SELECTED-DEVICE-CREATE"
+
+
+###############################################################################################################################
+############################################ OpenEBS Chaos Scenarios ##########################################################
+###############################################################################################################################
+
+  - tcid: TCID-JIVA-BUSYBOX-KILL
+    name: "TCID-JIVA-BUSYBOX-KILL"
+    description: "Kill busybox application pod and test if jiva volume can be remounted"
+    labels:
+      test/feature: "OPENEBS JIVA"
+      test/tags: "OPENEBS, JIVA"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-CHAOS/TCID-JIVA-BUSYBOX-KILL"
+
+  - tcid: TCID-JIVA-MULTIPLE-REPLICAS-FAILURE
+    name: "TCID-JIVA-MULTIPLE-REPLICAS-FAILURE"
+    description: "Kill multiple jiva volume replicas and verify the revision counter file"
+    labels:
+      test/feature: "OPENEBS JIVA"
+      test/tags: "OPENEBS, JIVA"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-CHAOS/TCID-JIVA-MULTIPLE-REPLICAS-FAILURE"
+
+  - tcid: TCID-JIVA-REPLICA-NETWORK-DELAY
+    name: "TCID-JIVA-REPLICA-NETWORK-DELAY"
+    description: "Induce network delay in Jiva replica pod"
+    labels:
+      test/feature: "OPENEBS JIVA"
+      test/tags: "OPENEBS, JIVA"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-CHAOS/TCID-JIVA-REPLICA-NETWORK-DELAY"
+
+  - tcid: TCID-JIVA-CONTROLLER-KILL
+    name: "TCID-JIVA-CONTROLLER-KILL"
+    description: "Kill Jiva controller pod and check volume accessibility"
+    labels:
+      test/feature: "OPENEBS JIVA"
+      test/tags: "OPENEBS, JIVA"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-CHAOS/TCID-JIVA-CONTROLLER-KILL"
+
+  - tcid: TCID-JIVA-CONTROLLER-NETWORK-DELAY
+    name: "TCID-JIVA-CONTROLLER-NETWORK-DELAY"
+    description: "Induce network delay in Jiva controller pod"
+    labels:
+      test/feature: "OPENEBS JIVA"
+      test/tags: "OPENEBS, JIVA"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-CHAOS/TCID-JIVA-CONTROLLER-NETWORK-DELAY"
+
+  - tcid: TCID-JIVA-REPLICA-NODE-AFFINITY
+    name: "TCID-JIVA-REPLICA-NODE-AFFINITY"
+    description: "Delete Jiva replica pod and check its stickiness with node"
+    labels:
+      test/feature: "OPENEBS JIVA"
+      test/tags: "OPENEBS, JIVA"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-CHAOS/TCID-JIVA-REPLICA-NODE-AFFINITY"
+
+  - tcid: TCID-CSTOR-BUSYBOX-APP-KILL
+    name: "TCID-CSTOR-BUSYBOX-APP-KILL"
+    description: "Kill busybox application pod and test if cStor volume can be remounted"
+    labels:
+      test/feature: "OPENEBS CSTOR"
+      test/tags: "OPENEBS, CSTOR"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-CHAOS/TCID-CSTOR-BUSYBOX-APP-KILL"
+
+  - tcid: TCID-CSTOR-TARGET-KILL
+    name: "TCID-CSTOR-TARGET-KILL"
+    description: "Kill cstor target pod and check volume accessiblity"
+    labels:
+      test/feature: "OPENEBS CSTOR"
+      test/tags: "OPENEBS, CSTOR"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-CHAOS/TCID-CSTOR-TARGET-KILL"
