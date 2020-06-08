@@ -1,0 +1,72 @@
+---
+- hosts: localhost
+  connection: local
+
+  vars_files:
+    - test_vars.yml
+
+  tasks:
+
+    - block:
+
+        ## Generating the testname for deployment
+        - include_tasks: /ansible-utils/create_testname.yml
+
+        ## RECORD START-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'SOT'
+          
+        ## Getting the username
+        - name: Get username
+          shell: cat /etc/secret-volume/username
+          register: username
+
+        ## Getting the password.stdout     
+        - name: Get password
+          shell: cat /etc/secret-volume/password
+          register: password
+
+        ## Check whether openebs components are in Running state or not
+        - name: Check whether openebs components are in Running state or not
+          shell: kubectl get pods -n {{ namespace }}  | grep {{ item }} | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
+          register: app_status
+          until: app_status.stdout == 'Running'
+          with_items:
+            - "{{ openebs_components }}"
+          retries: 20
+          delay: 5
+
+        - name: Get BD
+          shell: | 
+            kubectl get bd -n {{ namespace }}
+
+        ## Deletion of CSPC created by director
+        - name: Deletion of SPC created by director
+          uri: 
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/cstorpooloperations'
+            method: POST
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+            headers:
+                Content-Type: "application/json"
+            body: '{"clusterId":"{{ cluster_id }}", "input":{"name":"rec-create-raidz","kind":"CStorPoolCluster","version":"v1"}, "kind":"DeleteCStorPoolCluster"}'
+            status_code: 405
+          register: cspc_deletion
+
+        - set_fact:
+            flag: "Pass"
+
+      rescue:
+        - name: Setting fail flag
+          set_fact:
+            flag: "Fail"
+
+      always:
+        ## RECORD END-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'EOT'
