@@ -38,3 +38,7 @@ sidebar_label: TCID-DIR-DMAAS-MINIO-DELETE
 ### Expected output
 
 - Dmaas schedule should be removed which are using minio bucket.
+
+### Test Result Link
+
+- https://github.com/mayadata-io/oep-e2e-results/tree/master/TCID-DIR-DMAAS-MINIO-DELETE
