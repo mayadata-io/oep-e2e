@@ -26,6 +26,7 @@ module.exports = {
 					'director/authentication/TCID-GUI-AUTH',
 					'director/authentication/TCID-GUI-CLUSTER',
 					'director/authentication/TCID-GUI-DASHBOARD',
+					'director/authentication/TCID-GUI-PROFILE',
 					'director/authentication/TCID-DIR-AUTH-LOCAL-ADMIN',
 					'director/authentication/TCID-DIR-AUTH-LOCAL-USER',
 					'director/authentication/TCID-DIR-AUTH-LOCAL-PERF',
