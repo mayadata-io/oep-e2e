@@ -2,14 +2,14 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: delete-cstor-pool-
+  generateName: delete-cspc-pool-
   namespace: litmus
 spec:
   template:
     metadata:
       name: litmus
       labels:
-        app: delete-cstor-pool
+        app: delete-cspc-pool
     spec:
       serviceAccountName: litmus
       restartPolicy: Never

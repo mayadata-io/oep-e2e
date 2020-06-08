@@ -1,4 +1,4 @@
-test_name: delete-cstor-pool
+test_name: delete-cspc-pool
 openebs_components:
   [
     'openebs-provisioner',
