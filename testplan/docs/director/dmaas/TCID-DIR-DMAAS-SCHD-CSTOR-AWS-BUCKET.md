@@ -56,3 +56,7 @@ sidebar_label: TCID-DIR-DMAAS-SCHD-CSTOR-AWS-BUCKET
 ### Expected output
 
 - Restore status should be Success and application should get restored to the destination cluster.
+
+### Test Result Link
+
+- https://github.com/mayadata-io/oep-e2e-results/tree/master/TCID-DIR-DMAAS-SCHD-CSTOR-AWS-BUCKET

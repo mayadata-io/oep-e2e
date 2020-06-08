@@ -47,3 +47,7 @@ sidebar_label: TCID-DIR-TEAMING-USER-INVITE
 - pauser1 should be joined as project Admin, user should have all project access
 - pruser1 should be joined as Readonly, no write operation can be performed
 - pmuser1 should be joined as project member, user will be part of the project but no access to resources.
+
+### Test Result Link
+
+- https://github.com/mayadata-io/oep-e2e-results/tree/master/TCID-DIR-TEAMING-USER-INVITE

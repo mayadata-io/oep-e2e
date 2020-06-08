@@ -26,7 +26,13 @@ module.exports = {
 					'director/authentication/TCID-GUI-AUTH',
 					'director/authentication/TCID-GUI-CLUSTER',
 					'director/authentication/TCID-GUI-DASHBOARD',
-					'director/authentication/TCID-GUI-PROFILE'
+					'director/authentication/TCID-DIR-AUTH-LOCAL-ADMIN',
+					'director/authentication/TCID-DIR-AUTH-LOCAL-USER',
+					'director/authentication/TCID-DIR-AUTH-LOCAL-PERF',
+					'director/authentication/TCID-DIR-TEAMING-USER-INVITE',
+					'director/authentication/TCID-DIR-TEAMING-USER-ROLE-UPDATE',
+					'director/authentication/TCID-DIR-TEAMING-USER-ROLE-UPDATE-NEGATIVE',
+					'director/authentication/TCID-DIR-GUI-OPENEBS-COMPONENTS-VERSION'
 				],
 			},
 			{
@@ -64,7 +70,11 @@ module.exports = {
 					'director/openebs-provisioning/TCID-DIR-OP-INSTALL-OPENEBS-DP-ON-SPECIFIC-NODE',
 					'director/openebs-provisioning/TCID-DIR-OP-INSTALL-OPENEBS-LIMIT-RESOURCE',
 					'director/openebs-provisioning/TCID-DIR-OP-RE-INSTALL-OPENEBS',
-					'director/openebs-provisioning/TCID-DIR-GUI-OPENEBS-COMPONENTS-VERSION'
+					'director/openebs-provisioning/TCID-DIR-GUI-OPENEBS-COMPONENTS-VERSION',
+					'director/openebs-provisioning/TCID-DIR-OP-DELETE-SPC-WITH-NO-VOLUME',
+					'director/openebs-provisioning/TCID-DIR-OP-DELETE-CSPC-WITH-NO-VOLUME'
+
+
 				],
 			},
 			{
