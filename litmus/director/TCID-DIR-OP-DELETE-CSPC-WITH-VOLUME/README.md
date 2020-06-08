@@ -27,7 +27,8 @@
 
 ## Details
 
-- This test cases is to create cstor pool using recommendations.
+- This test cases is to delete cstor pool using recommendations.
+- Negative test case
 
 ### Expected output
 
