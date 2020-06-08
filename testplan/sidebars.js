@@ -29,10 +29,6 @@ module.exports = {
 					'director/authentication/TCID-DIR-AUTH-LOCAL-ADMIN',
 					'director/authentication/TCID-DIR-AUTH-LOCAL-USER',
 					'director/authentication/TCID-DIR-AUTH-LOCAL-PERF',
-					'director/authentication/TCID-DIR-TEAMING-USER-INVITE',
-					'director/authentication/TCID-DIR-TEAMING-USER-ROLE-UPDATE',
-					'director/authentication/TCID-DIR-TEAMING-USER-ROLE-UPDATE-NEGATIVE',
-					'director/authentication/TCID-DIR-GUI-OPENEBS-COMPONENTS-VERSION'
 				],
 			},
 			{
