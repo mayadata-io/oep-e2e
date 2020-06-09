@@ -38,7 +38,7 @@
         
         ## Add bd name in spc yml
         - name: Add bd name in spc yml
-          shell: sed -i "s/dummyvalue/{{blockdevice_name.stdout}}/g" ./utils/spc.yml
+          shell: sed -i "s/dummyvalue/{{blockdevice_name.stdout}}/g" /utils/spc.yml
         
         ## Create SPC
         - name: Create SPC 
