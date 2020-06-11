@@ -477,14 +477,7 @@ spec:
       test/feature: "OPENEBS PROVISIONING"
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, DEVICE, NODE"
       testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-DEVICE-TOGGLE-NODE"
-
-  - tcid: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST
-    name: "TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST"
-    description: "Test listing of cstor pool recommendations"
-    labels:
-      test/feature: "OPENEBS PROVISIONING"
-      test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR, RECOMMENDATIONS"
-      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST"
+      
 
   - tcid: TCID-DIR-OP-INSTALL-OPENEBS
     name: "TCID-DIR-OP-INSTALL-OPENEBS"

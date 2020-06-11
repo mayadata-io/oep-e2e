@@ -52,7 +52,6 @@ As a DevOps admin, I want to run applications on a storage that supports replica
 
 | TCID                                                                                       |
 | ------------------------------------------------------------------------------------------ |
-|[TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST](TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST)              |
 |[TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-STRIPE](TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-STRIPE)|
 |[TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-MIRROR](TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-MIRROR)|
 |[TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-RAIDZ](TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-RAIDZ)|
