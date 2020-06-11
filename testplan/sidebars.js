@@ -54,7 +54,6 @@ module.exports = {
 					'director/openebs-provisioning/TCID-DIR-OP-DEVICE-FILTER-PATH',
 					'director/openebs-provisioning/TCID-DIR-OP-DEVICE-IGNORE',
 					'director/openebs-provisioning/TCID-DIR-OP-DEVICE-VIEW-TOGGLE',
-					'director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST',
 					'director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-NO-NDM',
 					'director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-STRIPE',
 					'director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-RAIDZ',
