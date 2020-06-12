@@ -84,7 +84,7 @@
             return_content: yes
             force_basic_auth: yes
             body_format: json
-            body: '{"clusterId":"{{ cluster_id }}", "deviceGroupName":"{{ device_groupName }}","poolCapacity":"1G","poolName":"rec-create-test", "raidGroupConfig":{"groupDeviceCount":3, "raidType":"raidz"}}'
+            body: '{"clusterId":"{{ cluster_id }}", "deviceGroupName":"{{ device_groupName }}","poolCapacity":"1G","poolName":"raidz-pool-reboot", "raidGroupConfig":{"groupDeviceCount":3, "raidType":"raidz"}}'
             status_code: 200,201,202
           register: device_recommendation
 
