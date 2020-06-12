@@ -1,0 +1,200 @@
+---
+- hosts: localhost
+  connection: local
+
+  vars_files:
+    - test_vars.yml
+
+  tasks:
+
+    - block:
+
+        ## Generating the testname for deployment
+        - include_tasks: /ansible-utils/create_testname.yml
+
+        ## RECORD START-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'SOT'
+          
+        ## Getting the username
+        - name: Get username
+          shell: cat /etc/secret-volume/username
+          register: username
+
+        ## Getting the password.stdout     
+        - name: Get password
+          shell: cat /etc/secret-volume/password
+          register: password
+
+        ## Check whether openebs components are in Running state or not
+        - name: Check whether openebs components are in Running state or not
+          shell: kubectl get pods -n {{ namespace }}  | grep {{ item }} | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
+          register: app_status
+          until: app_status.stdout == 'Running'
+          with_items:
+            - "{{ openebs_components }}"
+          retries: 20
+          delay: 5
+
+        ## Fetch the recommendation details
+        - name: Fetch recommendations details
+          uri:
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/recommendations"
+            method: GET
+            url_username: "{{ username.stdout }}"
+            url_password: "{{ password.stdout }}"
+            force_basic_auth: yes
+            return_content: yes
+            body_format: json
+            status_code: 200,201,202
+          register: recommendations
+        
+        ## Fetch the recommendation id 
+        - name: Fetch the recommendation id
+          set_fact:
+            recommendation_id: "{{ recommendations.json.data[0].id }}"
+
+        ## List Recommendations
+        - name: List Recommendations
+          uri:
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/recommendations/{{ recommendation_id }}/?action=getcapacityrecommendation'
+            method: POST
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+            body: '{"clusterId":"{{ cluster_id }}", "raidGroupConfig":{"groupDeviceCount":3, "raidType":"raidz"}}'
+            status_code: 200,201,202
+          register: recommendation_list
+
+        ## Fetch the deviceGroupName
+        - name: Fetch the deviceGroupName
+          set_fact:
+            device_groupName: "{{ recommendation_list.json.data[0].deviceGroupName }}"
+
+        ## List Recommendations
+        - name: List Recommendations
+          uri:
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/recommendations/{{ recommendation_id }}/?action=getdevicerecommendation'
+            method: POST
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+            body: '{"clusterId":"{{ cluster_id }}", "deviceGroupName":"{{ device_groupName }}","poolCapacity":"1G","poolName":"rec-create-test", "raidGroupConfig":{"groupDeviceCount":3, "raidType":"raidz"}}'
+            status_code: 200,201,202
+          register: device_recommendation
+
+        ## Create cstorPoolOperation
+        - name: create cstorpooloperation
+          uri: 
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/cstorpooloperations'
+            method: POST
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+            body: '{"clusterId":"{{ cluster_id }}", "input":{{ device_recommendation.json.data[0] | to_json | string | to_json }}, "kind":"CreateCStorPoolCluster"}'
+            status_code: 200,201,202
+          register: cstorpooloperation
+
+        ## Fetching cstorpooloperation id
+        - name: Fetching cstorpooloperation id
+          set_fact:
+            cstorpooloperation_id: "{{ cstorpooloperation.json.id }}"
+
+        ## Execute CStorPoolOpetation
+        - name: Execute CStorPoolOpetation
+          uri: 
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/cstorpooloperations/{{ cstorpooloperation_id }}/?action=execute'
+            method: POST
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+            body: '{}'
+            status_code: 200,201,202
+          register: cstorpooloperation
+        
+        ## Wait for cstorpooloperation to get completed
+        - name: Wait for cstorpooloperation to get completed
+          uri: 
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/cstorpooloperations/{{ cstorpooloperation_id }}'
+            method: GET
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+            status_code: 200,201,202
+          register: cstorpooloperation_state
+          until: "cstorpooloperation_state.json.state == 'success'"
+          delay: 10
+          retries: 40
+
+        - block:
+
+          ## Getting Ip of the node
+          - name: Getting Ip of the node
+            shell: kubectl get node --no-headers -o wide | awk {'print $7'} | head -n 1
+            register: node_ip
+
+          ## Getting instance id.
+          - name: Getting instance id.
+            shell: aws ec2 describe-instances --filters "Name=ip-address,Values={{node_ip.stdout}}" --query Reservations[].Instances[].InstanceId | head -n 2 | tail -n 1 | tr -d ' ' 
+            register: instance_id
+
+          ## Rebooting the node 
+          - name: Rebooting the node
+            shell: aws ec2 reboot-instances --instance-ids {{ instance_id.stdout }}
+
+          - pause:
+              minutes: 3
+          
+          when: platform == "AWS"
+
+        - block:
+          
+          - name: Rebooting node
+            shell: sshpass -p {{vm_pass}} ssh {{vm_user}}@{{vm1_ip}} 'reboot'
+
+          - pause:
+              minutes: 3
+
+          when: platform == "RANCHER"
+        
+        - name: Check for the pool status after rebooting
+          uri: 
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/cstorpoolinstances'1cspi26
+            method: GET
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+            status_code: 200,201,202
+          register: cstorpooloperation_state
+          until: "cstorpooloperation_state.json.data[0].poolState == 'Online'"
+          delay: 10
+          retries: 40
+      
+
+        ## Setting flag as Pass
+        - set_fact:
+            flag: "Pass"
+        
+      rescue:
+        - name: Setting fail flag
+          set_fact:
+            flag: "Fail"
+
+      always:
+        ## RECORD END-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'EOT'
