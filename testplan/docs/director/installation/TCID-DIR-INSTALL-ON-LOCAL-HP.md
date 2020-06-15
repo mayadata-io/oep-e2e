@@ -54,11 +54,13 @@ kubectl apply -f oep-e2e/litmus/prerequisite/docker-secret.yml
 `
 - Generate URL to access DOP 
 - Create a configmap from DOP URL
-`kubectl create configmap config --from-literal=url=<generated-DOP-URL> -n litmus`
+`
+kubectl create configmap config --from-literal=url=$(generated-DOP-URL) -n litmus
+`
 
-<b>Running basic sanity checks</b> <br>
+**Running basic sanity checks**
 
-Using Basic-sanity-check script to check the DOP components , If any of the component fails job will fail .
+- Using Basic-sanity-check script to check the DOP components , If any of the component fails job will fail.
 
 ### Expected Result 
 
