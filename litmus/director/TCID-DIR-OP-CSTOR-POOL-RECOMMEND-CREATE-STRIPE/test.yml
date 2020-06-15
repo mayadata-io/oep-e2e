@@ -40,6 +40,10 @@
         - pause:	
             minutes: 2
 
+        - name: Get BD
+          shell: | 
+            kubectl get bd -n {{ namespace }}
+
         ## Fetch the recommendation details
         - name: Fetch recommendations details
           uri:
@@ -137,8 +141,8 @@
             status_code: 200,201,202
           register: cstorpooloperation_state
           until: "cstorpooloperation_state.json.state == 'success'"
-          delay: 10
-          retries: 40
+          delay: 20
+          retries: 50
 
         ## Setting flag as Pass
         - set_fact:

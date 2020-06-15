@@ -1,20 +1,44 @@
-## Cleaning SPC from the cluster
-- name: Removing SPC from the cluster
-  shell: kubectl delete spc --all
+## Check if SPC is present in the cluster
+- name: Checking if SPC is present in the cluster
+  shell: kubectl get spc --no-headers | wc -l
   args:
     executable: /bin/bash
-      
-## Cleaning PV form the cluster
+  register: spc
+
+## Clean up SPC (if any present) from the cluster
+- name: Cleaning up SPC from the cluster
+  shell: kubectl delete spc --all                                                            
+  args:                                            
+    executable: /bin/bash                          
+  when: "spc.stdout > '0'"
+
+## Check if PV is present in the cluster
+- name: Checking if PV is present in the cluster
+  shell: kubectl get pv -n openebs --no-headers | wc -l
+  args:
+    executable: /bin/bash
+  register: pv
+
+## Clean up PV (if any present) from the cluster
 - name: Removing PV from the cluster
   shell: kubectl delete pv -n {{ namespace }} --all
   args:
     executable: /bin/bash
+  when: "pv.stdout > '0'"
 
-## Cleaning up Blockdevices
-- name: Removing Blockdevices
+## Check if BD is present in the cluster
+- name: Checking if BD is present in the cluster
+  shell: kubectl get bd -n openebs --no-headers | wc -l
+  args:
+    executable: /bin/bash
+  register: bd
+
+## Clean up BD (if any present) from the cluster
+- name: Removing Blockdevices from the cluster
   shell: kubectl delete bd -n {{ namespace }} --all
   args:
     executable: /bin/bash
+  when: "bd.stdout > '0'"
       
 ## Cleaning up deployment
 - name: Removing deployment from openebs namespace
@@ -53,31 +77,15 @@
   retries: 30
   delay: 5
 
-- name: Check openebs is removed or not from cluster
+- name: Check openebses should not have openebs active entry
   uri:
-    url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses"
-    method: GET
-    url_username: "{{ username.stdout }}"
-    url_password: "{{ password.stdout }}" 
-    return_content: yes
-    force_basic_auth: yes
-    body_format: json
-  register: openebs_details
-  until: "openebs_details.json.data[0].state == 'removed'"
-  retries: 30
-  delay: 10
-
-- name: Verify openebs is removed or not
-  uri:
-    url: "{{ director_url }}/v3/clusters/{{ cluster_id }}"
-    method: GET
+    url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses?state=active&clusterId={{ cluster_id }}"
     url_username: "{{ username.stdout }}"
     url_password: "{{ password.stdout }}"
-    return_content: yes
-    force_basic_auth: yes
-    body_format: json
-  register: openebs_components_details
-     
-- name: Fetching specific component details to verify
-  set_fact:
-    component_details: "{{ openebs_components_details.json }}"
+    method: GET
+    status_code: 200
+  register: openebses_active
+  until: "openebses_active.json.data == []"
+  delay: 10
+  retries: 30
+

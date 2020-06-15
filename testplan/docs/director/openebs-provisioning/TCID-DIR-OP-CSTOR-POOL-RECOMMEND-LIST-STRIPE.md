@@ -39,3 +39,7 @@ sidebar_label: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-STRIPE
 ### Expected output
 
 - Director should list stripe based cstor pool recommendations
+
+### Test Result Link
+
+- https://github.com/mayadata-io/oep-e2e-results/tree/master/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-STRIPE

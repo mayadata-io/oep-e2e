@@ -1,0 +1,95 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: openebs-install-
+  namespace: litmus
+spec:
+  template:
+    metadata:
+      name: litmus
+      labels:
+        app: openebs-install-check-litmus
+    spec:
+      serviceAccountName: litmus
+      restartPolicy: Never
+      volumes:
+      - name: secret-volume
+        secret:
+          secretName: director-user-pass
+      containers:
+      - name: ansibletest
+        image: mayadataio/dop-validator:ci 
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: secret-volume
+          readOnly: true
+          mountPath: "/etc/secret-volume"
+        env:
+
+          ## Takes director-ip from configmap director-ip
+          - name: DIRECTOR_IP
+            valueFrom:
+              configMapKeyRef:
+                name: config
+                key: url
+
+          ## Takes group-id from configmap group-id
+          - name: GROUP_ID
+            valueFrom:
+              configMapKeyRef:
+                name: groupid
+                key: group_id
+          
+          ## It should be 1ot1 Mandatory
+          - name: TEMPLATE_ID
+            value: '1ot1' 
+
+          - name: NAMESPACE
+            value: 'openebs'
+
+          ## Enter the default directory - It can be /var/openebs
+          - name: DEFAULT_DIRECTORY
+            value: ''
+
+          ##Enter docker registry
+          - name: DOCKER_REGISTRY
+            value: ''
+
+          ## Enter include device filter
+          - name: INCLUDE_DEVICE_FILTERS
+            value: ''
+
+          ## Enter exclude device filter  
+          - name: EXCLUDE_DEVICE_FILTER
+            value: ''
+
+          ## Enter CPU resource limit
+          - name: CPU_RESOURCE_LIMIT
+            value: ''
+
+          ## Enter Memory resource limit
+          - name: MEMORY_RESOURCE_LIMIT
+            value: ''
+
+          ## It will have values basic/advance
+          ## Note: For basic installation only template value slould be provided
+          ## For adding any additional value change the installation mode to advance
+          - name: INSTALLATION_MODE
+            value: 'basic'
+
+          ## Takes cluster_id from configmap
+          - name: CLUSTER_ID
+            valueFrom:
+              configMapKeyRef:
+                name: clusterid
+                key: cluster_id
+
+          - name: ANSIBLE_STDOUT_CALLBACK
+            value: default  
+
+        command: ["/bin/bash"]
+        args: ["-c", "ansible-playbook ./litmus/director/TCID-DIR-OP-INSTALL-OPENEBS/test.yml -i /etc/ansible/hosts -v; exit 0"]
+
+      imagePullSecrets:
+      - name: oep-secret

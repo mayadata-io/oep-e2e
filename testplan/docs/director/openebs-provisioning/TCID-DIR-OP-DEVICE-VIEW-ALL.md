@@ -35,6 +35,7 @@ sidebar_label: TCID-DIR-OP-DEVICE-VIEW-ALL
 - This is a postive test case
 - Recent versions of K8s & DOP needs to be used
 
-### Test Results
-Access test results across various platforms by navigating through following links
-- [Link]()
+
+### Test Result Link
+
+- https://github.com/mayadata-io/oep-e2e-results/tree/master/TCID-DIR-OP-DEVICE-VIEW-ALL

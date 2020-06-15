@@ -40,3 +40,7 @@ sidebar_label: TCID-DIR-OP-CSTOR-POOL-RECOMMEND-MIRROR-REBOOT-NODE
 ### Expected output
 
 - The status of pools should be Active
+
+### Test Result Link
+
+- https://github.com/mayadata-io/oep-e2e-results/tree/master/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-MIRROR-REBOOT-NODE

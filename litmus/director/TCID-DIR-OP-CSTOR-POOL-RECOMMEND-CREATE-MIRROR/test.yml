@@ -37,6 +37,10 @@
           retries: 20
           delay: 5
 
+        - name: Get BD
+          shell: | 
+            kubectl get bd -n {{ namespace }}
+
         ## Fetch the recommendation details
         - name: Fetch recommendations details
           uri:

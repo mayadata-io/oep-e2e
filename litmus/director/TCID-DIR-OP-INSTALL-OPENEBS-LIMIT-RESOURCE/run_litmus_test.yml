@@ -1,0 +1,97 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: openebs-resource-limit-installation-
+  namespace: litmus
+spec:
+  template:
+    metadata:
+      name: litmus
+      labels:
+        app: openebs-resource-litmit-installation
+    spec:
+      serviceAccountName: litmus
+      restartPolicy: Never
+      volumes:
+      - name: secret-volume
+        secret:
+          secretName: director-user-pass
+      containers:
+      - name: ansibletest
+        image: mayadataio/dop-validator:ci
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: secret-volume
+          readOnly: true
+          mountPath: "/etc/secret-volume"
+        env:
+          
+          ## Take url from configmap config
+          - name: DIRECTOR_IP
+            valueFrom:
+              configMapKeyRef:
+                name: config
+                key: url
+
+          ## Take cluster_id from configmap clusterid
+          - name: CLUSTER_ID    
+            valueFrom:
+              configMapKeyRef:
+                name: clusterid
+                key: cluster_id
+
+          ## Takes group_id from configmap groupid
+          - name: GROUP_ID
+            valueFrom:
+              configMapKeyRef:
+                name: groupid
+                key: group_id
+
+          ## It should be 1ot1 Mandatory
+          - name: TEMPLATE_ID
+            value: '1ot1'
+
+          ## Namespace where openebs is installed
+          ## By default in basic mode it is openebs
+          - name: NAMESPACE
+            value: 'openebs'
+
+          ## Enter the default directory - It can be /var/openebs
+          - name: DEFAULT_DIRECTORY
+            value: ''
+
+          ##Enter docker registry
+          - name: DOCKER_REGISTRY
+            value: ''
+
+          ## Enter include device filter
+          - name: INCLUDE_DEVICE_FILTERS
+            value: ''
+
+          ## Enter exclude device filter  
+          - name: EXCLUDE_DEVICE_FILTER
+            value: ''
+
+          ## CPU resource limit is provided
+          - name: CPU_RESOURCE_LIMIT
+            value: '150m'
+
+          ## Memory resource limit provided
+          - name: MEMORY_RESOURCE_LIMIT
+            value: '250Mi'
+          
+          ## It will have values basic/advance
+          ## Note: For this test we will be using advance mode as basic mode is used
+          ## For default values of above fields
+          - name: INSTALLATION_MODE
+            value: 'advance'
+
+          - name: ANSIBLE_STDOUT_CALLBACK
+            value: 'default'  
+
+        command: ["/bin/bash"]
+        args: ["-c", "ansible-playbook ./litmus/director/TCID-DIR-OP-INSTALL-OPENEBS-LIMIT-RESOURCE/test.yml -i /etc/ansible/hosts -v; exit 0"]
+
+      imagePullSecrets:
+      - name: oep-secret        

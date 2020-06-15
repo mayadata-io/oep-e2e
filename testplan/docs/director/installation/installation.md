@@ -23,7 +23,7 @@ As a DevOps admin, I want to test compatibility of Director in consuming storage
 - Director with all its databases consuming openebs cstor engine with local SSDs underneath.
 
 
-### TCID-DIR-INSTALL-ON
+### TCID-DIR-INSTALL
 
 | TCID                                                                     |
 |------------------------------------------------------------------------- |
@@ -34,7 +34,7 @@ As a DevOps admin, I want to test compatibility of Director in consuming storage
 |[TCID-DIR-INSTALL-ON-CSTOR](TCID-DIR-INSTALL-ON-CSTOR)                    |
 
 
-### TCID-DIR-UPGRADE-ON
+### TCID-DIR-UPGRADE
 
 | TCID                                                                     |
 |------------------------------------------------------------------------- |

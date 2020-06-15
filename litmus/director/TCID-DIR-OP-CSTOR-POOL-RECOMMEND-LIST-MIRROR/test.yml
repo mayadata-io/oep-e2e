@@ -40,6 +40,10 @@
         - pause:	
             minutes: 2
 
+        - name: Get BD
+          shell: | 
+            kubectl get bd -n {{ namespace }}
+
         ## Fetch the recommendation details
         - name: Fetch recommendations details
           uri:

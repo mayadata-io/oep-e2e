@@ -9,8 +9,23 @@ sidebar_label: Test Strategy
 
 Data Management as a Service provides backup & restore options to stateful applications. Following sections describe various use cases that are required by enterprise users with respect to their business continuity plans.
 
+### TCID-DIR-DMAAS-RESTORE-ENTIRE-CLUSTER
+As a DevOps admin, I manage several applications in my kubernetes cluster. I want to have continuity plans for the entire kubernetes cluster. I want to take cloud based backup on a periodic basis & restore them when my source cluster is not available due to some unforeseen events. I should be able to restore the entire cluster from these backups _(somewhere in the cloud)_ as a new kubernetes cluster.
+
+### TCID-DIR-DMAAS-RESTORE-APP-WITH-LARGE-FILES
+As a DevOps admin, I manage applications in my kubernetes cluster. These applications are configured with two volumes. These volumes in turn consist of various large files _(each file with size >= 500MB)_ with a total capacity of around 10GB & 80GB respectively. I want to have continuity plans for these applications. I want to take cloud based backup on a periodic basis & restore them when needed. I should be able to restore the application from these backups _(somewhere in the cloud)_ on a preferred kubernetes cluster.
+
+### TCID-DIR-DMAAS-RESTORE-APP-WITH-SMALL-FILES
+As a DevOps admin, I manage applications in my kubernetes cluster. These applications are configured with two volumes. These volumes in turn consist of various small files _(each file with size <= 1MB)_ with a total capacity of around 10GB & 80GB respectively. I want to have continuity plans for these applications. I want to take cloud based backup on a periodic basis & restore them when needed. I should be able to restore the application from these backups _(somewhere in the cloud)_ on a preferred kubernetes cluster.
+
+### TCID-DIR-DMAAS-BACKUP-APP-WITH-RESTARTS
+As a DevOps admin, I manage several applications in my kubernetes cluster. These applications experience restarts due to the nature of kubernetes scheduler. I want to configure continuity plans for these applications that ensure proper backups & restores even with these disruptions. I want to take cloud based backup on a periodic basis & restore them when needed. I should be able to restore the application from these backups _(somewhere in the cloud)_ on a preferred kubernetes cluster.
+
+### TCID-DIR-DMAAS-BACKUP-APP-WITH-EVICTION
+As a DevOps admin, I manage several applications in my kubernetes cluster. These applications periodically get evicted to new nodes due to the nature of kubernetes scheduler. I want to configure continuity plans for these applications that ensure proper backups & restores even with these disruptions. I want to take cloud based backup on a periodic basis & restore them when needed. I should be able to restore the application from these backups _(somewhere in the cloud)_ on a preferred kubernetes cluster.
+
 ### TCID-DIR-DMAAS-SOURCE-CLUSTER-GONE
-As a DevOps admin, I manage statefulset applications in my kubernetes cluster. I want to have continuity plans for these applications. I want to take cloud based backup on a periodic basis & restore them when my source cluster is not available due to some unforeseen events. I should be able to restore from these backups _(somewhere in the cloud)_ to any new cluster that will be created only during these unforeseen situations.
+As a DevOps admin, I manage statefulset applications in my kubernetes cluster. I want to have continuity plans for these applications. I want to take cloud based backup on a periodic basis & restore them when my source cluster is not available due to some unforeseen events. I should be able to restore the entire application from these backups _(somewhere in the cloud)_ to any new kubernetes cluster that is either existing or newly created.
 
 | TCID                                                                    | Status |
 | ----------------------------------------------------------------------- | ----   |

@@ -15,6 +15,18 @@ This page captures the test strategies for OpenEBS operations related to:
 - Volume Provisioning 
 
 
+### OpenEBS install related test case IDs
+
+| TCID                                                                                      |
+| ----------------------------------------------------------------------------------------  |
+| [TCID-DIR-OP-INSTALL-OPENEBS](TCID-DIR-OP-INSTALL-OPENEBS)                                |
+| [TCID-DIR-OP-INSTALL-OPENEBS-LIMIT-RESOURCE](TCID-DIR-OP-INSTALL-OPENEBS-LIMIT-RESOURCE)  |
+| [TCID-DIR-OP-RE-INSTALL-OPENEBS](TCID-DIR-OP-RE-INSTALL-OPENEBS)                          |
+| [TCID-DIR-OP-INSTALL-OPENEBS-DP-ON-SPECIFIC-NODE](TCID-DIR-OP-INSTALL-OPENEBS-DP-ON-SPECIFIC-NODE)|
+| [TCID-DIR-OP-INSTALL-OPENEBS-CP-ON-SPECIFIC-NODE](TCID-DIR-OP-INSTALL-OPENEBS-CP-ON-SPECIFIC-NODE)|
+| [TCID-DIR-OP-INSTALL-OPENEBS-ON-DOP-CLUSTER](TCID-DIR-OP-INSTALL-OPENEBS-ON-DOP-CLUSTER)  |
+
+
 ###  TCID-DIR-OP-DEVICE-VIEW
 As a DevOps admin, I want OpenEBS to provide me all the storage disks that are eligible to be consumed by applications. OpenEBS should provide the list of disks that spans across nodes within the cluster. It is expected that during the lifetime of this cluster, few node restarts, upgrading this cluster to newer versions will be observed / performed. OpenEBS should continue to provide me storage information like the Day 0 days.
 
@@ -35,20 +47,15 @@ As a DevOps admin, I want to mark certain devices for consumption by OpenEBS. I 
 | [TCID-DIR-OP-DEVICE-TOGGLE-NODE](TCID-DIR-OP-DEVICE-TOGGLE-NODE)       |
 
 
-### TCID-DIR-OP-CONTROL-PLANE-UPGRADE
-
-
-### TCID-DIR-OP-DATA-PLANE-UPGRADE
-
-
-### TCID-DIR-OP-CSTOR-POOL
+### Test cases w.r.t CStorPool recommendations
 As a DevOps admin, I want to run applications on a storage that supports replication & snapshots. I want to get recommendations on storage pool plans that can help the applications recover from disk as well as node failures. Since openebs cstor supports my use cases, I would like to get cstor pool related recommendations that helps design pools that are resilient to node & disk failures.
 
 | TCID                                                                                       |
 | ------------------------------------------------------------------------------------------ |
-|[TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST](TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST)              |
 |[TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-STRIPE](TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-STRIPE)|
 |[TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-MIRROR](TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-MIRROR)|
+|[TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-RAIDZ](TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-RAIDZ)|
+|[TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-RAIDZ](TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-RAIDZ)|
 |[TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-MIRROR](TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-MIRROR)|
 |[TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-STRIPE](TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-STRIPE)|
 
@@ -89,15 +96,32 @@ As a DevOps admin, I want to run applications on a storage that supports replica
 |[TCID-DIR-OP-CSTOR-POOL-RECOMMEND-RAIDZ-REBOOT-NODE](TCID-DIR-OP-CSTOR-POOL-RECOMMEND-RAIDZ-REBOOT-NODE)        |
 
 
-### TCID-DIR-OP-CSTOR-VOLUME
+### Upgrade test cases w.r.t CStor
 
-### TCID-DIR-OP-JIVA-VOLUME
+| TCID                                                                                       |
+| ------------------------------------------------------------------------------------------ |
+| [TCID-DIR-OP-UPGRADE-CSTOR-POOL](TCID-DIR-OP-UPGRADE-CSTOR-POOL)                           |
+| [TCID-DIR-OP-UPGRADE-CSTOR-VOLUME](TCID-DIR-OP-UPGRADE-CSTOR-VOLUME)                       |
+| [TCID-DIR-OP-UPGRADE-CSTOR-POOL-ALL-PODS-RUNNING](TCID-DIR-OP-UPGRADE-CSTOR-POOL-ALL-PODS-RUNNING)|
+| [TCID-DIR-OP-UPGRADE-CSTOR-POOL-ONE-POD-PENDING](TCID-DIR-OP-UPGRADE-CSTOR-POOL-ONE-POD-PENDING)|
+| [TCID-DIR-OP-UPGRADE-CSTOR-POOL-ALL-PODS-PENDING](TCID-DIR-OP-UPGRADE-CSTOR-POOL-ALL-PODS-PENDING)|
 
-### TCID-DIR-OP-LOCAL-HOSTPATH-VOLUME
 
-### TCID-DIR-OP-LOCAL-DEVICE-VOLUME
+### Upgrade test cases w.r.t Jiva
+
+| TCID                                                                                       |
+| ------------------------------------------------------------------------------------------ |
+| [TCID-DIR-OP-UPGRADE-JIVA-VOLUME](TCID-DIR-OP-UPGRADE-JIVA-VOLUME)                         |
+| [TCID-DIR-OP-UPGRADE-JIVA-VOLUME-ONE-REPLICA-PENDING](TCID-DIR-OP-UPGRADE-JIVA-VOLUME-ONE-REPLICA-PENDING)|
+| [TCID-DIR-OP-UPGRADE-JIVA-VOLUME-ALL-REPLICAS-PENDING](TCID-DIR-OP-UPGRADE-JIVA-VOLUME-ALL-REPLICAS-PENDING)|
+| [TCID-DIR-OP-UPGRADE-JIVA-VOLUME-TWO-REPLICAS-PENDING](TCID-DIR-OP-UPGRADE-JIVA-VOLUME-TWO-REPLICAS-PENDING)|
 
 
+### Verify OpenEBS components version
+
+| TCID                                                                                       |
+| ------------------------------------------------------------------------------------------ |
+| [TCID-DIR-GUI-OPENEBS-COMPONENTS-VERSION](TCID-DIR-GUI-OPENEBS-COMPONENTS-VERSION)         |                |
 
 ## Glossary
 
@@ -106,3 +130,5 @@ As a DevOps admin, I want to run applications on a storage that supports replica
 | TCID             | TestCase ID                       |
 | DIR              | Director                          |
 | OP               | OPENEBS PROVISIONER               |
+| DP               | DATA PLANE                        |
+| CP               | CONTROL PLANE                     |

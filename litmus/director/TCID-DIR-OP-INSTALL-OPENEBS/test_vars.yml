@@ -1,0 +1,15 @@
+test_name: openebs-install
+openebs_components: ['openebs-provisioner','openebs-ndm-operator','openebs-ndm','openebs-snapshot-operator','openebs-admission-server','openebs-localpv-provisioner','maya-apiserver']
+group_id: "{{ lookup('env','GROUP_ID') }}"
+director_url: "{{ lookup('env','DIRECTOR_IP') }}"
+cluster_id: "{{ lookup('env','CLUSTER_ID') }}"
+template_id: "{{ lookup('env','TEMPLATE_ID') }}"
+namespace: "{{ lookup('env','NAMESPACE') }}"
+default_directory: "{{ lookup('env','DEFAULT_DIRECTORY') }}"
+docker_registry: "{{ lookup('env','DOCKER_REGISTRY') }}"
+include_device_filters: "{{ lookup('env','INCLUDE_DEVICE_FILTERS') }}"
+exclude_device_filters: "{{ lookup('env','EXCLUDE_DEVICE_FILTER') }}"
+cpu_resource_limit: "{{ lookup('env','CPU_RESOURCE_LIMIT') }}"
+memory_resource_limit: "{{ lookup('env','MEMORY_RESOURCE_LIMIT') }}"
+installation_mode: "{{ lookup('env','INSTALLATION_MODE') }}"
+app_ns: app-mongo-ns
