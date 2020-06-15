@@ -24,7 +24,7 @@ MayaData delivers it's vision of delivering data agility for DevOps by transform
 
 ## Test repository structure:
 
-**Kubera-e2e** is the main repository that hosts the test plans and test cases. This is also the repository that hosts the source code of this site. 
+**oep-e2e** is the main repository that hosts the test plans and test cases. This is also the repository that hosts the source code of this site. 
 
 **oep-e2e-gcp** repository contains scripts to run test cases against GCP platform.
 
