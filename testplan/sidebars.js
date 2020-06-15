@@ -159,6 +159,9 @@ module.exports = {
 				],
 			},
 		],
-		Help: ['doc1', 'mdx'],
+        "Release Notes": [
+            'kubera-e2e-release-1-10', 
+        ],
+        Help: ['doc1', 'mdx'],
 	},
 };
