@@ -1,6 +1,6 @@
 module.exports = {
-  title: 'OEP E2E',
-  tagline: 'E2E testing for OEP',
+  title: 'Kubera E2E',
+  tagline: 'E2E testing for Kubera',
   url: 'https://oep-pipelines.mayadata.io',
   baseUrl: '/',
   favicon: 'img/favicon.ico',
@@ -8,9 +8,9 @@ module.exports = {
   projectName: 'oep-e2e', // Usually your repo name.
   themeConfig: {
     navbar: {
-      title: 'OEP E2E',
+      title: 'Kubera E2E',
       logo: {
-        alt: 'MayaData OEP E2E',
+        alt: 'MayaData Kubera E2E',
         src: 'img/logo.png',
       },
       links: [
@@ -27,7 +27,7 @@ module.exports = {
         },
         {
           href: 'https://github.com/mayadata-io/oep-e2e',
-          label: 'OEP-E2E on GitHub',
+          label: 'Kubera-E2E on GitHub',
           position: 'right',
         },
       ],

@@ -1,11 +1,11 @@
 ---
 id: getstarted
-title: Test Plan for MayaData OpenEBS Enterprise Platform (OEP)
+title: Test Plan for MayaData Kubera
 sidebar_label: Introduction
 ---
 ------
 
-MayaData delivers it's vision of delivering data agility for DevOps by transforming Kubernetes into a data layer. MayaData's product is called OpenEBS Enterprise Platform or OEP. OEP is a combination of multiple tools and projects and it currently comprises of OpenEBS Enterprise Edition, Director and Litmus. OEP being an enterprise grade product, requires highest levels of testing such as scalability, security, interoperability, functional and chaos engineering. This site covers all these areas and serves as the top level guide for those who are contributing to the quality of the product.
+MayaData delivers it's vision of delivering data agility for DevOps by transforming Kubernetes into a data layer. MayaData's product is called Kubera. Kubera is a combination of multiple tools and projects and it currently comprises of OpenEBS Enterprise Edition, Director and Litmus. Kubera being an enterprise grade product, requires highest levels of testing such as scalability, security, interoperability, functional and chaos engineering. This site covers all these areas and serves as the top level guide for those who are contributing to the quality of the product.
 
 
 

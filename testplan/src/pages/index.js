@@ -21,7 +21,7 @@ const features = [
     imageUrl: 'img/undraw_docusaurus_tree.svg',
     description: (
       <>
-	OpenEBS Enterprise Platform or OEP converts Kuberentes into a Data layer. Using OEP, the Kubernetes SRE can increase the agility of DevOps, solve the issues around stateful applications.
+	Kubera converts Kuberentes into a Data layer. Using Kubera, the Kubernetes SRE can increase the agility of DevOps, solve the issues around stateful applications.
       </>
     ),
   },
@@ -56,7 +56,7 @@ function Home() {
   const {siteConfig = {}} = context;
   return (
     <Layout
-      title={`MayaData OEP E2E Testing`}
+      title={`MayaData Kubera E2E Testing`}
       description="Description will go into a meta tag in <head />">
       <header className={classnames('hero hero--primary', styles.heroBanner)}>
         <div className="container">
