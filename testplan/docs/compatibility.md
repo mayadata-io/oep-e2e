@@ -1,12 +1,12 @@
 ---
 id: compatibility
-title: OEP Test Compatibility Matrix
+title: Kubera Test Compatibility Matrix
 sidebar_label: Compatibility Matrix
 ---
 
-This page captures platforms and components used while testing each version of OEP Version. It can be used to derive the platform compatibility chart. 
+This page captures platforms and components used while testing each version of Kubera Version. It can be used to derive the platform compatibility chart. 
 
-## OEP Version 1.9
+## Kubera Version 1.9
 
 **Platforms and Details listed below**
 

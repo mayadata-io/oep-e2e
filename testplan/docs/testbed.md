@@ -1,6 +1,6 @@
 ---
 id: testbed
-title: OEP E2E TestBed
+title: Kubera E2E TestBed
 sidebar_label: Testbed
 ---
 ------
