@@ -170,7 +170,7 @@
         
         - name: Check for the pool status after rebooting
           uri: 
-            url: '{{ director_url }}/v3/groups/{{ group_id }}/cstorpoolinstances'1cspi26
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/cstorpoolinstances'
             method: GET
             url_username: '{{ username.stdout }}'
             url_password: '{{ password.stdout }}'
