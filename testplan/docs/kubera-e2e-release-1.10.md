@@ -12,6 +12,12 @@ This release focussed on making coverage as one of the indicators to determine t
 
 A minimum test coverage of **35%** was agreed upon to grant a go ahead for this release.
 
+### Features Verified
+This release focussed on verifying following features:
+- CStor pool recommendations
+- DMAAS
+- OpenEBS Install via DirectorOnPrem
+
 ### What does the future look like?
 While there is no doubt on the progress this team made; there were a lot of unknowns that needs to be understood & taken care of. There were several unknowns experienced in this release. Some of them are listed below:
 - Rancher platform experienced a lot of kube api server timeout errors
