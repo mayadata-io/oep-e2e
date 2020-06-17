@@ -33,7 +33,7 @@
 
         ## Get node name
         - name: Get node name
-          shell: kubectl get node --no-headers | grep Ready | awk '{print $1}' | tail -n 1
+          shell: kubectl get bd -n openebs --no-headers | grep Unclaimed | awk '{print $2}' | tail -n 1
           register: node_name
 
         ## Add bd name in cspc yml
