@@ -22,8 +22,8 @@ There are dedicated clusters for various kubernetes platforms.
 | Cluster | Master               | Worker Nodes                                                 | Notes                    |
 | ------- | -------------------- | ------------------------------------------------------------ | ------------------------ |
 | Kon-C1  | 1 Node, 16GB, 4vCPU  | 5 nodes, 16GB 4 vCPU, 1x100GB for OS Disks                   | DOP                      |
-| Kon-C2  | 1 Node, 32GB, 6vCPU  | 5 nodes x 64GB 12CPU, 1x100GB for OS Disks                         Node1, Node2 and Node3 each of them will have additional disks of total 600GB | OpenEBS via DOP
-
+| Kon-C2  | 1 Node, 32GB, 6vCPU  | 5 nodes x 64GB 12vCPU, 1x100GB for OS Disks                       Worker nodes will have additional disks of total 400GB (25GBx16) | OpenEBS via DOP
+| Kon-C3  | 1 Node, 32GB, 6vCPU  | 5 nodes x 32GB 8vCPU, 1x100GB for OS Disks                   |                          |
 ### OnPrem-Rancher
 
 | Cluster | Master               | Worker Nodes                                                 | Notes                    |
