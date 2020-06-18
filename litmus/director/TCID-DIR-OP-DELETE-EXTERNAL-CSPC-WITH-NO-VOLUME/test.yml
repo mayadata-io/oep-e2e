@@ -51,7 +51,7 @@
         
         ## Create CSPC
         - name: Create CSPC 
-          shell: kubectl apply -f /utils/cspc.yml
+          shell: kubectl create -f /utils/cspc.yml
 
         - pause: 
             seconds: 20

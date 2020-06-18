@@ -2,6 +2,7 @@ apiVersion: cstor.openebs.io/v1
 kind: CStorPoolCluster
 metadata:
   name: cspc-external
+  namespace: openebs
 spec:
   pools:
     - nodeSelector:
