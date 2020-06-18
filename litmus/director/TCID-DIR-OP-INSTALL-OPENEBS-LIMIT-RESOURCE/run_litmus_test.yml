@@ -9,7 +9,7 @@ spec:
     metadata:
       name: litmus
       labels:
-        app: openebs-resource-litmit-installation
+        app: openebs-resource-limit-installation
     spec:
       serviceAccountName: litmus
       restartPolicy: Never
