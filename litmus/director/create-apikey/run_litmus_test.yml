@@ -16,7 +16,7 @@ spec:
       containers:
       - name: ansibletest
         image: mayadataio/dop-validator:ci
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         env:
           - name: DIRECTOR_IP
             valueFrom:

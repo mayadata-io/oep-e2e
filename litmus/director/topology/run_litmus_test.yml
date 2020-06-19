@@ -20,7 +20,7 @@ spec:
       containers:
       - name: ansibletest
         image: mayadataio/dop-validator:ci
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         volumeMounts:
         - name: admin-secret-volume
           readOnly: true
