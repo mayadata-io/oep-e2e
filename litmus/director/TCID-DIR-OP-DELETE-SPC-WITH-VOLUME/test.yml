@@ -1,0 +1,97 @@
+---
+- hosts: localhost
+  connection: local
+
+  vars_files:
+    - test_vars.yml
+
+  tasks:
+
+    - block:
+
+        ## Generating the testname for deployment
+        - include_tasks: /ansible-utils/create_testname.yml
+
+        ## RECORD START-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'SOT'
+          
+        ## Getting the username
+        - name: Get username
+          shell: cat /etc/secret-volume/username
+          register: username
+
+        ## Getting the password.stdout     
+        - name: Get password
+          shell: cat /etc/secret-volume/password
+          register: password
+
+        - name: Get BD
+          shell: | 
+            kubectl get bd -n {{ namespace }}
+
+        ## Create cstorPoolOperation
+        - name: Get blockdevice 
+          shell: kubectl get bd -n openebs --no-headers | grep Unclaimed | awk '{print $1}' | tail -n 1
+          register: blockdevice_name
+        
+        ## Add bd name in spc yml
+        - name: Add bd name in spc yml
+          shell: sed -i "s/dummyvalue/{{blockdevice_name.stdout}}/g" /litmus/director/TCID-DIR-OP-DELETE-SPC-WITH-VOLUME/template/spc.yml
+
+        ## Create SPC
+        - name: Create SPC 
+          shell: kubectl apply -f /litmus/director/TCID-DIR-OP-DELETE-SPC-WITH-VOLUME/template/spc.yml
+
+        - pause: 
+            seconds: 10
+        
+        ## Create Storage Class
+        - name: Create Storage class
+          shell: kubectl apply -f /litmus/director/TCID-DIR-OP-DELETE-SPC-WITH-VOLUME/template/sc.yml
+        
+        ## Create namespace
+        - name: Create namespace
+          shell: kubectl create ns delete-spc
+        
+        ## Deploy minio application
+        - name: Deploy minio application
+          shell: kubectl apply -f /litmus/director/TCID-DIR-OP-DELETE-SPC-WITH-VOLUME/template/minio-manifest
+
+        - pause:
+            seconds: 10
+
+        ## Delete SPC using director
+        - name: Delete SPC using director
+          uri: 
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/cstorpooloperations'
+            method: POST
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+            headers:
+                Content-Type: "application/json"
+            body: '{"clusterId":"{{ cluster_id }}", "input":{"name":"spc-volume","kind":"StoragePoolClaim","version":"v1alpha1"}, "kind":"DeleteCStorPoolCluster"}'
+            status_code: 405
+          register: spc_deletion
+
+        - set_fact:
+            flag: "Pass"
+
+      rescue:
+        - name: Setting fail flag
+          set_fact:
+            flag: "Fail"
+
+      always:
+        ## RECORD END-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'EOT'
+        
+        
+
+        
