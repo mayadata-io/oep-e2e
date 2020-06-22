@@ -33,7 +33,7 @@
 
         ## Create cstorPoolOperation
         - name: Get blockdevice 
-          shell: kubectl get bd -n openebs --no-headers | grep Unclaimed | awk '{print $1}' | tail -n 1
+          shell: kubectl get bd -n {{ namespace }} --no-headers | grep Unclaimed | awk '{print $1}' | tail -n 1
           register: blockdevice_name
         
         ## Add bd name in spc yml
