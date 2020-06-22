@@ -943,14 +943,6 @@ spec:
       test/tags: "OPENEBS, CSTOR"
       testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-CSTOR-REPLICA-SCALEUP"
 
-  - tcid: TCID-CSTOR-REPLICA-SCALEUP
-    name: "TCID-CSTOR-REPLICA-SCALEUP"
-    description: "Test if cStor volume replicas can be scaled up"
-    labels:
-      test/feature: "OPENEBS CSTOR"
-      test/tags: "OPENEBS, CSTOR"
-      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-CSTOR-REPLICA-SCALEUP"
-
   - tcid: TCID-CSTOR-REPLICA-SCALEDOWN
     name: "TCID-CSTOR-REPLICA-SCALEDOWN"
     description: "Test if cStor volume replicas can be scaled down"
