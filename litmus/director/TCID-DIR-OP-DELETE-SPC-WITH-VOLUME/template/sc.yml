@@ -1,10 +1,12 @@
-kind: StorageClass
 apiVersion: storage.k8s.io/v1
+kind: StorageClass
 metadata:
   name: cstor-storageclass
-provisioner: cstor.csi.openebs.io
-allowVolumeExpansion: true
-parameters:
-  cas-type: cstor
-  cstorPoolCluster: spc-volume
-  replicaCount: "1"
+  annotations:
+    openebs.io/cas-type: cstor
+    cas.openebs.io/config: |
+      - name: StoragePoolClaim
+        value: "spc-volume"
+      - name: ReplicaCount
+        value: "1"
+provisioner: openebs.io/provisioner-iscsi
