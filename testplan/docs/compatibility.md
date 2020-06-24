@@ -69,7 +69,7 @@ This page captures platforms and components used while testing each version of K
 **Cluster1 and Cluster2**
 
 - OS version - Ubuntu Server 18.04 LTS (HVM), SSD Volume Type
-- K8S Version - 1.15.10
+- K8S Version - 1.17.6
 - KOPS version - Version 1.16.0
 - kuberouter - v0.3.1
 - tiller - v2.14.3
