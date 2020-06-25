@@ -31,9 +31,12 @@
           shell: | 
             kubectl get bd -n {{ namespace }}
 
-        ## Create cstorPoolOperation
-        - name: Get blockdevice 
-          shell: kubectl get bd -n {{ namespace }} --no-headers | grep Unclaimed | awk '{print $1}' | tail -n 1
+        - name: Get node details
+          shell: kubectl get node --selector='!node-role.kubernetes.io/master' --no-headers | awk '{print $1}' | tail -n 1
+          register: node_name
+        
+        - name: Get block blockdevice name
+          shell: kubectl get bd -n {{ namespace }} -l kubernetes.io/hostname={{ node_name.stdout }} | grep Unclaimed | awk '{print $1}' | tail -n 1
           register: blockdevice_name
         
         ## Add bd name in spc yml
