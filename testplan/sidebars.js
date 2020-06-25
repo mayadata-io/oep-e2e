@@ -86,7 +86,8 @@ module.exports = {
 					'director/dmaas/TCID-DIR-DMAAS-SCHD-LOCAL-DEV-MINIO-BUCKET',
 					'director/dmaas/TCID-DIR-DMAAS-SCHD-LOCAL-HP-AWS-BUCKET',
 					'director/dmaas/TCID-DIR-DMAAS-SCHD-LOCAL-HP-MINIO-BUCKET',
-					'director/dmaas/TCID-DIR-DMAAS-MINIO-DELETE'
+					'director/dmaas/TCID-DIR-DMAAS-MINIO-DELETE',
+					'director/dmaas/TCID-DIR-DMAAS-CSTOR-NON-RESTIC'
 				],
 			},
 			{

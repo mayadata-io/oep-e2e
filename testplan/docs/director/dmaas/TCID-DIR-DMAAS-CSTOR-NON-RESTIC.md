@@ -1,7 +1,7 @@
 ---
-id: TCID-DIR-DMAAS-SCHD-JIVA-MINIO-BUCKET
-title: Restore Minio application
-sidebar_label: TCID-DIR-DMAAS-SCHD-JIVA-MINIO-BUCKET
+id: TCID-DIR-DMAAS-CSTOR-NON-RESTIC
+title: Restore Minio application in non restic way
+sidebar_label: TCID-DIR-DMAAS-CSTOR-NON-RESTIC
 ---
 ------
 
@@ -14,9 +14,9 @@ sidebar_label: TCID-DIR-DMAAS-SCHD-JIVA-MINIO-BUCKET
     <th> Description </th>
   </tr>
   <tr>
-    <td> TCID-DIR-DMAAS-SCHD-JIVA-MINIO-BUCKET </td>
-    <td> Dmaas Backup and Restore </td>
-    <td> Verify dmaas restore minio application deployed using Jiva and Minio bucket used to restore backup </td>
+    <td> TCID-DIR-DMAAS-CSTOR-NON-RESTIC </td>
+    <td> Block based Dmaas Backup and Restore </td>
+    <td> Verify dmaas restore minio application deployed using cStor and AWS bucket used to restore backup in non restic way</td>
   </tr>
 </table>
 
@@ -25,7 +25,7 @@ sidebar_label: TCID-DIR-DMAAS-SCHD-JIVA-MINIO-BUCKET
 - Minio application should be deployed on source cluster.
 
 ### Details
-- Director version 1.9 onwards
+- Director version 1.11 onwards
 - Positive test case
 
 ### Steps Performed in the test
@@ -36,13 +36,13 @@ sidebar_label: TCID-DIR-DMAAS-SCHD-JIVA-MINIO-BUCKET
 - Click on Source cluster.
 - Click on Application tab.
 - Search minio application.
-- Click on minio application having namespace is jiva-minio.
+- Click on minio application having namespace is cstor-aws.
 - Click on dmaas.
 - Click on the New schedule button.
-- Select Minio cloud provider.
+- Select AWS cloud provider.
 - Click on Add cloud credentail button.
-- Enter  minio username and password and save it.
-- Enter minio server url where backup will be stored.
+- Enter  title, access id and access key and save it.
+- Select AWS region where backup objects will be stored.
 - Select schedule time interval.
 - Click on Schedule now button to schedule backup.
 - Click on created schedule.
@@ -60,4 +60,4 @@ sidebar_label: TCID-DIR-DMAAS-SCHD-JIVA-MINIO-BUCKET
 
 ### Test Result Link
 
-- https://github.com/mayadata-io/oep-e2e-results/tree/master/TCID-DIR-DMAAS-SCHD-JIVA-MINIO-BUCKET
+- https://github.com/mayadata-io/oep-e2e-results/tree/master/TCID-DIR-DMAAS-CSTOR-NON-RESTIC

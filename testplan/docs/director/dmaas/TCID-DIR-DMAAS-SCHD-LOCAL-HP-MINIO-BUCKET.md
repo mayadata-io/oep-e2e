@@ -44,6 +44,7 @@ sidebar_label: TCID-DIR-DMAAS-SCHD-LOCAL-HP-MINIO-BUCKET
 - Enter  minio username and password and save it.
 - Enter minio server url where backup will be stored.
 - Click on Schedule now button to schedule backup.
+- Select schedule time interval.
 - Click on created schedule.
 - click on Restore icon.
 - Select the destination cluster name from dropdown.
