@@ -266,6 +266,14 @@ spec:
       test/tags: "DIRECTOR, DMAAS, SCHEDULE, LOCAL PV HOSTPATH, AWS"
       testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-SCHD-LOCAL-HP-AWS-BUCKET"
 
+  - tcid: TCID-DIR-DMAAS-CSTOR-NON-RESTIC
+    name: "TCID-DIR-DMAAS-CSTOR-NON-RESTIC"
+    description: "Test DMAAS schedule for cstor engine in block based"
+    labels:
+      test/feature: "DMAAS"
+      test/tags: "DIRECTOR, DMAAS, SCHEDULE, CSTOR, AWS, NON RESTIC"
+      testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-CSTOR-NON-RESTIC"
+
   - tcid: TCID-DIR-TEAMING-USER-INVITE
     name: "TCID-DIR-TEAMING-USER-INVITE"
     description: "Test Teaming user invite functionality"

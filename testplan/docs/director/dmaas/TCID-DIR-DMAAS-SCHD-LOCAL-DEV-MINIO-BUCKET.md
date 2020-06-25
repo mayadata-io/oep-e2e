@@ -43,6 +43,7 @@ sidebar_label: TCID-DIR-DMAAS-SCHD-LOCAL-DEV-MINIO-BUCKET
 - Click on Add cloud credentail button.
 - Enter  minio username and password and save it.
 - Enter minio server url where backup will be stored.
+- Select schedule time interval.
 - Click on Schedule now button to schedule backup.
 - Click on created schedule.
 - click on Restore icon.

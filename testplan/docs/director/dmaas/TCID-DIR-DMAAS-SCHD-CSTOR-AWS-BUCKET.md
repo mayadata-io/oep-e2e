@@ -39,10 +39,11 @@ sidebar_label: TCID-DIR-DMAAS-SCHD-CSTOR-AWS-BUCKET
 - Click on minio application having namespace is cstor-aws.
 - Click on dmaas.
 - Click on the New schedule button.
-- Select Minio cloud provider.
+- Select AWS cloud provider.
 - Click on Add cloud credentail button.
-- Enter  minio username and password and save it.
-- Enter minio server url where backup will be stored.
+- Enter  title, access id and access key and save it.
+- Select AWS region where backup objects will be stored.
+- Select schedule time interval.
 - Click on Schedule now button to schedule backup.
 - Click on created schedule.
 - click on Restore icon.
