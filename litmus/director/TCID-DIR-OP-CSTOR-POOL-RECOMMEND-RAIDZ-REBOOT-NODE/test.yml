@@ -26,6 +26,16 @@
         - name: Get password
           shell: cat /etc/secret-volume/password
           register: password
+        
+        ## Copy aws credentials 
+        - name: Copy aws credentials
+          shell: |
+            mkdir ~/.aws
+            mv -f /utils/config ~/.aws
+            mv -f /utils/credentials ~/.aws
+            sed -i "s/aws-region/{{ aws_region }}/g" ~/.aws/config
+            sed -i "s/aws-access-key/{{ aws_access_key }}/g" ~/.aws/credentials
+            sed -i "s/aws-secret-key/{{ aws_secret_key }}/g" ~/.aws/credentials
 
         ## Check whether openebs components are in Running state or not
         - name: Check whether openebs components are in Running state or not
