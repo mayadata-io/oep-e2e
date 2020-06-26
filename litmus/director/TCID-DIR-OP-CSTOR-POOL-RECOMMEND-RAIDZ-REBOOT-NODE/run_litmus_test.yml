@@ -65,7 +65,17 @@ spec:
 
           - name: PLATFORM
             value: platform_name
-            
+
+          - name: AWS_REGION
+            value: aws_region
+
+          - name: AWS_ACCESS_KEY
+            value: aws_access_key
+
+          - name: AWS_SECRET_KEY
+            value: aws_secret_key
+          
+          - name:
         command: ["/bin/bash"]
         args: ["-c", "ansible-playbook ./litmus/director/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-RAIDZ-REBOOT-NODE/test.yml -i /etc/ansible/hosts -v; exit 0"]
       imagePullSecrets:
