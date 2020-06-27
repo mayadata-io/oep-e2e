@@ -75,7 +75,6 @@ spec:
           - name: AWS_SECRET_KEY
             value: aws_secret_key
           
-          - name:
         command: ["/bin/bash"]
         args: ["-c", "ansible-playbook ./litmus/director/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-RAIDZ-REBOOT-NODE/test.yml -i /etc/ansible/hosts -v; exit 0"]
       imagePullSecrets:
