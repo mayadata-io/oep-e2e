@@ -103,6 +103,23 @@
           set_fact:
             node3_id: "{{ node_id[2].split('n')[1] }}"  
 
+        ## Fetch template_details
+        - name: Fetch the template_details
+          uri:
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/openebstemplates?sort=id&order=desc"
+            method: GET
+            url_username: "{{ username.stdout }}"
+            url_password: "{{ password.stdout }}"
+            force_basic_auth: yes
+            return_content: yes
+            status_code: 200
+          register: template_details
+
+        ## Fetching template_id
+        - name: Fetching template_id
+          set_fact:
+            template_id: "{{ template_details.json.data[0].id }}"
+
         ## Get active openebses
         - name: Get active openebses
           uri:

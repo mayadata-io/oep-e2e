@@ -52,6 +52,23 @@
           set_fact:
             project_id: "{{ project_details.json.data[0].id }}"
 
+        ## Fetch template_details
+        - name: Fetch the template_details
+          uri:
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/openebstemplates?sort=id&order=desc"
+            method: GET
+            url_username: "{{ username.stdout }}"
+            url_password: "{{ password.stdout }}"
+            force_basic_auth: yes
+            return_content: yes
+            status_code: 200
+          register: template_details
+
+        ## Fetching template_id
+        - name: Fetching template_id
+          set_fact:
+            template_id: "{{ template_details.json.data[0].id }}"
+
         ## Getting node details of the cluster
         ## Selecting the node which is in active state present in the cluster
         - name: Getting the node details of the cluster
@@ -127,19 +144,6 @@
             body: '{"controlPlaneNodes":["{{node1_id}}"], "dataPlaneNodes":["{{node1_id}}","{{node2_id}}","{{node3_id}}","{{node4_id}}"]}'
             status_code: 200
           register: labelnodes
-
-        ## Checking the id
-        - name: Getting into the openebs installtion stage and checking the id
-          uri:
-            url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses/{{ openebsid }}"
-            method: GET
-            url_username: "{{ username.stdout }}"
-            url_password: "{{ password.stdout }}"
-            force_basic_auth: yes
-            return_content: yes
-            body_format: json
-            status_code: 200
-          register: install_openebs
 
         ## Installing openebs
         - name: Installing openebs on the DOP self cluster

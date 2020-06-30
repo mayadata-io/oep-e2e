@@ -48,10 +48,6 @@ spec:
                 name: groupid
                 key: group_id
 
-          ## It should be 1ot1 Mandatory
-          - name: TEMPLATE_ID
-            value: '1ot1'
-
           ## Namespace where openebs is installed
           ## By default in basic mode it is openebs
           - name: NAMESPACE
