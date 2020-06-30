@@ -40,10 +40,6 @@ spec:
               configMapKeyRef:
                 name: groupid
                 key: group_id
-          
-          ## It should be 1ot1 Mandatory
-          - name: TEMPLATE_ID
-            value: '1ot1' 
 
           - name: NAMESPACE
             value: 'openebs'
