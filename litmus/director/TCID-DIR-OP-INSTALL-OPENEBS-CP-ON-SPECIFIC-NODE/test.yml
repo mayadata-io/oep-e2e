@@ -61,6 +61,7 @@
 
         ## Getting node details of the cluster
         ## Selecting the node which is in active state in the cluster
+        ## Retry till the data field in node details is empty
         - name: Getting the node details of the cluster which is in active state
           uri:
             url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes?state=active&clusterId={{ cluster_id }}"
@@ -72,6 +73,9 @@
             body_format: json
             status_code: 200
           register: node_details
+          until: "node_details.json.data != []"
+          delay: 2
+          retries: 10
 
         ## Define variable node_id
         - set_fact:
@@ -83,9 +87,13 @@
             node_id: "{{ node_id  + [item.id] }}"
           loop: "{{ node_details.json.data }}"
 
-        ## Openebs cleanup and label cleanup
-        - name: Openebs cleanup and label cleanup
+        ## Removing the labels from the cluster nodes
+        - name: Cleanup labels from the nodes
           include_tasks: /utils/openebs-label-cleanup.yml
+          when: "count_maya_api.stdout == '1'"
+
+        ## Deleting openebs from the cluster
+        - name: Cleanup openebs from the cluster
           include_tasks: /utils/openebs-cleanup.yml
           vars:
             namespace: "{{ openebs_namespace.stdout }}"
