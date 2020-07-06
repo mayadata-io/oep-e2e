@@ -267,11 +267,11 @@
           register: labelled_node_count
 
         - name: Verify number of daemonset pods equal to labelled nodes
-          shell: kubectl get pods -n {{ namespace }} | grep {{ item }} | grep -v operator | awk '{print $3}' | grep Running | wc -l
+          shell: kubectl get pods -n {{ namespace }} | grep {{ openebs_ds_component }} | grep -v operator | awk '{print $3}' | grep Running | wc -l
           register: ds_pods_count
-          with_items:
-            - "{{ openebs_ds_components }}"
-          failed_when: labelled_node_count.stdout != ds_pods_count.stdout
+          until: labelled_node_count.stdout == ds_pods_count.stdout
+          retries: 20
+          delay: 5
 
         ## Get the container Status of the openebs pods
         - name: Get the container status of the openebs pods.
