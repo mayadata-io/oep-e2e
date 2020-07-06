@@ -983,6 +983,93 @@ spec:
       test/tags: "OPENEBS, LOCALPV"
       testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-LOCALPV-SELECTED-DEVICE-CREATE"
 
+  - tcid: TCID-ZFS-LOCALPV-PROVISIONER-DEPLOY
+    name: "TCID-ZFS-LOCALPV-PROVISIONER-DEPLOY"
+    description: "Test deployment of OpenEBS ZFS LocalPV provisioner"
+    labels:
+      test/feature: "OPENEBS ZFS LOCALPV"
+      test/tags: "OPENEBS, ZFS LOCALPV"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-ZFS-LOCALPV-PROVISIONER"
+
+  - tcid: TCID-ZFS-VOL-RESIZE-ZFS
+    name: "TCID-ZFS-VOL-RESIZE-ZFS"
+    description: "Test if ZFS LocalPV volume with ZFS file system can be resized successfully"
+    labels:
+      test/feature: "OPENEBS ZFS LOCALPV"
+      test/tags: "OPENEBS, ZFS LOCALPV"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-ZFS-VOL-RESIZE-ZFS"
+
+  - tcid: TCID-ZFS-VOL-RESIZE-EXT4
+    name: "TCID-ZFS-VOL-RESIZE-ZFS"
+    description: "Test if ZFS LocalPV volume with EXT4 file system can be resized successfully"
+    labels:
+      test/feature: "OPENEBS ZFS LOCALPV"
+      test/tags: "OPENEBS, ZFS LOCALPV"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-ZFS-VOL-RESIZE-EXT4"
+
+  - tcid: TCID-ZFS-VOL-RESIZE-XFS
+    name: "TCID-ZFS-VOL-RESIZE-XFS"
+    description: "Test if ZFS LocalPV volume with XFS file system can be resized successfully"
+    labels:
+      test/feature: "OPENEBS ZFS LOCALPV"
+      test/tags: "OPENEBS, ZFS LOCALPV"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-ZFS-VOL-RESIZE-XFS"
+
+  - tcid: TCID-ZFSPV-CUSTOM-TOPOLOGY-VERIFY
+    name: "TCID-ZFSPV-CUSTOM-TOPOLOGY-VERIFY"
+    description: "Test if ZFS LocalPV volume custom topology support"
+    labels:
+      test/feature: "OPENEBS ZFS LOCALPV"
+      test/tags: "OPENEBS, ZFS LOCALPV"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-ZFSPV-CUSTOM-TOPOLOGY-VERIFY"
+
+  - tcid: TCID-ZFSPV-SNAPSHOT-CLONE-ZFS-CREATE
+    name: "TCID-ZFSPV-SNAPSHOT-CLONE-ZFS"
+    description: "Test if snapshot and clone can be created on ZFS LocalPV based on ZFS filesystem"
+    labels:
+      test/feature: "OPENEBS ZFS LOCALPV"
+      test/tags: "OPENEBS, ZFS LOCALPV"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-ZFSPV-SNAPSHOT-CLONE-ZFS"
+
+  - tcid: TCID-ZFSPV-SNAPSHOT-CLONE-XFS-CREATE
+    name: "TCID-ZFSPV-SNAPSHOT-CLONE-XFS"
+    description: "Test if snapshot and clone can be created on ZFS LocalPV based on XFS filesystem"
+    labels:
+      test/feature: "OPENEBS ZFS LOCALPV"
+      test/tags: "OPENEBS, ZFS LOCALPV"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-ZFSPV-SNAPSHOT-CLONE-XFS"
+
+  - tcid: TCID-ZFSPV-SNAPSHOT-CLONE-EXT4-CREATE
+    name: "TCID-ZFSPV-SNAPSHOT-CLONE-EXT4"
+    description: "Test if snapshot and clone can be created on ZFS LocalPV based on EXT4 filesystem"
+    labels:
+      test/feature: "OPENEBS ZFS LOCALPV"
+      test/tags: "OPENEBS, ZFS LOCALPV"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-ZFSPV-SNAPSHOT-CLONE-EXT4"
+
+  - tcid: TCID-ZFSPV-PROPERTY-MODIFY-ZFS
+    name: "TCID-ZFSPV-PROPERTY-MODIFY-ZFS"
+    description: "Test if the properties of ZFS LocalPV based on ZFS filesystem can be modified"
+    labels:
+      test/feature: "OPENEBS ZFS LOCALPV"
+      test/tags: "OPENEBS, ZFS LOCALPV"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-ZFSPV-PROPERTY-MODIFY-ZFS"
+
+  - tcid: TCID-ZFSPV-PROPERTY-MODIFY-XFS
+    name: "TCID-ZFSPV-PROPERTY-MODIFY-XFS"
+    description: "Test if the properties of XFS LocalPV based on XFS filesystem can be modified"
+    labels:
+      test/feature: "OPENEBS ZFS LOCALPV"
+      test/tags: "OPENEBS, ZFS LOCALPV"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-ZFSPV-PROPERTY-MODIFY-XFS"
+
+  - tcid: TCID-ZFSPV-PROPERTY-MODIFY-EXT4
+    name: "TCID-ZFSPV-PROPERTY-MODIFY-EXT4"
+    description: "Test if the properties of ZFS LocalPV based on EXT4 filesystem can be modified"
+    labels:
+      test/feature: "OPENEBS ZFS LOCALPV"
+      test/tags: "OPENEBS, ZFS LOCALPV"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-ZFSPV-PROPERTY-MODIFY-EXT4"
 
 ###############################################################################################################################
 ############################################ OpenEBS Chaos Scenarios ##########################################################
