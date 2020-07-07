@@ -62,6 +62,19 @@ This page captures platforms and components used while testing each version of K
 - Keepalived Image: mesosphere/keepalived-snmp:v0.1
 - Kubectl Version: v1.15.0
 
+**Cluster C3**
+
+- Konvoy version: v1.2.4
+- OS version: centos-release-7-7.1908.0.el7.centos.x86_64
+- Kubernetes version: 1.15.5
+- Kernel version: 3.10.0-1062.el7.x86_64   
+- Containerd version: containerd://1.2.6
+- Calico version: v3.8.2
+- Tiller version: v2.14.3
+- CoreDNS version: 1.3.1
+- etcd version: 3.3.10-0
+- Keepalived Image: mesosphere/keepalived-snmp:v0.1
+- Kubectl Version: v1.15.0
 
 
 ###  AWS
