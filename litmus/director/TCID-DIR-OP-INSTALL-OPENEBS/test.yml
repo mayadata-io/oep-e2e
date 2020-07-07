@@ -262,6 +262,17 @@
           retries: 50
           delay: 5
 
+        - name: Fetch nodes with control plane labels
+          shell: kubectl get nodes --show-labels --no-headers | grep {{ control_plane_node_label }} | wc -l
+          register: labelled_node_count
+
+        - name: Verify number of daemonset pods equal to labelled nodes
+          shell: kubectl get pods -n {{ namespace }} | grep {{ openebs_ds_component }} | grep -v operator | awk '{print $3}' | grep Running | wc -l
+          register: ds_pods_count
+          until: labelled_node_count.stdout == ds_pods_count.stdout
+          retries: 20
+          delay: 5
+
         ## Get the container Status of the openebs pods
         - name: Get the container status of the openebs pods.
           shell: >
