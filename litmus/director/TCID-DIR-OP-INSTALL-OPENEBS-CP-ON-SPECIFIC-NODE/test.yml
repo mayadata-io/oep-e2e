@@ -362,6 +362,58 @@
         ## Removing the labels from the cluster nodes
         - include_tasks: /utils/openebs-label-cleanup.yml
 
+        # Check whether labels have been removed from the nodes
+        ## Check whether control plane label has been removed from the first node of the cluster
+        ## Retry until `mayadata.io/control-plane` label has been removed from API                                                                                                                                                         
+        - name: Checking whether control plane label has been removed from first node                                                                                                                                                 
+          uri:                                                                                                                                                                                                          
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes?state=active&clusterId={{ cluster_id }}"                                                                                                                                   
+            method: GET                                                                                                                                                                                                 
+            url_username: "{{ username.stdout}}"                                                                                                                                                                        
+            url_password: "{{ password.stdout}}"                                                                                                                                                                        
+            force_basic_auth: yes                                                                                                                                                                                       
+            return_content: yes                                                                                                                                                                                         
+            body_format: json                                                                                                                                                                                           
+            status_code: 200                                                                                                                                                                                            
+          register: node_details                                                                                                                                                                                               
+          until: "'mayadata.io/control-plane' not in node_details.json.data[0].labels"                                                                                                                                
+          delay: 2                                                                                                                                                                                                      
+          retries: 60
+
+        ## Check whether data plane label has been removed from the second node of the cluster
+        ## Retry until `mayadata.io/data-plane` label has been removed from API                                                                                                                                                         
+        - name: Checking whether data plane label has been removed from second node                                                                                                                                                 
+          uri:                                                                                                                                                                                                          
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes?state=active&clusterId={{ cluster_id }}"                                                                                                                                   
+            method: GET                                                                                                                                                                                                 
+            url_username: "{{ username.stdout}}"                                                                                                                                                                        
+            url_password: "{{ password.stdout}}"                                                                                                                                                                        
+            force_basic_auth: yes                                                                                                                                                                                       
+            return_content: yes                                                                                                                                                                                         
+            body_format: json                                                                                                                                                                                           
+            status_code: 200                                                                                                                                                                                            
+          register: node_details                                                                                                                                                                                               
+          until: "'mayadata.io/data-plane' not in node_details.json.data[1].labels"                                                                                                                                
+          delay: 2                                                                                                                                                                                                      
+          retries: 60
+
+        ## Check whether data plane label has been removed from the third node of the cluster
+        ## Retry until `mayadata.io/data-plane` label has been removed from API                                                                                                                                                         
+        - name: Checking whether data plane label has been removed from third node                                                                                                                                                 
+          uri:                                                                                                                                                                                                          
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes?state=active&clusterId={{ cluster_id }}"                                                                                                                                   
+            method: GET                                                                                                                                                                                                 
+            url_username: "{{ username.stdout}}"                                                                                                                                                                        
+            url_password: "{{ password.stdout}}"                                                                                                                                                                        
+            force_basic_auth: yes                                                                                                                                                                                       
+            return_content: yes                                                                                                                                                                                         
+            body_format: json                                                                                                                                                                                           
+            status_code: 200                                                                                                                                                                                            
+          register: node_details                                                                                                                                                                                               
+          until: "'mayadata.io/data-plane' not in node_details.json.data[2].labels"                                                                                                                                
+          delay: 2                                                                                                                                                                                                      
+          retries: 60
+
         ## Deleting openebs from the cluster
         - include_tasks: /utils/openebs-cleanup.yml
           vars:
