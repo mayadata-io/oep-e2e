@@ -11,8 +11,8 @@ openebs_components:
     'cspc-operator',
     'cvc-operator',
   ]
-openebs_ds_component: "openebs-ndm"
-control_plane_node_label: "mayadata.io/control-plane=true"
+openebs_ds_component: openebs-ndm
+control_plane_node_label: mayadata.io/control-plane=true
 group_id: "{{ lookup('env','GROUP_ID') }}"
 director_url: "{{ lookup('env','DIRECTOR_IP') }}"
 cluster_id: "{{ lookup('env','CLUSTER_ID') }}"
