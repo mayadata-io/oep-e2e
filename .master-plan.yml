@@ -989,7 +989,7 @@ spec:
     labels:
       test/feature: "OPENEBS ZFS LOCALPV"
       test/tags: "OPENEBS, ZFS LOCALPV"
-      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-ZFS-LOCALPV-PROVISIONER"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-ZFS-LOCALPV-PROVISIONER-DEPLOY"
 
   - tcid: TCID-ZFS-VOL-RESIZE-ZFS
     name: "TCID-ZFS-VOL-RESIZE-ZFS"
