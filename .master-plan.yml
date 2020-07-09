@@ -366,22 +366,6 @@ spec:
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR POOL, UPGRADE"
       testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-UPGRADE-CSTOR-POOL"
 
-  - tcid: TCID-DIR-OP-UPGRADE-CSTOR-VOLUME
-    name: "TCID-DIR-OP-UPGRADE-CSTOR-VOLUME"
-    description: "Test upgrade of cstor volume"
-    labels:
-      test/feature: "OPENEBS PROVISIONING"
-      test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR VOLUME, UPGRADE"
-      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-UPGRADE-CSTOR-VOLUME"
-
-  - tcid: TCID-DIR-OP-UPGRADE-CSTOR-POOL-ALL-PODS-RUNNING
-    name: "TCID-DIR-OP-UPGRADE-CSTOR-POOL-ALL-PODS-RUNNING"
-    description: "Test upgrade of cstor pool when all pool pods are running"
-    labels:
-      test/feature: "OPENEBS PROVISIONING"
-      test/tags: "DIRECTOR, OPENEBS PROVISIONING, CSTOR POOL, UPGRADE"
-      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-UPGRADE-CSTOR-POOL-ALL-PODS-RUNNING"
-
   - tcid: TCID-DIR-OP-UPGRADE-CSTOR-POOL-ONE-POD-PENDING
     name: "TCID-DIR-OP-UPGRADE-CSTOR-POOL-ONE-POD-PENDING"
     description: "Test upgrade of cstor pool when one pool pod is in pending state"
