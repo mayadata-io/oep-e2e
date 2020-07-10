@@ -1,0 +1,100 @@
+---
+- hosts: localhost
+  connection: local
+
+  vars_files:
+    - test_vars.yml
+
+  tasks:
+
+    - block:
+
+        ## Generating the testname for deployment
+        - include_tasks: /ansible-utils/create_testname.yml
+
+        ## RECORD START-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'SOT'
+          
+        ## Getting the username
+        - name: Get username
+          shell: cat /etc/secret-volume/username
+          register: username
+
+        ## Getting the password.stdout     
+        - name: Get password
+          shell: cat /etc/secret-volume/password
+          register: password
+
+        - name: Get BD
+          shell: | 
+            kubectl get bd -n {{ namespace }}
+
+        ## Get node name
+        - name: Get node name
+          shell: kubectl get bd -n openebs --no-headers | grep Unclaimed | awk '{print $2}' | tail -n 1
+          register: node_name
+        
+        - name: Create ns 
+          shell: kubectl create ns delete-cspc-external
+          
+        ## Add bd name in cspc yml
+        - name: Add bd name in cspc yml
+          shell: sed -i "s/nodeName/{{node_name.stdout}}/g" /utils/cspc.yml 
+
+        ## Create cstorPoolOperation
+        - name: Get blockdevice 
+          shell: kubectl get bd -n openebs --no-headers | grep Unclaimed | awk '{print $1}' | tail -n 1
+          register: blockdevice_name
+        
+        ## Add bd name in cspc yml
+        - name: Add bd name in cspc yml
+          shell: sed -i "s/dummyvalue/{{blockdevice_name.stdout}}/g" /utils/cspc.yml
+
+        ## Change name of the cspc
+        - name: Change name of cspc
+          shell: sed -i "s/cspc-external/cspc-external-volume/g" /utils/cspc.yml
+        
+        ## Create CSPC
+        - name: Create CSPC 
+          shell: kubectl create -f /utils/cspc.yml
+
+        - name: Create storage class
+          shell: kubectl create -f /litmus/director/TCID-DIR-OP-DELETE-EXTERNAL-CSPC-WITH-VOLUME/template/sc.yml
+
+        - name: Deploy application
+          shell: kubectl create -f 
+
+        - pause: 
+            seconds: 20
+
+        ## Delete CSPC using director
+        - name: Delete CSPC using director
+          uri: 
+            url: '{{ director_url }}/v3/groups/{{ group_id }}/cstorpooloperations'
+            method: POST
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
+            return_content: yes
+            force_basic_auth: yes
+            body_format: json
+            headers:
+                Content-Type: "application/json"
+            body: '{"clusterId":"{{ cluster_id }}", "input":{"name":"cspc-external-volume","kind":"CStorPoolCluster","version":"v1"}, "kind":"DeleteCStorPoolCluster"}'
+            status_code: 405
+          register: cspc_deletion
+
+        - set_fact:
+            flag: "Pass"
+
+      rescue:
+        - name: Setting fail flag
+          set_fact:
+            flag: "Fail"
+
+      always:
+        ## RECORD END-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'EOT'

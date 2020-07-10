@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: minio-claim
+  namespace: delete-spc-external
+  labels:
+    app: minio-storage-claim
+spec:
+  storageClassName: cstor-external-cspc
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 15G
