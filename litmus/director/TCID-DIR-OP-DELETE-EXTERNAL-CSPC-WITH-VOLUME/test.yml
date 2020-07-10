@@ -38,7 +38,7 @@
         
         - name: Create ns 
           shell: kubectl create ns delete-cspc-external
-          
+
         ## Add bd name in cspc yml
         - name: Add bd name in cspc yml
           shell: sed -i "s/nodeName/{{node_name.stdout}}/g" /utils/cspc.yml 
@@ -64,7 +64,7 @@
           shell: kubectl create -f /litmus/director/TCID-DIR-OP-DELETE-EXTERNAL-CSPC-WITH-VOLUME/template/sc.yml
 
         - name: Deploy application
-          shell: kubectl create -f 
+          shell: kubectl create -f /litmus/director/TCID-DIR-OP-DELETE-EXTERNAL-CSPC-WITH-VOLUME/template/minio-manifest
 
         - pause: 
             seconds: 20
