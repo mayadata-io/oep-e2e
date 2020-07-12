@@ -1,0 +1,358 @@
+---
+- hosts: localhost
+  connection: local
+
+  vars_files:
+    - test_vars.yml
+
+  tasks:
+
+    - block:
+  
+        ## Generating the testname for deployment
+        - include_tasks: /ansible-utils/create_testname.yml
+
+        ## Record Start-Of-Test In Litmus Result CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'SOT'
+        
+        ## Getting username
+        - name: Get username
+          shell: cat /etc/secret-volume/username
+          register: username
+
+        ## Getting password     
+        - name: Get password
+          shell: cat /etc/secret-volume/password
+          register: password
+
+        ## Checking if openebs is already installed in the cluster
+        - name: Check if openebs is already installed
+          shell: kubectl get deploy --all-namespaces -l name=maya-apiserver --no-headers | awk '{print $1}' | wc -l
+          args:
+            executable: /bin/bash
+          register: count_maya_api
+
+        ## If openebs is installed in the cluster then get the namespace
+        - name: Getting the namespace where openebs is installed 
+          shell: kubectl get deploy --all-namespaces -l name=maya-apiserver --no-headers | awk '{print $1}'
+          args:
+            executable: /bin/bash
+          register: openebs_namespace
+          when: "count_maya_api.stdout == '1'"
+
+        # Getting node details of the cluster
+        ## Selecting the node which is in active state present in the cluster
+        ## Retry till the data field in node details is empty
+        - name: Getting the node details of the cluster
+          uri:
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes?state=active&clusterId={{ cluster_id }}"
+            method: GET
+            url_username: "{{ username.stdout }}"
+            url_password: "{{ password.stdout }}"
+            force_basic_auth: yes
+            return_content: yes
+            body_format: json
+            body:
+              status_code: 202
+          register: node_details
+          until: "node_details.json.data != []"
+          delay: 2
+          retries: 10
+
+        ## Define variable node_id
+        - set_fact:
+            node_id: []
+        
+        ## Storing the node id of the nodes in the cluster
+        - name: Storing the node id of node in the cluster
+          set_fact:
+            node_id: "{{ node_id  + [item.id] }}"
+          loop: "{{ node_details.json.data }}"
+
+        ## Removing the labels from the cluster nodes
+        - name: Cleanup labels from the nodes
+          include_tasks: /utils/openebs-label-cleanup.yml
+          when: "count_maya_api.stdout == '1'"
+
+        ## Deleting openebs from the cluster
+        - name: Cleanup openebs from the cluster
+          include_tasks: /utils/openebs-cleanup.yml
+          vars:
+            namespace: "{{ openebs_namespace.stdout }}"
+          when: "count_maya_api.stdout == '1'"
+
+        ## Fetch Project deatils
+        - name: Fetch the project details
+          uri:
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/project"
+            method: GET
+            url_username: "{{ username.stdout }}"
+            url_password: "{{ password.stdout }}"
+            force_basic_auth: yes
+            return_content: yes
+            status_code: 200
+          register: project_details
+
+        ## Fetching project details
+        - name: Fetching project details
+          set_fact:
+            project_id: "{{ project_details.json.data[0].id }}"
+
+        ## Fetch template_details
+        - name: Fetch the template_details
+          uri:
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/openebstemplates?sort=id&order=desc"
+            method: GET
+            url_username: "{{ username.stdout }}"
+            url_password: "{{ password.stdout }}"
+            force_basic_auth: yes
+            return_content: yes
+            status_code: 200
+          register: template_details
+
+        ## Fetching template_id
+        - name: Fetching template_id
+          set_fact:
+            template_id: "{{ template_details.json.data[1].id }}"    
+
+        ## Fetching latest version
+        - name: Fetching latest version
+          set_fact:
+            openebs_current_version: "{{ template_details.json.data[1].version }}"
+
+        ## Get active openebses
+        - name: Get active openebses
+          uri:
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses?state=active&clusterId={{ cluster_id}}"
+            method: GET
+            url_username: "{{ username.stdout }}" 
+            url_password: "{{ password.stdout }}"
+            force_basic_auth: yes
+            return_content: yes
+            body_format: json
+            status_code: 200
+          register: openebses_active
+
+        - block:
+          
+          - name: Fetching Job manifest
+            set_fact:
+              openebs_job_manifest: "{{ openebses_active.json.data[0].installationManifest }}"
+
+          - name: Getting the openebses id
+            set_fact:
+              openebs_id: "{{ openebses_active.json.data[0].id }}"
+
+          - name: Installing openebs on the cluster
+            uri:
+              url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses/{{ openebs_id }}?action=openebsinstall"
+              method: POST
+              url_username: "{{ username.stdout }}"
+              url_password: "{{ password.stdout }}"
+              force_basic_auth: yes
+              return_content: yes
+              body_format: json
+              body: '{"yaml": {{ openebs_job_manifest }}}'
+              status_code: 200
+              headers:
+                Content-Type: "application/json"
+            register: openebs
+
+          - name: Fetching Job Id to of openebsjob
+            set_fact:
+              openebs_job_id: "{{ openebs.json.id }}"
+        
+          - name: Fetch openebsjob details
+            uri:
+              url: "{{ director_url }}/v3/groups/{{ group_id}}/openebsjobs/{{ openebs_job_id }}"
+              method: GET
+              url_username: "{{ username.stdout }}"
+              url_password: "{{ password.stdout }}"
+              force_basic_auth: yes
+              return_content: yes
+              body_format: json
+              status_code: 200
+            register: openebs_job
+            until: "openebs_job.json.state == 'Success'"
+            delay: 10
+            retries: 10
+        
+          when: openebses_active.json.data != []
+
+        - block: 
+
+          - name: Fetch openebses and create openebs
+            uri:
+              url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses"
+              method: POST
+              url_username: "{{ username.stdout }}"
+              url_password: "{{ password.stdout }}"
+              force_basic_auth: yes
+              return_content: yes
+              body_format: json
+              body: '{ "clusterId": "{{ cluster_id }}","creatorId": "{{ group_id }}","projectId": "{{ project_id }}","templateId": "{{ template_id }}","namespace": "{{ namespace }}","defaultDirectory": "{{ default_directory }}","dockerRegistry": "{{ docker_registry }}","includeDeviceFilters": "{{ include_device_filters }}","excludeDeviceFilters": "{{ exclude_device_filters }}","cpuResourceLimit": "{{ cpu_resource_limit }}","memoryResourceLimit": " {{ memory_resource_limit }}","installationMode": "{{ installation_mode }}" }'
+              status_code: 201
+            register: install_openebs
+
+          ## Fetching installation manifest
+          - name: Get manifest for installing openebs
+            set_fact:
+              installopenebs: "{{ install_openebs.json.installationManifest }}"
+
+          ## Getting the id 
+          - name: Getting the id
+            set_fact:
+              openebs_id: "{{ install_openebs.json.id }}"
+
+          ## Installing openebs
+          - name: Installing openebs on the cluster
+            uri:
+              url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses/{{ openebs_id }}/?action=openebsinstall"
+              method: POST
+              url_username: "{{ username.stdout }}"
+              url_password: "{{ password.stdout }}"
+              force_basic_auth: yes
+              return_content: yes
+              body_format: json
+              body: '{"yaml": {{ installopenebs }}}'
+              status_code: 200
+            register: openebs
+
+          ## Fetching job ID
+          - name: Fetching Job Id to of openebsjob
+            set_fact:
+              openebs_job_id: "{{ openebs.json.id }}"
+
+          - name: Fetch openebsjob details
+            uri:
+              url: "{{ director_url }}/v3/groups/{{ group_id}}/openebsjobs/{{ openebs_job_id }}"
+              method: GET
+              url_username: "{{ username.stdout }}"
+              url_password: "{{ password.stdout }}"
+              force_basic_auth: yes
+              return_content: yes
+              body_format: json
+              status_code: 200
+            register: openebs_job
+            until: "openebs_job.json.state == 'Success'"
+            delay: 10
+            retries: 30
+
+          when: openebses_active.json.data == []
+
+        ## Fetch openebs install details
+        - name: Fetch openebs install details
+          uri:
+            url: "{{ director_url }}/v3/groups/{{ group_id}}/openebs?clusterId={{ cluster_id }}"
+            method: GET
+            url_username: "{{ username.stdout }}"
+            url_password: "{{ password.stdout }}"
+            force_basic_auth: yes
+            return_content: yes
+            body_format: json
+            status_code: 200
+          register: openebs_job_info
+          until: "openebs_job_info.json.data != []"
+          delay: 5
+          retries: 30
+
+        - name: Fetch OpenEBS control plane pods state
+          shell: kubectl get pods -n {{ namespace }}  | grep {{ item }} | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
+          register: app_status
+          until: app_status.stdout == 'Running'
+          with_items:
+            - "{{ openebs_components }}"
+          retries: 50
+          delay: 5
+
+        - name: Fetch nodes with control plane labels
+          shell: kubectl get nodes --show-labels --no-headers | grep {{ control_plane_node_label }} | wc -l
+          register: labelled_node_count
+
+        - name: Verify number of daemonset pods equal to labelled nodes
+          shell: kubectl get pods -n {{ namespace }} | grep {{ openebs_ds_component }} | grep -v operator | awk '{print $3}' | grep Running | wc -l
+          register: ds_pods_count
+          until: labelled_node_count.stdout == ds_pods_count.stdout
+          retries: 20
+          delay: 5
+
+        ## Get the container Status of the openebs pods
+        - name: Get the container status of the openebs pods.
+          shell: >
+            kubectl get pod -n {{ namespace }} --no-headers
+            -o jsonpath='{.items[*].status.containerStatuses[*].ready}' | tr ' ' '\n' | uniq
+          args:
+            executable: /bin/bash
+          register: containerStatus
+          until: "containerStatus.stdout == 'true'"
+          retries: 50
+          delay: 5
+
+        ## Fetching latest version
+        - name: Fetching latest version
+          set_fact:
+            openebs_target_version: "{{ template_details.json.data[0].version }}"
+        
+        ## Upgrading openebs control plane components
+        - name: Upgrading openebs control plane components
+          uri:
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses/{{ openebs_id }}/?action=upgradecontrolplane"
+            method: POST
+            url_username: "{{ username.stdout }}"
+            url_password: "{{ password.stdout }}"
+            force_basic_auth: yes
+            return_content: yes
+            body_format: json
+            body: '{"upgradeVersion":"{{ openebs_target_version }}"}'
+            status_code: 200
+          register: openebs_upgrade
+        
+        ## Fetching Job Id to of openebsjob
+        - name: Fetching Job Id to of openebs_upgrade_job
+          set_fact:
+            openebs_job_id: "{{ openebs_upgrade.json.id }}"
+
+        ## Fetch openebsjob details
+        - name: Fetch openebsjob details
+          uri:
+            url: "{{ director_url }}/v3/groups/{{ group_id}}/openebsjobs/{{ openebs_job_id }}"
+            method: GET
+            url_username: "{{ username.stdout }}"
+            url_password: "{{ password.stdout }}"
+            force_basic_auth: yes
+            return_content: yes
+            body_format: json
+            status_code: 200
+          register: openebs_job
+          until: "openebs_job.json.state == 'Success'"
+          delay: 10
+          retries: 30
+
+        - name: Check if all the pods are upgraded or not
+          shell: >
+              kubectl get pods -n {{ namespace }} -o=jsonpath='{range .items[*]}{.metadata.labels.openebs\.io\/version}{"\n"}{end}'
+          args:
+            executable: /bin/bash
+          register: version_list
+          failed_when: "'{{openebs_current_version}}' in version_list.stdout"     
+    
+        ## Setting flag as Pass
+        - set_fact:
+            flag: "Pass"
+        
+      rescue:
+        - name: Setting fail flag
+          set_fact:
+            flag: "Fail"
+
+      always:
+        ## RECORD END-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'EOT'
+
+          
+
+        

@@ -1,5 +1,4 @@
 test_name: control-plane-upgrade
-openebs_target_version: "{{ lookup('env','OPENEBS_TARGET_VERSION') }}"
 openebs_components:
   [
     'openebs-provisioner',
