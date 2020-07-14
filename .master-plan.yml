@@ -414,6 +414,14 @@ spec:
       test/tags: "DIRECTOR, OPENEBS PROVISIONING, JIVA, VOLUME, UPGRADE"
       testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-UPGRADE-JIVA-VOLUME-TWO-REPLICAS-PENDING"
 
+  - tcid: TCID-DIR-OP-OPENEBS-UPGRADE-CP
+    name: "TCID-DIR-OP-OPENEBS-UPGRADE-CP"
+    description: "Test openebs control-plane upgrade"
+    labels:
+      test/feature: "OPENEBS PROVISIONING"
+      test/tags: "DIRECTOR, OPENEBS PROVISIONING, CONTROL PLANE, UPGRADE"
+      testplan: "https://e2e.mayadata.io/docs/director/openebs-provisioning/TCID-DIR-OP-OPENEBS-UPGRADE-CP"
+
   - tcid: TCID-DIR-OP-DEVICE-VIEW-ALL
     name: "TCID-DIR-OP-DEVICE-VIEW-ALL"
     description: "Test listing of storage device(s)"
