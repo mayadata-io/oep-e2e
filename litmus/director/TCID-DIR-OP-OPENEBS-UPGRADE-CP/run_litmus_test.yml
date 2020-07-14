@@ -44,6 +44,36 @@ spec:
           - name: NAMESPACE
             value: 'openebs'
 
+          ## Enter the default directory - It can be /var/openebs
+          - name: DEFAULT_DIRECTORY
+            value: ''
+
+          ##Enter docker registry
+          - name: DOCKER_REGISTRY
+            value: ''
+
+          ## Enter include device filter
+          - name: INCLUDE_DEVICE_FILTERS
+            value: ''
+
+          ## Enter exclude device filter  
+          - name: EXCLUDE_DEVICE_FILTER
+            value: ''
+
+          ## Enter CPU resource limit
+          - name: CPU_RESOURCE_LIMIT
+            value: ''
+
+          ## Enter Memory resource limit
+          - name: MEMORY_RESOURCE_LIMIT
+            value: ''
+
+          ## It will have values basic/advance
+          ## Note: For basic installation only template value slould be provided
+          ## For adding any additional value change the installation mode to advance
+          - name: INSTALLATION_MODE
+            value: 'basic'
+
           ## Takes cluster_id from configmap
           - name: CLUSTER_ID
             valueFrom:
