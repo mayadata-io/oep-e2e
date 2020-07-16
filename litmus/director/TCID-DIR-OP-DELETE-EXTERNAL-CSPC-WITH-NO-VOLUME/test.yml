@@ -33,16 +33,16 @@
 
         ## Get node name
         - name: Get node name
-          shell: kubectl get bd -n openebs --no-headers | grep Unclaimed | awk '{print $2}' | tail -n 1
+          shell: kubectl get bd -n openebs -ojsonpath='{range .items[*]}{.metadata.name}{"\t"}{.metadata.labels.kubernetes\.io/hostname}{"\t"}{.status}{"\t"}{.spec.filesystem}{"\t"}{"\n"}{end}' | grep "Unclaimed" | grep -v "fsType" | awk {'print $2'} | tail -n 1
           register: node_name
 
-        ## Add bd name in cspc yml
-        - name: Add bd name in cspc yml
+        ## Add node name in cspc yml
+        - name: Add node  name in cspc yml
           shell: sed -i "s/nodeName/{{node_name.stdout}}/g" /utils/cspc.yml 
 
         ## Create cstorPoolOperation
         - name: Get blockdevice 
-          shell: kubectl get bd -n openebs --no-headers | grep Unclaimed | awk '{print $1}' | tail -n 1
+          shell: kubectl get bd -n openebs -ojsonpath='{range .items[*]}{.metadata.name}{"\t"}{.metadata.labels.kubernetes\.io/hostname}{"\t"}{.status}{"\t"}{.spec.filesystem}{"\t"}{"\n"}{end}' | grep "Unclaimed" | grep -v "fsType" | awk {'print $1'} | tail -n 1
           register: blockdevice_name
         
         ## Add bd name in cspc yml
