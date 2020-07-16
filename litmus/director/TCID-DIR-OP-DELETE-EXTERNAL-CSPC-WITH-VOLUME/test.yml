@@ -39,8 +39,8 @@
         - name: Create ns 
           shell: kubectl create ns delete-cspc-external
 
-        ## Add bd name in cspc yml
-        - name: Add bd name in cspc yml
+        ## Add node name in cspc yml
+        - name: Add node name in cspc yml
           shell: sed -i "s/nodeName/{{node_name.stdout}}/g" /utils/cspc.yml 
 
         ## Create cstorPoolOperation
