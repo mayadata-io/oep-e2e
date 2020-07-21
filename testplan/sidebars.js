@@ -173,6 +173,7 @@ module.exports = {
 		],
         "Release Notes": [
             'kubera-e2e-release-1-10', 
+            'kubera-e2e-release-1-11', 
         ],
         Help: ['doc1', 'mdx'],
 	},
