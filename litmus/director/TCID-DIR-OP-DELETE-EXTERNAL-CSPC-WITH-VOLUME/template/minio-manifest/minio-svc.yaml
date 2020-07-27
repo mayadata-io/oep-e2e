@@ -8,7 +8,7 @@ metadata:
 spec:
   ports:
     - port: 9000
-      nodePort: 32701
+      nodePort: 32763
       protocol: TCP
   selector:
     name: minio
