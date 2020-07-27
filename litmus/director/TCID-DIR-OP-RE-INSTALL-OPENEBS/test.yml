@@ -91,7 +91,7 @@
         ## This task will look for active openebs entry for 2 mins after that it will fail
         - name: Check openebs is installed or not in the cluster
           uri:
-            url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses?state=active&clusterId={{ cluster_id}}"
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses?state=active&clusterId={{ cluster_id }}"
             method: GET
             url_username: "{{ username.stdout }}" 
             url_password: "{{ password.stdout }}"
