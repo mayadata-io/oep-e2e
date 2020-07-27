@@ -13,7 +13,7 @@ module.exports = {
         alt: 'MayaData Kubera E2E',
         src: 'img/logo.png',
       },
-      links: [
+      items: [
         {
           to: 'docs/getstarted',
           activeBasePath: 'docs',
