@@ -176,7 +176,19 @@ module.exports = {
             'kubera-e2e-release-1-11', 
         ],
         "Manual Testing": [
-            'manual/kubera-authentication' 
+            'manual/kubera-authentication', 
+            'manual/kubera-cluster', 
+            'manual/kubera-dashboard', 
+            'manual/kubera-browser', 
+            'manual/kubera-teaming', 
+            'manual/kubera-profile', 
+            'manual/kubera-scope', 
+            'manual/kubera-metrics', 
+            'manual/kubera-alerts', 
+            'manual/kubera-dmaas', 
+            'manual/kubera-openebs-upgrade', 
+            'manual/kubera-openebs-installation', 
+            'manual/kubera-cstor-pool' 
         ],
         Help: ['doc1', 'mdx'],
 	},
