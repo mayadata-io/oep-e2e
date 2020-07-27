@@ -87,6 +87,23 @@
           retries: 30
           delay: 10        
 
+        ## Check openebs is installed or not in the cluster.
+        ## This task will look for active openebs entry for 2 mins after that it will fail
+        - name: Check openebs is installed or not in the cluster
+          uri:
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses?state=active&clusterId={{ cluster_id}}"
+            method: GET
+            url_username: "{{ username.stdout }}" 
+            url_password: "{{ password.stdout }}"
+            force_basic_auth: yes
+            return_content: yes
+            body_format: json
+            status_code: 200
+          register: openebses_active
+          until: "openebses_active.json.data != []"
+          delay: 2
+          retries: 30
+
         ## Getting node details of the cluster
         ## Selecting the node which is in active state in the cluster
         - name: Getting the node details of the cluster which is in active state
