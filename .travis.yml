@@ -8,8 +8,7 @@ services:
 - docker
 script:
 - docker build -t $REPO:ci . ;
-- docker build -t $PLAN:$COMMIT ./testplan/ ;
 after_success:
 - if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then 
-   docker login -u "$DOCKER_USER" -p "$DOCKER_PASS" && docker push $REPO:ci && docker push $PLAN:$COMMIT; 
+   docker login -u "$DOCKER_USER" -p "$DOCKER_PASS" && docker push $REPO:ci; 
   fi
