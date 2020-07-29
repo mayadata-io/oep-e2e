@@ -1,6 +1,6 @@
 ---
 id: TCID-DIR-GUI-AUTH-LOCAL-ADMIN
-title: 
+title: Local admin authentication
 sidebar_label: TCID-DIR-GUI-AUTH-LOCAL-ADMIN
 ---
 ------

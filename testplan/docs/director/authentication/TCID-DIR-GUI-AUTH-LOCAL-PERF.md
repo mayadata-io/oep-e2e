@@ -1,6 +1,6 @@
 ---
 id: TCID-DIR-GUI-AUTH-LOCAL-PERF
-title: 
+title: Local user authentcation performance
 sidebar_label: TCID-DIR-GUI-AUTH-LOCAL-PERF
 ---
 ------
