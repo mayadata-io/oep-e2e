@@ -274,29 +274,29 @@ spec:
       test/tags: "DIRECTOR, DMAAS, SCHEDULE, CSTOR, AWS, NON RESTIC"
       testplan: "https://e2e.mayadata.io/docs/director/dmaas/TCID-DIR-DMAAS-CSTOR-NON-RESTIC"
 
-  - tcid: TCID-DIR-TEAMING-USER-INVITE
-    name: "TCID-DIR-TEAMING-USER-INVITE"
+  - tcid: TCID-DIR-GUI-TEAMING-USER-INVITE
+    name: "TCID-DIR-GUI-TEAMING-USER-INVITE"
     description: "Test Teaming user invite functionality"
     labels:
       test/feature: "Teaming"
       test/tags: "DIRECTOR, Teaming, Invite"
-      testplan: "https://e2e.mayadata.io/docs/director/teaming/TCID-DIR-TEAMING-USER-INVITE"
+      testplan: "https://e2e.mayadata.io/docs/director/teaming/TCID-DIR-GUI-TEAMING-USER-INVITE"
 
-  - tcid: TCID-DIR-TEAMING-USER-ROLE-UPDATE
-    name: "TCID-DIR-TEAMING-USER-ROLE-UPDATE"
+  - tcid: TCID-DIR-GUI-TEAMING-USER-ROLE-UPDATE
+    name: "TCID-DIR-GUI-TEAMING-USER-ROLE-UPDATE"
     description: "Test Teaming user role update functionality"
     labels:
       test/feature: "Teaming"
       test/tags: "DIRECTOR, Teaming, Role update"
-      testplan: "https://e2e.mayadata.io/docs/director/teaming/TCID-DIR-TEAMING-USER-ROLE-UPDATE"
+      testplan: "https://e2e.mayadata.io/docs/director/teaming/TCID-DIR-GUI-TEAMING-USER-ROLE-UPDATE"
 
-  - tcid: TCID-DIR-TEAMING-USER-ROLE-UPDATE-NEGATIVE
-    name: "TCID-DIR-TEAMING-USER-ROLE-UPDATE-NEGATIVE"
+  - tcid: TCID-DIR-GUI-TEAMING-USER-ROLE-UPDATE-NEGATIVE
+    name: "TCID-DIR-GUI-TEAMING-USER-ROLE-UPDATE-NEGATIVE"
     description: "Negative test Teaming user role update functionality"
     labels:
       test/feature: "Teaming"
       test/tags: "DIRECTOR, Teaming, Role update, Negative"
-      testplan: "https://e2e.mayadata.io/docs/director/teaming/TCID-DIR-TEAMING-USER-ROLE-UPDATE-NEGATIVE"
+      testplan: "https://e2e.mayadata.io/docs/director/teaming/TCID-DIR-GUI-TEAMING-USER-ROLE-UPDATE-NEGATIVE"
 
   - tcid: TCID-DIR-DMAAS-SCHD-SOAK-CASSANDRA
     name: "TCID-DIR-DMAAS-SCHD-SOAK-CASSANDRA"
@@ -851,29 +851,29 @@ spec:
       test/tags: "DIRECTOR, AUTHENTICATION"
       testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-DIR-GUI-AUTH"
 
-  - tcid: TCID-GUI-CLUSTER
-    name: "TCID-GUI-CLUSTER"
+  - tcid: TCID-DIR-GUI-CLUSTER
+    name: "TCID-DIR-GUI-CLUSTER"
     description: "Test director cluster"
     labels:
       test/feature: "DIRECTOR CLUSTER"
       test/tags: "DIRECTOR, CLUSTER"
-      testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-GUI-CLUSTER"
+      testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-DIR-GUI-CLUSTER"
 
-  - tcid: TCID-GUI-DASHBOARD
-    name: "TCID-GUI-DASHBOARD"
+  - tcid: TCID-DIR-GUI-DASHBOARD
+    name: "TCID-DIR-GUI-DASHBOARD"
     description: "Test director dashboard"
     labels:
       test/feature: "DIRECTOR DASHBOARD"
       test/tags: "DIRECTOR, DASHBOARD"
-      testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-GUI-DASHBOARD"
+      testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-DIR-GUI-DASHBOARD"
 
-  - tcid: TCID-GUI-PROFILE
-    name: "TCID-GUI-PROFILE"
+  - tcid: TCID-DIR-GUI-PROFILE
+    name: "TCID-DIR-GUI-PROFILE"
     description: "Test director profile"
     labels:
       test/feature: "DIRECTOR PROFILE"
       test/tags: "DIRECTOR, PROFILE"
-      testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-GUI-PROFILE"
+      testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-DIR-GUI-PROFILE"
 
   - tcid: TCID-DIR-GUI-OPENEBS-COMPONENTS-VERSION
     name: "TCID-DIR-GUI-OPENEBS-COMPONENTS-VERSION"

@@ -36,8 +36,8 @@ There are 4 roles for an user as listed below with order of access level, where 
   
   | TCID                                       
   | -----------------------------------------------------------------------------------------|
-  | [TCID-DIR-TEAMING-USER-INVITE](TCID-DIR-TEAMING-USER-INVITE)                             | 
-  | [TCID-DIR-TEAMING-USER-ROLE-UPDATE](TCID-DIR-TEAMING-USER-ROLE-UPDATE)                   | 
-  | [TCID-DIR-TEAMING-USER-ROLE-UPDATE-NEGATIVE](TCID-DIR-TEAMING-USER-ROLE-UPDATE-NEGATIVE) |
+  | [TCID-DIR-GUI-TEAMING-USER-INVITE](TCID-DIR-GUI-TEAMING-USER-INVITE)                             | 
+  | [TCID-DIR-GUI-TEAMING-USER-ROLE-UPDATE](TCID-DIR-GUI-TEAMING-USER-ROLE-UPDATE)                   | 
+  | [TCID-DIR-GUI-TEAMING-USER-ROLE-UPDATE-NEGATIVE](TCID-DIR-GUI-TEAMING-USER-ROLE-UPDATE-NEGATIVE) |
 
 

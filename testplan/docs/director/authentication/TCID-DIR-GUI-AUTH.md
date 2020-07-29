@@ -1,6 +1,6 @@
 ---
 id: TCID-DIR-GUI-AUTH
-title: 
+title: Authentication
 sidebar_label: TCID-DIR-GUI-AUTH
 ---
 ------
@@ -25,7 +25,7 @@ sidebar_label: TCID-DIR-GUI-AUTH
 - DOP should be installed and accessible from browser
 
 ### Details
-- To verify signup functionality in Local Auth
+- To verify signup functionality for Local Auth
 - To verify error message is shown if wrong password is provided
 - To verify error message is shown if wrong email ID is provided
 - To verify password for local authentication should be alpha numeric supported

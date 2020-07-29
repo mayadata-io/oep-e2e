@@ -1,7 +1,7 @@
 ---
-id: TCID-DIR-TEAMING-USER-ROLE-UPDATE-NEGATIVE
+id: TCID-DIR-GUI-TEAMING-USER-ROLE-UPDATE-NEGATIVE
 title: Teaming Role Change negative
-sidebar_label: TCID-DIR-TEAMING-USER-ROLE-UPDATE-NEGATIVE
+sidebar_label: TCID-DIR-GUI-TEAMING-USER-ROLE-UPDATE-NEGATIVE
 ---
 ------
 
@@ -16,8 +16,8 @@ sidebar_label: TCID-DIR-TEAMING-USER-ROLE-UPDATE-NEGATIVE
     <th> Description </th>
   </tr>
   <tr>
-    <td> TCID-DIR-TEAMING-USER-ROLE-UPDATE-NEGATIVE </td>
-    <td> TCID-DIR-TEAMING-USER-ROLE-UPDATE-NEGATIVE </td>
+    <td> TCID-DIR-GUI-TEAMING-USER-ROLE-UPDATE-NEGATIVE </td>
+    <td> TCID-DIR-GUI-TEAMING-USER-ROLE-UPDATE-NEGATIVE </td>
     <td> Teaming </td>
     <td> Non permissive Role Change Functionality  </td>
   </tr>
@@ -51,4 +51,4 @@ sidebar_label: TCID-DIR-TEAMING-USER-ROLE-UPDATE-NEGATIVE
 
 ### Test Result Link
 
-- https://github.com/mayadata-io/oep-e2e-results/tree/master/TCID-DIR-TEAMING-USER-ROLE-UPDATE-NEGATIVE
+- https://github.com/mayadata-io/oep-e2e-results/tree/master/TCID-DIR-GUI-TEAMING-USER-ROLE-UPDATE-NEGATIVE
