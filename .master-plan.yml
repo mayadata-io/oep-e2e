@@ -715,29 +715,29 @@ spec:
   # --------------------------------------------------
   # https://e2e.mayadata.io/docs/director/authentication/authentication
   #---------------------------------------------------
-  - tcid: TCID-DIR-AUTH-LOCAL-ADMIN
-    name: "TCID-DIR-AUTH-LOCAL-ADMIN"
+  - tcid: TCID-DIR-GUI-AUTH-LOCAL-ADMIN
+    name: "TCID-DIR-GUI-AUTH-LOCAL-ADMIN"
     description: "Test director authentication with local admin"
     labels:
       test/feature: "DIRECTOR AUTHENTICATION"
       test/tags: "DIRECTOR, AUTHENTICATION, LOCAL, ADMIN"      
-      testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-DIR-AUTH-LOCAL-ADMIN"
+      testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-DIR-GUI-AUTH-LOCAL-ADMIN"
 
-  - tcid: TCID-DIR-AUTH-LOCAL-USER
-    name: "TCID-DIR-AUTH-LOCAL-USER"
+  - tcid: TCID-DIR-GUI-AUTH-LOCAL-USER
+    name: "TCID-DIR-GUI-AUTH-LOCAL-USER"
     description: "Test director authentication with local user"
     labels:
       test/feature: "DIRECTOR AUTHENTICATION"
       test/tags: "DIRECTOR, AUTHENTICATION, LOCAL, USER"
-      testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-DIR-AUTH-LOCAL-USER"
+      testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-DIR-GUI-AUTH-LOCAL-USER"
 
-  - tcid: TCID-DIR-AUTH-LOCAL-PERF
-    name: "TCID-DIR-AUTH-LOCAL-PERF"
+  - tcid: TCID-DIR-GUI-AUTH-LOCAL-PERF
+    name: "TCID-DIR-GUI-AUTH-LOCAL-PERF"
     description: "Test director local authentication performance"
     labels:
       test/feature: "DIRECTOR AUTHENTICATION"
       test/tags: "DIRECTOR, AUTHENTICATION, LOCAL, PERFORMANCE"
-      testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-DIR-AUTH-LOCAL-PERF"
+      testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-DIR-GUI-AUTH-LOCAL-PERF"
 
   - tcid: TCID-DIR-AUTH-LOCAL-SCALE
     name: "TCID-DIR-AUTH-LOCAL-SCALE"
@@ -843,13 +843,13 @@ spec:
       test/tags: "DIRECTOR, AUTHENTICATION, LOCAL, AD, SCALE"
       testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-DIR-AUTH-AD-SCALE"
 
-  - tcid: TCID-GUI-AUTH
-    name: "TCID-GUI-AUTH"
+  - tcid: TCID-DIR-GUI-AUTH
+    name: "TCID-DIR-GUI-AUTH"
     description: "Test director GUI authentication"
     labels:
       test/feature: "DIRECTOR AUTHENTICATION"
       test/tags: "DIRECTOR, AUTHENTICATION"
-      testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-GUI-AUTH"
+      testplan: "https://e2e.mayadata.io/docs/director/authentication/TCID-DIR-GUI-AUTH"
 
   - tcid: TCID-GUI-CLUSTER
     name: "TCID-GUI-CLUSTER"
