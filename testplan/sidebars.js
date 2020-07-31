@@ -23,13 +23,13 @@ module.exports = {
 				label: 'Authentication',
 				items: [
 					'director/authentication/authentication',
-					'director/authentication/TCID-GUI-AUTH',
-					'director/authentication/TCID-GUI-CLUSTER',
-					'director/authentication/TCID-GUI-DASHBOARD',
-					'director/authentication/TCID-GUI-PROFILE',
-					'director/authentication/TCID-DIR-AUTH-LOCAL-ADMIN',
-					'director/authentication/TCID-DIR-AUTH-LOCAL-USER',
-					'director/authentication/TCID-DIR-AUTH-LOCAL-PERF',
+					'director/authentication/TCID-DIR-GUI-AUTH',
+					'director/authentication/TCID-DIR-GUI-CLUSTER',
+					'director/authentication/TCID-DIR-GUI-DASHBOARD',
+					'director/authentication/TCID-DIR-GUI-PROFILE',
+					'director/authentication/TCID-DIR-GUI-AUTH-LOCAL-ADMIN',
+					'director/authentication/TCID-DIR-GUI-AUTH-LOCAL-USER',
+					'director/authentication/TCID-DIR-GUI-AUTH-LOCAL-PERF',
 				],
 			},
 			{
@@ -37,9 +37,9 @@ module.exports = {
 				label: 'Teaming',
 				items: [
 					'director/teaming/directorTeaming',
-					'director/teaming/TCID-DIR-TEAMING-USER-INVITE',
-					'director/teaming/TCID-DIR-TEAMING-USER-ROLE-UPDATE',
-					'director/teaming/TCID-DIR-TEAMING-USER-ROLE-UPDATE-NEGATIVE'
+					'director/teaming/TCID-DIR-GUI-TEAMING-USER-INVITE',
+					'director/teaming/TCID-DIR-GUI-TEAMING-USER-ROLE-UPDATE',
+					'director/teaming/TCID-DIR-GUI-TEAMING-USER-ROLE-UPDATE-NEGATIVE'
 				],
 			},
 			{
