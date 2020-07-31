@@ -1,7 +1,7 @@
 ---
-id: TCID-DIR-UI-CLUSTER
+id: TCID-DIR-GUI-CLUSTER
 title: 
-sidebar_label: TCID-DIR-UI-CLUSTER
+sidebar_label: TCID-DIR-GUI-CLUSTER
 ---
 ------
 
@@ -14,7 +14,7 @@ sidebar_label: TCID-DIR-UI-CLUSTER
     <th> Description </th>
   </tr>
   <tr>
-    <td>TCID-DIR-UI-CLUSTER</td>
+    <td>TCID-DIR-GUI-CLUSTER</td>
     <td>Cluster</td>
     <td> Cluster connect </td>
   </tr>
