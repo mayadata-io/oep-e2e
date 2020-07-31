@@ -1,7 +1,7 @@
 ---
-id: TCID-DIR-TEAMING-USER-INVITE
+id: TCID-DIR-GUI-TEAMING-USER-INVITE
 title: Teaming Invite User
-sidebar_label: TCID-DIR-TEAMING-USER-INVITE
+sidebar_label: TCID-DIR-GUI-TEAMING-USER-INVITE
 ---
 ------
 
@@ -16,8 +16,8 @@ sidebar_label: TCID-DIR-TEAMING-USER-INVITE
     <th> Description </th>
   </tr>
   <tr>
-    <td> TCID-DIR-TEAMING-USER-INVITE </td>
-    <td> TCID-DIR-TEAMING-USER-INVITE </td>
+    <td> TCID-DIR-GUI-TEAMING-USER-INVITE </td>
+    <td> TCID-DIR-GUI-TEAMING-USER-INVITE </td>
     <td> Teaming </td>
     <td> Invite User Functionality </td>
   </tr>
@@ -50,4 +50,4 @@ sidebar_label: TCID-DIR-TEAMING-USER-INVITE
 
 ### Test Result Link
 
-- https://github.com/mayadata-io/oep-e2e-results/tree/master/TCID-DIR-TEAMING-USER-INVITE
+- https://github.com/mayadata-io/oep-e2e-results/tree/master/TCID-DIR-GUI-TEAMING-USER-INVITE

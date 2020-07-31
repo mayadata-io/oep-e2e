@@ -1,7 +1,7 @@
 ---
-id: TCID-DIR-TEAMING-USER-ROLE-UPDATE
+id: TCID-DIR-GUI-TEAMING-USER-ROLE-UPDATE
 title: Teaming Role Change
-sidebar_label: TCID-DIR-TEAMING-USER-ROLE-UPDATE
+sidebar_label: TCID-DIR-GUI-TEAMING-USER-ROLE-UPDATE
 ---
 ------
 
@@ -16,8 +16,8 @@ sidebar_label: TCID-DIR-TEAMING-USER-ROLE-UPDATE
     <th> Description </th>
   </tr>
   <tr>
-    <td> TCID-DIR-TEAMING-USER-ROLE-UPDATE </td>
-    <td> TCID-DIR-TEAMING-USER-ROLE-UPDATE </td>
+    <td> TCID-DIR-GUI-TEAMING-USER-ROLE-UPDATE </td>
+    <td> TCID-DIR-GUI-TEAMING-USER-ROLE-UPDATE </td>
     <td> Teaming </td>
     <td> Role Change Functionality </td>
   </tr>
@@ -52,4 +52,4 @@ sidebar_label: TCID-DIR-TEAMING-USER-ROLE-UPDATE
 
 ### Test Result Link
 
-- https://github.com/mayadata-io/oep-e2e-results/tree/master/TCID-DIR-TEAMING-USER-ROLE-UPDATE
+- https://github.com/mayadata-io/oep-e2e-results/tree/master/TCID-DIR-GUI-TEAMING-USER-ROLE-UPDATE
