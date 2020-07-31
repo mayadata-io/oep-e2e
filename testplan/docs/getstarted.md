@@ -37,7 +37,7 @@ MayaData delivers it's vision of delivering data agility for DevOps by transform
 ## Contributing guidelines:
 
 - You can [create a GitHub issue](https://github.com/mayadata-io/oep-e2e/issues/new/choose) if you are having an idea for improvement or to notify a missing test area/case.
-- If you want to suggest changes to any page in the test plan, use 'Edit this page' link found towards the bottom left corner of the specific page. This will enable you to raise a pull request with your suggested changes.
+- If you want to suggest changes to any page in the test plan, use 'Edit this page' link found towards the bottom left corner of the specific page. This will enable you to raise a pull request with your suggested changes...
 
 
 

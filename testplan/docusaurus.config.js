@@ -6,6 +6,7 @@ module.exports = {
   favicon: 'img/favicon.ico',
   organizationName: 'MayaData', // Usually your GitHub org/user name.
   projectName: 'oep-e2e', // Usually your repo name.
+  onBrokenLinks: 'ignore',
   themeConfig: {
     navbar: {
       title: 'Kubera E2E',
@@ -13,7 +14,7 @@ module.exports = {
         alt: 'MayaData Kubera E2E',
         src: 'img/logo.png',
       },
-      links: [
+      items: [
         {
           to: 'docs/getstarted',
           activeBasePath: 'docs',
