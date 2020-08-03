@@ -353,7 +353,7 @@
 
         - name: Check if all the pods are upgraded or not
           shell: >
-              kubectl get pods -n {{ namespace }} -o=jsonpath='{range .items[*]}{.metadata.labels.openebs\.io\/version}{"\n"}{end}'
+              kubectl get pods -n {{ namespace }} -o=jsonpath='{range .items[*]}{.spec.containers[*].image}{"\n"}{end}'
           args:
             executable: /bin/bash
           register: version_list
