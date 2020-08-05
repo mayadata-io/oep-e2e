@@ -983,6 +983,14 @@ spec:
       test/tags: "OPENEBS, LOCALPV"
       testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-LOCALPV-SELECTED-DEVICE-CREATE"
 
+  - tcid: TCID-LOCALPV-SELECTED-DEVICE-RECONCILE
+    name: "TCID-LOCALPV-SELECTED-DEVICE-RECONCILE"
+    description: "Test if localPV can be reconciled successfully after labeling a selected block device"
+    labels:
+      test/feature: "OPENEBS LOCALPV"
+      test/tags: "OPENEBS, LOCALPV"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-LOCALPV-SELECTED-DEVICE-RECONCILE"
+  
   - tcid: TCID-ZFS-LOCALPV-PROVISIONER-DEPLOY
     name: "TCID-ZFS-LOCALPV-PROVISIONER-DEPLOY"
     description: "Test deployment of OpenEBS ZFS LocalPV provisioner"
