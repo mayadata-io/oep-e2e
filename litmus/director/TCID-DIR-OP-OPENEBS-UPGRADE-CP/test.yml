@@ -357,7 +357,9 @@
           args:
             executable: /bin/bash
           register: version_list
-          failed_when: "'{{openebs_current_version}}' in version_list.stdout"     
+          until: "'{{openebs_current_version}}' not in version_list.stdout"
+          retries: 60
+          delay: 3     
     
         ## Setting flag as Pass
         - set_fact:
