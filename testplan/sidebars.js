@@ -61,11 +61,6 @@ module.exports = {
 					'director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-STRIPE',
 					'director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-LIST-MIRROR',
 					'director/openebs-provisioning/TCID-DIR-OP-CSTOR-POOL-RECOMMEND-CREATE-MIRROR',
-					'director/openebs-provisioning/TCID-DIR-OP-INSTALL-OPENEBS',
-					'director/openebs-provisioning/TCID-DIR-OP-INSTALL-OPENEBS-CP-ON-SPECIFIC-NODE',
-					'director/openebs-provisioning/TCID-DIR-OP-INSTALL-OPENEBS-DP-ON-SPECIFIC-NODE',
-					'director/openebs-provisioning/TCID-DIR-OP-INSTALL-OPENEBS-LIMIT-RESOURCE',
-					'director/openebs-provisioning/TCID-DIR-OP-RE-INSTALL-OPENEBS',
 					'director/openebs-provisioning/TCID-DIR-GUI-OPENEBS-COMPONENTS-VERSION',
 					'director/openebs-provisioning/TCID-DIR-OP-DELETE-SPC-WITH-NO-VOLUME',
 					'director/openebs-provisioning/TCID-DIR-OP-DELETE-CSPC-WITH-NO-VOLUME'
@@ -171,6 +166,21 @@ module.exports = {
 				],
 			},
 		],
+         
+		"OpenEBS Install": [
+			'openebs-install/openebs-install',
+			'openebs-install/TCID-DIR-OP-INSTALL-OPENEBS',
+			'openebs-install/TCID-DIR-OP-INSTALL-OPENEBS-CP-ON-SPECIFIC-NODE',
+			'openebs-install/TCID-DIR-OP-INSTALL-OPENEBS-DP-ON-SPECIFIC-NODE',
+			'openebs-install/TCID-DIR-OP-INSTALL-OPENEBS-LIMIT-RESOURCE',
+			'openebs-install/TCID-DIR-OP-RE-INSTALL-OPENEBS'
+		],
+
+		"OpenEBS Upgrade": [
+			'openebs-upgrade/openebs-upgrade',
+			'openebs-upgrade/TCID-DIR-OP-OPENEBS-UPGRADE-CP'
+		],
+
         "Release Notes": [
             'kubera-e2e-release-1-10', 
             'kubera-e2e-release-1-11', 
