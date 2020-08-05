@@ -985,7 +985,7 @@ spec:
 
   - tcid: TCID-LOCALPV-SELECTED-DEVICE-RECONCILE
     name: "TCID-LOCALPV-SELECTED-DEVICE-RECONCILE"
-    description: "Test creation of OpenEBS LocalPV reconiliation using selected block device"
+    description: "Test if localPV can be reconciled successfully after labeling a selected block device"
     labels:
       test/feature: "OPENEBS LOCALPV"
       test/tags: "OPENEBS, LOCALPV"
