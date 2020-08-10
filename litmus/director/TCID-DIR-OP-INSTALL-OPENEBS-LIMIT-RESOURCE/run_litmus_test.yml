@@ -66,6 +66,8 @@ spec:
             value: ''
 
           ## Enter exclude device filter  
+          ## we can remove /dev/sdb disk from the ndm configmap and
+          ## this disk will not be used as a block-device for openebs related test cases
           - name: EXCLUDE_DEVICE_FILTER
             value: '/dev/sdb'
 
