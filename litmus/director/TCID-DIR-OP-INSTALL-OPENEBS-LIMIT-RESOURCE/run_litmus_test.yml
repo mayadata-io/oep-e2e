@@ -67,7 +67,7 @@ spec:
 
           ## Enter exclude device filter  
           - name: EXCLUDE_DEVICE_FILTER
-            value: ''
+            value: '/dev/sdb'
 
           ## CPU resource limit is provided
           - name: CPU_RESOURCE_LIMIT

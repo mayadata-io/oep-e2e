@@ -27,13 +27,61 @@
           shell: cat /etc/secret-volume/password
           register: password
 
-        ## Checking if openebs is already installed
+        ## Checking if openebs is already installed in the cluster
         - name: Check if openebs is already installed
           shell: kubectl get deploy --all-namespaces -l name=maya-apiserver --no-headers | awk '{print $1}' | wc -l
           args:
             executable: /bin/bash
-          register: maya_api
-          failed_when: "{{ maya_api.stdout }} != 0"
+          register: count_maya_api
+
+        ## If openebs is installed in the cluster then get the namespace
+        - name: Getting the namespace where openebs is installed 
+          shell: kubectl get deploy --all-namespaces -l name=maya-apiserver --no-headers | awk '{print $1}'
+          args:
+            executable: /bin/bash
+          register: openebs_namespace
+          when: "count_maya_api.stdout == '1'"
+
+        # Getting node details of the cluster
+        ## Selecting the node which is in active state present in the cluster
+        ## Retry till the data field in node details is empty
+        - name: Getting the node details of the cluster
+          uri:
+            url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes?state=active&clusterId={{ cluster_id }}"
+            method: GET
+            url_username: "{{ username.stdout }}"
+            url_password: "{{ password.stdout }}"
+            force_basic_auth: yes
+            return_content: yes
+            body_format: json
+            body:
+              status_code: 202
+          register: node_details
+          until: "node_details.json.data != []"
+          delay: 2
+          retries: 10
+
+        ## Define variable node_id
+        - set_fact:
+            node_id: []
+        
+        ## Storing the node id of the nodes in the cluster
+        - name: Storing the node id of node in the cluster
+          set_fact:
+            node_id: "{{ node_id  + [item.id] }}"
+          loop: "{{ node_details.json.data }}"
+
+        ## Removing the labels from the cluster nodes
+        - name: Cleanup labels from the nodes
+          include_tasks: /utils/openebs-label-cleanup.yml
+          when: "count_maya_api.stdout == '1'"
+
+        ## Deleting openebs from the cluster
+        - name: Cleanup openebs from the cluster
+          include_tasks: /utils/openebs-cleanup.yml
+          vars:
+            namespace: "{{ openebs_namespace.stdout }}"
+          when: "count_maya_api.stdout == '1'"
 
         ## Fetch the projectid of the project where the cluster is running
         - name: Fetch the project details of the project where the cluster is running
@@ -68,31 +116,6 @@
         - name: Fetching template_id
           set_fact:
             template_id: "{{ template_details.json.data[0].id }}"
-
-        ## Getting node details of the cluster
-        ## Selecting the node which is in active state present in the cluster
-        - name: Getting the node details of the cluster
-          uri:
-            url: "{{ director_url }}/v3/groups/{{ group_id }}/nodes?state=active&clusterId={{ cluster_id }}"
-            method: GET
-            url_username: "{{ username.stdout }}"
-            url_password: "{{ password.stdout }}"
-            force_basic_auth: yes
-            return_content: yes
-            body_format: json
-            body:
-              status_code: 202
-          register: node_details
-
-        ## Define variable node_id
-        - set_fact:
-            node_id: []
-
-        ## Storing the node id of the nodes in the cluster
-        - name: Storing the node id of node in the cluster
-          set_fact:
-            node_id: "{{ node_id  + [item.id] }}"
-          loop: "{{ node_details.json.data }}"
 
         ## Passing the value for openebs creation in the cluster
         - name: Passing the values required for openebs creation
