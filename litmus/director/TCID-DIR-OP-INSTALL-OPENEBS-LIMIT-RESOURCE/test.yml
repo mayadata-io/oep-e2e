@@ -219,6 +219,14 @@
             executable: /bin/bash
           register: memory_limit
           failed_when: "memory_limit.stdout != memory_resource_limit"
+
+        - name: Check if the device has been excluded or not.
+          shell: >
+              kubectl get blockdevice -n {{ namespace }} -o custom-columns=:.spec.path --no-headers
+          args:
+            executable: /bin/bash
+          register: path_list
+          failed_when: "'{{ exclude_device_filters }}' in path_list.stdout"
           
         - set_fact:
             flag: "Pass"
