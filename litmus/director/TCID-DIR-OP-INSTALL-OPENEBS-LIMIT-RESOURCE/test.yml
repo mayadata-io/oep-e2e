@@ -226,7 +226,7 @@
           args:
             executable: /bin/bash
           register: path_list
-          failed_when: "'{{ exclude_device_filters }}' in path_list.stdout"
+          failed_when: "exclude_device_filters in path_list.stdout"
           
         - set_fact:
             flag: "Pass"
