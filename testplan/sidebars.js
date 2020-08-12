@@ -199,7 +199,14 @@ module.exports = {
             'manual/kubera-openebs-upgrade', 
             'manual/kubera-openebs-installation', 
             'manual/kubera-cstor-pool' 
-        ],
+		],
+		
+		"Troubleshooting": [
+			'troubleshooting/aws',
+			'troubleshooting/rancher',
+			'troubleshooting/konvoy'
+		],
+		
         Help: ['doc1', 'mdx'],
 	},
 };
