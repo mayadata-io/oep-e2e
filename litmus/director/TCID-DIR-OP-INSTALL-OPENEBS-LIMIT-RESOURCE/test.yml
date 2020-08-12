@@ -203,10 +203,10 @@
               return_content: yes
               body_format: json
               body: {
-                      controlPlaneNodes": [ 
+                      "controlPlaneNodes": [
                         "{{ node1_id }}"
                       ],
-                      dataPlaneNodes": [
+                      "dataPlaneNodes": [
                         "{{ node1_id }}",
                         "{{ node2_id }}",
                         "{{ node3_id }}"
