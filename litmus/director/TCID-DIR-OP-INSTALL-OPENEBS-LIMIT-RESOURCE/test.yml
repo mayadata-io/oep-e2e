@@ -161,6 +161,10 @@
             set_fact:
               node5_id: "{{ node_id[4].split('n')[1] }}"
           
+          - name: Get the node6_id
+            set_fact:
+              node6_id: "{{ node_id[5].split('n')[1] }}"
+          
           - name: Labeling the nodes of the cluster
             uri:
               url: "{{ director_url }}/v3/groups/{{ group_id }}/openebses/{{ openebsid }}/?action=selectopenebsnodes"
@@ -176,14 +180,16 @@
                         "{{ node2_id }}",
                         "{{ node3_id }}",
                         "{{ node4_id }}",
-                        "{{ node5_id }}"
+                        "{{ node5_id }}",
+                        "{{ node6_id }}"
                       ],
                       "dataPlaneNodes": [
                         "{{ node1_id }}",
                         "{{ node2_id }}",
                         "{{ node3_id }}",
                         "{{ node4_id }}",
-                        "{{ node5_id }}"
+                        "{{ node5_id }}",
+                        "{{ node6_id }}"
                       ]
                     }
               status_code: 200
