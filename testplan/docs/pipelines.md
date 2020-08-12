@@ -5,7 +5,17 @@ sidebar_label: Pipelines
 ---
 ## Kubera E2E Pipeline
 
-Kubera E2E pipeline is a GitLab based pipeline. This pipeline is triggered for each Kubera release. The images are taken from [director-charts-internal](https://github.com/mayadata-io/director-charts-internal) repo. Kubera pipeline is divided into following groups:
+Kubera E2E pipeline is a GitLab based pipeline. This pipeline is triggered for each Kubera release. The images are taken from [kubera-charts](https://charts.mayadata.io/) repo. Once E2E team get the build following changes are done in Gitlab to run the pipeline with new image.
+
+- Login to Gitlab.
+- Select the project eg: oep-e2e-aws
+- On the left panel click on setting and then select CI/CD
+- Click on Expand button of variables
+- Click on Reveal values button at the bottom
+- Change the image for RELEASE environment variable eg: 1.11.0-ee
+- Click on Save variables and start triggering the pipeline for respective platform
+
+Kubera pipeline is divided into following groups:
 
 - Group 1
 - Group 2
