@@ -474,8 +474,8 @@
           uri:
             url: '{{ director_url }}/v3/groups/{{ group_id }}/openebsupgradeclaims'
             method: POST
-            url_username: '{{ username.password }}'
-            url_password: '{{ password.password }}'
+            url_username: '{{ username.stdout }}'
+            url_password: '{{ password.stdout }}'
             return_content: yes
             force_basic_auth: yes
             body_format: json
