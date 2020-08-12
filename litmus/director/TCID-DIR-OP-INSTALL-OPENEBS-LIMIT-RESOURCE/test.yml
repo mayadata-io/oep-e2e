@@ -157,7 +157,7 @@
 
         - block:
           
-          - name: Get the node4_id
+          - name: Get the node5_id
             set_fact:
               node5_id: "{{ node_id[4].split('n')[1] }}"
           
@@ -170,7 +170,22 @@
               force_basic_auth: yes
               return_content: yes
               body_format: json
-              body: '{"controlPlaneNodes":["{{node1_id}}",,"{{node2_id}}","{{node3_id}}","{{node4_id}}",{{node5_id}}], "dataPlaneNodes":["{{node1_id}}","{{node2_id}}","{{node3_id}}","{{node4_id}}","{{node5_id}}"]}'
+              body: {
+                      controlPlaneNodes": [ 
+                        "{{ node1_id }}",
+                        "{{ node2_id }}",
+                        "{{ node3_id }}",
+                        "{{ node4_id }}",
+                        "{{ node5_id }}"
+                      ],
+                      dataPlaneNodes": [
+                        "{{ node1_id }}",
+                        "{{ node2_id }}",
+                        "{{ node3_id }}",
+                        "{{ node4_id }}",
+                        "{{ node5_id }}"
+                      ]
+                    }
               status_code: 200
             register: labelnodes
 
@@ -187,7 +202,16 @@
               force_basic_auth: yes
               return_content: yes
               body_format: json
-              body: '{"controlPlaneNodes":["{{node1_id}}"], "dataPlaneNodes":["{{node1_id}}","{{node2_id}}","{{node3_id}}","{{node4_id}}"]}'
+              body: {
+                      controlPlaneNodes": [ 
+                        "{{ node1_id }}"
+                      ],
+                      dataPlaneNodes": [
+                        "{{ node1_id }}",
+                        "{{ node2_id }}",
+                        "{{ node3_id }}"
+                      ]
+                    }
               status_code: 200
             register: labelnodes
 
