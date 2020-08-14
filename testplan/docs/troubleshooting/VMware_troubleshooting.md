@@ -2,13 +2,13 @@
 
 
 
-Initially, we were using Public clouds such as AWS, GCP for executing the E2E test scenarios. Eventually, cloud expenses became immense. As an impact, we thought of setting up the test environment and the expenses became very less comparatively. We use VMware Vsphere for setting up virtual machines for various distribution of Kubernetes such as OpenShift, D2IQ Konvoy, and Rancher.
+Initially, we were using public cloud platforms such as AWS, GCP for executing the E2E test scenarios. Eventually, cloud expenses became immense. As an impact, we thought of setting up the test environment and the expenses became very less comparatively. We use VMware Vsphere for setting up virtual machines for various distribution of Kubernetes such as OpenShift, D2IQ Konvoy, and Rancher.
 
 The will discuss how the environment was created and the challenges that we used to face day by day.
 
 ### **Setting up the cluster environment**
 
-When we were using the public cloud platforms, we used to create the cluster at the beginning of every CI pipeline and delete it at the end. In the case of VMware environment, it takes much time for creating virtual machines and then to configure the Kubernetes cluster. Approximately, it takes almost an hour for configuring a new cluster. In order to overcome this, we leverage VMware snapshotting/restoring feature. After creating the Kubernetes cluster with the desired distribution, say, Rancher, OpenShift, D2IQ Konvoy, and Kubeadm based, a VMware snapshot was created for each virtual machine to hold the state of the machine. Once the pipeline is completed, all the VM instances are reverted back using this snapshot. So, all the configurations created as part of the pipeline would be deleted and resemble a freshly configured Kubernetes cluster.
+When we were using the public cloud platforms, we used to create the cluster at the beginning of every CI pipeline and delete it at the end. In the case of VMware environment, it takes much time for creating virtual machines and then to configure the Kubernetes cluster. Approximately, it takes almost an hour for configuring a new cluster. In order to overcome this, we leverage VMware snapshotting/restoring feature. After creating a Kubernetes cluster with the desired distribution, say, Rancher, OpenShift, D2IQ Konvoy, and Kubeadm based, a VMware snapshot was created for each virtual machine to hold the state of the machine. Once the pipeline is completed, all the VM instances are reverted back using this snapshot. So, all the configurations created as part of the pipeline would be deleted and resemble a freshly configured Kubernetes cluster.
 At the beginning of the pipeline, we check if the cluster is healthy and if all the components are running successfully. And then, we execute various OpenEBS specific E2E Scenarios in various Gitlab stages. Finally, in the end, we revert back all the VM instances to the earlier state using snapshots.
 
 For reference, please check [pipelines](https://oep-pipelines.mayadata.io/)
@@ -25,7 +25,7 @@ This is one of the most common challenges which we face when we add more jobs to
 
 #### **Thin Provisioning:**
 
-We leverage the Thin provisioning feature for doing over-provisioning of storage resources to the virtual machine instances. When the resource utilization reaches the threshold, the machines were observed to be stuck. As an effect, it is recommended to plan and provision the resources based on the availability of resources in the hypervisor.
+We leverage the Thin provisioning feature of VMware for doing over-provisioning of storage resources to the virtual machine instances. When the resource utilization reaches the threshold, the machines were observed to be stuck. As an effect, it is recommended to plan and provision the resources based on the availability of resources in the hypervisor.
 
 #### **Virtual machine memory snapshots:**
 
@@ -33,7 +33,8 @@ In our use case, the virtual machine’s memory is not required in snapshots. Wh
 
 #### **Virtual Disk Errors:**
 
-Sometimes, the virtual machines are stuck at the boot prompt with disk errors when we reboot them. It is an error that occurs due to file system error on ubuntu. It doesn’t proceed further without human intervention.
+Sometimes, the virtual machines are stuck at the boot prompt with disk errors when we reboot them. It is an error that occurs due to file system error on Ubuntu. It doesn’t proceed further without human intervention.
+
 ![img](https://lh4.googleusercontent.com/2J35ko05O6nltgzeo9dcmBg_sZtRj7Jb-XF-aUssMQwGl5xKVhkgQGE9cYPyw5FE_xZvn7W3-WwAQ09WjVs52o_zAYsXh_3flWu11da9g0ZaEwRFHe0qDxinPstFixcCWnhsIoS5)
 
-We need to clear the errors on the specified disk by executing the command ‘e2fsck -y /dev/<disk name>. This will check the file system consistency and clear the errors which enable the virtual machine to proceed further.
+We need to clear the errors on specified disk by executing the command ‘e2fsck -y /dev/<disk name>`. This will check the file system consistency and clear the errors which enable the virtual machine to proceed further.
