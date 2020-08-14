@@ -16,7 +16,7 @@ In the Rancher pipeline, the installation of OpenEBS via Kubera OnPrem Director 
 E0730 05:58:27.664789       1 discovery.go:184] API resource discovery failed: unable to retrieve the complete list of server APIs: metrics.k8s.io/v1beta1: the server is currently unable to handle the request
 `
 
-On running kubectl get apiservices we got the below output -
+On running `kubectl get apiservices` we got the below output -
 
 ```
 NAME                                   SERVICE                      AVAILABLE                      AGE
