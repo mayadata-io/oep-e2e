@@ -171,12 +171,13 @@ There are a set of tests that are written against storage components.  A separat
 E2E metrics, finalizing the tests, disconnect the user clusters,clean up resources, delete Director OnPrem and scaledown/destroy cluster where DOP is installed.
 
 
-#### Director PR workflow as one of the use case:
+#### Kubera PR workflow as one of the use case:
 
-- Staging Branch (Staging DOL) release--1.10 . PR are merged on daily basis.
-- PR are cherry picked into preprod (Prepod DOL), release--1.10 (May10) (Not tested by E2E).
-- PR are cherry picked into master (DOL) release--1.10 (May15) (Not tested by E2E).
-- PR are cherry picked into enterprise-master (DOP) release--1.10 (May16 RC1, June15) -- OEP release branch get tested by E2E. [OEP-Release](https://oep-pipelines.mayadata.io/) .
+- Staging Branch (Staging Kubera Director) release--1.11 . PR are merged on daily basis.
+- E2E team tests the Staging branch in a release cycle  
+- PR are cherry picked into preprod (Prepod Kubera Director), release--1.11 (June10) (Not tested by E2E).
+- PR are cherry picked into master (Kubera Director) release--1.11 (June15) (Tested by E2E).
+- PR are cherry picked into enterprise-master (KDOP) release--1.11 (June16 RC1, July15) -- OEP release branch get tested by E2E. [OEP-Release](https://oep-pipelines.mayadata.io/) .
 
 - Director ci image testing on daily basis can be seen on [ci.mayadata.io](https://ci.mayadata.io/) .
 
