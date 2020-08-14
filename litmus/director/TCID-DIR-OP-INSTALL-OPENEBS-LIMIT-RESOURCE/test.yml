@@ -222,6 +222,9 @@
             register: labelnodes
 
           when: platform == "AWS"
+       
+        - pause:	
+            seconds: 10
 
         ## Installing openebs
         - name: Installing openebs on the DOP self cluster
@@ -237,6 +240,26 @@
             status_code: 200
           register: res_openebs
 
+        ## Fetching job ID
+        - name: Fetching Job Id to of openebsjob
+          set_fact:
+            openebs_job_id: "{{ res_openebs.json.id }}"
+
+        - name: Fetch openebsjob details
+          uri:
+            url: "{{ director_url }}/v3/groups/{{ group_id}}/openebsjobs/{{ openebs_job_id }}"
+            method: GET
+            url_username: "{{ username.stdout }}"
+            url_password: "{{ password.stdout }}"
+            force_basic_auth: yes
+            return_content: yes
+            body_format: json
+            status_code: 200
+          register: openebs_job
+          until: "openebs_job.json.state == 'Success'"
+          delay: 10
+          retries: 30          
+        
         ## Checking the openebs Installation    
         - name: Fetch OpenEBS control plane pods state
           shell: kubectl get pods -n {{ namespace }}  | grep {{ item }} | awk '{print $3}' | awk -F':' '{print $1}' | tail -n 1
