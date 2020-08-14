@@ -204,7 +204,8 @@ module.exports = {
 		"Troubleshooting": [
 			'troubleshooting/aws',
 			'troubleshooting/rancher',
-			'troubleshooting/konvoy'
+			'troubleshooting/konvoy',
+			'troubleshooting/VMware_troubleshooting'
 		],
 		
         Help: ['doc1', 'mdx'],
