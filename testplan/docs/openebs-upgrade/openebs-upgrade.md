@@ -15,9 +15,9 @@ This page captures the test strategies for OpenEBS operations related to:
 
 ### OpenEBS upgrade test cases w.r.t control plane component
 
-| TCID                                                                                       |
-| ------------------------------------------------------------------------------------------ |
-| [TCID-DIR-OP-OPENEBS-UPGRADE-CP](TCID-DIR-OP-OPENEBS-UPGRADE-CP)                           |
+| TCID                                                                                       | Cluster |
+| ------------------------------------------------------------------------------------------ |---------|
+| [TCID-DIR-OP-OPENEBS-UPGRADE-CP](TCID-DIR-OP-OPENEBS-UPGRADE-CP)                           |   C3    |
 
 
 
@@ -41,6 +41,13 @@ This page captures the test strategies for OpenEBS operations related to:
 | [TCID-DIR-OP-UPGRADE-JIVA-VOLUME-ALL-REPLICAS-PENDING](TCID-DIR-OP-UPGRADE-JIVA-VOLUME-ALL-REPLICAS-PENDING)|
 | [TCID-DIR-OP-UPGRADE-JIVA-VOLUME-TWO-REPLICAS-PENDING](TCID-DIR-OP-UPGRADE-JIVA-VOLUME-TWO-REPLICAS-PENDING)|
 
+---
+**NOTE**
+
+- C1 would be installed with latest version of DOP
+- C2 and C3 are connected to C1 using DOP APIs
+---
+
 ## Glossary
 
 | Abbreviation     | Details                           |
@@ -48,3 +55,6 @@ This page captures the test strategies for OpenEBS operations related to:
 | TCID             | TestCase ID                       |
 | DIR              | Director                          |
 | OP               | OPENEBS PROVISIONER               |
+| C1               | CLUSTER-1                         |
+| C2               | CLUSTER-2                         |
+| C3               | CLUSTER-3                         |
