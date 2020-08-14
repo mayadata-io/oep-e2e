@@ -22,6 +22,12 @@ This page captures the test strategies for OpenEBS operations related to:
 | [TCID-DIR-OP-INSTALL-OPENEBS-DP-ON-SPECIFIC-NODE](TCID-DIR-OP-INSTALL-OPENEBS-DP-ON-SPECIFIC-NODE)|C3 |
 | [TCID-DIR-OP-INSTALL-OPENEBS-CP-ON-SPECIFIC-NODE](TCID-DIR-OP-INSTALL-OPENEBS-CP-ON-SPECIFIC-NODE)|C3 |
 
+---
+**NOTE**
+
+- C1 would be installed with latest version of DOP
+- C2 and C3 are connected to C1 using DOP APIs
+---
 
 
 ## Glossary
@@ -31,5 +37,6 @@ This page captures the test strategies for OpenEBS operations related to:
 | TCID             | TestCase ID                       |
 | DIR              | Director                          |
 | OP               | OPENEBS PROVISIONER               |
+| C1               | CLUSTER-1                         |
 | C2               | CLUSTER-2                         |
 | C3               | CLUSTER-3                         |
