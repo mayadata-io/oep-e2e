@@ -1,13 +1,14 @@
-# ***Challenges in Setting up K8s based CI test environment on VMware***
+# ***Challenges in setting up K8s based CI test environment on VMware***
 
 
 
 Initially, we were using Public clouds such as AWS, GCP for executing the E2E test scenarios. Eventually, cloud expenses became immense. As an impact, we thought of setting up the test environment and the expenses became very less comparatively. We use VMware Vsphere for setting up virtual machines for various distribution of Kubernetes such as OpenShift, D2IQ Konvoy, and Rancher.
-In this short article, I will discuss how the environment was created and the challenges that we used to face day by day.
+
+The will discuss how the environment was created and the challenges that we used to face day by day.
 
 ### **Setting up the cluster environment**
 
-When we were using the cloud, we used to create the cluster at the beginning of every CI pipeline and delete it at the end. In the case of VMware environment, it takes much time for creating virtual machines and then to configure the Kubernetes cluster. Approximately, It takes almost an hour for configuring a new cluster. In order to overcome this, we leverage VMware snapshotting/restoring feature. After creating the Kubernetes cluster with the desired distribution, say, Rancher, OpenShift, D2IQ Konvoy, and Kubeadm based, a VMware snapshot was created for each virtual machine to hold the state of the machine. Once the pipeline is completed, all the VM instances are reverted back using this snapshot. So, all the configurations created as part of the pipeline would be deleted and resemble a freshly configured Kubernetes cluster.
+When we were using the public cloud platforms, we used to create the cluster at the beginning of every CI pipeline and delete it at the end. In the case of VMware environment, it takes much time for creating virtual machines and then to configure the Kubernetes cluster. Approximately, it takes almost an hour for configuring a new cluster. In order to overcome this, we leverage VMware snapshotting/restoring feature. After creating the Kubernetes cluster with the desired distribution, say, Rancher, OpenShift, D2IQ Konvoy, and Kubeadm based, a VMware snapshot was created for each virtual machine to hold the state of the machine. Once the pipeline is completed, all the VM instances are reverted back using this snapshot. So, all the configurations created as part of the pipeline would be deleted and resemble a freshly configured Kubernetes cluster.
 At the beginning of the pipeline, we check if the cluster is healthy and if all the components are running successfully. And then, we execute various OpenEBS specific E2E Scenarios in various Gitlab stages. Finally, in the end, we revert back all the VM instances to the earlier state using snapshots.
 
 For reference, please check [pipelines](https://oep-pipelines.mayadata.io/)
