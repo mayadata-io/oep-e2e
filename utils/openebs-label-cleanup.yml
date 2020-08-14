@@ -1,42 +1,7 @@
-## Removing control plane label from node-1
-- name: Removing control plane label from the node
-  shell: kubectl label nodes {{ node_details.json.data[0].name }} mayadata.io/control-plane-
-  args:
-    executable: /bin/bash
-  when: "{{ node_id[0] | length > 0 }}"
-    
-## Removing control plane label from node-2
-- name: Removing control plane label from the node
-  shell: kubectl label nodes {{ node_details.json.data[1].name }} mayadata.io/control-plane-
-  args:
-    executable: /bin/bash
-  when: "{{ node_id[1] | length > 0 }}"
+## Remove control plane label from the nodes of the cluster
+- name: Removing control plane label from the nodes
+  shell: kubectl label nodes --all mayadata.io/control-plane-
 
-## Removing control plane label from node-3
-- name: Removing control plane label from the node
-  shell: kubectl label nodes {{ node_details.json.data[2].name }} mayadata.io/control-plane-
-  args:
-    executable: /bin/bash
-  when: "{{ node_id[2] | length > 0 }}"
-
-## Removing data plane label from node-1
-- name: Removing control plane label from the node
-  shell: kubectl label nodes {{ node_details.json.data[0].name }} mayadata.io/data-plane-
-  args:
-    executable: /bin/bash
-  when: "{{ node_id[0] | length > 0 }}"
-  
-## Removing data plane label from node-2
-- name: Removing control plane label from the node
-  shell: kubectl label nodes {{ node_details.json.data[1].name }} mayadata.io/data-plane-
-  args:
-    executable: /bin/bash
-  when: "{{ node_id[1] | length > 0 }}"
-
-## Removing data plane label from node-3
-- name: Removing control plane label from the node
-  shell: kubectl label nodes {{ node_details.json.data[2].name }} mayadata.io/data-plane-
-  args:
-    executable: /bin/bash
-  when: "{{ node_id[2] | length > 0 }}"
-  
+## Remove data plane label from the nodes of the cluster
+- name: Removing data plane label from the nodes
+  shell: kubectl label nodes --all mayadata.io/data-plane-
