@@ -15,9 +15,9 @@ This page captures the test strategies for OpenEBS operations related to:
 
 ### OpenEBS upgrade test cases w.r.t control plane component
 
-| TCID                                                                                       |
-| ------------------------------------------------------------------------------------------ |
-| [TCID-DIR-OP-OPENEBS-UPGRADE-CP](TCID-DIR-OP-OPENEBS-UPGRADE-CP)                           |
+| TCID                                                                                       | Cluster |
+| ------------------------------------------------------------------------------------------ |---------|
+| [TCID-DIR-OP-OPENEBS-UPGRADE-CP](TCID-DIR-OP-OPENEBS-UPGRADE-CP)                           |   C3    |
 
 
 
@@ -48,3 +48,4 @@ This page captures the test strategies for OpenEBS operations related to:
 | TCID             | TestCase ID                       |
 | DIR              | Director                          |
 | OP               | OPENEBS PROVISIONER               |
+| C3               | CLUSTER-3                         |

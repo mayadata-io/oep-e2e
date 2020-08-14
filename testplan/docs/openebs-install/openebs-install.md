@@ -14,33 +14,15 @@ This page captures the test strategies for OpenEBS operations related to:
 
 ### OpenEBS install related test case IDs
 
-| TCID                                                                                      |
-| ----------------------------------------------------------------------------------------  |
-| [TCID-DIR-OP-INSTALL-OPENEBS](TCID-DIR-OP-INSTALL-OPENEBS)                                |
-| [TCID-DIR-OP-INSTALL-OPENEBS-LIMIT-RESOURCE](TCID-DIR-OP-INSTALL-OPENEBS-LIMIT-RESOURCE)  |
-| [TCID-DIR-OP-RE-INSTALL-OPENEBS](TCID-DIR-OP-RE-INSTALL-OPENEBS)                          |
-| [TCID-DIR-OP-INSTALL-OPENEBS-DP-ON-SPECIFIC-NODE](TCID-DIR-OP-INSTALL-OPENEBS-DP-ON-SPECIFIC-NODE)|
-| [TCID-DIR-OP-INSTALL-OPENEBS-CP-ON-SPECIFIC-NODE](TCID-DIR-OP-INSTALL-OPENEBS-CP-ON-SPECIFIC-NODE)|
-
-### OpenEBS upgrade test cases w.r.t CStor
-
-| TCID                                                                                       |
-| ------------------------------------------------------------------------------------------ |
-| [TCID-DIR-OP-UPGRADE-CSTOR-POOL](TCID-DIR-OP-UPGRADE-CSTOR-POOL)                           |
-| [TCID-DIR-OP-UPGRADE-CSTOR-VOLUME](TCID-DIR-OP-UPGRADE-CSTOR-VOLUME)                       |
-| [TCID-DIR-OP-UPGRADE-CSTOR-POOL-ALL-PODS-RUNNING](TCID-DIR-OP-UPGRADE-CSTOR-POOL-ALL-PODS-RUNNING)|
-| [TCID-DIR-OP-UPGRADE-CSTOR-POOL-ONE-POD-PENDING](TCID-DIR-OP-UPGRADE-CSTOR-POOL-ONE-POD-PENDING)|
-| [TCID-DIR-OP-UPGRADE-CSTOR-POOL-ALL-PODS-PENDING](TCID-DIR-OP-UPGRADE-CSTOR-POOL-ALL-PODS-PENDING)|
+| TCID                                                                                      | Cluster   |
+| ----------------------------------------------------------------------------------------  |-----------|
+| [TCID-DIR-OP-INSTALL-OPENEBS](TCID-DIR-OP-INSTALL-OPENEBS)                                |    C2     |
+| [TCID-DIR-OP-INSTALL-OPENEBS-LIMIT-RESOURCE](TCID-DIR-OP-INSTALL-OPENEBS-LIMIT-RESOURCE)  |    C3     |
+| [TCID-DIR-OP-RE-INSTALL-OPENEBS](TCID-DIR-OP-RE-INSTALL-OPENEBS)                          |    C3     |
+| [TCID-DIR-OP-INSTALL-OPENEBS-DP-ON-SPECIFIC-NODE](TCID-DIR-OP-INSTALL-OPENEBS-DP-ON-SPECIFIC-NODE)|C3 |
+| [TCID-DIR-OP-INSTALL-OPENEBS-CP-ON-SPECIFIC-NODE](TCID-DIR-OP-INSTALL-OPENEBS-CP-ON-SPECIFIC-NODE)|C3 |
 
 
-### Upgrade test cases w.r.t Jiva
-
-| TCID                                                                                       |
-| ------------------------------------------------------------------------------------------ |
-| [TCID-DIR-OP-UPGRADE-JIVA-VOLUME](TCID-DIR-OP-UPGRADE-JIVA-VOLUME)                         |
-| [TCID-DIR-OP-UPGRADE-JIVA-VOLUME-ONE-REPLICA-PENDING](TCID-DIR-OP-UPGRADE-JIVA-VOLUME-ONE-REPLICA-PENDING)|
-| [TCID-DIR-OP-UPGRADE-JIVA-VOLUME-ALL-REPLICAS-PENDING](TCID-DIR-OP-UPGRADE-JIVA-VOLUME-ALL-REPLICAS-PENDING)|
-| [TCID-DIR-OP-UPGRADE-JIVA-VOLUME-TWO-REPLICAS-PENDING](TCID-DIR-OP-UPGRADE-JIVA-VOLUME-TWO-REPLICAS-PENDING)|
 
 ## Glossary
 
@@ -49,3 +31,5 @@ This page captures the test strategies for OpenEBS operations related to:
 | TCID             | TestCase ID                       |
 | DIR              | Director                          |
 | OP               | OPENEBS PROVISIONER               |
+| C2               | CLUSTER-2                         |
+| C3               | CLUSTER-3                         |
