@@ -184,6 +184,7 @@ module.exports = {
         "Release Notes": [
             'kubera-e2e-release-1-10', 
             'kubera-e2e-release-1-11', 
+            'kubera-e2e-release-1-12', 
         ],
         "Manual Testing": [
             'manual/kubera-authentication', 
@@ -205,7 +206,7 @@ module.exports = {
 			'troubleshooting/aws',
 			'troubleshooting/rancher',
 			'troubleshooting/konvoy',
-			'troubleshooting/VMware_troubleshooting'
+			'troubleshooting/vmware'
 		],
 		
         Help: ['doc1', 'mdx'],
