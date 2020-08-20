@@ -1,10 +1,8 @@
-# ***Challenges in setting up K8s based CI test environment on VMware***
+# ***K8s clusters on VMware***
 
+Kubera E2E started off by using public cloud platforms such as AWS, GCP to execute E2E test scenarios. However, cloud expenses did bother us a lot leading to setting up on premise infrastructure to reduce this cost. Team started using VMware Vsphere to set up virtual machines for various Kubernetes distributions such as OpenShift, D2IQ Konvoy, and Rancher.
 
-
-Initially, we were using public cloud platforms such as AWS, GCP for executing the E2E test scenarios. Eventually, cloud expenses became immense. As an impact, we thought of setting up the test environment and the expenses became very less comparatively. We use VMware Vsphere for setting up virtual machines for various distribution of Kubernetes such as OpenShift, D2IQ Konvoy, and Rancher.
-
-The will discuss how the environment was created and the challenges that we used to face day by day.
+The page will discuss about this environment and the challenges faced so far to run E2E pipelines.
 
 ### **Setting up the cluster environment**
 
