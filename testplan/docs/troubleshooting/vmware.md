@@ -36,3 +36,7 @@ Sometimes, the virtual machines are stuck at the boot prompt with disk errors wh
 ![img](https://lh4.googleusercontent.com/2J35ko05O6nltgzeo9dcmBg_sZtRj7Jb-XF-aUssMQwGl5xKVhkgQGE9cYPyw5FE_xZvn7W3-WwAQ09WjVs52o_zAYsXh_3flWu11da9g0ZaEwRFHe0qDxinPstFixcCWnhsIoS5)
 
 We need to clear the errors on specified disk by executing the command `e2fsck -y /dev/<disk name>`. This will check the file system consistency and clear the errors which enable the virtual machine to proceed further.
+
+#### **Residues left while snapshotting**
+
+In pipelines, we observed that the new files added in repo was missing. It was due to the container images already being present in the node. These images were available when capturing the snapshots. This issue happened as we configure `ImagePullPolicy` as `ifNotPresent` for the containers. If it was set to `Always`, the images would be pulled again though it is already present. So, It is recommended to not to have any such residues left while creating virtual machine snapshot.
