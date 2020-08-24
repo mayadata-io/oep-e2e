@@ -1079,6 +1079,54 @@ spec:
       test/tags: "OPENEBS, ZFS LOCALPV"
       testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-ZFSPV-PROPERTY-MODIFY-EXT4"
 
+  - tcid: TCID-BLOCKDEVICE-REUSABILITY-VERIFY
+    name: "TCID-BLOCKDEVICE-REUSABILITY-VERIFY"
+    description: "Test if cspc pool can be created on the same blockdevices, on which cspc pool was previously present"
+    labels:
+      test/feature: "OPENEBS CSTOR CSI"
+      test/tags: "OPENEBS, CSTOR, CSPC"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-BLOCKDEVICE-REUSABILITY-VERIFY"
+
+  - tcid: TCID-CSPC-POOL-EXPANSION
+    name: "TCID-CSPC-POOL-EXPANSION"
+    description: "Test if cspc pool can be expanded successfully"
+    labels:
+      test/feature: "OPENEBS CSTOR CSI"
+      test/tags: "OPENEBS, CSTOR, CSPC"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-CSPC-POOL-EXPANSION"
+
+  - tcid: TCID-CSPC-POOL-SCALEUP
+    name: "TCID-CSPC-POOL-SCALEUP"
+    description: "Test if cspc pool replicas can be scaled up successfully"
+    labels:
+      test/feature: "OPENEBS CSTOR CSI"
+      test/tags: "OPENEBS, CSTOR, CSPC"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-CSPC-POOL-SCALEUP"
+
+  - tcid: TCID-CSPC-POOL-BLOCKDEVICE-REPLACEMENT
+    name: "TCID-CSPC-POOL-BLOCKDEVICE-REPLACEMENT"
+    description: "Check if a blockdevice in cspc pool can be replaced successfully"
+    labels:
+      test/feature: "OPENEBS CSTOR CSI"
+      test/tags: "OPENEBS, CSTOR, CSPC"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-CSPC-POOL-BLOCKDEVICE-REPLACEMENT"
+
+  - tcid: TCID-CSPC-POOL-CREATION-WITH-CLAIMED-BLOCKDEVICE
+    name: "TCID-CSPC-POOL-CREATION-WITH-CLAIMED-BLOCKDEVICE"
+    description: "Test if cspc pool creation gets failed when created on already claimed blockdevice"
+    labels:
+      test/feature: "OPENEBS CSTOR CSI"
+      test/tags: "OPENEBS, CSTOR, CSPC"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-CSPC-POOL-CREATION-WITH-CLAIMED-BLOCKDEVICE"
+
+  - tcid: TCID-CSPC-POOL-DELETION-WITH-VOLUME
+    name: "TCID-CSPC-POOL-DELETION-WITH-VOLUME"
+    description: "Test if cspc pool deletion fail in the presence of volumes"
+    labels:
+      test/feature: "OPENEBS CSTOR CSI"
+      test/tags: "OPENEBS, CSTOR, CSPC"
+      testplan: "https://e2e.mayadata.io/docs/openebs-enterprise/OPENEBS-FUNCTIONAL/TCID-CSPC-POOL-DELETION-WITH-VOLUME"
+
 ###############################################################################################################################
 ############################################ OpenEBS Chaos Scenarios ##########################################################
 ###############################################################################################################################
