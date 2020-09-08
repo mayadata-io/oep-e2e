@@ -49,3 +49,6 @@ RUN curl -o /usr/local/bin/aws-iam-authenticator https://amazon-eks.s3-us-west-2
 RUN chmod +x /usr/local/bin/aws-iam-authenticator
 RUN curl --silent --location "https://github.com/weaveworks/eksctl/releases/download/latest_release/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
 RUN mv /tmp/eksctl /usr/local/bin
+
+# Install Docker
+RUN apk add docker

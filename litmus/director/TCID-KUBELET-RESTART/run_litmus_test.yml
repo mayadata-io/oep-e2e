@@ -1,0 +1,47 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: kubelet-restart-
+  namespace: litmus
+spec:
+  template:
+    metadata:
+      name: litmus
+      labels:
+        app: kubelet-restart
+    spec:
+      serviceAccountName: litmus
+      restartPolicy: Never
+      containers:
+      - name: ansibletest
+        image: mayadataio/dop-validator:ci
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          privileged: true
+        env:
+
+          - name: ANSIBLE_STDOUT_CALLBACK
+            value: default
+
+            # Namespace in which Kubera is deployed
+          - name: KUBERA_NAMESPACE
+            value: default
+
+            # Platform on which the test is being run
+          - name: PLATFORM
+            value: platform_name
+
+        command: ["/bin/bash"]
+        args: ["-c", "ansible-playbook ./litmus/director/TCID-KUBELET-RESTART/test.yml -i /etc/ansible/hosts -v; exit 0"]
+        volumeMounts:
+          - name: dockersock
+            mountPath: "/var/run/docker.sock"
+      volumes:
+        # Mount the socket to use docker running on the node
+      - name: dockersock
+        hostPath:
+          path: /var/run/docker.sock
+          type: File
+      imagePullSecrets:
+      - name: oep-secret
