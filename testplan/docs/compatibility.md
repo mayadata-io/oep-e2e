@@ -14,7 +14,7 @@ This page captures platforms and components used while testing each version of K
 
 **Cluster1**
 
-- Rancher version - v2.3.5
+- Rancher version - v2.3.5 
 - k8s version - v1.15.9
 - OS - CentOS Linux 7
 - Docker version - 1.13.1
