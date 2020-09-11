@@ -194,7 +194,7 @@ module.exports = {
             'manual/kubera-teaming', 
             'manual/kubera-profile', 
             'manual/kubera-scope', 
-            'manual/kubera-metrics', 
+            'manual/monitoring',
             'manual/kubera-alerts', 
             'manual/kubera-dmaas', 
             'manual/kubera-openebs-upgrade', 
