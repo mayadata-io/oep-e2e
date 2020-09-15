@@ -1,0 +1,2 @@
+kuberaNamespace: "{{ lookup('env','KUBERA_NAMESPACE') }}"
+platform: "{{ lookup('env','PLATFORM')}}"
