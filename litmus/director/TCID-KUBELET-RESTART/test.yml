@@ -41,11 +41,15 @@
           # Restart Kubelet based on platform
         - block:
 
-            # Restart Kubelet container present on the node
-          - name: Restarting Kubelet container in Rancher
-            shell: docker restart kubelet
+            # Stop Kubelet container present on the node
+          - name: Stopping Kubelet container in Rancher
+            shell: echo "Stopping kubelet container - "{{ item }}"" && docker stop kubelet && sleep 2
+            loop: "{{ range(0, 210, 1)|list }}"
 
           when: platform == "RANCHER"
+
+        - name: Printing the status of nodes of the cluster
+          shell: kubectl get nodes -o wide
 
           # Check Kubera pod status
           # Task will fail if all the pods are not in 'Running' phase
@@ -54,7 +58,7 @@
           register: podStatus
           until: podStatus.stdout == ""
           delay: 10
-          retries: 12
+          retries: 18
 
           # Check Kubera pods container's state
           # Task will fail if all the containers are not in 'Ready' state
