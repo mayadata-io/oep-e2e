@@ -1,0 +1,97 @@
+---
+- hosts: localhost
+  connection: local
+
+  vars_files:
+    - test_vars.yml
+
+  tasks:
+    - block:
+
+          # Generating the testname for deployment
+        - include_tasks: /ansible-utils/create_testname.yml
+
+          # RECORD START-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'SOT'
+
+          # Check Kubera pod status before running chaos
+          # Task will fail if all the pods are not in 'Running' phase
+        - name: Checking Kubera pods status before running chaos
+          shell: kubectl get pods -n {{ kuberaNamespace }} --field-selector=status.phase!=Running --no-headers
+          register: initialPodStatus
+          until: initialPodStatus.stdout == ""
+          delay: 10
+          retries: 12
+
+          # Check Kubera pods container's state before running chaos
+          # Task will fail if all the containers are not in 'Ready' state
+        - name: Checking Kubera pods container's state before running chaos
+          shell: >
+            kubectl get pod -n {{ kuberaNamespace }} --no-headers
+            -o jsonpath='{.items[*].status.containerStatuses[*].ready}' | tr ' ' '\n' | uniq
+          args:
+            executable: /bin/bash
+          register: initialContainerStatus
+          until: initialContainerStatus.stdout == "true"
+          delay: 10
+          retries: 12
+
+          # Restart Kubelet based on platform
+        - block:
+
+            # Stop Kubelet container present on the node
+          - name: Stopping Kubelet container in Rancher
+            shell: echo "Stopping kubelet container - "{{ item }}"" && docker stop kubelet && sleep 2
+            loop: "{{ range(0, 210, 1)|list }}"
+
+          when: platform == "RANCHER"
+
+        - name: Printing the status of nodes of the cluster
+          shell: kubectl get nodes -o wide
+
+          # Check Kubera pod status
+          # Task will fail if all the pods are not in 'Running' phase
+        - name: Checking Kubera pods status
+          shell: kubectl get pods -n {{ kuberaNamespace }} --field-selector=status.phase!=Running --no-headers
+          register: podStatus
+          until: podStatus.stdout == ""
+          delay: 10
+          retries: 18
+
+          # Check Kubera pods container's state
+          # Task will fail if all the containers are not in 'Ready' state
+        - name: Checking Kubera pods container's state
+          shell: >
+            kubectl get pod -n {{ kuberaNamespace }} --no-headers
+            -o jsonpath='{.items[*].status.containerStatuses[*].ready}' | tr ' ' '\n' | uniq
+          args:
+            executable: /bin/bash
+          register: containerStatus
+          until: containerStatus.stdout == "true"
+          delay: 10
+          retries: 12
+
+        - set_fact:
+            flag: "Pass"
+
+      rescue:
+      
+        - name: Setting fail flag
+          set_fact:
+            flag: "Fail"
+        
+        - name: Print the task where the testcase failed
+          debug:
+            msg: Testcase failed at TASK - {{ ansible_failed_task.name }}
+        
+        - name: Print the ERROR with which the task failed
+          debug:
+            msg: ERROR - {{ ansible_failed_result }}
+
+      always:
+          # RECORD END-OF-TEST IN LITMUS RESULT CR
+        - include_tasks: /ansible-utils/update_litmus_result_resource.yml
+          vars:
+            status: 'EOT'

@@ -185,6 +185,7 @@ module.exports = {
             'kubera-e2e-release-1-10', 
             'kubera-e2e-release-1-11', 
             'kubera-e2e-release-1-12', 
+            'kubera-e2e-release-2-0',
         ],
         "Manual Testing": [
             'manual/kubera-authentication', 
@@ -194,7 +195,7 @@ module.exports = {
             'manual/kubera-teaming', 
             'manual/kubera-profile', 
             'manual/kubera-scope', 
-            'manual/kubera-metrics', 
+            'manual/monitoring',
             'manual/kubera-alerts', 
             'manual/kubera-dmaas', 
             'manual/kubera-openebs-upgrade', 

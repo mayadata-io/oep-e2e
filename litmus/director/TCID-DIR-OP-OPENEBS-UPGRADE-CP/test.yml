@@ -290,10 +290,26 @@
           retries: 50
           delay: 5
 
-        ## Fetching latest version
-        - name: Fetching latest version
+        ## Fetch upgradematrix details
+        ## upgradematrix includes list of supported Base versions openebs_current_version
+        ## is not in list of upgradematrix.
+        - name: Fetch upgradematrixs details
+          uri:
+            url: "{{ director_url }}/v3/upgradematrixes"
+            method: GET
+            url_username: "{{ username.stdout }}"
+            url_password: "{{ password.stdout }}"
+            force_basic_auth: yes
+            return_content: yes
+            body_format: json
+            status_code: 200,201,202
+          register: upgradematrixes
+          failed_when: openebs_current_version not in upgradematrixes.json.data[0].supportedBaseVersions
+
+        ## Fetch latest version from upgradematrix
+        - name: Fetch latest version from upgradematrix
           set_fact:
-            openebs_target_version: "{{ template_details.json.data[0].version }}"
+            openebs_target_version: "{{ upgradematrixes.json.data[0].targetVersion }}"
         
         ## Upgrading openebs control plane components
         - name: Upgrading openebs control plane components
