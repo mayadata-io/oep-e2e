@@ -185,6 +185,7 @@ module.exports = {
             'kubera-e2e-release-1-10', 
             'kubera-e2e-release-1-11', 
             'kubera-e2e-release-1-12', 
+            'kubera-e2e-release-2-0',
         ],
         "Manual Testing": [
             'manual/kubera-authentication', 
