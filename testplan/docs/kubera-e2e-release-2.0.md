@@ -9,10 +9,10 @@ This is the 4th release of Kubera end to end (E2E) pipelines. Team continued the
 
 Team continues to work on these projects:
 - https://github.com/mayadata-io/kubera-api-testing
-- https://github.com/kubera-io/continuous-kubernetes
+- https://github.com/dokc/continuous-kubernetes
 
 ### kubera-api-testing
-This has enabled E2E to test various combinations which was previously not possible. It does so by leveraging Golang table driven testing techniques. Needless to say E2E can test positive, negative, boundary, scale up, scale down, etc. in a much simpler ways now.
+This has enabled E2E to test various combinations which was previously not possible. It does so by leveraging Golang table driven testing techniques. Needless to say E2E can test `positive`, `negative`, `boundary`, `scale up`, `scale down`, etc. testcases using this simple, readable & extensible approach.
 
 Following is an excerpt taken from the project that showcases different scenarios used to test DMAAS' add credential feature:
 ```go
