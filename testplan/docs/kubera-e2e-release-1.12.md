@@ -16,7 +16,7 @@ Team had a bad experience with GitLab when it had become the single point of fai
 ### What's next?
 Following are the two new projects that E2E team is pursuing:
 - https://github.com/mayadata-io/kubera-api-testing
-- https://github.com/kubera-io/continuous-kubernetes
+- https://github.com/dokc/continuous-kubernetes
 
 **kubera-api-testing** is a development effort undertaken to simplify testing Kubera APIs. Team currently uses Ansible, kubectl & bunch of bash scripts to test the APIs. Needless to say it is fragile and does not help in identifying root cause of error(s) if any. kubera-api-testing aims to eliminate these problems. In addition to testing Kubera APIs it can test Kubernetes APIs in case such a need arise.
 
